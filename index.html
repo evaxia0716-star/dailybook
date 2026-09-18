@@ -4,590 +4,878 @@
   <meta charset="UTF-8">
   <title>Daybook</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap">
+  <meta name="theme-color" content="#f6efe3">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Huninn&family=Zen+Maru+Gothic:wght@400;500;700&display=swap">
   <style>
     :root {
-      --paper: #f6f7f5;
-      --ink: #22302f;
-      --muted: #6b7876;
-      --line: #dfe3e0;
-      --accent: #245c9a;
-      --accent-soft: #e6eef8;
-      --done: #2f7d5b;
-      --done-soft: #e4f2ea;
-      --warn: #b4581c;
-      --warn-soft: #fbeee3;
-      --theme-color: var(--accent);
+      --paper: #f6efe3;        /* 底紙 */
+      --paper-2: #fbf7ef;      /* 卡片 */
+      --paper-3: #efe5d3;      /* 分隔、hover */
+      --ink: #3a3129;          /* 主文字 */
+      --ink-2: #7a6d60;        /* 次文字 */
+      --line: #e3d8c4;
+      --accent: #c96f45;       /* 台電：陶土橘 */
+      --accent-soft: #f6e3d7;
+      --sage: #6f9478;         /* 學習：鼠尾草綠 */
+      --sage-soft: #e4eee5;
+      --plum: #8a6a9c;         /* 隨寫：淡紫 */
+      --plum-soft: #ede4f1;
+      --done: #5f8f6a;
+      --done-soft: #e2eee4;
+      --due: #c0803a;
+      --due-soft: #f8e9d3;
+      --danger: #b4483a;
+      --radius: 14px;
+      --shadow: 0 1px 2px rgba(58,49,41,0.06), 0 6px 18px rgba(58,49,41,0.06);
+      --font: "Huninn", "Zen Maru Gothic", "PingFang TC", "Microsoft JhengHei", sans-serif;
     }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
-      font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
-      background: var(--paper);
-      color: var(--ink);
-      font-size: 16px;
+      margin: 0; background: var(--paper); color: var(--ink);
+      font-family: var(--font); font-size: 16px; line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+      background-image: radial-gradient(rgba(58,49,41,0.035) 1px, transparent 1px);
+      background-size: 22px 22px;
     }
-    .sidebar { background: #fff; border-right: 1px solid var(--line); }
-    .sidebar > h1 a { color: var(--ink); font-weight: 700; }
-    .sidebar-nav li > a { color: var(--ink); }
-    .sidebar-nav li.active > a { color: var(--accent); font-weight: 500; }
-    .markdown-section { max-width: 760px; padding-bottom: 6rem; }
-    .markdown-section h1 { font-size: 1.7rem; }
-    .markdown-section h2 {
-      font-size: 1.15rem;
-      margin: 2.6rem 0 0.8rem;
-      padding-bottom: 0.4rem;
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; text-underline-offset: 3px; }
+    button { font-family: inherit; }
+    code { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 0.9em; background: var(--paper-3); padding: 0.05em 0.4em; border-radius: 6px; }
+
+    /* ===== 頂部 ===== */
+    .top {
+      position: sticky; top: 0; z-index: 30;
+      background: rgba(246,239,227,0.85); backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--line);
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      flex-wrap: wrap;
     }
-    .markdown-section li { line-height: 1.8; }
-    .markdown-section strong { color: var(--accent); }
-    .markdown-section blockquote { border-left-color: var(--accent); background: var(--accent-soft); padding: 0.6rem 1rem; }
-    .markdown-section blockquote p { color: var(--ink); }
-    .markdown-section table { display: table; width: 100%; }
-    .search input { font-family: inherit; }
+    .top-in {
+      max-width: 1040px; margin: 0 auto; padding: 0.7rem 1.2rem;
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .brand { display: flex; align-items: center; gap: 0.55rem; color: var(--ink); font-weight: 700; font-size: 1.15rem; letter-spacing: 0.02em; }
+    .brand:hover { text-decoration: none; }
+    .brand .mark {
+      width: 28px; height: 28px; border-radius: 9px; background: var(--accent);
+      display: inline-grid; place-items: center; color: #fff; font-size: 0.85rem; font-weight: 700;
+      box-shadow: inset 0 -3px 0 rgba(0,0,0,0.12);
+    }
+    .tabs { display: flex; gap: 0.2rem; margin-left: 0.5rem; overflow-x: auto; scrollbar-width: none; }
+    .tab { white-space: nowrap; }
+    .tab {
+      padding: 0.35rem 0.9rem; border-radius: 999px; color: var(--ink-2); font-weight: 500; font-size: 0.95rem;
+    }
+    .tab:hover { background: var(--paper-3); text-decoration: none; color: var(--ink); }
+    .tab.on { background: var(--ink); color: var(--paper-2); }
+    .top .sp { flex: 1; }
+    .icon-btn {
+      border: 1px solid var(--line); background: var(--paper-2); color: var(--ink-2);
+      border-radius: 999px; padding: 0.35rem 0.8rem; font-size: 0.88rem; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 0.4rem;
+    }
+    .icon-btn:hover { color: var(--ink); border-color: var(--ink-2); }
+    .icon-btn .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--danger); }
+    .icon-btn .dot.on { background: var(--done); }
+    .icon-btn kbd { font-family: inherit; font-size: 0.72rem; border: 1px solid var(--line); border-radius: 5px; padding: 0 0.35rem; color: var(--ink-2); }
 
-    /* 已複習按鈕 */
+    /* ===== 版面 ===== */
+    main { max-width: 1040px; margin: 0 auto; padding: 1.6rem 1.2rem 7rem; }
+    .narrow { max-width: 760px; margin: 0 auto; }
+    h1.page-title { font-size: 1.9rem; margin: 0.2rem 0 0.4rem; line-height: 1.3; letter-spacing: 0.01em; }
+    .crumbs { font-size: 0.85rem; color: var(--ink-2); display: flex; gap: 0.4rem; flex-wrap: wrap; }
+    .crumbs a { color: var(--ink-2); }
+    .lead { color: var(--ink-2); margin: 0 0 1.4rem; }
+    .lead p { margin: 0.3rem 0; }
+    .eyebrow { font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-2); font-weight: 700; }
+    .sec-head { display: flex; align-items: baseline; gap: 0.8rem; margin: 2rem 0 0.8rem; }
+    .sec-head h2 { margin: 0; font-size: 1.25rem; }
+    .sec-head .count { color: var(--ink-2); font-size: 0.9rem; }
+    .sec-head .more { margin-left: auto; font-size: 0.9rem; }
+
+    /* ===== 首頁：今日卡 ===== */
+    .hero {
+      display: grid; grid-template-columns: 1.4fr 1fr; gap: 1rem; margin-bottom: 0.5rem;
+    }
+    .panel {
+      background: var(--paper-2); border: 1px solid var(--line); border-radius: var(--radius);
+      box-shadow: var(--shadow); padding: 1.1rem 1.3rem;
+    }
+    .panel h3 { margin: 0 0 0.6rem; font-size: 1.05rem; display: flex; align-items: center; gap: 0.5rem; }
+    .today-list { list-style: none; margin: 0; padding: 0; }
+    .today-list li { display: flex; align-items: baseline; gap: 0.6rem; padding: 0.45rem 0; border-top: 1px dashed var(--line); }
+    .today-list li:first-child { border-top: none; }
+    .today-list .pg { font-size: 0.78rem; color: var(--ink-2); white-space: nowrap; background: var(--paper-3); border-radius: 6px; padding: 0 0.45rem; }
+    .today-list a { color: var(--ink); flex: 1; }
+    .today-list .age { font-size: 0.8rem; color: var(--due); white-space: nowrap; }
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; margin-top: 0.4rem; }
+    .stat { background: var(--paper); border-radius: 10px; padding: 0.6rem 0.8rem; }
+    .stat b { display: block; font-size: 1.5rem; line-height: 1.2; }
+    .stat span { font-size: 0.78rem; color: var(--ink-2); }
+    .week { display: flex; gap: 0.3rem; margin-top: 0.8rem; align-items: flex-end; height: 42px; }
+    .week div { flex: 1; background: var(--accent-soft); border-radius: 5px 5px 2px 2px; position: relative; min-height: 4px; }
+    .week div.hit { background: var(--accent); }
+    .week div.today { outline: 2px solid var(--ink); outline-offset: 1px; }
+    .week-labels { display: flex; gap: 0.3rem; font-size: 0.7rem; color: var(--ink-2); }
+    .week-labels span { flex: 1; text-align: center; }
+    .panel .actions { display: flex; gap: 0.5rem; margin-top: 0.9rem; flex-wrap: wrap; }
+    .btn {
+      border: 1px solid var(--line); background: var(--paper-2); color: var(--ink);
+      border-radius: 999px; padding: 0.45rem 1rem; font-size: 0.9rem; cursor: pointer; font-weight: 500;
+    }
+    .btn:hover { border-color: var(--ink-2); }
+    .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .btn.primary:hover { filter: brightness(0.95); }
+    .btn.ghost { border-color: transparent; background: transparent; color: var(--ink-2); }
+    .btn:disabled { opacity: 0.5; cursor: default; }
+
+    /* ===== 頁面卡片格 ===== */
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0.9rem; }
+    .pcard {
+      display: block; background: var(--paper-2); border: 1px solid var(--line); border-radius: var(--radius);
+      padding: 1rem 1.1rem 0.9rem; color: var(--ink); box-shadow: var(--shadow); position: relative;
+      transition: transform 0.12s, box-shadow 0.12s; min-height: 118px;
+    }
+    .pcard:hover { text-decoration: none; transform: translateY(-2px); box-shadow: 0 2px 4px rgba(58,49,41,0.06), 0 12px 26px rgba(58,49,41,0.1); }
+    .pcard::before { content: ""; position: absolute; left: 1.1rem; right: 1.1rem; top: 0; height: 4px; border-radius: 0 0 4px 4px; background: var(--c, var(--accent)); }
+    .pcard .sub { font-size: 0.75rem; color: var(--ink-2); margin-bottom: 0.15rem; }
+    .pcard h3 { margin: 0.2rem 0 0.5rem; font-size: 1.08rem; line-height: 1.35; }
+    .pcard .meta { display: flex; gap: 0.5rem; flex-wrap: wrap; font-size: 0.8rem; color: var(--ink-2); }
+    .pill { border-radius: 999px; padding: 0.05rem 0.55rem; background: var(--paper-3); }
+    .pill.due { background: var(--due-soft); color: var(--due); font-weight: 600; }
+    .pill.new { background: var(--sage-soft); color: var(--sage); }
+    .pcard.add { border-style: dashed; background: transparent; box-shadow: none; display: grid; place-items: center; color: var(--ink-2); cursor: pointer; }
+    .pcard.add::before { display: none; }
+    .pcard.add:hover { color: var(--ink); border-color: var(--ink-2); transform: none; }
+    .sec-台電 { --c: var(--accent); } .sec-學習 { --c: var(--sage); } .sec-隨寫 { --c: var(--plum); }
+
+    /* ===== 筆記頁：一張張卡 ===== */
+    .page-tools { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; margin: 0.8rem 0 1.4rem; }
+    .page-tools .hint { font-size: 0.82rem; color: var(--ink-2); }
+    .toggle { display: inline-flex; align-items: center; gap: 0.45rem; cursor: pointer; font-size: 0.9rem; color: var(--ink-2); user-select: none; }
+    .toggle input { appearance: none; width: 34px; height: 20px; border-radius: 999px; background: var(--line); position: relative; margin: 0; cursor: pointer; transition: background 0.15s; }
+    .toggle input::after { content: ""; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 50%; background: #fff; transition: left 0.15s; box-shadow: 0 1px 2px rgba(0,0,0,0.2); }
+    .toggle input:checked { background: var(--accent); }
+    .toggle input:checked::after { left: 16px; }
+    .cards { display: flex; flex-direction: column; gap: 1rem; }
+    .card {
+      background: var(--paper-2); border: 1px solid var(--line); border-radius: var(--radius);
+      box-shadow: var(--shadow); padding: 1.1rem 1.4rem 1.2rem; position: relative; scroll-margin-top: 80px;
+    }
+    .card.flash { animation: flash 1.6s ease-out; }
+    @keyframes flash { 0% { box-shadow: 0 0 0 4px var(--accent-soft), var(--shadow); } 100% { box-shadow: var(--shadow); } }
+    .card-head { display: flex; align-items: flex-start; gap: 0.8rem; margin-bottom: 0.4rem; }
+    .card-head h2 { margin: 0; font-size: 1.12rem; line-height: 1.45; flex: 1; }
+    .card-head h2 .tag { color: var(--accent); font-weight: 700; }
+    .card-body p { margin: 0.45rem 0; }
+    .card-body strong { color: var(--accent); font-weight: 700; }
+    .card-body ul, .card-body ol { padding-left: 1.4rem; margin: 0.4rem 0; }
+    .card-body table { border-collapse: collapse; width: 100%; margin: 0.6rem 0; font-size: 0.95rem; }
+    .card-body th, .card-body td { border: 1px solid var(--line); padding: 0.4rem 0.6rem; text-align: left; }
+    .card-body th { background: var(--paper-3); }
+    .card-body blockquote { margin: 0.6rem 0; padding: 0.5rem 1rem; border-left: 3px solid var(--accent); background: var(--accent-soft); border-radius: 0 8px 8px 0; }
+    .card-body pre { background: var(--paper-3); padding: 0.8rem 1rem; border-radius: 10px; overflow: auto; font-size: 0.88rem; line-height: 1.5; }
+    .card-body pre code { background: none; padding: 0; }
+    .card-body hr { border: none; border-top: 1px dashed var(--line); margin: 1rem 0; }
+    .card-body img { max-width: 100%; border-radius: 10px; }
+    .card-foot { display: flex; gap: 0.5rem; align-items: center; margin-top: 0.7rem; flex-wrap: wrap; }
     .review-btn {
-      margin-left: auto;
-      font: inherit;
-      font-size: 0.8rem;
-      border: 1px solid var(--line);
-      background: #fff;
-      color: var(--muted);
-      border-radius: 999px;
-      padding: 0.15rem 0.7rem;
-      cursor: pointer;
+      border: 1px solid var(--line); background: var(--paper-2); color: var(--ink-2);
+      border-radius: 999px; padding: 0.2rem 0.75rem; font-size: 0.82rem; cursor: pointer; white-space: nowrap;
     }
-    .review-btn.done { background: var(--done-soft); border-color: var(--done); color: var(--done); }
-    .review-btn.due { background: var(--warn-soft); border-color: var(--warn); color: var(--warn); }
-    .review-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .review-btn:hover { border-color: var(--ink-2); color: var(--ink); }
+    .review-btn.done { background: var(--done-soft); border-color: transparent; color: var(--done); }
+    .review-btn.due { background: var(--due-soft); border-color: transparent; color: var(--due); }
+    .mini { border: none; background: none; color: var(--ink-2); font-size: 0.8rem; cursor: pointer; padding: 0.2rem 0.4rem; border-radius: 6px; }
+    .mini:hover { background: var(--paper-3); color: var(--ink); }
+    /* 自測：遮答案 */
+    .selftest .card-body p.ans, .selftest .card-body table.ans, .selftest .card-body ul.ans { filter: blur(6px); user-select: none; transition: filter 0.2s; }
+    .selftest .card:not(.reveal) .card-body { cursor: pointer; }
+    .selftest .card.reveal .card-body .ans { filter: none; user-select: auto; }
+    .selftest .card:not(.reveal)::after {
+      content: "點一下看答案"; position: absolute; right: 1.2rem; bottom: 0.9rem;
+      font-size: 0.78rem; color: var(--ink-2); background: var(--paper-3); padding: 0.1rem 0.6rem; border-radius: 999px;
+    }
+    .empty { color: var(--ink-2); text-align: center; padding: 2rem 1rem; border: 1px dashed var(--line); border-radius: var(--radius); }
 
-    /* 首頁看板 */
-    #dashboard { margin: 1rem 0 2rem; }
-    #dashboard td, #dashboard th { padding: 0.5rem 0.6rem; }
-    #dashboard .due { color: var(--warn); font-weight: 600; }
-    #dashboard .empty { color: var(--muted); }
-    #dashboard .today { background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 0.8rem 1rem; margin-bottom: 1rem; }
-    #dashboard .today h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
-    #dashboard .today ul { margin: 0; padding-left: 1.2rem; }
+    /* ===== 浮動按鈕 ===== */
+    .fabs { position: fixed; right: 1.2rem; bottom: 1.2rem; z-index: 40; display: flex; flex-direction: column; gap: 0.5rem; align-items: flex-end; }
+    .fab {
+      border: 1px solid var(--line); background: var(--paper-2); color: var(--ink); cursor: pointer;
+      border-radius: 999px; padding: 0.6rem 1.15rem; font-size: 0.92rem; font-weight: 600;
+      box-shadow: 0 4px 14px rgba(58,49,41,0.14);
+    }
+    .fab.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .fab:hover { filter: brightness(0.97); }
 
-    /* 浮動工具列 */
-    .db-toolbar {
-      position: fixed; right: 1.2rem; bottom: 1.2rem; z-index: 40;
-      display: flex; flex-direction: column; gap: 0.5rem; align-items: flex-end;
+    /* ===== 面板 ===== */
+    .overlay { position: fixed; inset: 0; background: rgba(58,49,41,0.4); z-index: 50; display: none; align-items: center; justify-content: center; padding: 1rem; }
+    .overlay.open { display: flex; }
+    .sheet {
+      background: var(--paper-2); border-radius: 18px; width: min(880px, 100%); max-height: 94vh;
+      display: flex; flex-direction: column; box-shadow: 0 20px 60px rgba(0,0,0,0.25); border: 1px solid var(--line);
     }
-    .db-fab {
-      font: inherit; font-size: 0.9rem; font-weight: 500;
-      border: none; border-radius: 999px; padding: 0.6rem 1.1rem;
-      background: #fff; color: var(--ink); cursor: pointer;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.12); border: 1px solid var(--line);
+    .sheet header { display: flex; align-items: center; gap: 0.8rem; padding: 0.9rem 1.3rem; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+    .sheet header h3 { margin: 0; font-size: 1.05rem; flex: 1; }
+    .sheet .body { padding: 1rem 1.3rem; overflow: auto; display: flex; flex-direction: column; gap: 0.7rem; }
+    .sheet footer { display: flex; align-items: center; gap: 0.6rem; padding: 0.8rem 1.3rem; border-top: 1px solid var(--line); flex-wrap: wrap; }
+    .sheet footer .msg { flex: 1; font-size: 0.85rem; color: var(--ink-2); }
+    .sheet footer .msg.err { color: var(--danger); }
+    .sheet footer .msg.ok { color: var(--done); }
+    .row { display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center; }
+    .row label { font-size: 0.85rem; color: var(--ink-2); }
+    .sheet input[type=text], .sheet input[type=password], .sheet input[type=search], .sheet select, .sheet textarea {
+      font: inherit; font-size: 0.95rem; border: 1px solid var(--line); border-radius: 10px;
+      padding: 0.5rem 0.7rem; background: #fff; color: var(--ink);
     }
-    .db-fab.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
-    .db-fab.small { font-size: 0.78rem; padding: 0.35rem 0.8rem; color: var(--muted); }
-    .db-fab .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #c33; margin-right: 0.4rem; vertical-align: middle; }
-    .db-fab .dot.on { background: var(--done); }
+    .sheet input[type=text], .sheet input[type=password], .sheet input[type=search] { flex: 1; min-width: 12rem; }
+    .sheet textarea { width: 100%; min-height: 46vh; resize: vertical; line-height: 1.65; }
+    .sheet textarea:focus, .sheet input:focus { outline: 2px solid var(--accent-soft); border-color: var(--accent); }
+    .preview { display: none; border: 1px dashed var(--line); border-radius: 10px; padding: 0.5rem 1rem; min-height: 46vh; }
+    .preview.show { display: block; }
+    .chip { border: 1px solid var(--line); background: var(--paper); color: var(--ink); border-radius: 999px; padding: 0.2rem 0.75rem; font-size: 0.8rem; cursor: pointer; }
+    .chip:hover { border-color: var(--accent); color: var(--accent); }
+    .segs { display: flex; gap: 0.25rem; background: var(--paper); border-radius: 999px; padding: 0.2rem; }
+    .segs button { border: none; background: none; padding: 0.3rem 0.8rem; border-radius: 999px; cursor: pointer; color: var(--ink-2); font-size: 0.85rem; }
+    .segs button.on { background: var(--paper-2); color: var(--ink); font-weight: 600; box-shadow: var(--shadow); }
+    .help { font-size: 0.86rem; color: var(--ink-2); line-height: 1.7; }
+    .help ol { padding-left: 1.3rem; margin: 0.3rem 0; }
+    .toast {
+      position: fixed; left: 50%; bottom: 5.4rem; transform: translateX(-50%);
+      background: var(--ink); color: var(--paper-2); padding: 0.55rem 1.1rem; border-radius: 999px;
+      font-size: 0.88rem; z-index: 60; opacity: 0; transition: opacity 0.25s; pointer-events: none; white-space: nowrap;
+    }
+    .toast.show { opacity: 1; }
 
-    /* 編輯面板 */
-    .db-overlay {
-      position: fixed; inset: 0; background: rgba(34,48,47,0.45); z-index: 50;
-      display: none; align-items: center; justify-content: center; padding: 1rem;
-    }
-    .db-overlay.open { display: flex; }
-    .db-panel {
-      background: #fff; border-radius: 12px; width: min(860px, 100%); max-height: 94vh;
-      display: flex; flex-direction: column; box-shadow: 0 10px 40px rgba(0,0,0,0.25);
-    }
-    .db-panel header {
-      display: flex; align-items: center; gap: 0.8rem; padding: 0.9rem 1.2rem;
-      border-bottom: 1px solid var(--line); flex-wrap: wrap;
-    }
-    .db-panel header h3 { margin: 0; font-size: 1.05rem; flex: 1; }
-    .db-panel .body { padding: 1rem 1.2rem; overflow: auto; display: flex; flex-direction: column; gap: 0.7rem; }
-    .db-panel footer {
-      display: flex; align-items: center; gap: 0.6rem; padding: 0.8rem 1.2rem;
-      border-top: 1px solid var(--line); flex-wrap: wrap;
-    }
-    .db-panel footer .msg { flex: 1; font-size: 0.85rem; color: var(--muted); }
-    .db-panel footer .msg.err { color: #b3261e; }
-    .db-panel footer .msg.ok { color: var(--done); }
-    .db-row { display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center; }
-    .db-row label { font-size: 0.85rem; color: var(--muted); }
-    .db-panel input[type=text], .db-panel input[type=password], .db-panel select, .db-panel textarea {
-      font: inherit; font-size: 0.95rem; border: 1px solid var(--line); border-radius: 6px;
-      padding: 0.45rem 0.6rem; background: #fff; color: var(--ink);
-    }
-    .db-panel input[type=text], .db-panel input[type=password] { flex: 1; min-width: 12rem; }
-    .db-panel textarea {
-      width: 100%; min-height: 46vh; resize: vertical; line-height: 1.6;
-      font-family: "Noto Sans TC", ui-monospace, monospace; box-sizing: border-box;
-    }
-    .db-preview {
-      display: none; border: 1px dashed var(--line); border-radius: 6px; padding: 0.5rem 1rem; min-height: 46vh;
-    }
-    .db-preview.show { display: block; }
-    .db-preview h2 { font-size: 1.1rem; border-bottom: 1px solid var(--line); padding-bottom: 0.3rem; margin-top: 1.4rem; }
-    .db-btn {
-      font: inherit; font-size: 0.88rem; border-radius: 6px; padding: 0.45rem 0.9rem; cursor: pointer;
-      border: 1px solid var(--line); background: #fff; color: var(--ink);
-    }
-    .db-btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
-    .db-btn.ghost { background: transparent; color: var(--muted); }
-    .db-btn:disabled { opacity: 0.5; cursor: default; }
-    .db-chip {
-      font: inherit; font-size: 0.8rem; border-radius: 999px; padding: 0.2rem 0.75rem; cursor: pointer;
-      border: 1px solid var(--line); background: var(--paper); color: var(--ink);
-    }
-    .db-chip:hover { border-color: var(--accent); color: var(--accent); }
-    .db-tabs { display: flex; gap: 0.3rem; }
-    .db-tabs button { font: inherit; font-size: 0.85rem; border: none; background: none; padding: 0.3rem 0.7rem; border-radius: 6px; cursor: pointer; color: var(--muted); }
-    .db-tabs button.on { background: var(--accent-soft); color: var(--accent); font-weight: 500; }
-    .db-help { font-size: 0.85rem; color: var(--muted); line-height: 1.7; }
-    .db-help ol { padding-left: 1.3rem; margin: 0.3rem 0; }
-    .db-help code { background: var(--paper); padding: 0 0.3rem; border-radius: 3px; }
-    .db-toast {
-      position: fixed; left: 50%; bottom: 5rem; transform: translateX(-50%);
-      background: var(--ink); color: #fff; padding: 0.6rem 1.1rem; border-radius: 999px;
-      font-size: 0.88rem; z-index: 60; opacity: 0; transition: opacity 0.25s; pointer-events: none;
-    }
-    .db-toast.show { opacity: 1; }
-    @media (max-width: 600px) {
-      .db-toolbar { right: 0.8rem; bottom: 0.8rem; }
-      .db-panel textarea, .db-preview { min-height: 40vh; }
+    /* 搜尋結果 */
+    .results { display: flex; flex-direction: column; gap: 0.4rem; }
+    .result { display: block; padding: 0.6rem 0.8rem; border-radius: 10px; color: var(--ink); border: 1px solid transparent; }
+    .result:hover { background: var(--paper); text-decoration: none; border-color: var(--line); }
+    .result .where { font-size: 0.75rem; color: var(--ink-2); }
+    .result .snip { font-size: 0.85rem; color: var(--ink-2); margin-top: 0.1rem; }
+    .result mark { background: var(--due-soft); color: inherit; border-radius: 3px; padding: 0 0.1em; }
+
+    @media (max-width: 720px) {
+      .hero { grid-template-columns: 1fr; }
+      .tabs { margin-left: 0; }
+      .tab { padding: 0.3rem 0.7rem; font-size: 0.9rem; }
+      .top-in { gap: 0.5rem; padding: 0.6rem 0.9rem; }
+      .icon-btn .label { display: none; }
+      .brand span.txt { display: none; }
+      main { padding: 1.1rem 0.9rem 7rem; }
+      h1.page-title { font-size: 1.55rem; }
+      .card { padding: 0.9rem 1rem 1rem; }
+      .sheet textarea, .preview { min-height: 40vh; }
     }
   </style>
 </head>
 <body>
-  <div id="app">載入中…</div>
-
-  <!-- 浮動工具列 -->
-  <div class="db-toolbar">
-    <button class="db-fab small" id="fab-settings"><span class="dot" id="conn-dot"></span>設定</button>
-    <button class="db-fab" id="fab-edit">✎ 編輯這頁</button>
-    <button class="db-fab primary" id="fab-new">＋ 新筆記</button>
+  <div class="top">
+    <div class="top-in">
+      <a class="brand" href="#/"><span class="mark">D</span><span class="txt">Daybook</span></a>
+      <nav class="tabs" id="tabs"></nav>
+      <span class="sp"></span>
+      <button class="icon-btn" id="btn-search">🔍 <span class="label">搜尋</span> <kbd>/</kbd></button>
+      <button class="icon-btn" id="btn-settings" title="設定"><span class="dot" id="conn-dot"></span><span class="label">設定</span></button>
+    </div>
   </div>
 
-  <!-- 編輯面板 -->
-  <div class="db-overlay" id="editor">
-    <div class="db-panel" role="dialog" aria-modal="true">
+  <main id="app"><div class="empty">載入中…</div></main>
+
+  <div class="fabs">
+    <button class="fab" id="fab-edit">✎ 編輯這頁</button>
+    <button class="fab primary" id="fab-new">＋ 新筆記</button>
+  </div>
+
+  <!-- 編輯 -->
+  <div class="overlay" id="editor">
+    <div class="sheet" role="dialog" aria-modal="true">
       <header>
         <h3 id="ed-title">新筆記</h3>
-        <div class="db-tabs" id="ed-mode">
-          <button data-mode="card" class="on">加一張卡到這頁</button>
+        <div class="segs" id="ed-mode">
+          <button data-mode="card" class="on">加一張卡</button>
           <button data-mode="page">新頁面</button>
           <button data-mode="full">編輯整頁</button>
         </div>
-        <button class="db-btn ghost" id="ed-close">✕</button>
+        <button class="btn ghost" id="ed-close">✕</button>
       </header>
       <div class="body">
-        <div class="db-row" id="ed-target-row">
+        <div class="row" id="ed-target-row">
           <label>放在</label>
           <select id="ed-section"></select>
           <input type="text" id="ed-name" placeholder="頁面名稱，例如：行政學概要">
         </div>
-        <div class="db-row" id="ed-file-row">
-          <label>檔案</label><code id="ed-file"></code>
-        </div>
-        <div class="db-row" id="ed-templates">
+        <div class="row"><label>檔案</label><code id="ed-file"></code></div>
+        <div class="row" id="ed-templates">
           <label>套範本</label>
-          <button class="db-chip" data-tpl="wrong">錯題卡</button>
-          <button class="db-chip" data-tpl="concept">概念卡</button>
-          <button class="db-chip" data-tpl="essay">作文練習</button>
-          <button class="db-chip" data-tpl="free">隨寫</button>
+          <button class="chip" data-tpl="wrong">錯題卡</button>
+          <button class="chip" data-tpl="concept">概念卡</button>
+          <button class="chip" data-tpl="essay">作文練習</button>
+          <button class="chip" data-tpl="free">隨寫</button>
           <span style="flex:1"></span>
-          <button class="db-chip" id="ed-preview-toggle">預覽</button>
+          <button class="chip" id="ed-preview-toggle">預覽</button>
         </div>
         <textarea id="ed-text" spellcheck="false" placeholder="用 Markdown 寫。## 開頭的一行就是一張卡。"></textarea>
-        <div class="db-preview markdown-section" id="ed-preview"></div>
+        <div class="preview card-body" id="ed-preview"></div>
       </div>
       <footer>
         <span class="msg" id="ed-msg">Ctrl + S 也可以存</span>
-        <button class="db-btn" id="ed-cancel">取消</button>
-        <button class="db-btn primary" id="ed-save">存到 GitHub</button>
+        <button class="btn" id="ed-cancel">取消</button>
+        <button class="btn primary" id="ed-save">存到 GitHub</button>
       </footer>
     </div>
   </div>
 
-  <!-- 設定面板 -->
-  <div class="db-overlay" id="settings">
-    <div class="db-panel" role="dialog" aria-modal="true" style="width:min(620px,100%)">
-      <header><h3>設定：連到你的 GitHub</h3><button class="db-btn ghost" id="st-close">✕</button></header>
+  <!-- 設定 -->
+  <div class="overlay" id="settings">
+    <div class="sheet" role="dialog" aria-modal="true" style="width:min(640px,100%)">
+      <header><h3>設定：連到你的 GitHub</h3><button class="btn ghost" id="st-close">✕</button></header>
       <div class="body">
-        <div class="db-help">
-          這把「鑰匙」（token）讓網站能直接把筆記寫回 repo，不用再跳去 GitHub。它只存在這台瀏覽器裡。
+        <div class="help">
+          這把「鑰匙」（token）讓網站能替你把筆記寫回 repo，不用再跳去 GitHub。它只存在這台瀏覽器裡，只能開這一個 repo。
           <ol>
             <li>到 <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub → 產生 Fine-grained token</a></li>
-            <li>Token name 打 <code>daybook</code>；Expiration 選最長的 1 year（或 Custom）</li>
+            <li>Token name 打 <code>daybook</code>；Expiration 選 1 year</li>
             <li>Repository access 選 <b>Only select repositories</b> → 勾 <code id="st-repo-name"></code></li>
-            <li>Permissions → Repository permissions → <b>Contents</b> 改成 <b>Read and write</b>（其他都不用動）</li>
+            <li>Permissions → Repository permissions → <b>Contents</b> 改成 <b>Read and write</b></li>
             <li>按 Generate token，把 <code>github_pat_…</code> 整串複製，貼到下面</li>
           </ol>
         </div>
-        <div class="db-row">
+        <div class="row">
           <input type="password" id="st-token" placeholder="github_pat_…" autocomplete="off">
-          <button class="db-btn" id="st-show">顯示</button>
+          <button class="btn" id="st-show">顯示</button>
         </div>
-        <div class="db-row">
-          <label>Repo</label><code id="st-repo"></code>
-          <label>分支</label><code id="st-branch"></code>
-        </div>
+        <div class="row"><label>Repo</label><code id="st-repo"></code><label>分支</label><code id="st-branch"></code></div>
+        <div class="row"><label>幾天沒看算「該再看」</label><input type="text" id="st-days" style="flex:0;width:4rem" inputmode="numeric"></div>
       </div>
       <footer>
         <span class="msg" id="st-msg"></span>
-        <button class="db-btn" id="st-clear">清除</button>
-        <button class="db-btn primary" id="st-save">測試並儲存</button>
+        <button class="btn" id="st-clear">清除鑰匙</button>
+        <button class="btn primary" id="st-save">測試並儲存</button>
       </footer>
     </div>
   </div>
 
-  <div class="db-toast" id="toast"></div>
+  <!-- 搜尋 -->
+  <div class="overlay" id="search">
+    <div class="sheet" role="dialog" aria-modal="true" style="width:min(680px,100%);align-self:flex-start;margin-top:8vh">
+      <header>
+        <input type="search" id="sq" placeholder="搜卡片標題或內文：明茲伯格、115、comply…" autocomplete="off">
+        <button class="btn ghost" id="sq-close">✕</button>
+      </header>
+      <div class="body" id="sq-results"><div class="help">輸入兩個字以上開始搜。</div></div>
+    </div>
+  </div>
 
+  <div class="toast" id="toast"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
   <script>
-    // ===== 設定 =====
+    // ===================== 設定 =====================
     var OWNER = 'evaxia0716-star';
     var REPO = 'dailybook';
     var BRANCH = 'main';
-    var REVIEW_DAYS = 7;                 // 幾天沒看就算「該再看」
-    var REVIEW_FILE = 'data/reviews.json'; // 複習紀錄存哪裡
-    var REVIEW_SECTIONS = ['台電/', '學習/']; // 哪些區的卡片有「已複習」按鈕
-    var TOKEN_KEY = 'daybook:token';
-    var LOCAL_REVIEW_KEY = 'daybook:reviews';
-    var PENDING_KEY = 'daybook:pending';   // 剛存檔、GitHub Pages 還沒更新前的暫存
+    var TOC_FILE = '_sidebar.md';            // 目錄檔（沿用舊名）
+    var REVIEW_FILE = 'data/reviews.json';
+    var REVIEW_SECTIONS = ['台電/', '學習/']; // 這些區的卡有「已複習」
+    var SECTION_INTRO = {
+      '台電': '考試筆記。錯題卡、概念卡、作文，全部在這。',
+      '學習': '課程與工具的學習筆記。',
+      '隨寫': '想到什麼寫什麼，一天一張。'
+    };
+    var K = { token: 'daybook:token', reviews: 'daybook:reviews', pending: 'daybook:pending', days: 'daybook:days', selftest: 'daybook:selftest' };
     var PENDING_TTL = 15 * 60 * 1000;
-
-    // 如果網址是 xxx.github.io/repo/，自動抓 owner 和 repo
     (function () {
       var m = location.hostname.match(/^([^.]+)\.github\.io$/);
       var seg = location.pathname.split('/').filter(Boolean)[0];
       if (m && seg) { OWNER = m[1]; REPO = seg; }
     })();
+    function reviewDays() { var n = parseInt(localStorage.getItem(K.days) || '7', 10); return n > 0 ? n : 7; }
 
-    // ===== 小工具 =====
+    // ===================== 小工具 =====================
     function $(id) { return document.getElementById(id); }
-    function today() { return new Date().toISOString().slice(0, 10); }
-    function daysSince(d) { return Math.floor((Date.now() - new Date(d).getTime()) / 86400000); }
+    function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+    function today() { var d = new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+    function daysSince(d) { return Math.floor((Date.now() - new Date(d + 'T00:00:00').getTime()) / 86400000); }
     function b64enc(s) { return btoa(unescape(encodeURIComponent(s))); }
     function b64dec(s) { return decodeURIComponent(escape(atob(s.replace(/\n/g, '')))); }
     function encPath(p) { return p.split('/').map(encodeURIComponent).join('/'); }
     function safeDecode(s) { try { return decodeURIComponent(s); } catch (e) { return s; } }
-    function toast(msg) {
-      var t = $('toast'); t.textContent = msg; t.classList.add('show');
-      clearTimeout(toast._t); toast._t = setTimeout(function () { t.classList.remove('show'); }, 2600);
-    }
-    function getToken() { try { return localStorage.getItem(TOKEN_KEY) || ''; } catch (e) { return ''; } }
     function readJSON(k, d) { try { return JSON.parse(localStorage.getItem(k)) || d; } catch (e) { return d; } }
     function writeJSON(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
-
-    // 暫存：剛寫回 GitHub 的內容，Pages 更新前先顯示這份
-    function setPending(file, content) {
-      var p = readJSON(PENDING_KEY, {});
-      p[file] = { t: Date.now(), c: content };
-      writeJSON(PENDING_KEY, p);
-    }
+    function getToken() { try { return localStorage.getItem(K.token) || ''; } catch (e) { return ''; } }
+    function toast(msg) { var t = $('toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(toast._t); toast._t = setTimeout(function () { t.classList.remove('show'); }, 2600); }
+    function setPending(file, content) { var p = readJSON(K.pending, {}); p[file] = { t: Date.now(), c: content }; writeJSON(K.pending, p); }
     function getPending(file) {
-      var p = readJSON(PENDING_KEY, {}), e = p[file];
+      var p = readJSON(K.pending, {}), e = p[file];
       if (!e) return null;
-      if (Date.now() - e.t > PENDING_TTL) { delete p[file]; writeJSON(PENDING_KEY, p); return null; }
+      if (Date.now() - e.t > PENDING_TTL) { delete p[file]; writeJSON(K.pending, p); return null; }
       return e.c;
     }
+    function md(s) { return marked.parse(s || '', { breaks: false, gfm: true }); }
 
-    // ===== GitHub API =====
+    // ===================== GitHub API =====================
     function ghFetch(url, opts) {
       opts = opts || {};
-      opts.headers = Object.assign({
-        'Accept': 'application/vnd.github+json',
-        'X-GitHub-Api-Version': '2022-11-28'
-      }, opts.headers || {});
-      var tk = getToken();
-      if (tk) opts.headers['Authorization'] = 'Bearer ' + tk;
+      opts.headers = Object.assign({ 'Accept': 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28' }, opts.headers || {});
+      var tk = getToken(); if (tk) opts.headers['Authorization'] = 'Bearer ' + tk;
       return fetch(url, opts);
     }
-    function contentsUrl(path) {
-      return 'https://api.github.com/repos/' + OWNER + '/' + REPO + '/contents/' + encPath(path);
-    }
-    // 讀檔：回 {content, sha}，不存在回 null
+    function contentsUrl(path) { return 'https://api.github.com/repos/' + OWNER + '/' + REPO + '/contents/' + encPath(path); }
     function ghGet(path) {
       return ghFetch(contentsUrl(path) + '?ref=' + BRANCH + '&_=' + Date.now()).then(function (r) {
         if (r.status === 404) return null;
         if (!r.ok) throw new Error('讀取失敗 ' + r.status);
         return r.json();
-      }).then(function (j) {
-        if (!j) return null;
-        return { content: b64dec(j.content), sha: j.sha };
-      });
+      }).then(function (j) { return j ? { content: b64dec(j.content), sha: j.sha } : null; });
     }
-    // 寫檔：有 sha 就是覆寫，沒有就是新建
     function ghPut(path, content, message, sha) {
       var body = { message: message, content: b64enc(content), branch: BRANCH };
       if (sha) body.sha = sha;
       return ghFetch(contentsUrl(path), { method: 'PUT', body: JSON.stringify(body) }).then(function (r) {
         if (r.status === 409) throw new Error('檔案剛被別處改過，請重開編輯器再存一次');
-        if (r.status === 401) throw new Error('token 無效或過期，請到「設定」重貼');
-        if (r.status === 403) throw new Error('token 沒有這個 repo 的寫入權限（Contents: Read and write）');
+        if (r.status === 401) throw new Error('鑰匙無效或過期，請到「設定」重貼');
+        if (r.status === 403) throw new Error('鑰匙沒有這個 repo 的寫入權限（Contents: Read and write）');
         if (!r.ok) return r.json().then(function (j) { throw new Error(j.message || ('寫入失敗 ' + r.status)); });
         return r.json();
       });
     }
-    // 讀某頁最新內容：有 token 走 API（永遠最新），沒有就讀 Pages（可能慢幾分鐘）
-    function loadFile(path) {
-      if (getToken()) return ghGet(path).then(function (f) { return f ? f.content : ''; }).catch(function () { return fetchPages(path); });
-      return fetchPages(path);
-    }
-    function fetchPages(path) {
-      return fetch(encPath(path) + '?_=' + Date.now()).then(function (r) { return r.ok ? r.text() : ''; }).catch(function () { return ''; });
+    function fetchPages(path) { return fetch(encPath(path) + '?_=' + Date.now()).then(function (r) { return r.ok ? r.text() : null; }).catch(function () { return null; }); }
+    // 讀檔：先看暫存 → 有鑰匙走 API → 否則讀 Pages
+    var fileCache = {};
+    function loadFile(path, fresh) {
+      var pend = getPending(path);
+      if (pend !== null) return Promise.resolve(pend);
+      if (!fresh && fileCache[path] !== undefined) return Promise.resolve(fileCache[path]);
+      var p = getToken()
+        ? ghGet(path).then(function (f) { return f ? f.content : null; }).catch(function () { return fetchPages(path); })
+        : fetchPages(path);
+      return p.then(function (t) { fileCache[path] = t; return t; });
     }
 
-    // ===== 複習紀錄（GitHub + 本機） =====
-    var reviews = readJSON(LOCAL_REVIEW_KEY, {});
-    var reviewsSha = null;
-    var reviewsLoaded = false;
+    // ===================== 目錄 =====================
+    // _sidebar.md 格式：
+    // - [首頁看板](/)            ← 忽略
+    // - [使用說明](使用說明)      ← 獨立頁
+    // - 台電                     ← 分區
+    //   - [國文](台電/共同科目/國文)
+    var toc = { sections: [], loose: [] };
+    function parseToc(text) {
+      var out = { sections: [], loose: [] }, cur = null;
+      (text || '').split('\n').forEach(function (line) {
+        var top = line.match(/^- ([^\[\]]+?)\s*$/);
+        if (top) { cur = { name: top[1].trim(), pages: [] }; out.sections.push(cur); return; }
+        var lnk = line.match(/^(\s*)- \[(.+?)\]\((.+?)\)/);
+        if (!lnk) return;
+        var path = lnk[3].replace(/^\//, '').replace(/\/$/, '');
+        if (!path) return;
+        var page = { title: lnk[2].trim(), path: path, file: path + '.md' };
+        if (lnk[1].length && cur) { page.section = cur.name; page.sub = path.split('/').slice(1, -1).join('/'); cur.pages.push(page); }
+        else out.loose.push(page);
+      });
+      return out;
+    }
+    function loadToc(fresh) { return loadFile(TOC_FILE, fresh).then(function (t) { toc = parseToc(t || ''); return toc; }); }
+    function allPages() { return toc.sections.reduce(function (a, s) { return a.concat(s.pages); }, []); }
+    function findPage(path) { return allPages().concat(toc.loose).filter(function (p) { return p.path === path; })[0]; }
+    function sectionOf(path) { return path.split('/')[0]; }
+
+    // ===================== 卡片切分 =====================
+    function splitCards(text) {
+      var lines = (text || '').split('\n'), title = '', intro = [], cards = [], cur = null, fence = false;
+      lines.forEach(function (l) {
+        if (/^```/.test(l)) fence = !fence;
+        var h1 = fence ? null : l.match(/^# (.+)$/), h2 = fence ? null : l.match(/^## (.+)$/);
+        if (h1 && !title && !cur) { title = h1[1].trim(); return; }
+        if (h2) { cur = { title: h2[1].trim(), body: [] }; cards.push(cur); return; }
+        (cur ? cur.body : intro).push(l);
+      });
+      return { title: title, intro: intro.join('\n').trim(), cards: cards.map(function (c) { return { title: c.title, body: c.body.join('\n').trim() }; }) };
+    }
+    function cardKey(file, title) { return file.replace(/\.md$/, '') + '#' + title.trim().replace(/\s+/g, ' '); }
+    function inReviewSection(file) { return REVIEW_SECTIONS.some(function (s) { return file.indexOf(s) === 0; }); }
+
+    // ===================== 複習紀錄 =====================
+    var reviews = readJSON(K.reviews, {}), reviewsSha = null, reviewsLoaded = false;
     function mergeReviews(remote) {
       Object.keys(remote || {}).forEach(function (k) {
-        var a = reviews[k] || [], b = remote[k] || [];
-        var set = {}; a.concat(b).forEach(function (d) { if (d) set[d] = 1; });
+        var set = {}; (reviews[k] || []).concat(remote[k] || []).forEach(function (d) { if (d) set[d] = 1; });
         reviews[k] = Object.keys(set).sort();
       });
-      writeJSON(LOCAL_REVIEW_KEY, reviews);
+      writeJSON(K.reviews, reviews);
     }
-    function loadReviews() {
-      if (reviewsLoaded) return Promise.resolve(reviews);
+    function loadReviews(force) {
+      if (reviewsLoaded && !force) return Promise.resolve(reviews);
       var p = getToken()
         ? ghGet(REVIEW_FILE).then(function (f) { if (f) { reviewsSha = f.sha; mergeReviews(JSON.parse(f.content || '{}')); } })
         : fetchPages(REVIEW_FILE).then(function (t) { if (t) mergeReviews(JSON.parse(t)); });
       return p.catch(function () {}).then(function () { reviewsLoaded = true; return reviews; });
     }
-    var reviewSaveTimer = null;
+    var reviewTimer = null;
     function pushReviews() {
       if (!getToken()) return;
-      clearTimeout(reviewSaveTimer);
-      reviewSaveTimer = setTimeout(function () {
-        var body = JSON.stringify(reviews, null, 1);
-        ghPut(REVIEW_FILE, body, '複習紀錄 ' + today(), reviewsSha).then(function (j) {
-          reviewsSha = j.content.sha;
-        }).catch(function () {
-          // sha 過期就重抓再存一次
-          ghGet(REVIEW_FILE).then(function (f) {
-            if (f) { reviewsSha = f.sha; mergeReviews(JSON.parse(f.content || '{}')); }
-            return ghPut(REVIEW_FILE, JSON.stringify(reviews, null, 1), '複習紀錄 ' + today(), reviewsSha);
-          }).then(function (j) { reviewsSha = j.content.sha; }).catch(function (e) { toast('複習紀錄沒同步到 GitHub：' + e.message); });
-        });
+      clearTimeout(reviewTimer);
+      reviewTimer = setTimeout(function () {
+        ghPut(REVIEW_FILE, JSON.stringify(reviews, null, 1), '複習紀錄 ' + today(), reviewsSha)
+          .then(function (j) { reviewsSha = j.content.sha; })
+          .catch(function () {
+            return ghGet(REVIEW_FILE).then(function (f) {
+              if (f) { reviewsSha = f.sha; mergeReviews(JSON.parse(f.content || '{}')); }
+              return ghPut(REVIEW_FILE, JSON.stringify(reviews, null, 1), '複習紀錄 ' + today(), reviewsSha);
+            }).then(function (j) { reviewsSha = j.content.sha; })
+              .catch(function (e) { toast('複習紀錄沒同步到 GitHub：' + e.message); });
+          });
       }, 800);
     }
     function markReviewed(key) {
       var list = reviews[key] || [];
       if (list[list.length - 1] !== today()) list.push(today());
-      reviews[key] = list;
-      writeJSON(LOCAL_REVIEW_KEY, reviews);
-      pushReviews();
+      reviews[key] = list; writeJSON(K.reviews, reviews); pushReviews();
     }
-    function cardKey(file, title) { return file.replace(/\.md$/, '') + '#' + title.trim().replace(/\s+/g, ' '); }
-    function inReviewSection(file) { return REVIEW_SECTIONS.some(function (s) { return file.indexOf(s) === 0; }); }
+    function reviewState(key) {
+      var list = reviews[key] || [];
+      if (!list.length) return { n: 0, last: null, due: false, never: true };
+      var last = list[list.length - 1];
+      return { n: list.length, last: last, due: daysSince(last) >= reviewDays(), never: false };
+    }
+    function reviewBtnHtml(key) {
+      var s = reviewState(key);
+      if (s.never) return '<button class="review-btn" data-key="' + esc(key) + '">標記已複習</button>';
+      return '<button class="review-btn ' + (s.due ? 'due' : 'done') + '" data-key="' + esc(key) + '">' + (s.due ? '該再看 · ' : '已複習 ') + s.n + ' 次 · ' + s.last + '</button>';
+    }
 
-    // 每張卡（h2）後面加「已複習」按鈕
-    function addReviewButtons(vm) {
-      var file = currentFile(vm);
-      if (!inReviewSection(file)) return;
-      loadReviews().then(function () {
-        document.querySelectorAll('.markdown-section h2').forEach(function (h2) {
-          if (h2.querySelector('.review-btn')) return;
-          var key = cardKey(file, h2.textContent);
-          var btn = document.createElement('button');
-          function paint() {
-            var list = reviews[key] || [];
-            if (!list.length) { btn.className = 'review-btn'; btn.textContent = '標記已複習'; return; }
-            var last = list[list.length - 1], due = daysSince(last) >= REVIEW_DAYS;
-            btn.className = 'review-btn ' + (due ? 'due' : 'done');
-            btn.textContent = (due ? '該再看 · ' : '已複習 ') + list.length + ' 次 · ' + last;
-          }
-          paint();
-          btn.onclick = function () { markReviewed(key); paint(); toast('記下了 ✓'); };
-          h2.appendChild(btn);
+    // 統計每一頁：卡片數、看過、該再看
+    function pageStats(page) {
+      return loadFile(page.file).then(function (text) {
+        var c = splitCards(text || ''), seen = 0, due = 0, never = 0, dueList = [];
+        c.cards.forEach(function (card) {
+          var s = reviewState(cardKey(page.file, card.title));
+          if (s.never) { never++; return; }
+          seen++; if (s.due) { due++; dueList.push({ title: card.title, last: s.last }); }
         });
+        return { page: page, total: c.cards.length, seen: seen, due: due, never: never, dueList: dueList, cards: c.cards, intro: c.intro, exists: text !== null };
       });
     }
 
-    // ===== 首頁看板 =====
-    function sidebarLinks() {
-      return Array.from(document.querySelectorAll('.sidebar-nav a')).map(function (a) {
-        var href = a.getAttribute('href') || '';
-        var path = safeDecode(href.replace(/^#\//, '').replace(/\/$/, ''));
-        return { href: href, path: path, text: a.textContent.trim() };
-      }).filter(function (l) { return l.path; });
+    // ===================== 路由與畫面 =====================
+    var app = $('app');
+    var current = { kind: 'home', path: '' };
+    function route() {
+      var h = safeDecode(location.hash.replace(/^#\/?/, ''));
+      var q = '', i = h.indexOf('?');
+      if (i >= 0) { q = h.slice(i + 1); h = h.slice(0, i); }
+      h = h.replace(/\/$/, '');
+      var params = {}; q.split('&').forEach(function (kv) { if (!kv) return; var p = kv.split('='); params[safeDecode(p[0])] = safeDecode(p[1] || ''); });
+      return { path: h, params: params };
     }
-    function renderDashboard() {
-      var box = $('dashboard');
-      if (!box) return;
-      var links = sidebarLinks().filter(function (l) { return l.path.indexOf('台電/') === 0; });
-      if (!document.querySelector('.sidebar-nav a')) {
-        box.innerHTML = '<p class="empty">側邊欄沒有載入。多半是 repo 少了 <code>.nojekyll</code> 這個檔。</p>';
-        return;
+    function go() {
+      var r = route();
+      window.scrollTo(0, 0);
+      loadToc().then(function () {
+        renderTabs(r.path);
+        if (!r.path) { current = { kind: 'home', path: '' }; return renderHome(); }
+        var sec = toc.sections.filter(function (s) { return s.name === r.path; })[0];
+        if (sec) { current = { kind: 'section', path: r.path }; return renderSection(sec); }
+        current = { kind: 'page', path: r.path };
+        return renderPage(r.path, r.params);
+      }).catch(function (e) { app.innerHTML = '<div class="empty">載入失敗：' + esc(e.message) + '</div>'; });
+    }
+    function renderTabs(path) {
+      var top = path.split('/')[0];
+      $('tabs').innerHTML = toc.sections.map(function (s) {
+        return '<a class="tab' + (top === s.name ? ' on' : '') + '" href="#/' + esc(s.name) + '">' + esc(s.name) + '</a>';
+      }).join('');
+      $('fab-edit').style.display = current.kind === 'page' || path ? '' : 'none';
+    }
+
+    // ---------- 首頁 ----------
+    function renderHome() {
+      $('fab-edit').style.display = 'none';
+      app.innerHTML = '<div class="hero"><div class="panel" id="today"><h3>今天先看這些</h3><div class="help">整理中…</div></div><div class="panel" id="stats"><h3>這週</h3></div></div><div id="sections"></div>';
+      var pages = allPages();
+      Promise.all([loadReviews()].concat(pages.map(pageStats))).then(function (res) {
+        var stats = res.slice(1);
+        renderToday(stats);
+        renderWeek(stats);
+        renderHomeSections(stats);
+      });
+    }
+    function renderToday(stats) {
+      var due = [], never = [], total = 0;
+      stats.forEach(function (s) {
+        total += s.total;
+        s.dueList.forEach(function (d) { due.push({ page: s.page, title: d.title, last: d.last }); });
+        if (s.never) never.push(s);
+      });
+      due.sort(function (a, b) { return a.last < b.last ? -1 : 1; });
+      var html = '<h3>今天先看這些 <span class="pill ' + (due.length ? 'due' : '') + '">' + due.length + '</span></h3>';
+      if (!total) html += '<p class="help">還沒有任何卡片。按右下角「＋ 新筆記」貼第一張。</p>';
+      else if (due.length) {
+        html += '<ul class="today-list">' + due.slice(0, 6).map(function (d) {
+          return '<li><span class="pg">' + esc(d.page.title) + '</span><a href="#/' + esc(d.page.path) + '?c=' + encodeURIComponent(d.title) + '">' + esc(d.title) + '</a><span class="age">' + daysSince(d.last) + ' 天前</span></li>';
+        }).join('') + '</ul>' + (due.length > 6 ? '<p class="help">還有 ' + (due.length - 6) + ' 張。</p>' : '');
+      } else if (never.length) {
+        var n = never.reduce(function (s, r) { return s + r.never; }, 0);
+        html += '<p class="help">沒有到期的卡。還有 ' + n + ' 張沒看過，可以從「' + esc(never[0].page.title) + '」開始。</p>';
+      } else html += '<p class="help">全部看過、也都還沒到期。去刷一回題吧。</p>';
+      html += '<div class="actions"><button class="btn primary" id="btn-random">🎲 隨機抽一張</button><label class="toggle" title="開了以後進到頁面會先遮住答案"><input type="checkbox" id="home-selftest"' + (localStorage.getItem(K.selftest) === '1' ? ' checked' : '') + '> 自測模式</label></div>';
+      $('today').innerHTML = html;
+      $('btn-random').onclick = function () {
+        var pool = due.length ? due : [];
+        if (!pool.length) stats.forEach(function (s) { s.cards.forEach(function (c) { if (reviewState(cardKey(s.page.file, c.title)).never) pool.push({ page: s.page, title: c.title }); }); });
+        if (!pool.length) stats.forEach(function (s) { s.cards.forEach(function (c) { pool.push({ page: s.page, title: c.title }); }); });
+        if (!pool.length) return toast('還沒有卡片');
+        var pick = pool[Math.floor(Math.random() * pool.length)];
+        location.hash = '#/' + pick.page.path + '?c=' + encodeURIComponent(pick.title);
+      };
+      $('home-selftest').onchange = function () { localStorage.setItem(K.selftest, this.checked ? '1' : '0'); };
+    }
+    function renderWeek(stats) {
+      var total = 0, seen = 0, due = 0;
+      stats.forEach(function (s) { total += s.total; seen += s.seen; due += s.due; });
+      // 最近 7 天每天複習幾次
+      var days = [], counts = {};
+      for (var i = 6; i >= 0; i--) { var d = new Date(); d.setDate(d.getDate() - i); var k = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); days.push(k); counts[k] = 0; }
+      Object.keys(reviews).forEach(function (key) { (reviews[key] || []).forEach(function (d) { if (counts[d] !== undefined) counts[d]++; }); });
+      var max = Math.max.apply(null, days.map(function (d) { return counts[d]; }).concat([1]));
+      var weekTotal = days.reduce(function (s, d) { return s + counts[d]; }, 0);
+      var streak = 0; for (var j = days.length - 1; j >= 0; j--) { if (counts[days[j]] > 0) streak++; else if (j !== days.length - 1) break; }
+      var names = ['日', '一', '二', '三', '四', '五', '六'];
+      var html = '<h3>這週 <span class="help" style="font-weight:400">複習 ' + weekTotal + ' 次' + (streak > 1 ? ' · 連續 ' + streak + ' 天' : '') + '</span></h3>';
+      html += '<div class="week">' + days.map(function (d) { return '<div class="' + (counts[d] ? 'hit' : '') + (d === today() ? ' today' : '') + '" style="height:' + Math.max(8, Math.round(counts[d] / max * 42)) + 'px" title="' + d + '：' + counts[d] + ' 次"></div>'; }).join('') + '</div>';
+      html += '<div class="week-labels">' + days.map(function (d) { return '<span>' + names[new Date(d + 'T00:00:00').getDay()] + '</span>'; }).join('') + '</div>';
+      html += '<div class="stats"><div class="stat"><b>' + total + '</b><span>張卡</span></div><div class="stat"><b>' + seen + '</b><span>看過</span></div><div class="stat"><b style="color:' + (due ? 'var(--due)' : 'inherit') + '">' + due + '</b><span>該再看</span></div></div>';
+      html += '<p class="help" style="margin:0.7rem 0 0">' + (getToken() ? '紀錄同步到 GitHub，換裝置也在。' : '紀錄目前只存在這台瀏覽器；到右上角「設定」貼鑰匙就會同步。') + '</p>';
+      $('stats').innerHTML = html;
+    }
+    function pageCardHtml(s) {
+      var p = s.page;
+      var meta = '';
+      if (!s.exists) meta = '<span class="pill">空白頁</span>';
+      else if (!s.total) meta = '<span class="pill">還沒有卡</span>';
+      else {
+        meta = '<span class="pill">' + s.total + ' 張</span>';
+        if (s.due) meta += '<span class="pill due">' + s.due + ' 該再看</span>';
+        if (s.never && inReviewSection(p.file)) meta += '<span class="pill new">' + s.never + ' 沒看過</span>';
       }
-      if (!links.length) { box.innerHTML = '<p class="empty">側邊欄裡還沒有「台電/」底下的頁面。</p>'; return; }
-      box.innerHTML = '<p class="empty">看板載入中…</p>';
-      Promise.all([loadReviews()].concat(links.map(function (l) {
-        var file = l.path + '.md';
-        var pend = getPending(file);
-        return (pend ? Promise.resolve(pend) : loadFile(file)).then(function (md) {
-          var titles = (md.match(/^## .+$/gm) || []).map(function (line) { return line.replace(/^## /, '').trim(); });
-          var seen = 0, due = 0, never = 0, dueList = [];
-          titles.forEach(function (t) {
-            var list = reviews[cardKey(file, t)] || [];
-            if (!list.length) { never++; return; }
-            seen++;
-            if (daysSince(list[list.length - 1]) >= REVIEW_DAYS) { due++; dueList.push(t); }
-          });
-          return { name: l.text, href: l.href, total: titles.length, seen: seen, due: due, never: never, dueList: dueList };
-        });
-      }))).then(function (res) {
-        var rows = res.slice(1);
-        var totalCards = rows.reduce(function (s, r) { return s + r.total; }, 0);
-        if (!totalCards) { box.innerHTML = '<p class="empty">台電區還沒有任何卡片。按右下角「＋ 新筆記」貼第一張。</p>'; return; }
-        var html = '';
-        var dueAll = [];
-        rows.forEach(function (r) { r.dueList.forEach(function (t) { dueAll.push({ page: r.name, href: r.href, title: t }); }); });
-        var neverAll = rows.filter(function (r) { return r.never; });
-        html += '<div class="today"><h4>今天先看這些</h4>';
-        if (dueAll.length) {
-          html += '<ul>' + dueAll.slice(0, 6).map(function (d) {
-            return '<li><a href="' + d.href + '">' + d.page + '</a> › ' + d.title + '</li>';
-          }).join('') + '</ul>' + (dueAll.length > 6 ? '<p class="empty">還有 ' + (dueAll.length - 6) + ' 張。</p>' : '');
-        } else if (neverAll.length) {
-          html += '<p class="empty">沒有到期的卡。有 ' + neverAll.reduce(function (s, r) { return s + r.never; }, 0) + ' 張還沒看過，從 <a href="' + neverAll[0].href + '">' + neverAll[0].name + '</a> 開始。</p>';
-        } else {
-          html += '<p class="empty">全部看過、也都還沒到期。去刷一回題吧。</p>';
-        }
-        html += '</div>';
-        html += '<table><thead><tr><th>頁面</th><th>卡片</th><th>看過</th><th>沒看過</th><th>該再看</th></tr></thead><tbody>';
-        rows.forEach(function (r) {
-          html += '<tr><td><a href="' + r.href + '">' + r.name + '</a></td><td>' + r.total + '</td><td>' + r.seen + '</td><td>' + r.never + '</td><td class="' + (r.due ? 'due' : '') + '">' + r.due + '</td></tr>';
-        });
-        html += '<tr><td><b>合計</b></td><td><b>' + totalCards + '</b></td><td>' + rows.reduce(function (s, r) { return s + r.seen; }, 0) + '</td><td>' + rows.reduce(function (s, r) { return s + r.never; }, 0) + '</td><td class="' + (dueAll.length ? 'due' : '') + '">' + dueAll.length + '</td></tr>';
-        html += '</tbody></table><p class="empty">「該再看」＝ 上次複習超過 ' + REVIEW_DAYS + ' 天。' + (getToken() ? '紀錄已同步到 GitHub，換裝置也看得到。' : '目前紀錄只存在這台瀏覽器；到「設定」貼 token 就會同步。') + '</p>';
-        box.innerHTML = html;
+      return '<a class="pcard sec-' + esc(sectionOf(p.path)) + '" href="#/' + esc(p.path) + '">' + (p.sub ? '<div class="sub">' + esc(p.sub) + '</div>' : '') + '<h3>' + esc(p.title) + '</h3><div class="meta">' + meta + '</div></a>';
+    }
+    function renderHomeSections(stats) {
+      var by = {}; stats.forEach(function (s) { by[s.page.path] = s; });
+      var html = toc.sections.map(function (sec) {
+        var cnt = sec.pages.reduce(function (n, p) { return n + ((by[p.path] || {}).total || 0); }, 0);
+        return '<div class="sec-head"><h2>' + esc(sec.name) + '</h2><span class="count">' + sec.pages.length + ' 頁 · ' + cnt + ' 張</span><a class="more" href="#/' + esc(sec.name) + '">全部 →</a></div>'
+          + '<div class="grid">' + sec.pages.map(function (p) { return pageCardHtml(by[p.path] || { page: p, total: 0, exists: true }); }).join('')
+          + '<div class="pcard add" data-section="' + esc(sec.name) + '">＋ 新頁面</div></div>';
+      }).join('');
+      if (toc.loose.length) html += '<p class="help" style="margin-top:2rem;text-align:center">' + toc.loose.map(function (p) { return '<a href="#/' + esc(p.path) + '">' + esc(p.title) + '</a>'; }).join(' · ') + '</p>';
+      $('sections').innerHTML = html;
+      bindAddCards();
+    }
+    function bindAddCards() {
+      document.querySelectorAll('.pcard.add').forEach(function (el) {
+        el.onclick = function () { openEditor('page', el.dataset.section); };
       });
     }
 
-    // ===== 編輯器 =====
-    var docsifyVm = null;
-    var edMode = 'card';
-    var edFileSha = null;
-    function currentFile(vm) {
-      var f = (vm && vm.route && vm.route.file) || 'README.md';
-      f = safeDecode(f).replace(/^\.?\//, '');
-      return f || 'README.md';
+    // ---------- 分區頁 ----------
+    function renderSection(sec) {
+      $('fab-edit').style.display = 'none';
+      app.innerHTML = '<div class="crumbs"><a href="#/">首頁</a><span>›</span><span>' + esc(sec.name) + '</span></div><h1 class="page-title">' + esc(sec.name) + '</h1><p class="lead">' + esc(SECTION_INTRO[sec.name] || '') + '</p><div class="grid" id="sec-grid"></div>';
+      Promise.all([loadReviews()].concat(sec.pages.map(pageStats))).then(function (res) {
+        var stats = res.slice(1);
+        // 依子資料夾分群
+        var groups = {}; var order = [];
+        stats.forEach(function (s) { var g = s.page.sub || ''; if (!groups[g]) { groups[g] = []; order.push(g); } groups[g].push(s); });
+        var html = order.map(function (g) {
+          return (order.length > 1 && g ? '<div class="sec-head" style="grid-column:1/-1;margin:0.6rem 0 0"><h2 style="font-size:1rem;color:var(--ink-2)">' + esc(g) + '</h2></div>' : '') + groups[g].map(pageCardHtml).join('');
+        }).join('') + '<div class="pcard add" data-section="' + esc(sec.name) + '">＋ 新頁面</div>';
+        $('sec-grid').innerHTML = html;
+        bindAddCards();
+      });
     }
-    function pageTitleFromFile(file) { return file.replace(/\.md$/, '').split('/').pop(); }
 
+    // ---------- 筆記頁 ----------
+    var ANSWER_LABELS = ['答案', '我選', '為什麼錯', '觀念一句話', '易混淆', '一句話', '比喻', '怎麼考', '跟它很像的', '答案架構', '申論寫法', '怎麼用'];
+    function markAnswers(container) {
+      container.querySelectorAll('.card-body > p, .card-body > table, .card-body > ul').forEach(function (el) {
+        var st = el.querySelector('strong');
+        var label = st ? st.textContent.replace(/[：:]\s*$/, '').trim() : '';
+        if (el.tagName !== 'P') { // 表格、清單：跟著前一個段落的標籤
+          var prev = el.previousElementSibling; if (prev && prev.classList.contains('ans')) el.classList.add('ans');
+          return;
+        }
+        if (ANSWER_LABELS.indexOf(label) >= 0) el.classList.add('ans');
+      });
+    }
+    function renderPage(path, params) {
+      var page = findPage(path) || { title: path.split('/').pop(), path: path, file: path + '.md' };
+      var sec = sectionOf(path), secObj = toc.sections.filter(function (s) { return s.name === sec; })[0];
+      $('fab-edit').style.display = '';
+      app.innerHTML = '<div class="narrow"><div class="crumbs"><a href="#/">首頁</a>' + (secObj ? '<span>›</span><a href="#/' + esc(sec) + '">' + esc(sec) + '</a>' : '') + (page.sub ? '<span>›</span><span>' + esc(page.sub) + '</span>' : '') + '</div><h1 class="page-title">' + esc(page.title) + '</h1><div id="page-body"><div class="help">載入中…</div></div></div>';
+      Promise.all([loadFile(page.file, true), loadReviews()]).then(function (res) {
+        var text = res[0];
+        var body = $('page-body');
+        if (text === null) {
+          body.innerHTML = '<div class="empty">這頁還沒有內容。可能是剛建好、GitHub Pages 還在更新（等 1 分鐘重新整理），或連結打錯了。<br><br><button class="btn primary" id="empty-add">＋ 在這頁加第一張卡</button></div>';
+          $('empty-add').onclick = function () { openEditor('card'); };
+          return;
+        }
+        var c = splitCards(text);
+        if (c.title && c.title !== page.title) document.querySelector('.page-title').textContent = c.title;
+        var canReview = inReviewSection(page.file);
+        var html = '';
+        if (c.intro) html += '<div class="lead card-body">' + md(c.intro) + '</div>';
+        if (canReview && c.cards.length) {
+          html += '<div class="page-tools"><label class="toggle"><input type="checkbox" id="pg-selftest"' + (localStorage.getItem(K.selftest) === '1' ? ' checked' : '') + '> 自測：遮住答案</label><span class="hint">' + c.cards.length + ' 張卡</span><span style="flex:1"></span><button class="mini" id="mark-all">全部標記已複習</button></div>';
+        }
+        html += '<div class="cards" id="cards">' + c.cards.map(function (card, i) {
+          var key = cardKey(page.file, card.title);
+          var t = esc(card.title).replace(/^(【[^】]+】)/, '<span class="tag">$1</span>');
+          return '<article class="card" id="card-' + i + '" data-title="' + esc(card.title) + '"><div class="card-head"><h2>' + t + '</h2>' + (canReview ? reviewBtnHtml(key) : '') + '</div><div class="card-body">' + md(card.body) + '</div><div class="card-foot"><button class="mini" data-edit="' + i + '">✎ 改這張</button><button class="mini" data-copy="' + i + '">複製 Markdown</button></div></article>';
+        }).join('') + '</div>';
+        if (!c.cards.length) html += '<div class="empty">還沒有卡。按右下角「＋ 新筆記」貼第一張。</div>';
+        body.innerHTML = html;
+        markAnswers(body);
+        var st = $('pg-selftest');
+        function applySelftest() { $('cards').classList.toggle('selftest', !!(st && st.checked)); }
+        if (st) { applySelftest(); st.onchange = function () { localStorage.setItem(K.selftest, this.checked ? '1' : '0'); applySelftest(); }; }
+        body.querySelectorAll('.card').forEach(function (el) {
+          el.querySelector('.card-body').addEventListener('click', function () { if ($('cards').classList.contains('selftest')) el.classList.add('reveal'); });
+        });
+        body.querySelectorAll('.review-btn').forEach(function (btn) {
+          btn.onclick = function () { markReviewed(btn.dataset.key); btn.outerHTML = reviewBtnHtml(btn.dataset.key); bindReview(); toast('記下了 ✓'); };
+        });
+        function bindReview() { body.querySelectorAll('.review-btn').forEach(function (b) { b.onclick = function () { markReviewed(b.dataset.key); b.outerHTML = reviewBtnHtml(b.dataset.key); bindReview(); toast('記下了 ✓'); }; }); }
+        if ($('mark-all')) $('mark-all').onclick = function () { c.cards.forEach(function (card) { markReviewed(cardKey(page.file, card.title)); }); renderPage(path, {}); toast('這頁全部記下了 ✓'); };
+        body.querySelectorAll('[data-edit]').forEach(function (b) { b.onclick = function () { openEditor('full', null, c.cards[+b.dataset.edit].title); }; });
+        body.querySelectorAll('[data-copy]').forEach(function (b) {
+          b.onclick = function () { var card = c.cards[+b.dataset.copy]; navigator.clipboard.writeText('## ' + card.title + '\n\n' + card.body).then(function () { toast('已複製'); }); };
+        });
+        // 從搜尋或「今天先看」跳進來：捲到那張卡並閃一下
+        if (params && params.c) {
+          var target = Array.from(body.querySelectorAll('.card')).filter(function (el) { return el.dataset.title === params.c; })[0];
+          if (target) { setTimeout(function () { target.scrollIntoView({ block: 'start' }); target.classList.add('flash'); }, 60); }
+        }
+      });
+    }
+
+    // ===================== 搜尋 =====================
+    var searchIndex = null;
+    function buildIndex() {
+      if (searchIndex) return Promise.resolve(searchIndex);
+      var pages = allPages().concat(toc.loose);
+      return Promise.all(pages.map(function (p) {
+        return loadFile(p.file).then(function (t) {
+          var c = splitCards(t || '');
+          return c.cards.map(function (card) { return { page: p, title: card.title, body: card.body.replace(/[*_`#>|]/g, '') }; });
+        });
+      })).then(function (lists) { searchIndex = lists.reduce(function (a, b) { return a.concat(b); }, []); return searchIndex; });
+    }
+    function highlight(s, q) { return esc(s).replace(new RegExp('(' + q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi'), '<mark>$1</mark>'); }
+    function doSearch(q) {
+      var box = $('sq-results');
+      q = q.trim();
+      if (q.length < 2) { box.innerHTML = '<div class="help">輸入兩個字以上開始搜。</div>'; return; }
+      buildIndex().then(function (idx) {
+        var lq = q.toLowerCase();
+        var hits = idx.filter(function (it) { return it.title.toLowerCase().indexOf(lq) >= 0 || it.body.toLowerCase().indexOf(lq) >= 0; }).slice(0, 30);
+        if (!hits.length) { box.innerHTML = '<div class="help">沒有找到「' + esc(q) + '」。</div>'; return; }
+        box.innerHTML = '<div class="results">' + hits.map(function (it) {
+          var i = it.body.toLowerCase().indexOf(lq), snip = i >= 0 ? it.body.slice(Math.max(0, i - 30), i + 50).replace(/\n+/g, ' ') : it.body.slice(0, 80).replace(/\n+/g, ' ');
+          return '<a class="result" href="#/' + esc(it.page.path) + '?c=' + encodeURIComponent(it.title) + '"><div class="where">' + esc(it.page.section || '') + ' › ' + esc(it.page.title) + '</div><div>' + highlight(it.title, q) + '</div><div class="snip">…' + highlight(snip, q) + '…</div></a>';
+        }).join('') + '</div>';
+        box.querySelectorAll('.result').forEach(function (a) { a.onclick = function () { closeAll(); }; });
+      });
+    }
+
+    // ===================== 編輯器 =====================
+    var edMode = 'card', edFileSha = null, edSectionHint = null, edFocusCard = null;
     var TEMPLATES = {
       wrong: '## 【科目】115-Q07 一句話標題\n\n**題目**：\n\n**選項**：(A)  (B)  (C)  (D) \n\n**答案**：\n\n**我選**：\n\n**為什麼錯**：\n\n**觀念一句話**：\n\n**易混淆**：\n',
       concept: '## 名詞（英文）\n\n**一句話**：\n\n**比喻**：\n\n**怎麼考**：\n\n**跟它很像的**：\n',
-      essay: '## ' + today() + ' 題目：\n\n**大綱**\n1. \n2. \n3. \n\n**正文**\n\n\n**AI 批改（25 分制）**\n- 分數：\n- 缺的關鍵字：\n- 架構建議：\n',
-      free: '## ' + today() + ' \n\n'
+      essay: '## DATE 題目：\n\n**大綱**\n1. \n2. \n3. \n\n**正文**\n\n\n**AI 批改（25 分制）**\n- 分數：\n- 缺的關鍵字：\n- 架構建議：\n',
+      free: '## DATE \n\n'
     };
-
-    function sectionsFromSidebar() {
-      // 從側邊欄的連結整理出「可以放頁面的資料夾」
+    function tpl(name) { return TEMPLATES[name].replace('DATE', today()); }
+    function currentFile() { return current.kind === 'page' ? current.path + '.md' : ''; }
+    function sectionDirs() {
       var dirs = {};
-      sidebarLinks().forEach(function (l) {
-        var parts = l.path.split('/');
-        if (parts.length < 2) return;
-        var dir = parts.slice(0, -1).join('/');
-        dirs[dir] = true;
-      });
-      var list = Object.keys(dirs);
-      ['台電/共同科目', '台電/專業科目', '台電/作文', '學習', '隨寫'].forEach(function (d) { if (list.indexOf(d) < 0) list.push(d); });
-      return list;
-    }
-    function updateFileLabel() {
-      var file;
-      if (edMode === 'page') {
-        var name = $('ed-name').value.trim().replace(/[\/\\#?]/g, '');
-        file = $('ed-section').value + '/' + (name || '（頁面名稱）') + '.md';
-      } else {
-        file = currentFile(docsifyVm);
-      }
-      $('ed-file').textContent = file;
-      return file;
-    }
-    function setMode(mode) {
-      edMode = mode;
-      $('ed-mode').querySelectorAll('button').forEach(function (b) { b.classList.toggle('on', b.dataset.mode === mode); });
-      $('ed-target-row').style.display = mode === 'page' ? 'flex' : 'none';
-      $('ed-title').textContent = mode === 'card' ? '加一張卡到「' + pageTitleFromFile(currentFile(docsifyVm)) + '」' : mode === 'page' ? '新頁面' : '編輯整頁';
-      $('ed-msg').className = 'msg'; $('ed-msg').textContent = 'Ctrl + S 也可以存';
-      $('ed-preview').classList.remove('show'); $('ed-text').style.display = '';
-      if (mode === 'full') {
-        $('ed-text').value = '載入中…'; $('ed-text').disabled = true;
-        var file = updateFileLabel();
-        ghGet(file).then(function (f) {
-          edFileSha = f ? f.sha : null;
-          $('ed-text').value = f ? f.content : '# ' + pageTitleFromFile(file) + '\n\n';
-        }).catch(function (e) { $('ed-text').value = ''; showMsg(e.message, 'err'); })
-          .then(function () { $('ed-text').disabled = false; });
-      } else if (mode === 'page') {
-        var sel = $('ed-section');
-        sel.innerHTML = sectionsFromSidebar().map(function (d) { return '<option>' + d + '</option>'; }).join('');
-        var cur = currentFile(docsifyVm).split('/').slice(0, -1).join('/');
-        if (cur) sel.value = cur;
-        $('ed-name').value = '';
-        $('ed-text').value = '';
-        updateFileLabel();
-      } else {
-        var f2 = currentFile(docsifyVm);
-        var guess = f2.indexOf('隨寫/') === 0 ? 'free' : f2.indexOf('作文') >= 0 ? 'essay' : f2.indexOf('概念') >= 0 ? 'concept' : 'wrong';
-        $('ed-text').value = TEMPLATES[guess];
-        updateFileLabel();
-      }
+      allPages().forEach(function (p) { dirs[p.path.split('/').slice(0, -1).join('/')] = true; });
+      toc.sections.forEach(function (s) { dirs[s.name] = true; });
+      return Object.keys(dirs).sort();
     }
     function showMsg(msg, cls) { var m = $('ed-msg'); m.textContent = msg; m.className = 'msg ' + (cls || ''); }
-    function openEditor(mode) {
-      if (!getToken()) { openSettings('先貼一次 token，之後就能在這裡直接寫。'); return; }
-      docsifyVm = window.__vm;
-      $('editor').classList.add('open');
-      setMode(mode);
-      setTimeout(function () { (mode === 'page' ? $('ed-name') : $('ed-text')).focus(); }, 50);
+    function updateFileLabel() {
+      var file;
+      if (edMode === 'page') { var name = $('ed-name').value.trim().replace(/[\/\\#?]/g, ''); file = $('ed-section').value + '/' + (name || '（頁面名稱）') + '.md'; }
+      else file = currentFile();
+      $('ed-file').textContent = file; return file;
     }
-    function closeEditor() { $('editor').classList.remove('open'); }
-
-    // 把新頁面加進 _sidebar.md 對應的區
-    function addToSidebar(file, title) {
-      return ghGet('_sidebar.md').then(function (f) {
-        var md = f ? f.content : '';
-        var lines = md.split('\n');
+    function setMode(mode) {
+      if (mode !== 'page' && !currentFile()) mode = 'page';
+      edMode = mode;
+      $('ed-mode').querySelectorAll('button').forEach(function (b) { b.classList.toggle('on', b.dataset.mode === mode); b.disabled = (b.dataset.mode !== 'page' && !currentFile()); });
+      $('ed-target-row').style.display = mode === 'page' ? 'flex' : 'none';
+      var pageTitle = (findPage(current.path) || {}).title || current.path.split('/').pop();
+      $('ed-title').textContent = mode === 'card' ? '加一張卡到「' + pageTitle + '」' : mode === 'page' ? '新頁面' : '編輯整頁「' + pageTitle + '」';
+      showMsg('Ctrl + S 也可以存');
+      $('ed-preview').classList.remove('show'); $('ed-text').style.display = ''; $('ed-preview-toggle').textContent = '預覽';
+      var ta = $('ed-text');
+      if (mode === 'full') {
+        ta.value = '載入中…'; ta.disabled = true; updateFileLabel();
+        ghGet(currentFile()).then(function (f) {
+          edFileSha = f ? f.sha : null; ta.value = f ? f.content : '# ' + pageTitle + '\n\n';
+          if (edFocusCard) { var i = ta.value.indexOf('## ' + edFocusCard); if (i >= 0) { ta.focus(); ta.setSelectionRange(i, i); ta.scrollTop = Math.max(0, (ta.value.slice(0, i).split('\n').length - 3) * 26); } edFocusCard = null; }
+        }).catch(function (e) { ta.value = ''; showMsg(e.message, 'err'); }).then(function () { ta.disabled = false; });
+      } else if (mode === 'page') {
+        var sel = $('ed-section');
+        sel.innerHTML = sectionDirs().map(function (d) { return '<option>' + esc(d) + '</option>'; }).join('');
+        var guess = edSectionHint || (current.kind === 'page' ? current.path.split('/').slice(0, -1).join('/') : current.kind === 'section' ? current.path : '');
+        if (guess) { var opt = Array.from(sel.options).filter(function (o) { return o.value === guess; })[0]; if (opt) sel.value = guess; }
+        $('ed-name').value = ''; ta.value = ''; updateFileLabel();
+      } else {
+        var f = currentFile();
+        var g = f.indexOf('隨寫/') === 0 ? 'free' : f.indexOf('作文') >= 0 ? 'essay' : f.indexOf('概念') >= 0 ? 'concept' : f.indexOf('學習/') === 0 ? 'concept' : 'wrong';
+        ta.value = tpl(g); updateFileLabel();
+      }
+    }
+    function openEditor(mode, sectionHint, focusCard) {
+      if (!getToken()) { openSettings('先貼一次鑰匙，之後就能在這裡直接寫。'); return; }
+      edSectionHint = sectionHint || null; edFocusCard = focusCard || null;
+      $('editor').classList.add('open'); setMode(mode);
+      setTimeout(function () { (edMode === 'page' ? $('ed-name') : $('ed-text')).focus(); }, 50);
+    }
+    function closeAll() { ['editor', 'settings', 'search'].forEach(function (id) { $(id).classList.remove('open'); }); }
+    function addToToc(file, title) {
+      return ghGet(TOC_FILE).then(function (f) {
+        var text = f ? f.content : '', lines = text.split('\n');
         var link = '(' + file.replace(/\.md$/, '') + ')';
-        if (md.indexOf(link) >= 0) return;
-        var top = file.split('/')[0];
-        var newLine = '  - [' + title + '](' + file.replace(/\.md$/, '') + ')';
+        if (text.indexOf(link) >= 0) return;
+        var top = file.split('/')[0], newLine = '  - [' + title + '](' + file.replace(/\.md$/, '') + ')';
         var idx = -1;
         for (var i = 0; i < lines.length; i++) if (lines[i].trim() === '- ' + top) { idx = i; break; }
-        if (idx < 0) { lines.push('- ' + top, newLine); }
-        else {
-          var j = idx + 1;
-          while (j < lines.length && /^\s+- /.test(lines[j])) j++;
-          lines.splice(j, 0, newLine);
-        }
+        if (idx < 0) lines.push('- ' + top, newLine);
+        else { var j = idx + 1; while (j < lines.length && /^\s+- /.test(lines[j])) j++; lines.splice(j, 0, newLine); }
         var out = lines.join('\n').replace(/\n{3,}/g, '\n\n');
-        setPending('_sidebar.md', out);
-        return ghPut('_sidebar.md', out, '側邊欄：加入 ' + title, f ? f.sha : null);
+        setPending(TOC_FILE, out); fileCache[TOC_FILE] = out;
+        return ghPut(TOC_FILE, out, '目錄：加入 ' + title, f ? f.sha : null);
       });
     }
     function saveEditor() {
       var text = $('ed-text').value;
       if (!text.trim()) { showMsg('還沒寫東西', 'err'); return; }
       $('ed-save').disabled = true; showMsg('存檔中…');
-      var file = updateFileLabel();
-      var p;
+      var file = updateFileLabel(), p;
       if (edMode === 'card') {
         p = ghGet(file).then(function (f) {
-          var base = f ? f.content.replace(/\s+$/, '') : '# ' + pageTitleFromFile(file);
+          var base = f ? f.content.replace(/\s+$/, '') : '# ' + ((findPage(current.path) || {}).title || current.path.split('/').pop());
           var out = base + '\n\n' + text.trim() + '\n';
           var m = text.match(/^## (.+)$/m);
-          return ghPut(file, out, '新卡：' + (m ? m[1].trim() : pageTitleFromFile(file)), f ? f.sha : null).then(function () { return out; });
+          return ghPut(file, out, '新卡：' + (m ? m[1].trim() : file), f ? f.sha : null).then(function () { return out; });
         });
       } else if (edMode === 'full') {
-        p = ghPut(file, text, '編輯 ' + pageTitleFromFile(file), edFileSha).then(function () { return text; });
+        p = ghPut(file, text, '編輯 ' + file.replace(/\.md$/, ''), edFileSha).then(function () { return text; });
       } else {
         var name = $('ed-name').value.trim();
         if (!name) { showMsg('要給頁面一個名稱', 'err'); $('ed-save').disabled = false; return; }
@@ -595,160 +883,82 @@
         p = ghGet(file).then(function (f) {
           if (f) throw new Error('這個頁面已經存在，改用「編輯整頁」');
           return ghPut(file, body, '新頁面：' + name, null);
-        }).then(function () { return addToSidebar(file, name); }).then(function () { return body; });
+        }).then(function () { return addToToc(file, name); }).then(function () { return body; });
       }
       p.then(function (content) {
-        setPending(file, content);
-        showMsg('存好了 ✓', 'ok'); toast('已存到 GitHub，網站約 1 分鐘後同步');
+        setPending(file, content); fileCache[file] = content; searchIndex = null;
+        showMsg('存好了 ✓', 'ok'); toast('已存到 GitHub');
         setTimeout(function () {
-          closeEditor();
-          var route = '#/' + file.replace(/\.md$/, '');
-          if (safeDecode(location.hash).replace(/\/$/, '') === route) location.reload();
-          else location.hash = route;
-        }, 500);
-      }).catch(function (e) { showMsg(e.message, 'err'); })
-        .then(function () { $('ed-save').disabled = false; });
+          closeAll();
+          var target = file.replace(/\.md$/, '');
+          if (route().path === target) go(); else location.hash = '#/' + target;
+        }, 450);
+      }).catch(function (e) { showMsg(e.message, 'err'); }).then(function () { $('ed-save').disabled = false; });
     }
 
-    // ===== 設定面板 =====
-    function paintConn() {
-      $('conn-dot').classList.toggle('on', !!getToken());
-      $('fab-settings').title = getToken() ? '已連到 GitHub' : '還沒貼 token';
-    }
+    // ===================== 設定 =====================
+    function paintConn() { $('conn-dot').classList.toggle('on', !!getToken()); $('btn-settings').title = getToken() ? '已連到 GitHub' : '還沒貼鑰匙'; }
     function openSettings(hint) {
-      $('st-repo').textContent = OWNER + '/' + REPO;
-      $('st-repo-name').textContent = REPO;
-      $('st-branch').textContent = BRANCH;
-      $('st-token').value = getToken();
+      $('st-repo').textContent = OWNER + '/' + REPO; $('st-repo-name').textContent = REPO; $('st-branch').textContent = BRANCH;
+      $('st-token').value = getToken(); $('st-days').value = reviewDays();
       $('st-msg').className = 'msg'; $('st-msg').textContent = hint || '';
       $('settings').classList.add('open');
     }
-    function closeSettings() { $('settings').classList.remove('open'); }
     function testAndSave() {
-      var tk = $('st-token').value.trim();
-      var m = $('st-msg');
-      if (!tk) { m.className = 'msg err'; m.textContent = '請先貼上 token'; return; }
+      var tk = $('st-token').value.trim(), m = $('st-msg');
+      var days = parseInt($('st-days').value, 10); if (days > 0) localStorage.setItem(K.days, String(days));
+      if (!tk) { m.className = 'msg err'; m.textContent = '請先貼上鑰匙'; return; }
       m.className = 'msg'; m.textContent = '測試中…';
-      fetch('https://api.github.com/repos/' + OWNER + '/' + REPO, {
-        headers: { 'Authorization': 'Bearer ' + tk, 'Accept': 'application/vnd.github+json' }
-      }).then(function (r) {
-        if (r.status === 401) throw new Error('GitHub 說這把 token 無效，請重新複製');
-        if (r.status === 404) throw new Error('token 看不到 ' + OWNER + '/' + REPO + '，Repository access 要勾這個 repo');
-        if (!r.ok) throw new Error('連線失敗 ' + r.status);
-        return r.json();
-      }).then(function (j) {
-        if (!(j.permissions && j.permissions.push)) throw new Error('連得上，但沒有寫入權限。Permissions → Contents 要選 Read and write');
-        localStorage.setItem(TOKEN_KEY, tk);
-        BRANCH = j.default_branch || BRANCH;
-        paintConn();
-        m.className = 'msg ok'; m.textContent = '連上了 ✓ 可以開始寫';
-        reviewsLoaded = false; loadReviews().then(function () { if (Object.keys(reviews).length) pushReviews(); if (location.hash === '#/' || location.hash === '') renderDashboard(); });
-        setTimeout(closeSettings, 900);
-      }).catch(function (e) { m.className = 'msg err'; m.textContent = e.message; });
+      fetch('https://api.github.com/repos/' + OWNER + '/' + REPO, { headers: { 'Authorization': 'Bearer ' + tk, 'Accept': 'application/vnd.github+json' } })
+        .then(function (r) {
+          if (r.status === 401) throw new Error('GitHub 說這把鑰匙無效，請重新複製');
+          if (r.status === 404) throw new Error('鑰匙看不到 ' + OWNER + '/' + REPO + '，Repository access 要勾這個 repo');
+          if (!r.ok) throw new Error('連線失敗 ' + r.status);
+          return r.json();
+        }).then(function (j) {
+          if (!(j.permissions && j.permissions.push)) throw new Error('連得上，但沒有寫入權限。Permissions → Contents 要選 Read and write');
+          localStorage.setItem(K.token, tk); BRANCH = j.default_branch || BRANCH; paintConn();
+          m.className = 'msg ok'; m.textContent = '連上了 ✓ 可以開始寫';
+          fileCache = {}; searchIndex = null;
+          loadReviews(true).then(function () { if (Object.keys(reviews).length) pushReviews(); go(); });
+          setTimeout(closeAll, 900);
+        }).catch(function (e) { m.className = 'msg err'; m.textContent = e.message; });
     }
 
-    // ===== 綁事件 =====
+    // ===================== 綁事件 =====================
     document.addEventListener('DOMContentLoaded', function () {
       paintConn();
-      $('fab-new').onclick = function () { openEditor(currentFile(window.__vm) === 'README.md' ? 'page' : 'card'); };
+      $('fab-new').onclick = function () { openEditor(current.kind === 'page' ? 'card' : 'page', current.kind === 'section' ? current.path : null); };
       $('fab-edit').onclick = function () { openEditor('full'); };
-      $('fab-settings').onclick = function () { openSettings(); };
-      $('ed-close').onclick = $('ed-cancel').onclick = closeEditor;
+      $('btn-settings').onclick = function () { openSettings(); };
+      $('btn-search').onclick = function () { $('search').classList.add('open'); $('sq').value = ''; doSearch(''); setTimeout(function () { $('sq').focus(); }, 30); };
+      $('sq').oninput = function () { doSearch(this.value); };
+      $('sq-close').onclick = $('ed-close').onclick = $('ed-cancel').onclick = $('st-close').onclick = closeAll;
       $('ed-save').onclick = saveEditor;
-      $('ed-mode').querySelectorAll('button').forEach(function (b) { b.onclick = function () { setMode(b.dataset.mode); }; });
+      $('ed-mode').querySelectorAll('button').forEach(function (b) { b.onclick = function () { if (!b.disabled) setMode(b.dataset.mode); }; });
       $('ed-templates').querySelectorAll('[data-tpl]').forEach(function (b) {
-        b.onclick = function () {
-          var ta = $('ed-text');
-          var tpl = TEMPLATES[b.dataset.tpl];
-          if (b.dataset.tpl === 'essay' || b.dataset.tpl === 'free') tpl = tpl.replace(/^## \d{4}-\d{2}-\d{2}/, '## ' + today());
-          ta.value = (ta.value.trim() ? ta.value.replace(/\s+$/, '') + '\n\n' : '') + tpl;
-          ta.focus();
-        };
+        b.onclick = function () { var ta = $('ed-text'); ta.value = (ta.value.trim() ? ta.value.replace(/\s+$/, '') + '\n\n' : '') + tpl(b.dataset.tpl); ta.focus(); };
       });
       $('ed-preview-toggle').onclick = function () {
-        var pv = $('ed-preview'), ta = $('ed-text');
-        var show = !pv.classList.contains('show');
-        if (show && window.__vm && window.__vm.compiler) pv.innerHTML = window.__vm.compiler.compile($('ed-text').value);
-        pv.classList.toggle('show', show); ta.style.display = show ? 'none' : '';
-        this.textContent = show ? '回到編輯' : '預覽';
+        var pv = $('ed-preview'), ta = $('ed-text'), show = !pv.classList.contains('show');
+        if (show) pv.innerHTML = md($('ed-text').value);
+        pv.classList.toggle('show', show); ta.style.display = show ? 'none' : ''; this.textContent = show ? '回到編輯' : '預覽';
       };
-      $('ed-name').oninput = updateFileLabel;
-      $('ed-section').onchange = updateFileLabel;
-      $('st-close').onclick = closeSettings;
+      $('ed-name').oninput = updateFileLabel; $('ed-section').onchange = updateFileLabel;
       $('st-save').onclick = testAndSave;
-      $('st-clear').onclick = function () { localStorage.removeItem(TOKEN_KEY); $('st-token').value = ''; paintConn(); $('st-msg').textContent = '已清除'; };
+      $('st-clear').onclick = function () { localStorage.removeItem(K.token); $('st-token').value = ''; paintConn(); $('st-msg').textContent = '已清除'; fileCache = {}; };
       $('st-show').onclick = function () { var i = $('st-token'); i.type = i.type === 'password' ? 'text' : 'password'; this.textContent = i.type === 'password' ? '顯示' : '隱藏'; };
       document.addEventListener('keydown', function (e) {
+        var typing = /INPUT|TEXTAREA|SELECT/.test((e.target.tagName || ''));
         if ((e.ctrlKey || e.metaKey) && e.key === 's' && $('editor').classList.contains('open')) { e.preventDefault(); saveEditor(); }
-        if (e.key === 'Escape') { closeEditor(); closeSettings(); }
+        else if (e.key === 'Escape') closeAll();
+        else if (e.key === '/' && !typing) { e.preventDefault(); $('btn-search').click(); }
+        else if (e.key === 'n' && !typing && !e.ctrlKey && !e.metaKey) { $('fab-new').click(); }
       });
-      $('editor').addEventListener('click', function (e) { if (e.target === this) closeEditor(); });
-      $('settings').addEventListener('click', function (e) { if (e.target === this) closeSettings(); });
+      ['editor', 'settings', 'search'].forEach(function (id) { $(id).addEventListener('click', function (e) { if (e.target === this) closeAll(); }); });
+      window.addEventListener('hashchange', go);
+      go();
     });
-
-    // 側邊欄剛加了新頁面、Pages 還沒更新時，先把連結補進去
-    function patchSidebar() {
-      var pend = getPending('_sidebar.md');
-      if (!pend) return;
-      var nav = document.querySelector('.sidebar-nav');
-      if (!nav) return;
-      var have = sidebarLinks().map(function (l) { return l.path; });
-      var lines = pend.split('\n');
-      var currentTop = null;
-      lines.forEach(function (line) {
-        var top = line.match(/^- ([^\[]\S*)\s*$/);
-        if (top) { currentTop = top[1].trim(); return; }
-        var m = line.match(/^\s+- \[(.+?)\]\((.+?)\)/);
-        if (!m || have.indexOf(m[2]) >= 0) return;
-        // 找到該區的 ul
-        var ul = null;
-        Array.from(nav.querySelectorAll('li')).forEach(function (li) {
-          var firstText = (li.childNodes[0] && li.childNodes[0].textContent || '').trim();
-          if (firstText === currentTop) ul = li.querySelector('ul');
-        });
-        var li = document.createElement('li');
-        li.innerHTML = '<a href="#/' + m[2] + '">' + m[1] + '</a>';
-        if (ul) ul.appendChild(li); else nav.querySelector('ul').appendChild(li);
-      });
-    }
-
-    window.$docsify = {
-      name: 'Daybook',
-      repo: '',
-      loadSidebar: true,
-      subMaxLevel: 0,
-      auto2top: true,
-      homepage: 'README.md',
-      alias: { '/.*/_sidebar.md': '/_sidebar.md' },
-      notFoundPage: true,
-      search: {
-        paths: 'auto',
-        placeholder: '搜關鍵字、年份、章節',
-        noData: '沒有找到',
-        depth: 2
-      },
-      plugins: [
-        function (hook, vm) {
-          window.__vm = vm;
-          // 有剛存的暫存就先顯示；有 token 就直接讀 GitHub 最新版
-          hook.beforeEach(function (content, next) {
-            var file = currentFile(vm);
-            var pend = getPending(file);
-            if (pend) return next(pend);
-            if (getToken()) {
-              ghGet(file).then(function (f) { next(f ? f.content : content); }).catch(function () { next(content); });
-            } else next(content);
-          });
-          hook.doneEach(function () {
-            patchSidebar();
-            addReviewButtons(vm);
-            if (currentFile(vm) === 'README.md') renderDashboard();
-          });
-        }
-      ]
-    };
   </script>
-  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.min.js"></script>
 </body>
 </html>
