@@ -16,6 +16,8 @@
       --accent-soft: #e6eef8;
       --done: #2f7d5b;
       --done-soft: #e4f2ea;
+      --warn: #b4581c;
+      --warn-soft: #fbeee3;
       --theme-color: var(--accent);
     }
     body {
@@ -28,7 +30,7 @@
     .sidebar > h1 a { color: var(--ink); font-weight: 700; }
     .sidebar-nav li > a { color: var(--ink); }
     .sidebar-nav li.active > a { color: var(--accent); font-weight: 500; }
-    .markdown-section { max-width: 760px; }
+    .markdown-section { max-width: 760px; padding-bottom: 6rem; }
     .markdown-section h1 { font-size: 1.7rem; }
     .markdown-section h2 {
       font-size: 1.15rem;
@@ -42,6 +44,10 @@
     }
     .markdown-section li { line-height: 1.8; }
     .markdown-section strong { color: var(--accent); }
+    .markdown-section blockquote { border-left-color: var(--accent); background: var(--accent-soft); padding: 0.6rem 1rem; }
+    .markdown-section blockquote p { color: var(--ink); }
+    .markdown-section table { display: table; width: 100%; }
+    .search input { font-family: inherit; }
 
     /* 已複習按鈕 */
     .review-btn {
@@ -55,154 +61,654 @@
       padding: 0.15rem 0.7rem;
       cursor: pointer;
     }
-    .review-btn.done {
-      background: var(--done-soft);
-      border-color: var(--done);
-      color: var(--done);
-    }
+    .review-btn.done { background: var(--done-soft); border-color: var(--done); color: var(--done); }
+    .review-btn.due { background: var(--warn-soft); border-color: var(--warn); color: var(--warn); }
     .review-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
     /* 首頁看板 */
     #dashboard { margin: 1rem 0 2rem; }
-    #dashboard table { width: 100%; }
     #dashboard td, #dashboard th { padding: 0.5rem 0.6rem; }
-    #dashboard .due { color: var(--accent); font-weight: 500; }
+    #dashboard .due { color: var(--warn); font-weight: 600; }
     #dashboard .empty { color: var(--muted); }
-    .search input { font-family: inherit; }
+    #dashboard .today { background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 0.8rem 1rem; margin-bottom: 1rem; }
+    #dashboard .today h4 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    #dashboard .today ul { margin: 0; padding-left: 1.2rem; }
 
-    /* 編輯連結與寫一筆 */
-    .edit-link { margin-top: 3rem; font-size: 0.85rem; }
-    .edit-link a { color: var(--muted); }
-    .write-bar {
-      display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap;
-      background: #fff; border: 1px solid var(--line); border-radius: 8px;
-      padding: 0.7rem 1rem; margin: 0 0 1.5rem;
-      font-size: 0.85rem; color: var(--muted);
+    /* 浮動工具列 */
+    .db-toolbar {
+      position: fixed; right: 1.2rem; bottom: 1.2rem; z-index: 40;
+      display: flex; flex-direction: column; gap: 0.5rem; align-items: flex-end;
     }
-    .write-btn {
-      background: var(--accent); color: #fff !important; text-decoration: none !important;
-      border-radius: 999px; padding: 0.35rem 1rem; font-weight: 500;
+    .db-fab {
+      font: inherit; font-size: 0.9rem; font-weight: 500;
+      border: none; border-radius: 999px; padding: 0.6rem 1.1rem;
+      background: #fff; color: var(--ink); cursor: pointer;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.12); border: 1px solid var(--line);
+    }
+    .db-fab.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .db-fab.small { font-size: 0.78rem; padding: 0.35rem 0.8rem; color: var(--muted); }
+    .db-fab .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #c33; margin-right: 0.4rem; vertical-align: middle; }
+    .db-fab .dot.on { background: var(--done); }
+
+    /* 編輯面板 */
+    .db-overlay {
+      position: fixed; inset: 0; background: rgba(34,48,47,0.45); z-index: 50;
+      display: none; align-items: center; justify-content: center; padding: 1rem;
+    }
+    .db-overlay.open { display: flex; }
+    .db-panel {
+      background: #fff; border-radius: 12px; width: min(860px, 100%); max-height: 94vh;
+      display: flex; flex-direction: column; box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+    }
+    .db-panel header {
+      display: flex; align-items: center; gap: 0.8rem; padding: 0.9rem 1.2rem;
+      border-bottom: 1px solid var(--line); flex-wrap: wrap;
+    }
+    .db-panel header h3 { margin: 0; font-size: 1.05rem; flex: 1; }
+    .db-panel .body { padding: 1rem 1.2rem; overflow: auto; display: flex; flex-direction: column; gap: 0.7rem; }
+    .db-panel footer {
+      display: flex; align-items: center; gap: 0.6rem; padding: 0.8rem 1.2rem;
+      border-top: 1px solid var(--line); flex-wrap: wrap;
+    }
+    .db-panel footer .msg { flex: 1; font-size: 0.85rem; color: var(--muted); }
+    .db-panel footer .msg.err { color: #b3261e; }
+    .db-panel footer .msg.ok { color: var(--done); }
+    .db-row { display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center; }
+    .db-row label { font-size: 0.85rem; color: var(--muted); }
+    .db-panel input[type=text], .db-panel input[type=password], .db-panel select, .db-panel textarea {
+      font: inherit; font-size: 0.95rem; border: 1px solid var(--line); border-radius: 6px;
+      padding: 0.45rem 0.6rem; background: #fff; color: var(--ink);
+    }
+    .db-panel input[type=text], .db-panel input[type=password] { flex: 1; min-width: 12rem; }
+    .db-panel textarea {
+      width: 100%; min-height: 46vh; resize: vertical; line-height: 1.6;
+      font-family: "Noto Sans TC", ui-monospace, monospace; box-sizing: border-box;
+    }
+    .db-preview {
+      display: none; border: 1px dashed var(--line); border-radius: 6px; padding: 0.5rem 1rem; min-height: 46vh;
+    }
+    .db-preview.show { display: block; }
+    .db-preview h2 { font-size: 1.1rem; border-bottom: 1px solid var(--line); padding-bottom: 0.3rem; margin-top: 1.4rem; }
+    .db-btn {
+      font: inherit; font-size: 0.88rem; border-radius: 6px; padding: 0.45rem 0.9rem; cursor: pointer;
+      border: 1px solid var(--line); background: #fff; color: var(--ink);
+    }
+    .db-btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .db-btn.ghost { background: transparent; color: var(--muted); }
+    .db-btn:disabled { opacity: 0.5; cursor: default; }
+    .db-chip {
+      font: inherit; font-size: 0.8rem; border-radius: 999px; padding: 0.2rem 0.75rem; cursor: pointer;
+      border: 1px solid var(--line); background: var(--paper); color: var(--ink);
+    }
+    .db-chip:hover { border-color: var(--accent); color: var(--accent); }
+    .db-tabs { display: flex; gap: 0.3rem; }
+    .db-tabs button { font: inherit; font-size: 0.85rem; border: none; background: none; padding: 0.3rem 0.7rem; border-radius: 6px; cursor: pointer; color: var(--muted); }
+    .db-tabs button.on { background: var(--accent-soft); color: var(--accent); font-weight: 500; }
+    .db-help { font-size: 0.85rem; color: var(--muted); line-height: 1.7; }
+    .db-help ol { padding-left: 1.3rem; margin: 0.3rem 0; }
+    .db-help code { background: var(--paper); padding: 0 0.3rem; border-radius: 3px; }
+    .db-toast {
+      position: fixed; left: 50%; bottom: 5rem; transform: translateX(-50%);
+      background: var(--ink); color: #fff; padding: 0.6rem 1.1rem; border-radius: 999px;
+      font-size: 0.88rem; z-index: 60; opacity: 0; transition: opacity 0.25s; pointer-events: none;
+    }
+    .db-toast.show { opacity: 1; }
+    @media (max-width: 600px) {
+      .db-toolbar { right: 0.8rem; bottom: 0.8rem; }
+      .db-panel textarea, .db-preview { min-height: 40vh; }
     }
   </style>
 </head>
 <body>
   <div id="app">載入中…</div>
+
+  <!-- 浮動工具列 -->
+  <div class="db-toolbar">
+    <button class="db-fab small" id="fab-settings"><span class="dot" id="conn-dot"></span>設定</button>
+    <button class="db-fab" id="fab-edit">✎ 編輯這頁</button>
+    <button class="db-fab primary" id="fab-new">＋ 新筆記</button>
+  </div>
+
+  <!-- 編輯面板 -->
+  <div class="db-overlay" id="editor">
+    <div class="db-panel" role="dialog" aria-modal="true">
+      <header>
+        <h3 id="ed-title">新筆記</h3>
+        <div class="db-tabs" id="ed-mode">
+          <button data-mode="card" class="on">加一張卡到這頁</button>
+          <button data-mode="page">新頁面</button>
+          <button data-mode="full">編輯整頁</button>
+        </div>
+        <button class="db-btn ghost" id="ed-close">✕</button>
+      </header>
+      <div class="body">
+        <div class="db-row" id="ed-target-row">
+          <label>放在</label>
+          <select id="ed-section"></select>
+          <input type="text" id="ed-name" placeholder="頁面名稱，例如：行政學概要">
+        </div>
+        <div class="db-row" id="ed-file-row">
+          <label>檔案</label><code id="ed-file"></code>
+        </div>
+        <div class="db-row" id="ed-templates">
+          <label>套範本</label>
+          <button class="db-chip" data-tpl="wrong">錯題卡</button>
+          <button class="db-chip" data-tpl="concept">概念卡</button>
+          <button class="db-chip" data-tpl="essay">作文練習</button>
+          <button class="db-chip" data-tpl="free">隨寫</button>
+          <span style="flex:1"></span>
+          <button class="db-chip" id="ed-preview-toggle">預覽</button>
+        </div>
+        <textarea id="ed-text" spellcheck="false" placeholder="用 Markdown 寫。## 開頭的一行就是一張卡。"></textarea>
+        <div class="db-preview markdown-section" id="ed-preview"></div>
+      </div>
+      <footer>
+        <span class="msg" id="ed-msg">Ctrl + S 也可以存</span>
+        <button class="db-btn" id="ed-cancel">取消</button>
+        <button class="db-btn primary" id="ed-save">存到 GitHub</button>
+      </footer>
+    </div>
+  </div>
+
+  <!-- 設定面板 -->
+  <div class="db-overlay" id="settings">
+    <div class="db-panel" role="dialog" aria-modal="true" style="width:min(620px,100%)">
+      <header><h3>設定：連到你的 GitHub</h3><button class="db-btn ghost" id="st-close">✕</button></header>
+      <div class="body">
+        <div class="db-help">
+          這把「鑰匙」（token）讓網站能直接把筆記寫回 repo，不用再跳去 GitHub。它只存在這台瀏覽器裡。
+          <ol>
+            <li>到 <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub → 產生 Fine-grained token</a></li>
+            <li>Token name 打 <code>daybook</code>；Expiration 選最長的 1 year（或 Custom）</li>
+            <li>Repository access 選 <b>Only select repositories</b> → 勾 <code id="st-repo-name"></code></li>
+            <li>Permissions → Repository permissions → <b>Contents</b> 改成 <b>Read and write</b>（其他都不用動）</li>
+            <li>按 Generate token，把 <code>github_pat_…</code> 整串複製，貼到下面</li>
+          </ol>
+        </div>
+        <div class="db-row">
+          <input type="password" id="st-token" placeholder="github_pat_…" autocomplete="off">
+          <button class="db-btn" id="st-show">顯示</button>
+        </div>
+        <div class="db-row">
+          <label>Repo</label><code id="st-repo"></code>
+          <label>分支</label><code id="st-branch"></code>
+        </div>
+      </div>
+      <footer>
+        <span class="msg" id="st-msg"></span>
+        <button class="db-btn" id="st-clear">清除</button>
+        <button class="db-btn primary" id="st-save">測試並儲存</button>
+      </footer>
+    </div>
+  </div>
+
+  <div class="db-toast" id="toast"></div>
+
   <script>
     // ===== 設定 =====
-    var REVIEW_DAYS = 7;          // 幾天沒看就算「該複習」
-    var STORAGE_PREFIX = 'review:'; // 瀏覽器儲存的鍵名前綴
-    var GITHUB = 'https://github.com/evaxia0716-star/daybook'; // 你的 repo
+    var OWNER = 'evaxia0716-star';
+    var REPO = 'dailybook';
+    var BRANCH = 'main';
+    var REVIEW_DAYS = 7;                 // 幾天沒看就算「該再看」
+    var REVIEW_FILE = 'data/reviews.json'; // 複習紀錄存哪裡
+    var REVIEW_SECTIONS = ['台電/', '學習/']; // 哪些區的卡片有「已複習」按鈕
+    var TOKEN_KEY = 'daybook:token';
+    var LOCAL_REVIEW_KEY = 'daybook:reviews';
+    var PENDING_KEY = 'daybook:pending';   // 剛存檔、GitHub Pages 還沒更新前的暫存
+    var PENDING_TTL = 15 * 60 * 1000;
 
-    // 讀寫本機紀錄（只存在你這台瀏覽器）
+    // 如果網址是 xxx.github.io/repo/，自動抓 owner 和 repo
+    (function () {
+      var m = location.hostname.match(/^([^.]+)\.github\.io$/);
+      var seg = location.pathname.split('/').filter(Boolean)[0];
+      if (m && seg) { OWNER = m[1]; REPO = seg; }
+    })();
+
+    // ===== 小工具 =====
+    function $(id) { return document.getElementById(id); }
+    function today() { return new Date().toISOString().slice(0, 10); }
+    function daysSince(d) { return Math.floor((Date.now() - new Date(d).getTime()) / 86400000); }
+    function b64enc(s) { return btoa(unescape(encodeURIComponent(s))); }
+    function b64dec(s) { return decodeURIComponent(escape(atob(s.replace(/\n/g, '')))); }
+    function encPath(p) { return p.split('/').map(encodeURIComponent).join('/'); }
+    function safeDecode(s) { try { return decodeURIComponent(s); } catch (e) { return s; } }
+    function toast(msg) {
+      var t = $('toast'); t.textContent = msg; t.classList.add('show');
+      clearTimeout(toast._t); toast._t = setTimeout(function () { t.classList.remove('show'); }, 2600);
+    }
+    function getToken() { try { return localStorage.getItem(TOKEN_KEY) || ''; } catch (e) { return ''; } }
+    function readJSON(k, d) { try { return JSON.parse(localStorage.getItem(k)) || d; } catch (e) { return d; } }
+    function writeJSON(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+
+    // 暫存：剛寫回 GitHub 的內容，Pages 更新前先顯示這份
+    function setPending(file, content) {
+      var p = readJSON(PENDING_KEY, {});
+      p[file] = { t: Date.now(), c: content };
+      writeJSON(PENDING_KEY, p);
+    }
+    function getPending(file) {
+      var p = readJSON(PENDING_KEY, {}), e = p[file];
+      if (!e) return null;
+      if (Date.now() - e.t > PENDING_TTL) { delete p[file]; writeJSON(PENDING_KEY, p); return null; }
+      return e.c;
+    }
+
+    // ===== GitHub API =====
+    function ghFetch(url, opts) {
+      opts = opts || {};
+      opts.headers = Object.assign({
+        'Accept': 'application/vnd.github+json',
+        'X-GitHub-Api-Version': '2022-11-28'
+      }, opts.headers || {});
+      var tk = getToken();
+      if (tk) opts.headers['Authorization'] = 'Bearer ' + tk;
+      return fetch(url, opts);
+    }
+    function contentsUrl(path) {
+      return 'https://api.github.com/repos/' + OWNER + '/' + REPO + '/contents/' + encPath(path);
+    }
+    // 讀檔：回 {content, sha}，不存在回 null
+    function ghGet(path) {
+      return ghFetch(contentsUrl(path) + '?ref=' + BRANCH + '&_=' + Date.now()).then(function (r) {
+        if (r.status === 404) return null;
+        if (!r.ok) throw new Error('讀取失敗 ' + r.status);
+        return r.json();
+      }).then(function (j) {
+        if (!j) return null;
+        return { content: b64dec(j.content), sha: j.sha };
+      });
+    }
+    // 寫檔：有 sha 就是覆寫，沒有就是新建
+    function ghPut(path, content, message, sha) {
+      var body = { message: message, content: b64enc(content), branch: BRANCH };
+      if (sha) body.sha = sha;
+      return ghFetch(contentsUrl(path), { method: 'PUT', body: JSON.stringify(body) }).then(function (r) {
+        if (r.status === 409) throw new Error('檔案剛被別處改過，請重開編輯器再存一次');
+        if (r.status === 401) throw new Error('token 無效或過期，請到「設定」重貼');
+        if (r.status === 403) throw new Error('token 沒有這個 repo 的寫入權限（Contents: Read and write）');
+        if (!r.ok) return r.json().then(function (j) { throw new Error(j.message || ('寫入失敗 ' + r.status)); });
+        return r.json();
+      });
+    }
+    // 讀某頁最新內容：有 token 走 API（永遠最新），沒有就讀 Pages（可能慢幾分鐘）
+    function loadFile(path) {
+      if (getToken()) return ghGet(path).then(function (f) { return f ? f.content : ''; }).catch(function () { return fetchPages(path); });
+      return fetchPages(path);
+    }
+    function fetchPages(path) {
+      return fetch(encPath(path) + '?_=' + Date.now()).then(function (r) { return r.ok ? r.text() : ''; }).catch(function () { return ''; });
+    }
+
+    // ===== 複習紀錄（GitHub + 本機） =====
+    var reviews = readJSON(LOCAL_REVIEW_KEY, {});
+    var reviewsSha = null;
+    var reviewsLoaded = false;
+    function mergeReviews(remote) {
+      Object.keys(remote || {}).forEach(function (k) {
+        var a = reviews[k] || [], b = remote[k] || [];
+        var set = {}; a.concat(b).forEach(function (d) { if (d) set[d] = 1; });
+        reviews[k] = Object.keys(set).sort();
+      });
+      writeJSON(LOCAL_REVIEW_KEY, reviews);
+    }
     function loadReviews() {
-      var out = {};
-      try {
-        for (var i = 0; i < localStorage.length; i++) {
-          var k = localStorage.key(i);
-          if (k && k.indexOf(STORAGE_PREFIX) === 0) {
-            out[k.slice(STORAGE_PREFIX.length)] = JSON.parse(localStorage.getItem(k) || '[]');
-          }
-        }
-      } catch (e) {}
-      return out;
+      if (reviewsLoaded) return Promise.resolve(reviews);
+      var p = getToken()
+        ? ghGet(REVIEW_FILE).then(function (f) { if (f) { reviewsSha = f.sha; mergeReviews(JSON.parse(f.content || '{}')); } })
+        : fetchPages(REVIEW_FILE).then(function (t) { if (t) mergeReviews(JSON.parse(t)); });
+      return p.catch(function () {}).then(function () { reviewsLoaded = true; return reviews; });
+    }
+    var reviewSaveTimer = null;
+    function pushReviews() {
+      if (!getToken()) return;
+      clearTimeout(reviewSaveTimer);
+      reviewSaveTimer = setTimeout(function () {
+        var body = JSON.stringify(reviews, null, 1);
+        ghPut(REVIEW_FILE, body, '複習紀錄 ' + today(), reviewsSha).then(function (j) {
+          reviewsSha = j.content.sha;
+        }).catch(function () {
+          // sha 過期就重抓再存一次
+          ghGet(REVIEW_FILE).then(function (f) {
+            if (f) { reviewsSha = f.sha; mergeReviews(JSON.parse(f.content || '{}')); }
+            return ghPut(REVIEW_FILE, JSON.stringify(reviews, null, 1), '複習紀錄 ' + today(), reviewsSha);
+          }).then(function (j) { reviewsSha = j.content.sha; }).catch(function (e) { toast('複習紀錄沒同步到 GitHub：' + e.message); });
+        });
+      }, 800);
     }
     function markReviewed(key) {
-      try {
-        var list = JSON.parse(localStorage.getItem(STORAGE_PREFIX + key) || '[]');
-        list.push(new Date().toISOString().slice(0, 10));
-        localStorage.setItem(STORAGE_PREFIX + key, JSON.stringify(list));
-      } catch (e) {}
+      var list = reviews[key] || [];
+      if (list[list.length - 1] !== today()) list.push(today());
+      reviews[key] = list;
+      writeJSON(LOCAL_REVIEW_KEY, reviews);
+      pushReviews();
     }
-    function daysSince(dateStr) {
-      return Math.floor((Date.now() - new Date(dateStr).getTime()) / 86400000);
-    }
+    function cardKey(file, title) { return file.replace(/\.md$/, '') + '#' + title.trim().replace(/\s+/g, ' '); }
+    function inReviewSection(file) { return REVIEW_SECTIONS.some(function (s) { return file.indexOf(s) === 0; }); }
 
     // 每張卡（h2）後面加「已複習」按鈕
     function addReviewButtons(vm) {
-      var path = vm.route.path;
-      if (path.indexOf('/台電/') !== 0) return;
-      var reviews = loadReviews();
-      document.querySelectorAll('.markdown-section h2').forEach(function (h2) {
-        var key = path + '#' + h2.textContent.trim().replace(/\s+/g, ' ');
-        var list = reviews[key] || [];
-        var btn = document.createElement('button');
-        btn.className = 'review-btn' + (list.length ? ' done' : '');
-        btn.textContent = list.length ? '已複習 ' + list.length + ' 次 · 最近 ' + list[list.length - 1] : '標記已複習';
-        btn.onclick = function () {
-          markReviewed(key);
-          var n = list.length + 1;
-          btn.className = 'review-btn done';
-          btn.textContent = '已複習 ' + n + ' 次 · 最近 ' + new Date().toISOString().slice(0, 10);
-          list.push('');
-        };
-        h2.appendChild(btn);
+      var file = currentFile(vm);
+      if (!inReviewSection(file)) return;
+      loadReviews().then(function () {
+        document.querySelectorAll('.markdown-section h2').forEach(function (h2) {
+          if (h2.querySelector('.review-btn')) return;
+          var key = cardKey(file, h2.textContent);
+          var btn = document.createElement('button');
+          function paint() {
+            var list = reviews[key] || [];
+            if (!list.length) { btn.className = 'review-btn'; btn.textContent = '標記已複習'; return; }
+            var last = list[list.length - 1], due = daysSince(last) >= REVIEW_DAYS;
+            btn.className = 'review-btn ' + (due ? 'due' : 'done');
+            btn.textContent = (due ? '該再看 · ' : '已複習 ') + list.length + ' 次 · ' + last;
+          }
+          paint();
+          btn.onclick = function () { markReviewed(key); paint(); toast('記下了 ✓'); };
+          h2.appendChild(btn);
+        });
       });
     }
 
-    // 每頁底下加「編輯這頁」；隨寫頁最上面加「寫一筆」
-    function mdFileOf(path) {
-      var p = path.replace(/^\//, '').replace(/\/$/, '');
-      return p ? p + '.md' : 'README.md';
+    // ===== 首頁看板 =====
+    function sidebarLinks() {
+      return Array.from(document.querySelectorAll('.sidebar-nav a')).map(function (a) {
+        var href = a.getAttribute('href') || '';
+        var path = safeDecode(href.replace(/^#\//, '').replace(/\/$/, ''));
+        return { href: href, path: path, text: a.textContent.trim() };
+      }).filter(function (l) { return l.path; });
     }
-    function addEditLinks(vm) {
-      var sec = document.querySelector('.markdown-section');
-      if (!sec) return;
-      var file = mdFileOf(vm.route.path);
-      var editUrl = GITHUB + '/edit/main/' + file;
-
-      var foot = document.createElement('p');
-      foot.className = 'edit-link';
-      foot.innerHTML = '<a href="' + editUrl + '" target="_blank" rel="noopener">編輯這頁</a>';
-      sec.appendChild(foot);
-
-      if (vm.route.path.indexOf('/隨寫/') === 0) {
-        var bar = document.createElement('div');
-        bar.className = 'write-bar';
-        bar.innerHTML = '<a class="write-btn" href="' + editUrl + '" target="_blank" rel="noopener">寫一筆</a>'
-          + '<span>會打開 GitHub 編輯器，寫完按 Commit changes，一分鐘後這頁就更新。</span>';
-        sec.insertBefore(bar, sec.firstChild);
-      }
-    }
-
-    // 首頁看板：抓側邊欄每個頁面，數「## 」開頭的卡片數，配上本機複習紀錄
     function renderDashboard() {
-      var box = document.getElementById('dashboard');
+      var box = $('dashboard');
       if (!box) return;
-      var links = Array.from(document.querySelectorAll('.sidebar-nav a'))
-        .map(function (a) { return a.getAttribute('href'); })
-        .filter(function (h) { return h && decodeURIComponent(h).indexOf('#/台電/') === 0; });
+      var links = sidebarLinks().filter(function (l) { return l.path.indexOf('台電/') === 0; });
       if (!document.querySelector('.sidebar-nav a')) {
-        box.innerHTML = '<p class="empty">側邊欄沒有載入。多半是 repo 少了 <code>.nojekyll</code> 這個檔：Add file → Create new file，檔名打 .nojekyll，內容留空，Commit。</p>';
+        box.innerHTML = '<p class="empty">側邊欄沒有載入。多半是 repo 少了 <code>.nojekyll</code> 這個檔。</p>';
         return;
       }
       if (!links.length) { box.innerHTML = '<p class="empty">側邊欄裡還沒有「台電/」底下的頁面。</p>'; return; }
-
-      var reviews = loadReviews();
-      Promise.all(links.map(function (href) {
-        var page = decodeURIComponent(href.slice(2)).replace(/\/$/, '');
-        var file = page + '.md';
-        return fetch(file).then(function (r) { return r.ok ? r.text() : ''; }).then(function (md) {
-          var ids = (md.match(/^## .+$/gm) || []).map(function (line) {
-            return line.replace(/^## /, '').trim().replace(/\s+/g, ' ');
-          });
-          var seen = 0, due = 0, never = 0;
-          ids.forEach(function (id) {
-            var list = reviews['/' + page + '#' + id] || [];
+      box.innerHTML = '<p class="empty">看板載入中…</p>';
+      Promise.all([loadReviews()].concat(links.map(function (l) {
+        var file = l.path + '.md';
+        var pend = getPending(file);
+        return (pend ? Promise.resolve(pend) : loadFile(file)).then(function (md) {
+          var titles = (md.match(/^## .+$/gm) || []).map(function (line) { return line.replace(/^## /, '').trim(); });
+          var seen = 0, due = 0, never = 0, dueList = [];
+          titles.forEach(function (t) {
+            var list = reviews[cardKey(file, t)] || [];
             if (!list.length) { never++; return; }
             seen++;
-            if (daysSince(list[list.length - 1]) >= REVIEW_DAYS) due++;
+            if (daysSince(list[list.length - 1]) >= REVIEW_DAYS) { due++; dueList.push(t); }
           });
-          return { name: page, total: ids.length, seen: seen, due: due, never: never, href: href };
+          return { name: l.text, href: l.href, total: titles.length, seen: seen, due: due, never: never, dueList: dueList };
         });
-      })).then(function (rows) {
+      }))).then(function (res) {
+        var rows = res.slice(1);
         var totalCards = rows.reduce(function (s, r) { return s + r.total; }, 0);
-        if (!totalCards) { box.innerHTML = '<p class="empty">台電區還沒有任何卡片。先去刷一回題，把第一張錯題卡貼進來。</p>'; return; }
-        var html = '<table><thead><tr><th>頁面</th><th>卡片</th><th>看過</th><th>沒看過</th><th>該再看</th></tr></thead><tbody>';
+        if (!totalCards) { box.innerHTML = '<p class="empty">台電區還沒有任何卡片。按右下角「＋ 新筆記」貼第一張。</p>'; return; }
+        var html = '';
+        var dueAll = [];
+        rows.forEach(function (r) { r.dueList.forEach(function (t) { dueAll.push({ page: r.name, href: r.href, title: t }); }); });
+        var neverAll = rows.filter(function (r) { return r.never; });
+        html += '<div class="today"><h4>今天先看這些</h4>';
+        if (dueAll.length) {
+          html += '<ul>' + dueAll.slice(0, 6).map(function (d) {
+            return '<li><a href="' + d.href + '">' + d.page + '</a> › ' + d.title + '</li>';
+          }).join('') + '</ul>' + (dueAll.length > 6 ? '<p class="empty">還有 ' + (dueAll.length - 6) + ' 張。</p>' : '');
+        } else if (neverAll.length) {
+          html += '<p class="empty">沒有到期的卡。有 ' + neverAll.reduce(function (s, r) { return s + r.never; }, 0) + ' 張還沒看過，從 <a href="' + neverAll[0].href + '">' + neverAll[0].name + '</a> 開始。</p>';
+        } else {
+          html += '<p class="empty">全部看過、也都還沒到期。去刷一回題吧。</p>';
+        }
+        html += '</div>';
+        html += '<table><thead><tr><th>頁面</th><th>卡片</th><th>看過</th><th>沒看過</th><th>該再看</th></tr></thead><tbody>';
         rows.forEach(function (r) {
           html += '<tr><td><a href="' + r.href + '">' + r.name + '</a></td><td>' + r.total + '</td><td>' + r.seen + '</td><td>' + r.never + '</td><td class="' + (r.due ? 'due' : '') + '">' + r.due + '</td></tr>';
         });
-        html += '</tbody></table><p class="empty">「該再看」＝ 上次複習超過 ' + REVIEW_DAYS + ' 天的卡片。紀錄只存在這台瀏覽器。</p>';
+        html += '<tr><td><b>合計</b></td><td><b>' + totalCards + '</b></td><td>' + rows.reduce(function (s, r) { return s + r.seen; }, 0) + '</td><td>' + rows.reduce(function (s, r) { return s + r.never; }, 0) + '</td><td class="' + (dueAll.length ? 'due' : '') + '">' + dueAll.length + '</td></tr>';
+        html += '</tbody></table><p class="empty">「該再看」＝ 上次複習超過 ' + REVIEW_DAYS + ' 天。' + (getToken() ? '紀錄已同步到 GitHub，換裝置也看得到。' : '目前紀錄只存在這台瀏覽器；到「設定」貼 token 就會同步。') + '</p>';
         box.innerHTML = html;
+      });
+    }
+
+    // ===== 編輯器 =====
+    var docsifyVm = null;
+    var edMode = 'card';
+    var edFileSha = null;
+    function currentFile(vm) {
+      var f = (vm && vm.route && vm.route.file) || 'README.md';
+      f = safeDecode(f).replace(/^\.?\//, '');
+      return f || 'README.md';
+    }
+    function pageTitleFromFile(file) { return file.replace(/\.md$/, '').split('/').pop(); }
+
+    var TEMPLATES = {
+      wrong: '## 【科目】115-Q07 一句話標題\n\n**題目**：\n\n**選項**：(A)  (B)  (C)  (D) \n\n**答案**：\n\n**我選**：\n\n**為什麼錯**：\n\n**觀念一句話**：\n\n**易混淆**：\n',
+      concept: '## 名詞（英文）\n\n**一句話**：\n\n**比喻**：\n\n**怎麼考**：\n\n**跟它很像的**：\n',
+      essay: '## ' + today() + ' 題目：\n\n**大綱**\n1. \n2. \n3. \n\n**正文**\n\n\n**AI 批改（25 分制）**\n- 分數：\n- 缺的關鍵字：\n- 架構建議：\n',
+      free: '## ' + today() + ' \n\n'
+    };
+
+    function sectionsFromSidebar() {
+      // 從側邊欄的連結整理出「可以放頁面的資料夾」
+      var dirs = {};
+      sidebarLinks().forEach(function (l) {
+        var parts = l.path.split('/');
+        if (parts.length < 2) return;
+        var dir = parts.slice(0, -1).join('/');
+        dirs[dir] = true;
+      });
+      var list = Object.keys(dirs);
+      ['台電/共同科目', '台電/專業科目', '台電/作文', '學習', '隨寫'].forEach(function (d) { if (list.indexOf(d) < 0) list.push(d); });
+      return list;
+    }
+    function updateFileLabel() {
+      var file;
+      if (edMode === 'page') {
+        var name = $('ed-name').value.trim().replace(/[\/\\#?]/g, '');
+        file = $('ed-section').value + '/' + (name || '（頁面名稱）') + '.md';
+      } else {
+        file = currentFile(docsifyVm);
+      }
+      $('ed-file').textContent = file;
+      return file;
+    }
+    function setMode(mode) {
+      edMode = mode;
+      $('ed-mode').querySelectorAll('button').forEach(function (b) { b.classList.toggle('on', b.dataset.mode === mode); });
+      $('ed-target-row').style.display = mode === 'page' ? 'flex' : 'none';
+      $('ed-title').textContent = mode === 'card' ? '加一張卡到「' + pageTitleFromFile(currentFile(docsifyVm)) + '」' : mode === 'page' ? '新頁面' : '編輯整頁';
+      $('ed-msg').className = 'msg'; $('ed-msg').textContent = 'Ctrl + S 也可以存';
+      $('ed-preview').classList.remove('show'); $('ed-text').style.display = '';
+      if (mode === 'full') {
+        $('ed-text').value = '載入中…'; $('ed-text').disabled = true;
+        var file = updateFileLabel();
+        ghGet(file).then(function (f) {
+          edFileSha = f ? f.sha : null;
+          $('ed-text').value = f ? f.content : '# ' + pageTitleFromFile(file) + '\n\n';
+        }).catch(function (e) { $('ed-text').value = ''; showMsg(e.message, 'err'); })
+          .then(function () { $('ed-text').disabled = false; });
+      } else if (mode === 'page') {
+        var sel = $('ed-section');
+        sel.innerHTML = sectionsFromSidebar().map(function (d) { return '<option>' + d + '</option>'; }).join('');
+        var cur = currentFile(docsifyVm).split('/').slice(0, -1).join('/');
+        if (cur) sel.value = cur;
+        $('ed-name').value = '';
+        $('ed-text').value = '';
+        updateFileLabel();
+      } else {
+        var f2 = currentFile(docsifyVm);
+        var guess = f2.indexOf('隨寫/') === 0 ? 'free' : f2.indexOf('作文') >= 0 ? 'essay' : f2.indexOf('概念') >= 0 ? 'concept' : 'wrong';
+        $('ed-text').value = TEMPLATES[guess];
+        updateFileLabel();
+      }
+    }
+    function showMsg(msg, cls) { var m = $('ed-msg'); m.textContent = msg; m.className = 'msg ' + (cls || ''); }
+    function openEditor(mode) {
+      if (!getToken()) { openSettings('先貼一次 token，之後就能在這裡直接寫。'); return; }
+      docsifyVm = window.__vm;
+      $('editor').classList.add('open');
+      setMode(mode);
+      setTimeout(function () { (mode === 'page' ? $('ed-name') : $('ed-text')).focus(); }, 50);
+    }
+    function closeEditor() { $('editor').classList.remove('open'); }
+
+    // 把新頁面加進 _sidebar.md 對應的區
+    function addToSidebar(file, title) {
+      return ghGet('_sidebar.md').then(function (f) {
+        var md = f ? f.content : '';
+        var lines = md.split('\n');
+        var link = '(' + file.replace(/\.md$/, '') + ')';
+        if (md.indexOf(link) >= 0) return;
+        var top = file.split('/')[0];
+        var newLine = '  - [' + title + '](' + file.replace(/\.md$/, '') + ')';
+        var idx = -1;
+        for (var i = 0; i < lines.length; i++) if (lines[i].trim() === '- ' + top) { idx = i; break; }
+        if (idx < 0) { lines.push('- ' + top, newLine); }
+        else {
+          var j = idx + 1;
+          while (j < lines.length && /^\s+- /.test(lines[j])) j++;
+          lines.splice(j, 0, newLine);
+        }
+        var out = lines.join('\n').replace(/\n{3,}/g, '\n\n');
+        setPending('_sidebar.md', out);
+        return ghPut('_sidebar.md', out, '側邊欄：加入 ' + title, f ? f.sha : null);
+      });
+    }
+    function saveEditor() {
+      var text = $('ed-text').value;
+      if (!text.trim()) { showMsg('還沒寫東西', 'err'); return; }
+      $('ed-save').disabled = true; showMsg('存檔中…');
+      var file = updateFileLabel();
+      var p;
+      if (edMode === 'card') {
+        p = ghGet(file).then(function (f) {
+          var base = f ? f.content.replace(/\s+$/, '') : '# ' + pageTitleFromFile(file);
+          var out = base + '\n\n' + text.trim() + '\n';
+          var m = text.match(/^## (.+)$/m);
+          return ghPut(file, out, '新卡：' + (m ? m[1].trim() : pageTitleFromFile(file)), f ? f.sha : null).then(function () { return out; });
+        });
+      } else if (edMode === 'full') {
+        p = ghPut(file, text, '編輯 ' + pageTitleFromFile(file), edFileSha).then(function () { return text; });
+      } else {
+        var name = $('ed-name').value.trim();
+        if (!name) { showMsg('要給頁面一個名稱', 'err'); $('ed-save').disabled = false; return; }
+        var body = /^# /m.test(text) ? text : '# ' + name + '\n\n' + text;
+        p = ghGet(file).then(function (f) {
+          if (f) throw new Error('這個頁面已經存在，改用「編輯整頁」');
+          return ghPut(file, body, '新頁面：' + name, null);
+        }).then(function () { return addToSidebar(file, name); }).then(function () { return body; });
+      }
+      p.then(function (content) {
+        setPending(file, content);
+        showMsg('存好了 ✓', 'ok'); toast('已存到 GitHub，網站約 1 分鐘後同步');
+        setTimeout(function () {
+          closeEditor();
+          var route = '#/' + file.replace(/\.md$/, '');
+          if (safeDecode(location.hash).replace(/\/$/, '') === route) location.reload();
+          else location.hash = route;
+        }, 500);
+      }).catch(function (e) { showMsg(e.message, 'err'); })
+        .then(function () { $('ed-save').disabled = false; });
+    }
+
+    // ===== 設定面板 =====
+    function paintConn() {
+      $('conn-dot').classList.toggle('on', !!getToken());
+      $('fab-settings').title = getToken() ? '已連到 GitHub' : '還沒貼 token';
+    }
+    function openSettings(hint) {
+      $('st-repo').textContent = OWNER + '/' + REPO;
+      $('st-repo-name').textContent = REPO;
+      $('st-branch').textContent = BRANCH;
+      $('st-token').value = getToken();
+      $('st-msg').className = 'msg'; $('st-msg').textContent = hint || '';
+      $('settings').classList.add('open');
+    }
+    function closeSettings() { $('settings').classList.remove('open'); }
+    function testAndSave() {
+      var tk = $('st-token').value.trim();
+      var m = $('st-msg');
+      if (!tk) { m.className = 'msg err'; m.textContent = '請先貼上 token'; return; }
+      m.className = 'msg'; m.textContent = '測試中…';
+      fetch('https://api.github.com/repos/' + OWNER + '/' + REPO, {
+        headers: { 'Authorization': 'Bearer ' + tk, 'Accept': 'application/vnd.github+json' }
+      }).then(function (r) {
+        if (r.status === 401) throw new Error('GitHub 說這把 token 無效，請重新複製');
+        if (r.status === 404) throw new Error('token 看不到 ' + OWNER + '/' + REPO + '，Repository access 要勾這個 repo');
+        if (!r.ok) throw new Error('連線失敗 ' + r.status);
+        return r.json();
+      }).then(function (j) {
+        if (!(j.permissions && j.permissions.push)) throw new Error('連得上，但沒有寫入權限。Permissions → Contents 要選 Read and write');
+        localStorage.setItem(TOKEN_KEY, tk);
+        BRANCH = j.default_branch || BRANCH;
+        paintConn();
+        m.className = 'msg ok'; m.textContent = '連上了 ✓ 可以開始寫';
+        reviewsLoaded = false; loadReviews().then(function () { if (Object.keys(reviews).length) pushReviews(); if (location.hash === '#/' || location.hash === '') renderDashboard(); });
+        setTimeout(closeSettings, 900);
+      }).catch(function (e) { m.className = 'msg err'; m.textContent = e.message; });
+    }
+
+    // ===== 綁事件 =====
+    document.addEventListener('DOMContentLoaded', function () {
+      paintConn();
+      $('fab-new').onclick = function () { openEditor(currentFile(window.__vm) === 'README.md' ? 'page' : 'card'); };
+      $('fab-edit').onclick = function () { openEditor('full'); };
+      $('fab-settings').onclick = function () { openSettings(); };
+      $('ed-close').onclick = $('ed-cancel').onclick = closeEditor;
+      $('ed-save').onclick = saveEditor;
+      $('ed-mode').querySelectorAll('button').forEach(function (b) { b.onclick = function () { setMode(b.dataset.mode); }; });
+      $('ed-templates').querySelectorAll('[data-tpl]').forEach(function (b) {
+        b.onclick = function () {
+          var ta = $('ed-text');
+          var tpl = TEMPLATES[b.dataset.tpl];
+          if (b.dataset.tpl === 'essay' || b.dataset.tpl === 'free') tpl = tpl.replace(/^## \d{4}-\d{2}-\d{2}/, '## ' + today());
+          ta.value = (ta.value.trim() ? ta.value.replace(/\s+$/, '') + '\n\n' : '') + tpl;
+          ta.focus();
+        };
+      });
+      $('ed-preview-toggle').onclick = function () {
+        var pv = $('ed-preview'), ta = $('ed-text');
+        var show = !pv.classList.contains('show');
+        if (show && window.__vm && window.__vm.compiler) pv.innerHTML = window.__vm.compiler.compile($('ed-text').value);
+        pv.classList.toggle('show', show); ta.style.display = show ? 'none' : '';
+        this.textContent = show ? '回到編輯' : '預覽';
+      };
+      $('ed-name').oninput = updateFileLabel;
+      $('ed-section').onchange = updateFileLabel;
+      $('st-close').onclick = closeSettings;
+      $('st-save').onclick = testAndSave;
+      $('st-clear').onclick = function () { localStorage.removeItem(TOKEN_KEY); $('st-token').value = ''; paintConn(); $('st-msg').textContent = '已清除'; };
+      $('st-show').onclick = function () { var i = $('st-token'); i.type = i.type === 'password' ? 'text' : 'password'; this.textContent = i.type === 'password' ? '顯示' : '隱藏'; };
+      document.addEventListener('keydown', function (e) {
+        if ((e.ctrlKey || e.metaKey) && e.key === 's' && $('editor').classList.contains('open')) { e.preventDefault(); saveEditor(); }
+        if (e.key === 'Escape') { closeEditor(); closeSettings(); }
+      });
+      $('editor').addEventListener('click', function (e) { if (e.target === this) closeEditor(); });
+      $('settings').addEventListener('click', function (e) { if (e.target === this) closeSettings(); });
+    });
+
+    // 側邊欄剛加了新頁面、Pages 還沒更新時，先把連結補進去
+    function patchSidebar() {
+      var pend = getPending('_sidebar.md');
+      if (!pend) return;
+      var nav = document.querySelector('.sidebar-nav');
+      if (!nav) return;
+      var have = sidebarLinks().map(function (l) { return l.path; });
+      var lines = pend.split('\n');
+      var currentTop = null;
+      lines.forEach(function (line) {
+        var top = line.match(/^- ([^\[]\S*)\s*$/);
+        if (top) { currentTop = top[1].trim(); return; }
+        var m = line.match(/^\s+- \[(.+?)\]\((.+?)\)/);
+        if (!m || have.indexOf(m[2]) >= 0) return;
+        // 找到該區的 ul
+        var ul = null;
+        Array.from(nav.querySelectorAll('li')).forEach(function (li) {
+          var firstText = (li.childNodes[0] && li.childNodes[0].textContent || '').trim();
+          if (firstText === currentTop) ul = li.querySelector('ul');
+        });
+        var li = document.createElement('li');
+        li.innerHTML = '<a href="#/' + m[2] + '">' + m[1] + '</a>';
+        if (ul) ul.appendChild(li); else nav.querySelector('ul').appendChild(li);
       });
     }
 
@@ -212,6 +718,9 @@
       loadSidebar: true,
       subMaxLevel: 0,
       auto2top: true,
+      homepage: 'README.md',
+      alias: { '/.*/_sidebar.md': '/_sidebar.md' },
+      notFoundPage: true,
       search: {
         paths: 'auto',
         placeholder: '搜關鍵字、年份、章節',
@@ -220,10 +729,20 @@
       },
       plugins: [
         function (hook, vm) {
+          window.__vm = vm;
+          // 有剛存的暫存就先顯示；有 token 就直接讀 GitHub 最新版
+          hook.beforeEach(function (content, next) {
+            var file = currentFile(vm);
+            var pend = getPending(file);
+            if (pend) return next(pend);
+            if (getToken()) {
+              ghGet(file).then(function (f) { next(f ? f.content : content); }).catch(function () { next(content); });
+            } else next(content);
+          });
           hook.doneEach(function () {
+            patchSidebar();
             addReviewButtons(vm);
-            addEditLinks(vm);
-            if (vm.route.path === '/') renderDashboard();
+            if (currentFile(vm) === 'README.md') renderDashboard();
           });
         }
       ]
