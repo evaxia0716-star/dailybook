@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>Daybook</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap">
+  <style>
+    :root {
+      --paper: #f6f7f5;
+      --ink: #22302f;
+      --muted: #6b7876;
+      --line: #dfe3e0;
+      --accent: #245c9a;
+      --accent-soft: #e6eef8;
+      --done: #2f7d5b;
+      --done-soft: #e4f2ea;
+      --theme-color: var(--accent);
+    }
+    body {
+      font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      font-size: 16px;
+    }
+    .sidebar { background: #fff; border-right: 1px solid var(--line); }
+    .sidebar > h1 a { color: var(--ink); font-weight: 700; }
+    .sidebar-nav li > a { color: var(--ink); }
+    .sidebar-nav li.active > a { color: var(--accent); font-weight: 500; }
+    .markdown-section { max-width: 760px; }
+    .markdown-section h1 { font-size: 1.7rem; }
+    .markdown-section h2 {
+      font-size: 1.15rem;
+      margin: 2.6rem 0 0.8rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+    .markdown-section li { line-height: 1.8; }
+    .markdown-section strong { color: var(--accent); }
+
+    /* 已複習按鈕 */
+    .review-btn {
+      margin-left: auto;
+      font: inherit;
+      font-size: 0.8rem;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--muted);
+      border-radius: 999px;
+      padding: 0.15rem 0.7rem;
+      cursor: pointer;
+    }
+    .review-btn.done {
+      background: var(--done-soft);
+      border-color: var(--done);
+      color: var(--done);
+    }
+    .review-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+    /* 首頁看板 */
+    #dashboard { margin: 1rem 0 2rem; }
+    #dashboard table { width: 100%; }
+    #dashboard td, #dashboard th { padding: 0.5rem 0.6rem; }
+    #dashboard .due { color: var(--accent); font-weight: 500; }
+    #dashboard .empty { color: var(--muted); }
+    .search input { font-family: inherit; }
+  </style>
+</head>
+<body>
+  <div id="app">載入中…</div>
+  <script>
+    // ===== 設定 =====
+    var REVIEW_DAYS = 7;          // 幾天沒看就算「該複習」
+    var STORAGE_PREFIX = 'review:'; // 瀏覽器儲存的鍵名前綴
+
+    // 讀寫本機紀錄（只存在你這台瀏覽器）
+    function loadReviews() {
+      var out = {};
+      try {
+        for (var i = 0; i < localStorage.length; i++) {
+          var k = localStorage.key(i);
+          if (k && k.indexOf(STORAGE_PREFIX) === 0) {
+            out[k.slice(STORAGE_PREFIX.length)] = JSON.parse(localStorage.getItem(k) || '[]');
+          }
+        }
+      } catch (e) {}
+      return out;
+    }
+    function markReviewed(key) {
+      try {
+        var list = JSON.parse(localStorage.getItem(STORAGE_PREFIX + key) || '[]');
+        list.push(new Date().toISOString().slice(0, 10));
+        localStorage.setItem(STORAGE_PREFIX + key, JSON.stringify(list));
+      } catch (e) {}
+    }
+    function daysSince(dateStr) {
+      return Math.floor((Date.now() - new Date(dateStr).getTime()) / 86400000);
+    }
+
+    // 每張卡（h2）後面加「已複習」按鈕
+    function addReviewButtons(vm) {
+      var path = vm.route.path;
+      var reviews = loadReviews();
+      document.querySelectorAll('.markdown-section h2').forEach(function (h2) {
+        var key = path + '#' + h2.textContent.trim().replace(/\s+/g, ' ');
+        var list = reviews[key] || [];
+        var btn = document.createElement('button');
+        btn.className = 'review-btn' + (list.length ? ' done' : '');
+        btn.textContent = list.length ? '已複習 ' + list.length + ' 次 · 最近 ' + list[list.length - 1] : '標記已複習';
+        btn.onclick = function () {
+          markReviewed(key);
+          var n = list.length + 1;
+          btn.className = 'review-btn done';
+          btn.textContent = '已複習 ' + n + ' 次 · 最近 ' + new Date().toISOString().slice(0, 10);
+          list.push('');
+        };
+        h2.appendChild(btn);
+      });
+    }
+
+    // 首頁看板：抓側邊欄每個頁面，數「## 」開頭的卡片數，配上本機複習紀錄
+    function renderDashboard() {
+      var box = document.getElementById('dashboard');
+      if (!box) return;
+      var links = Array.from(document.querySelectorAll('.sidebar-nav a'))
+        .map(function (a) { return a.getAttribute('href'); })
+        .filter(function (h) { return h && decodeURIComponent(h).indexOf('#/台電/') === 0; });
+      if (!links.length) { box.innerHTML = '<p class="empty">側邊欄裡還沒有「台電/」底下的頁面。</p>'; return; }
+
+      var reviews = loadReviews();
+      Promise.all(links.map(function (href) {
+        var page = decodeURIComponent(href.slice(2)).replace(/\/$/, '');
+        var file = page + '.md';
+        return fetch(file).then(function (r) { return r.ok ? r.text() : ''; }).then(function (md) {
+          var ids = (md.match(/^## .+$/gm) || []).map(function (line) {
+            return line.replace(/^## /, '').trim().replace(/\s+/g, ' ');
+          });
+          var seen = 0, due = 0, never = 0;
+          ids.forEach(function (id) {
+            var list = reviews['/' + page + '#' + id] || [];
+            if (!list.length) { never++; return; }
+            seen++;
+            if (daysSince(list[list.length - 1]) >= REVIEW_DAYS) due++;
+          });
+          return { name: page, total: ids.length, seen: seen, due: due, never: never, href: href };
+        });
+      })).then(function (rows) {
+        var totalCards = rows.reduce(function (s, r) { return s + r.total; }, 0);
+        if (!totalCards) { box.innerHTML = '<p class="empty">台電區還沒有任何卡片。先去刷一回題，把第一張錯題卡貼進來。</p>'; return; }
+        var html = '<table><thead><tr><th>頁面</th><th>卡片</th><th>看過</th><th>沒看過</th><th>該再看</th></tr></thead><tbody>';
+        rows.forEach(function (r) {
+          html += '<tr><td><a href="' + r.href + '">' + r.name + '</a></td><td>' + r.total + '</td><td>' + r.seen + '</td><td>' + r.never + '</td><td class="' + (r.due ? 'due' : '') + '">' + r.due + '</td></tr>';
+        });
+        html += '</tbody></table><p class="empty">「該再看」＝ 上次複習超過 ' + REVIEW_DAYS + ' 天的卡片。紀錄只存在這台瀏覽器。</p>';
+        box.innerHTML = html;
+      });
+    }
+
+    window.$docsify = {
+      name: 'Daybook',
+      repo: '',
+      loadSidebar: true,
+      subMaxLevel: 0,
+      auto2top: true,
+      search: {
+        paths: 'auto',
+        placeholder: '搜關鍵字、年份、章節',
+        noData: '沒有找到',
+        depth: 2
+      },
+      plugins: [
+        function (hook, vm) {
+          hook.doneEach(function () {
+            addReviewButtons(vm);
+            if (vm.route.path === '/') renderDashboard();
+          });
+        }
+      ]
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.min.js"></script>
+</body>
+</html>
