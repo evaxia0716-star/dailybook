@@ -69,6 +69,20 @@
     #dashboard .due { color: var(--accent); font-weight: 500; }
     #dashboard .empty { color: var(--muted); }
     .search input { font-family: inherit; }
+
+    /* 編輯連結與寫一筆 */
+    .edit-link { margin-top: 3rem; font-size: 0.85rem; }
+    .edit-link a { color: var(--muted); }
+    .write-bar {
+      display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap;
+      background: #fff; border: 1px solid var(--line); border-radius: 8px;
+      padding: 0.7rem 1rem; margin: 0 0 1.5rem;
+      font-size: 0.85rem; color: var(--muted);
+    }
+    .write-btn {
+      background: var(--accent); color: #fff !important; text-decoration: none !important;
+      border-radius: 999px; padding: 0.35rem 1rem; font-weight: 500;
+    }
   </style>
 </head>
 <body>
@@ -77,6 +91,7 @@
     // ===== 設定 =====
     var REVIEW_DAYS = 7;          // 幾天沒看就算「該複習」
     var STORAGE_PREFIX = 'review:'; // 瀏覽器儲存的鍵名前綴
+    var GITHUB = 'https://github.com/evaxia0716-star/daybook'; // 你的 repo
 
     // 讀寫本機紀錄（只存在你這台瀏覽器）
     function loadReviews() {
@@ -105,6 +120,7 @@
     // 每張卡（h2）後面加「已複習」按鈕
     function addReviewButtons(vm) {
       var path = vm.route.path;
+      if (path.indexOf('/台電/') !== 0) return;
       var reviews = loadReviews();
       document.querySelectorAll('.markdown-section h2').forEach(function (h2) {
         var key = path + '#' + h2.textContent.trim().replace(/\s+/g, ' ');
@@ -123,6 +139,31 @@
       });
     }
 
+    // 每頁底下加「編輯這頁」；隨寫頁最上面加「寫一筆」
+    function mdFileOf(path) {
+      var p = path.replace(/^\//, '').replace(/\/$/, '');
+      return p ? p + '.md' : 'README.md';
+    }
+    function addEditLinks(vm) {
+      var sec = document.querySelector('.markdown-section');
+      if (!sec) return;
+      var file = mdFileOf(vm.route.path);
+      var editUrl = GITHUB + '/edit/main/' + file;
+
+      var foot = document.createElement('p');
+      foot.className = 'edit-link';
+      foot.innerHTML = '<a href="' + editUrl + '" target="_blank" rel="noopener">編輯這頁</a>';
+      sec.appendChild(foot);
+
+      if (vm.route.path.indexOf('/隨寫/') === 0) {
+        var bar = document.createElement('div');
+        bar.className = 'write-bar';
+        bar.innerHTML = '<a class="write-btn" href="' + editUrl + '" target="_blank" rel="noopener">寫一筆</a>'
+          + '<span>會打開 GitHub 編輯器，寫完按 Commit changes，一分鐘後這頁就更新。</span>';
+        sec.insertBefore(bar, sec.firstChild);
+      }
+    }
+
     // 首頁看板：抓側邊欄每個頁面，數「## 」開頭的卡片數，配上本機複習紀錄
     function renderDashboard() {
       var box = document.getElementById('dashboard');
@@ -130,6 +171,10 @@
       var links = Array.from(document.querySelectorAll('.sidebar-nav a'))
         .map(function (a) { return a.getAttribute('href'); })
         .filter(function (h) { return h && decodeURIComponent(h).indexOf('#/台電/') === 0; });
+      if (!document.querySelector('.sidebar-nav a')) {
+        box.innerHTML = '<p class="empty">側邊欄沒有載入。多半是 repo 少了 <code>.nojekyll</code> 這個檔：Add file → Create new file，檔名打 .nojekyll，內容留空，Commit。</p>';
+        return;
+      }
       if (!links.length) { box.innerHTML = '<p class="empty">側邊欄裡還沒有「台電/」底下的頁面。</p>'; return; }
 
       var reviews = loadReviews();
@@ -177,6 +222,7 @@
         function (hook, vm) {
           hook.doneEach(function () {
             addReviewButtons(vm);
+            addEditLinks(vm);
             if (vm.route.path === '/') renderDashboard();
           });
         }
