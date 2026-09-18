@@ -15,7 +15,7 @@
       --ink: #3a3129;          /* 主文字 */
       --ink-2: #7a6d60;        /* 次文字 */
       --line: #e3d8c4;
-      --accent: #c96f45;       /* 台電：陶土橘 */
+      --accent: #c96f45;       /* 學科：陶土橘 */
       --accent-soft: #f6e3d7;
       --sage: #6f9478;         /* 學習：鼠尾草綠 */
       --sage-soft: #e4eee5;
@@ -108,7 +108,7 @@
     .today-list .pg { font-size: 0.78rem; color: var(--ink-2); white-space: nowrap; background: var(--paper-3); border-radius: 6px; padding: 0 0.45rem; }
     .today-list a { color: var(--ink); flex: 1; }
     .today-list .age { font-size: 0.8rem; color: var(--due); white-space: nowrap; }
-    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; margin-top: 0.4rem; }
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.6rem; margin-top: 0.4rem; }
     .stat { background: var(--paper); border-radius: 10px; padding: 0.6rem 0.8rem; }
     .stat b { display: block; font-size: 1.5rem; line-height: 1.2; }
     .stat span { font-size: 0.78rem; color: var(--ink-2); }
@@ -147,7 +147,7 @@
     .pcard.add { border-style: dashed; background: transparent; box-shadow: none; display: grid; place-items: center; color: var(--ink-2); cursor: pointer; }
     .pcard.add::before { display: none; }
     .pcard.add:hover { color: var(--ink); border-color: var(--ink-2); transform: none; }
-    .sec-台電 { --c: var(--accent); } .sec-學習 { --c: var(--sage); } .sec-隨寫 { --c: var(--plum); }
+    .sec-學科 { --c: var(--accent); } .sec-學習 { --c: var(--sage); } .sec-隨寫 { --c: var(--plum); }
 
     /* ===== 筆記頁：一張張卡 ===== */
     .page-tools { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; margin: 0.8rem 0 1.4rem; }
@@ -196,6 +196,21 @@
       content: "點一下看答案"; position: absolute; right: 1.2rem; bottom: 0.9rem;
       font-size: 0.78rem; color: var(--ink-2); background: var(--paper-3); padding: 0.1rem 0.6rem; border-radius: 999px;
     }
+    /* 地圖：可打勾清單 */
+    .card-body li.task { list-style: none; margin-left: -1.4rem; padding: 0.25rem 0 0.25rem 2rem; position: relative; border-radius: 8px; }
+    .card-body li.task:hover { background: var(--paper); }
+    .card-body li.task input { position: absolute; left: 0.45rem; top: 0.62rem; width: 18px; height: 18px; margin: 0; accent-color: var(--sage); cursor: pointer; }
+    .card-body li.task.done { color: var(--ink-2); }
+    .card-body li.task.done .txt { text-decoration: line-through; text-decoration-color: var(--line); }
+    .exam { display: inline-block; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em; padding: 0 0.4rem; border-radius: 5px; margin-left: 0.3rem; vertical-align: 1px; background: var(--paper-3); color: var(--ink-2); }
+    .exam.A { background: var(--accent-soft); color: var(--accent); } .exam.B { background: var(--plum-soft); color: var(--plum); }
+    .card-head .prog { font-size: 0.78rem; color: var(--ink-2); white-space: nowrap; }
+    .bar { height: 6px; background: var(--paper-3); border-radius: 999px; overflow: hidden; margin-top: 0.6rem; }
+    .bar i { display: block; height: 100%; background: var(--sage); border-radius: 999px; transition: width 0.3s; }
+    .pcard.subject { cursor: pointer; }
+    .pcard .links { display: flex; gap: 0.3rem; flex-wrap: wrap; margin-top: 0.6rem; }
+    .pcard .links a { font-size: 0.78rem; color: var(--ink-2); background: var(--paper); border: 1px solid var(--line); border-radius: 999px; padding: 0.05rem 0.55rem; }
+    .pcard .links a:hover { color: var(--accent); border-color: var(--accent); text-decoration: none; }
     .empty { color: var(--ink-2); text-align: center; padding: 2rem 1rem; border: 1px dashed var(--line); border-radius: var(--radius); }
 
     /* ===== 浮動按鈕 ===== */
@@ -377,13 +392,14 @@
     var BRANCH = 'main';
     var TOC_FILE = '_sidebar.md';            // 目錄檔（沿用舊名）
     var REVIEW_FILE = 'data/reviews.json';
-    var REVIEW_SECTIONS = ['台電/', '學習/']; // 這些區的卡有「已複習」
+    var REVIEW_SECTIONS = ['學科/', '學習/']; // 這些區的卡有「已複習」
+    var PROGRESS_FILE = 'data/progress.json';
     var SECTION_INTRO = {
-      '台電': '考試筆記。錯題卡、概念卡、作文，全部在這。',
+      '學科': '每科三頁：地圖是章節骨架（讀懂就打勾），錯題記怎麼錯，概念記是什麼。',
       '學習': '課程與工具的學習筆記。',
       '隨寫': '想到什麼寫什麼，一天一張。'
     };
-    var K = { token: 'daybook:token', reviews: 'daybook:reviews', pending: 'daybook:pending', days: 'daybook:days', selftest: 'daybook:selftest' };
+    var K = { token: 'daybook:token', reviews: 'daybook:reviews', progress: 'daybook:progress', pending: 'daybook:pending', days: 'daybook:days', selftest: 'daybook:selftest' };
     var PENDING_TTL = 15 * 60 * 1000;
     (function () {
       var m = location.hostname.match(/^([^.]+)\.github\.io$/);
@@ -457,8 +473,8 @@
     // _sidebar.md 格式：
     // - [首頁看板](/)            ← 忽略
     // - [使用說明](使用說明)      ← 獨立頁
-    // - 台電                     ← 分區
-    //   - [國文](台電/共同科目/國文)
+    // - 學科                     ← 分區
+    //   - [管理學地圖](學科/管理學/地圖)
     var toc = { sections: [], loose: [] };
     function parseToc(text) {
       var out = { sections: [], loose: [] }, cur = null;
@@ -544,6 +560,40 @@
       return '<button class="review-btn ' + (s.due ? 'due' : 'done') + '" data-key="' + esc(key) + '">' + (s.due ? '該再看 · ' : '已複習 ') + s.n + ' 次 · ' + s.last + '</button>';
     }
 
+    // ===================== 地圖進度（打勾） =====================
+    var progress = readJSON(K.progress, {}), progressSha = null, progressLoaded = false;
+    function loadProgress(force) {
+      if (progressLoaded && !force) return Promise.resolve(progress);
+      var p = getToken()
+        ? ghGet(PROGRESS_FILE).then(function (f) { if (f) { progressSha = f.sha; Object.assign(progress, JSON.parse(f.content || '{}')); } })
+        : fetchPages(PROGRESS_FILE).then(function (t) { if (t) Object.assign(progress, JSON.parse(t)); });
+      return p.catch(function () {}).then(function () { writeJSON(K.progress, progress); progressLoaded = true; return progress; });
+    }
+    var progressTimer = null;
+    function pushProgress() {
+      if (!getToken()) return;
+      clearTimeout(progressTimer);
+      progressTimer = setTimeout(function () {
+        var body = JSON.stringify(progress, null, 1);
+        ghPut(PROGRESS_FILE, body, '地圖進度 ' + today(), progressSha).then(function (j) { progressSha = j.content.sha; })
+          .catch(function () {
+            return ghGet(PROGRESS_FILE).then(function (f) { if (f) progressSha = f.sha; return ghPut(PROGRESS_FILE, JSON.stringify(progress, null, 1), '地圖進度 ' + today(), progressSha); })
+              .then(function (j) { progressSha = j.content.sha; }).catch(function (e) { toast('進度沒同步到 GitHub：' + e.message); });
+          });
+      }, 800);
+    }
+    function taskKey(file, text) { return file.replace(/\.md$/, '') + '#' + text.replace(/〔[AB]+〕/g, '').replace(/\s+/g, ' ').trim(); }
+    function setTask(key, done) { if (done) progress[key] = today(); else delete progress[key]; writeJSON(K.progress, progress); pushProgress(); }
+    function countTasks(text, file) {
+      var total = 0, done = 0;
+      (text || '').split('\n').forEach(function (l) {
+        var m = l.match(/^\s*[-*] \[( |x|X)\] (.+)$/); if (!m) return;
+        total++; if (m[1] !== ' ' || progress[taskKey(file, m[2])]) done++;
+      });
+      return { total: total, done: done };
+    }
+    function examTags(html) { return html.replace(/〔(AB|A|B)〕/g, function (_, t) { return '<span class="exam ' + t[0] + '">' + t + '</span>'; }); }
+
     // 統計每一頁：卡片數、看過、該再看
     function pageStats(page) {
       return loadFile(page.file).then(function (text) {
@@ -553,7 +603,9 @@
           if (s.never) { never++; return; }
           seen++; if (s.due) { due++; dueList.push({ title: card.title, last: s.last }); }
         });
-        return { page: page, total: c.cards.length, seen: seen, due: due, never: never, dueList: dueList, cards: c.cards, intro: c.intro, exists: text !== null };
+        var t = countTasks(text, page.file);
+        if (t.total) { return { page: page, total: 0, seen: 0, due: 0, never: 0, dueList: [], cards: [], intro: c.intro, exists: true, tasks: t.total, tasksDone: t.done }; }
+        return { page: page, total: c.cards.length, seen: seen, due: due, never: never, dueList: dueList, cards: c.cards, intro: c.intro, exists: text !== null, tasks: 0, tasksDone: 0 };
       });
     }
 
@@ -593,8 +645,8 @@
       $('fab-edit').style.display = 'none';
       app.innerHTML = '<div class="hero"><div class="panel" id="today"><h3>今天先看這些</h3><div class="help">整理中…</div></div><div class="panel" id="stats"><h3>這週</h3></div></div><div id="sections"></div>';
       var pages = allPages();
-      Promise.all([loadReviews()].concat(pages.map(pageStats))).then(function (res) {
-        var stats = res.slice(1);
+      Promise.all([loadReviews(), loadProgress()].concat(pages.map(pageStats))).then(function (res) {
+        var stats = res.slice(2);
         renderToday(stats);
         renderWeek(stats);
         renderHomeSections(stats);
@@ -631,8 +683,8 @@
       $('home-selftest').onchange = function () { localStorage.setItem(K.selftest, this.checked ? '1' : '0'); };
     }
     function renderWeek(stats) {
-      var total = 0, seen = 0, due = 0;
-      stats.forEach(function (s) { total += s.total; seen += s.seen; due += s.due; });
+      var total = 0, seen = 0, due = 0, tasks = 0, tasksDone = 0;
+      stats.forEach(function (s) { total += s.total; seen += s.seen; due += s.due; tasks += s.tasks || 0; tasksDone += s.tasksDone || 0; });
       // 最近 7 天每天複習幾次
       var days = [], counts = {};
       for (var i = 6; i >= 0; i--) { var d = new Date(); d.setDate(d.getDate() - i); var k = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); days.push(k); counts[k] = 0; }
@@ -644,7 +696,7 @@
       var html = '<h3>這週 <span class="help" style="font-weight:400">複習 ' + weekTotal + ' 次' + (streak > 1 ? ' · 連續 ' + streak + ' 天' : '') + '</span></h3>';
       html += '<div class="week">' + days.map(function (d) { return '<div class="' + (counts[d] ? 'hit' : '') + (d === today() ? ' today' : '') + '" style="height:' + Math.max(8, Math.round(counts[d] / max * 42)) + 'px" title="' + d + '：' + counts[d] + ' 次"></div>'; }).join('') + '</div>';
       html += '<div class="week-labels">' + days.map(function (d) { return '<span>' + names[new Date(d + 'T00:00:00').getDay()] + '</span>'; }).join('') + '</div>';
-      html += '<div class="stats"><div class="stat"><b>' + total + '</b><span>張卡</span></div><div class="stat"><b>' + seen + '</b><span>看過</span></div><div class="stat"><b style="color:' + (due ? 'var(--due)' : 'inherit') + '">' + due + '</b><span>該再看</span></div></div>';
+      html += '<div class="stats"><div class="stat"><b>' + total + '</b><span>張卡</span></div><div class="stat"><b>' + seen + '</b><span>看過</span></div><div class="stat"><b style="color:' + (due ? 'var(--due)' : 'inherit') + '">' + due + '</b><span>該再看</span></div><div class="stat"><b>' + (tasks ? Math.round(tasksDone / tasks * 100) : 0) + '%</b><span>地圖讀完</span></div></div>';
       html += '<p class="help" style="margin:0.7rem 0 0">' + (getToken() ? '紀錄同步到 GitHub，換裝置也在。' : '紀錄目前只存在這台瀏覽器；到右上角「設定」貼鑰匙就會同步。') + '</p>';
       $('stats').innerHTML = html;
     }
@@ -652,25 +704,49 @@
       var p = s.page;
       var meta = '';
       if (!s.exists) meta = '<span class="pill">空白頁</span>';
+      else if (s.tasks) meta = '<span class="pill">' + s.tasksDone + ' / ' + s.tasks + ' 讀完</span>' + (s.due ? '<span class="pill due">' + s.due + ' 章該再看</span>' : '');
       else if (!s.total) meta = '<span class="pill">還沒有卡</span>';
       else {
         meta = '<span class="pill">' + s.total + ' 張</span>';
         if (s.due) meta += '<span class="pill due">' + s.due + ' 該再看</span>';
         if (s.never && inReviewSection(p.file)) meta += '<span class="pill new">' + s.never + ' 沒看過</span>';
       }
-      return '<a class="pcard sec-' + esc(sectionOf(p.path)) + '" href="#/' + esc(p.path) + '">' + (p.sub ? '<div class="sub">' + esc(p.sub) + '</div>' : '') + '<h3>' + esc(p.title) + '</h3><div class="meta">' + meta + '</div></a>';
+      return '<a class="pcard sec-' + esc(sectionOf(p.path)) + '" href="#/' + esc(p.path) + '">' + (p.sub ? '<div class="sub">' + esc(p.sub) + '</div>' : '') + '<h3>' + esc(p.title) + '</h3><div class="meta">' + meta + '</div>' + (s.tasks ? '<div class="bar"><i style="width:' + Math.round(s.tasksDone / s.tasks * 100) + '%"></i></div>' : '') + '</a>';
+    }
+    // 首頁：有子資料夾的分區（學科）一科一張卡
+    function subjectCardHtml(secName, sub, list) {
+      var map = list.filter(function (s) { return s.tasks; })[0];
+      var cards = list.reduce(function (n, s) { return n + s.total; }, 0) - (map ? map.total : 0);
+      var due = list.reduce(function (n, s) { return n + s.due; }, 0);
+      var meta = '';
+      if (map) meta += '<span class="pill">地圖 ' + map.tasksDone + '/' + map.tasks + '</span>';
+      meta += '<span class="pill">' + cards + ' 張卡</span>';
+      if (due) meta += '<span class="pill due">' + due + ' 該再看</span>';
+      var first = (map || list[0]).page.path;
+      return '<div class="pcard subject sec-' + esc(secName) + '" data-href="#/' + esc(first) + '"><h3>' + esc(sub) + '</h3><div class="meta">' + meta + '</div>'
+        + (map ? '<div class="bar"><i style="width:' + Math.round(map.tasksDone / map.tasks * 100) + '%"></i></div>' : '')
+        + '<div class="links">' + list.map(function (s) { return '<a href="#/' + esc(s.page.path) + '">' + esc(s.page.title.replace(sub, '') || s.page.title) + '</a>'; }).join('') + '</div></div>';
     }
     function renderHomeSections(stats) {
       var by = {}; stats.forEach(function (s) { by[s.page.path] = s; });
       var html = toc.sections.map(function (sec) {
         var cnt = sec.pages.reduce(function (n, p) { return n + ((by[p.path] || {}).total || 0); }, 0);
+        var hasSub = sec.pages.some(function (p) { return p.sub; });
+        var body;
+        if (hasSub) {
+          var groups = {}, order = [];
+          sec.pages.forEach(function (p) { var g = p.sub || '其他'; if (!groups[g]) { groups[g] = []; order.push(g); } groups[g].push(by[p.path] || { page: p, total: 0, due: 0, exists: true }); });
+          body = order.map(function (g) { return subjectCardHtml(sec.name, g, groups[g]); }).join('');
+        } else body = sec.pages.map(function (p) { return pageCardHtml(by[p.path] || { page: p, total: 0, exists: true }); }).join('');
         return '<div class="sec-head"><h2>' + esc(sec.name) + '</h2><span class="count">' + sec.pages.length + ' 頁 · ' + cnt + ' 張</span><a class="more" href="#/' + esc(sec.name) + '">全部 →</a></div>'
-          + '<div class="grid">' + sec.pages.map(function (p) { return pageCardHtml(by[p.path] || { page: p, total: 0, exists: true }); }).join('')
-          + '<div class="pcard add" data-section="' + esc(sec.name) + '">＋ 新頁面</div></div>';
+          + '<div class="grid">' + body + '<div class="pcard add" data-section="' + esc(sec.name) + '">＋ 新頁面</div></div>';
       }).join('');
       if (toc.loose.length) html += '<p class="help" style="margin-top:2rem;text-align:center">' + toc.loose.map(function (p) { return '<a href="#/' + esc(p.path) + '">' + esc(p.title) + '</a>'; }).join(' · ') + '</p>';
       $('sections').innerHTML = html;
       bindAddCards();
+      document.querySelectorAll('.pcard.subject').forEach(function (el) {
+        el.onclick = function (e) { if (e.target.tagName === 'A') return; location.hash = el.dataset.href; };
+      });
     }
     function bindAddCards() {
       document.querySelectorAll('.pcard.add').forEach(function (el) {
@@ -682,8 +758,8 @@
     function renderSection(sec) {
       $('fab-edit').style.display = 'none';
       app.innerHTML = '<div class="crumbs"><a href="#/">首頁</a><span>›</span><span>' + esc(sec.name) + '</span></div><h1 class="page-title">' + esc(sec.name) + '</h1><p class="lead">' + esc(SECTION_INTRO[sec.name] || '') + '</p><div class="grid" id="sec-grid"></div>';
-      Promise.all([loadReviews()].concat(sec.pages.map(pageStats))).then(function (res) {
-        var stats = res.slice(1);
+      Promise.all([loadReviews(), loadProgress()].concat(sec.pages.map(pageStats))).then(function (res) {
+        var stats = res.slice(2);
         // 依子資料夾分群
         var groups = {}; var order = [];
         stats.forEach(function (s) { var g = s.page.sub || ''; if (!groups[g]) { groups[g] = []; order.push(g); } groups[g].push(s); });
@@ -713,7 +789,7 @@
       var sec = sectionOf(path), secObj = toc.sections.filter(function (s) { return s.name === sec; })[0];
       $('fab-edit').style.display = '';
       app.innerHTML = '<div class="narrow"><div class="crumbs"><a href="#/">首頁</a>' + (secObj ? '<span>›</span><a href="#/' + esc(sec) + '">' + esc(sec) + '</a>' : '') + (page.sub ? '<span>›</span><span>' + esc(page.sub) + '</span>' : '') + '</div><h1 class="page-title">' + esc(page.title) + '</h1><div id="page-body"><div class="help">載入中…</div></div></div>';
-      Promise.all([loadFile(page.file, true), loadReviews()]).then(function (res) {
+      Promise.all([loadFile(page.file, true), loadReviews(), loadProgress()]).then(function (res) {
         var text = res[0];
         var body = $('page-body');
         if (text === null) {
@@ -723,20 +799,42 @@
         }
         var c = splitCards(text);
         if (c.title && c.title !== page.title) document.querySelector('.page-title').textContent = c.title;
-        var canReview = inReviewSection(page.file);
+        var isMap = countTasks(text, page.file).total > 0;
+        var canReview = inReviewSection(page.file) && !isMap;
         var html = '';
         if (c.intro) html += '<div class="lead card-body">' + md(c.intro) + '</div>';
+        if (isMap) {
+          var tt = countTasks(text, page.file);
+          html += '<div class="page-tools"><span class="hint">讀懂一項就打勾。<b id="map-total">' + tt.done + ' / ' + tt.total + '</b> 已讀完</span><span style="flex:1"></span><span class="hint"><span class="exam A">A</span><span class="exam B">B</span> 哪場考試會考，沒標的兩場都考</span></div>';
+        }
         if (canReview && c.cards.length) {
           html += '<div class="page-tools"><label class="toggle"><input type="checkbox" id="pg-selftest"' + (localStorage.getItem(K.selftest) === '1' ? ' checked' : '') + '> 自測：遮住答案</label><span class="hint">' + c.cards.length + ' 張卡</span><span style="flex:1"></span><button class="mini" id="mark-all">全部標記已複習</button></div>';
         }
         html += '<div class="cards" id="cards">' + c.cards.map(function (card, i) {
           var key = cardKey(page.file, card.title);
           var t = esc(card.title).replace(/^(【[^】]+】)/, '<span class="tag">$1</span>');
-          return '<article class="card" id="card-' + i + '" data-title="' + esc(card.title) + '"><div class="card-head"><h2>' + t + '</h2>' + (canReview ? reviewBtnHtml(key) : '') + '</div><div class="card-body">' + md(card.body) + '</div><div class="card-foot"><button class="mini" data-edit="' + i + '">✎ 改這張</button><button class="mini" data-copy="' + i + '">複製 Markdown</button></div></article>';
+          var tk = countTasks(card.body, page.file);
+          return '<article class="card" id="card-' + i + '" data-title="' + esc(card.title) + '"><div class="card-head"><h2>' + t + '</h2>' + (tk.total ? '<span class="prog" data-prog="' + i + '">' + tk.done + ' / ' + tk.total + '</span>' : '') + (canReview ? reviewBtnHtml(key) : '') + '</div><div class="card-body">' + examTags(md(card.body)) + '</div><div class="card-foot"><button class="mini" data-edit="' + i + '">✎ 改這張</button><button class="mini" data-copy="' + i + '">複製 Markdown</button></div></article>';
         }).join('') + '</div>';
         if (!c.cards.length) html += '<div class="empty">還沒有卡。按右下角「＋ 新筆記」貼第一張。</div>';
         body.innerHTML = html;
         markAnswers(body);
+        // 地圖：把 - [ ] 變成可以打勾
+        body.querySelectorAll('.card-body li').forEach(function (li) {
+          var cb = li.querySelector('input[type=checkbox]'); if (!cb) return;
+          var textEl = document.createElement('span'); textEl.className = 'txt';
+          Array.from(li.childNodes).forEach(function (n) { if (n !== cb) textEl.appendChild(n); });
+          li.appendChild(textEl); li.classList.add('task');
+          var key = taskKey(page.file, textEl.textContent);
+          cb.disabled = false; cb.checked = cb.checked || !!progress[key]; li.classList.toggle('done', cb.checked);
+          cb.onchange = function () {
+            setTask(key, cb.checked); li.classList.toggle('done', cb.checked);
+            var art = li.closest('.card'), n = art.querySelectorAll('li.task input:checked').length, tot = art.querySelectorAll('li.task input').length;
+            var pr = art.querySelector('.prog'); if (pr) pr.textContent = n + ' / ' + tot;
+            if (cb.checked && n === tot) toast('這章讀完了 ✓');
+            var mt = $('map-total'); if (mt) mt.textContent = body.querySelectorAll('li.task input:checked').length + ' / ' + body.querySelectorAll('li.task input').length;
+          };
+        });
         var st = $('pg-selftest');
         function applySelftest() { $('cards').classList.toggle('selftest', !!(st && st.checked)); }
         if (st) { applySelftest(); st.onchange = function () { localStorage.setItem(K.selftest, this.checked ? '1' : '0'); applySelftest(); }; }
@@ -920,7 +1018,7 @@
           localStorage.setItem(K.token, tk); BRANCH = j.default_branch || BRANCH; paintConn();
           m.className = 'msg ok'; m.textContent = '連上了 ✓ 可以開始寫';
           fileCache = {}; searchIndex = null;
-          loadReviews(true).then(function () { if (Object.keys(reviews).length) pushReviews(); go(); });
+          loadReviews(true).then(function () { if (Object.keys(reviews).length) pushReviews(); return loadProgress(true); }).then(function () { if (Object.keys(progress).length) pushProgress(); go(); });
           setTimeout(closeAll, 900);
         }).catch(function (e) { m.className = 'msg err'; m.textContent = e.message; });
     }
