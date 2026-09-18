@@ -211,6 +211,32 @@
     .pcard .links { display: flex; gap: 0.3rem; flex-wrap: wrap; margin-top: 0.6rem; }
     .pcard .links a { font-size: 0.78rem; color: var(--ink-2); background: var(--paper); border: 1px solid var(--line); border-radius: 999px; padding: 0.05rem 0.55rem; }
     .pcard .links a:hover { color: var(--accent); border-color: var(--accent); text-decoration: none; }
+    /* 白紙 */
+    .doc { background: var(--paper-2); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: 1.4rem 1.8rem 1.6rem; font-size: 1.02rem; }
+    .doc h2 { font-size: 1.3rem; margin: 1.8rem 0 0.6rem; padding-bottom: 0.3rem; border-bottom: 1px solid var(--line); }
+    .doc h3 { font-size: 1.08rem; margin: 1.3rem 0 0.4rem; }
+    .doc > :first-child { margin-top: 0; }
+    .doc-toc { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0 0 1rem; }
+    .doc-toc a { font-size: 0.82rem; color: var(--ink-2); background: var(--paper-2); border: 1px solid var(--line); border-radius: 999px; padding: 0.1rem 0.7rem; }
+    .doc-toc a:hover { color: var(--accent); border-color: var(--accent); text-decoration: none; }
+    /* 日記 */
+    .entry-head { display: flex; align-items: center; gap: 0.9rem; margin-bottom: 0.6rem; }
+    .entry-head .mood { font-size: 2rem; line-height: 1; }
+    .entry-date { font-weight: 700; font-size: 1.1rem; }
+    .entry-date small { font-weight: 400; color: var(--ink-2); font-size: 0.82rem; margin-left: 0.2rem; }
+    .entry-label { color: var(--ink-2); font-size: 0.95rem; }
+    .tagpill { display: inline-block; background: var(--plum-soft); color: var(--plum); border-radius: 999px; padding: 0 0.55rem; font-size: 0.85em; cursor: pointer; }
+    .tagpill:hover { filter: brightness(0.95); }
+    .filterbar { display: flex; gap: 0.35rem; flex-wrap: wrap; }
+    .filterbar .chip.on { background: var(--plum); color: #fff; border-color: var(--plum); }
+    .filterbar small { opacity: 0.7; }
+    .moods { display: flex; gap: 0.3rem; flex-wrap: wrap; }
+    .mood-chip { font-size: 1.1rem; padding: 0.05rem 0.5rem; }
+    .mood-chip.on { background: var(--accent-soft); border-color: var(--accent); }
+    /* 圖片 */
+    .card-body img, .doc img { max-width: 100%; border-radius: 10px; cursor: zoom-in; display: block; margin: 0.6rem auto; box-shadow: var(--shadow); }
+    .lightbox { cursor: zoom-out; background: rgba(34,28,24,0.85); }
+    .lightbox img { max-width: 96vw; max-height: 94vh; border-radius: 8px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
     .empty { color: var(--ink-2); text-align: center; padding: 2rem 1rem; border: 1px dashed var(--line); border-radius: var(--radius); }
 
     /* ===== 浮動按鈕 ===== */
@@ -309,8 +335,9 @@
         <h3 id="ed-title">新筆記</h3>
         <div class="segs" id="ed-mode">
           <button data-mode="card" class="on">加一張卡</button>
-          <button data-mode="page">新頁面</button>
+          <button data-mode="journal">今天寫一筆</button>
           <button data-mode="full">編輯整頁</button>
+          <button data-mode="page">新頁面</button>
         </div>
         <button class="btn ghost" id="ed-close">✕</button>
       </header>
@@ -321,16 +348,25 @@
           <input type="text" id="ed-name" placeholder="頁面名稱，例如：行政學概要">
         </div>
         <div class="row"><label>檔案</label><code id="ed-file"></code></div>
+        <div class="row" id="ed-mood-row" style="display:none">
+          <label>心情</label>
+          <span class="moods"><button class="chip mood-chip" data-mood="😊">😊</button><button class="chip mood-chip" data-mood="🙂">🙂</button><button class="chip mood-chip" data-mood="😐">😐</button><button class="chip mood-chip" data-mood="😔">😔</button><button class="chip mood-chip" data-mood="😫">😫</button><button class="chip mood-chip" data-mood="🔥">🔥</button><button class="chip mood-chip" data-mood="💤">💤</button><button class="chip mood-chip" data-mood="🤔">🤔</button></span>
+          <span id="ed-tags" class="moods"></span>
+          <span class="help" style="font-size:0.78rem">文中打 <code>#標籤</code> 之後可以篩</span>
+        </div>
         <div class="row" id="ed-templates">
           <label>套範本</label>
           <button class="chip" data-tpl="wrong">錯題卡</button>
           <button class="chip" data-tpl="concept">概念卡</button>
           <button class="chip" data-tpl="essay">作文練習</button>
-          <button class="chip" data-tpl="free">隨寫</button>
+          <button class="chip" data-tpl="article">文章骨架</button>
+          <button class="chip" data-tpl="free">空白小節</button>
           <span style="flex:1"></span>
+          <button class="chip" id="ed-img" title="也可以直接 Ctrl+V 貼圖或拖進來">🖼 插入圖片</button>
+          <input type="file" id="ed-file-input" accept="image/*" multiple style="display:none">
           <button class="chip" id="ed-preview-toggle">預覽</button>
         </div>
-        <textarea id="ed-text" spellcheck="false" placeholder="用 Markdown 寫。## 開頭的一行就是一張卡。"></textarea>
+        <textarea id="ed-text" spellcheck="false" placeholder="用 Markdown 寫。## 開頭的一行就是一張卡；圖片直接 Ctrl+V 貼進來。"></textarea>
         <div class="preview card-body" id="ed-preview"></div>
       </div>
       <footer>
@@ -382,6 +418,7 @@
     </div>
   </div>
 
+  <div class="overlay lightbox" id="lightbox"><img id="lb-img" alt=""></div>
   <div class="toast" id="toast"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
@@ -392,12 +429,18 @@
     var BRANCH = 'main';
     var TOC_FILE = '_sidebar.md';            // 目錄檔（沿用舊名）
     var REVIEW_FILE = 'data/reviews.json';
-    var REVIEW_SECTIONS = ['學科/', '學習/']; // 這些區的卡有「已複習」
+    var REVIEW_SECTIONS = ['學科/'];            // 這些區的卡有「已複習」
+    // 三種紙：cards＝卡片（錯題、概念、地圖）、doc＝白紙（整頁自由寫）、journal＝日記（一鍵帶日期、心情、標籤）
+    var SECTION_MODE = { '學科': 'cards', '學習': 'doc', '隨寫': 'journal' }; // 沒列到的分區預設 doc
+    var JOURNAL_DIR = '隨寫';
+    var ASSET_DIR = 'assets';                    // 貼上的圖片存這裡（assets/年/月/）
+    var IMG_MAX = 1600, IMG_QUALITY = 0.85;      // 圖片最長邊、JPEG 品質
+    var MOODS = ['😊', '🙂', '😐', '😔', '😫', '🔥', '💤', '🤔'];
     var PROGRESS_FILE = 'data/progress.json';
     var SECTION_INTRO = {
       '學科': '每科三頁：地圖是章節骨架（讀懂就打勾），錯題記怎麼錯，概念記是什麼。',
-      '學習': '課程與工具的學習筆記。',
-      '隨寫': '想到什麼寫什麼，一天一張。'
+      '學習': '白紙。一個主題一頁，想怎麼寫就怎麼寫，圖片直接貼。',
+      '隨寫': '日記。一天一則，帶日期、心情、標籤；最新的在最上面。'
     };
     var K = { token: 'daybook:token', reviews: 'daybook:reviews', progress: 'daybook:progress', pending: 'daybook:pending', days: 'daybook:days', selftest: 'daybook:selftest' };
     var PENDING_TTL = 15 * 60 * 1000;
@@ -456,6 +499,13 @@
         return r.json();
       });
     }
+    function ghPutRaw(path, base64, message) {
+      return ghFetch(contentsUrl(path), { method: 'PUT', body: JSON.stringify({ message: message, content: base64, branch: BRANCH }) }).then(function (r) {
+        if (!r.ok) return r.json().then(function (j) { throw new Error(j.message || ('上傳失敗 ' + r.status)); });
+        return r.json();
+      });
+    }
+    function rawUrl(path) { return 'https://raw.githubusercontent.com/' + OWNER + '/' + REPO + '/' + BRANCH + '/' + encPath(path); }
     function fetchPages(path) { return fetch(encPath(path) + '?_=' + Date.now()).then(function (r) { return r.ok ? r.text() : null; }).catch(function () { return null; }); }
     // 讀檔：先看暫存 → 有鑰匙走 API → 否則讀 Pages
     var fileCache = {};
@@ -495,6 +545,7 @@
     function allPages() { return toc.sections.reduce(function (a, s) { return a.concat(s.pages); }, []); }
     function findPage(path) { return allPages().concat(toc.loose).filter(function (p) { return p.path === path; })[0]; }
     function sectionOf(path) { return path.split('/')[0]; }
+    function modeOf(path) { return SECTION_MODE[sectionOf(path)] || 'doc'; }
 
     // ===================== 卡片切分 =====================
     function splitCards(text) {
@@ -508,6 +559,20 @@
       });
       return { title: title, intro: intro.join('\n').trim(), cards: cards.map(function (c) { return { title: c.title, body: c.body.join('\n').trim() }; }) };
     }
+    // 日記：標題「2026-09-18」或「2026-09-18 16:40 標題」；內文第一行「心情：😊」；文中 #標籤
+    function parseEntry(card) {
+      var m = card.title.match(/^(\d{4}-\d{2}-\d{2})(?:\s+(\d{1,2}:\d{2}))?\s*(.*)$/);
+      var body = card.body, mood = '';
+      var mm = body.match(/^心情[：:]\s*(.*)$/m);
+      if (mm) { mood = mm[1].trim(); body = body.replace(mm[0], '').trim(); }
+      var tags = []; body.replace(/(^|[\s（(])#([^\s#，。,.!?）)]+)/g, function (_, __, t) { if (tags.indexOf(t) < 0) tags.push(t); return _; });
+      return { title: card.title, date: m ? m[1] : '', time: m ? (m[2] || '') : '', label: m ? m[3].trim() : card.title, mood: mood, tags: tags, body: body };
+    }
+    function sortEntries(cards) {
+      return cards.map(parseEntry).sort(function (a, b) { var ka = a.date + ' ' + (a.time || '00:00'), kb = b.date + ' ' + (b.time || '00:00'); return ka < kb ? 1 : ka > kb ? -1 : 0; });
+    }
+    function weekday(d) { var w = ['日', '一', '二', '三', '四', '五', '六']; var t = new Date(d + 'T00:00:00'); return isNaN(t) ? '' : '週' + w[t.getDay()]; }
+    function tagPills(html) { return html.replace(/(^|[\s（(>])#([^\s#，。,.!?）)<]+)/g, function (_, pre, t) { return pre + '<span class="tagpill" data-tag="' + esc(t) + '">#' + esc(t) + '</span>'; }); }
     function cardKey(file, title) { return file.replace(/\.md$/, '') + '#' + title.trim().replace(/\s+/g, ' '); }
     function inReviewSection(file) { return REVIEW_SECTIONS.some(function (s) { return file.indexOf(s) === 0; }); }
 
@@ -604,8 +669,11 @@
           seen++; if (s.due) { due++; dueList.push({ title: card.title, last: s.last }); }
         });
         var t = countTasks(text, page.file);
-        if (t.total) { return { page: page, total: 0, seen: 0, due: 0, never: 0, dueList: [], cards: [], intro: c.intro, exists: true, tasks: t.total, tasksDone: t.done }; }
-        return { page: page, total: c.cards.length, seen: seen, due: due, never: never, dueList: dueList, cards: c.cards, intro: c.intro, exists: text !== null, tasks: 0, tasksDone: 0 };
+        var mode = modeOf(page.path);
+        if (mode === 'doc') return { page: page, mode: mode, total: 0, seen: 0, due: 0, never: 0, dueList: [], cards: [], intro: c.intro, exists: text !== null, tasks: 0, tasksDone: 0, words: (text || '').replace(/\s+/g, '').length };
+        if (mode === 'journal') { var ents = sortEntries(c.cards); return { page: page, mode: mode, total: c.cards.length, seen: 0, due: 0, never: 0, dueList: [], cards: [], entries: ents, latest: ents[0] || null, intro: c.intro, exists: text !== null, tasks: 0, tasksDone: 0 }; }
+        if (t.total) { return { page: page, mode: 'cards', total: 0, seen: 0, due: 0, never: 0, dueList: [], cards: [], intro: c.intro, exists: true, tasks: t.total, tasksDone: t.done }; }
+        return { page: page, mode: 'cards', total: c.cards.length, seen: seen, due: due, never: never, dueList: dueList, cards: c.cards, intro: c.intro, exists: text !== null, tasks: 0, tasksDone: 0 };
       });
     }
 
@@ -624,11 +692,11 @@
       var r = route();
       window.scrollTo(0, 0);
       loadToc().then(function () {
-        renderTabs(r.path);
-        if (!r.path) { current = { kind: 'home', path: '' }; return renderHome(); }
         var sec = toc.sections.filter(function (s) { return s.name === r.path; })[0];
-        if (sec) { current = { kind: 'section', path: r.path }; return renderSection(sec); }
-        current = { kind: 'page', path: r.path };
+        current = !r.path ? { kind: 'home', path: '' } : sec ? { kind: 'section', path: r.path } : { kind: 'page', path: r.path };
+        renderTabs(r.path);
+        if (current.kind === 'home') return renderHome();
+        if (current.kind === 'section') return renderSection(sec);
         return renderPage(r.path, r.params);
       }).catch(function (e) { app.innerHTML = '<div class="empty">載入失敗：' + esc(e.message) + '</div>'; });
     }
@@ -638,6 +706,8 @@
         return '<a class="tab' + (top === s.name ? ' on' : '') + '" href="#/' + esc(s.name) + '">' + esc(s.name) + '</a>';
       }).join('');
       $('fab-edit').style.display = current.kind === 'page' || path ? '' : 'none';
+      var m = editorModes()[0];
+      $('fab-new').textContent = m === 'journal' ? '✎ 今天寫一筆' : m === 'card' ? '＋ 加一張卡' : m === 'full' ? '✎ 編輯這頁' : '＋ 新頁面';
     }
 
     // ---------- 首頁 ----------
@@ -674,8 +744,8 @@
       $('today').innerHTML = html;
       $('btn-random').onclick = function () {
         var pool = due.length ? due : [];
-        if (!pool.length) stats.forEach(function (s) { s.cards.forEach(function (c) { if (reviewState(cardKey(s.page.file, c.title)).never) pool.push({ page: s.page, title: c.title }); }); });
-        if (!pool.length) stats.forEach(function (s) { s.cards.forEach(function (c) { pool.push({ page: s.page, title: c.title }); }); });
+        if (!pool.length) stats.forEach(function (s) { if (s.mode !== 'cards') return; s.cards.forEach(function (c) { if (reviewState(cardKey(s.page.file, c.title)).never) pool.push({ page: s.page, title: c.title }); }); });
+        if (!pool.length) stats.forEach(function (s) { if (s.mode !== 'cards') return; s.cards.forEach(function (c) { pool.push({ page: s.page, title: c.title }); }); });
         if (!pool.length) return toast('還沒有卡片');
         var pick = pool[Math.floor(Math.random() * pool.length)];
         location.hash = '#/' + pick.page.path + '?c=' + encodeURIComponent(pick.title);
@@ -704,6 +774,8 @@
       var p = s.page;
       var meta = '';
       if (!s.exists) meta = '<span class="pill">空白頁</span>';
+      else if (s.mode === 'doc') meta = '<span class="pill">約 ' + (s.words || 0) + ' 字</span>';
+      else if (s.mode === 'journal') meta = '<span class="pill">' + s.total + ' 則</span>' + (s.latest ? '<span class="pill">最近 ' + esc(s.latest.date) + (s.latest.mood ? ' ' + esc(s.latest.mood) : '') + '</span>' : '');
       else if (s.tasks) meta = '<span class="pill">' + s.tasksDone + ' / ' + s.tasks + ' 讀完</span>' + (s.due ? '<span class="pill due">' + s.due + ' 章該再看</span>' : '');
       else if (!s.total) meta = '<span class="pill">還沒有卡</span>';
       else {
@@ -739,7 +811,7 @@
           body = order.map(function (g) { return subjectCardHtml(sec.name, g, groups[g]); }).join('');
         } else body = sec.pages.map(function (p) { return pageCardHtml(by[p.path] || { page: p, total: 0, exists: true }); }).join('');
         return '<div class="sec-head"><h2>' + esc(sec.name) + '</h2><span class="count">' + sec.pages.length + ' 頁 · ' + cnt + ' 張</span><a class="more" href="#/' + esc(sec.name) + '">全部 →</a></div>'
-          + '<div class="grid">' + body + '<div class="pcard add" data-section="' + esc(sec.name) + '">＋ 新頁面</div></div>';
+          + '<div class="grid">' + body + addCardHtml(sec.name) + '</div>';
       }).join('');
       if (toc.loose.length) html += '<p class="help" style="margin-top:2rem;text-align:center">' + toc.loose.map(function (p) { return '<a href="#/' + esc(p.path) + '">' + esc(p.title) + '</a>'; }).join(' · ') + '</p>';
       $('sections').innerHTML = html;
@@ -748,9 +820,13 @@
         el.onclick = function (e) { if (e.target.tagName === 'A') return; location.hash = el.dataset.href; };
       });
     }
+    function addCardHtml(secName) {
+      var j = (SECTION_MODE[secName] || 'doc') === 'journal';
+      return '<div class="pcard add" data-section="' + esc(secName) + '" data-mode="' + (j ? 'journal' : 'page') + '">' + (j ? '✎ 今天寫一筆' : '＋ 新頁面') + '</div>';
+    }
     function bindAddCards() {
       document.querySelectorAll('.pcard.add').forEach(function (el) {
-        el.onclick = function () { openEditor('page', el.dataset.section); };
+        el.onclick = function () { openEditor(el.dataset.mode || 'page', el.dataset.section); };
       });
     }
 
@@ -765,7 +841,7 @@
         stats.forEach(function (s) { var g = s.page.sub || ''; if (!groups[g]) { groups[g] = []; order.push(g); } groups[g].push(s); });
         var html = order.map(function (g) {
           return (order.length > 1 && g ? '<div class="sec-head" style="grid-column:1/-1;margin:0.6rem 0 0"><h2 style="font-size:1rem;color:var(--ink-2)">' + esc(g) + '</h2></div>' : '') + groups[g].map(pageCardHtml).join('');
-        }).join('') + '<div class="pcard add" data-section="' + esc(sec.name) + '">＋ 新頁面</div>';
+        }).join('') + addCardHtml(sec.name);
         $('sec-grid').innerHTML = html;
         bindAddCards();
       });
@@ -787,18 +863,22 @@
     function renderPage(path, params) {
       var page = findPage(path) || { title: path.split('/').pop(), path: path, file: path + '.md' };
       var sec = sectionOf(path), secObj = toc.sections.filter(function (s) { return s.name === sec; })[0];
-      $('fab-edit').style.display = '';
+      $('fab-edit').style.display = modeOf(path) === 'doc' ? 'none' : '';
       app.innerHTML = '<div class="narrow"><div class="crumbs"><a href="#/">首頁</a>' + (secObj ? '<span>›</span><a href="#/' + esc(sec) + '">' + esc(sec) + '</a>' : '') + (page.sub ? '<span>›</span><span>' + esc(page.sub) + '</span>' : '') + '</div><h1 class="page-title">' + esc(page.title) + '</h1><div id="page-body"><div class="help">載入中…</div></div></div>';
       Promise.all([loadFile(page.file, true), loadReviews(), loadProgress()]).then(function (res) {
         var text = res[0];
         var body = $('page-body');
+        var mode = modeOf(path);
         if (text === null) {
-          body.innerHTML = '<div class="empty">這頁還沒有內容。可能是剛建好、GitHub Pages 還在更新（等 1 分鐘重新整理），或連結打錯了。<br><br><button class="btn primary" id="empty-add">＋ 在這頁加第一張卡</button></div>';
-          $('empty-add').onclick = function () { openEditor('card'); };
+          var lbl = mode === 'journal' ? '✎ 今天寫一筆' : mode === 'doc' ? '✎ 開始寫' : '＋ 在這頁加第一張卡';
+          body.innerHTML = '<div class="empty">這頁還沒有內容。可能是剛建好、GitHub Pages 還在更新（等 1 分鐘重新整理），或連結打錯了。<br><br><button class="btn primary" id="empty-add">' + lbl + '</button></div>';
+          $('empty-add').onclick = function () { openEditor(mode === 'journal' ? 'journal' : mode === 'doc' ? 'full' : 'card'); };
           return;
         }
         var c = splitCards(text);
         if (c.title && c.title !== page.title) document.querySelector('.page-title').textContent = c.title;
+        if (mode === 'doc') return renderDoc(body, page, text, c);
+        if (mode === 'journal') return renderJournal(body, page, c, params);
         var isMap = countTasks(text, page.file).total > 0;
         var canReview = inReviewSection(page.file) && !isMap;
         var html = '';
@@ -850,11 +930,64 @@
         body.querySelectorAll('[data-copy]').forEach(function (b) {
           b.onclick = function () { var card = c.cards[+b.dataset.copy]; navigator.clipboard.writeText('## ' + card.title + '\n\n' + card.body).then(function () { toast('已複製'); }); };
         });
+        bindImages(body);
         // 從搜尋或「今天先看」跳進來：捲到那張卡並閃一下
         if (params && params.c) {
           var target = Array.from(body.querySelectorAll('.card')).filter(function (el) { return el.dataset.title === params.c; })[0];
           if (target) { setTimeout(function () { target.scrollIntoView({ block: 'start' }); target.classList.add('flash'); }, 60); }
         }
+      });
+    }
+
+    // ---------- 白紙：整頁一篇 ----------
+    function renderDoc(body, page, text, c) {
+      var content = text.replace(/^# .+\n?/, '');
+      var heads = (content.match(/^## .+$/gm) || []).map(function (l) { return l.replace(/^## /, '').trim(); });
+      var html = '';
+      if (heads.length >= 3) html += '<div class="doc-toc">' + heads.map(function (h, i) { return '<a href="javascript:void(0)" data-h="' + i + '">' + esc(h) + '</a>'; }).join('') + '</div>';
+      html += '<article class="doc card-body">' + md(content) + '</article>';
+      html += '<div class="card-foot" style="margin-top:1rem"><button class="mini" id="doc-edit">✎ 編輯這頁</button><button class="mini" id="doc-copy">複製 Markdown</button><span class="hint" style="margin-left:auto;font-size:0.8rem;color:var(--ink-2)">約 ' + text.replace(/\s+/g, '').length + ' 字</span></div>';
+      body.innerHTML = html;
+      var h2s = body.querySelectorAll('.doc h2');
+      body.querySelectorAll('.doc-toc a').forEach(function (a) { a.onclick = function () { var el = h2s[+a.dataset.h]; if (el) el.scrollIntoView({ block: 'start', behavior: 'smooth' }); }; });
+      $('doc-edit').onclick = function () { openEditor('full'); };
+      $('doc-copy').onclick = function () { navigator.clipboard.writeText(text).then(function () { toast('已複製'); }); };
+      bindImages(body);
+    }
+    // ---------- 日記：一天一則，最新在上 ----------
+    function renderJournal(body, page, c, params) {
+      var entries = sortEntries(c.cards);
+      var tagCount = {}; entries.forEach(function (e) { e.tags.forEach(function (t) { tagCount[t] = (tagCount[t] || 0) + 1; }); });
+      var tags = Object.keys(tagCount).sort(function (a, b) { return tagCount[b] - tagCount[a]; });
+      var filter = (params && params.tag) || '';
+      var html = '';
+      if (c.intro) html += '<div class="lead card-body">' + md(c.intro) + '</div>';
+      html += '<div class="page-tools"><span class="hint">' + entries.length + ' 則</span>';
+      if (tags.length) html += '<span class="filterbar">' + tags.map(function (t) { return '<button class="chip' + (filter === t ? ' on' : '') + '" data-filter="' + esc(t) + '">#' + esc(t) + ' <small>' + tagCount[t] + '</small></button>'; }).join('') + (filter ? '<button class="chip" data-filter="">全部</button>' : '') + '</span>';
+      html += '<span style="flex:1"></span><button class="btn primary" id="j-new">✎ 今天寫一筆</button></div>';
+      var shown = entries.filter(function (e) { return !filter || e.tags.indexOf(filter) >= 0; });
+      html += '<div class="cards" id="cards">' + shown.map(function (e, i) {
+        return '<article class="card entry" data-title="' + esc(e.title) + '"><div class="entry-head">' + (e.mood ? '<span class="mood">' + esc(e.mood) + '</span>' : '') + '<div><div class="entry-date">' + esc(e.date || e.title) + (e.time ? ' <small>' + esc(e.time) + '</small>' : '') + (e.date ? ' <small>' + weekday(e.date) + '</small>' : '') + '</div>' + (e.label ? '<div class="entry-label">' + esc(e.label) + '</div>' : '') + '</div></div><div class="card-body">' + tagPills(md(e.body)) + '</div><div class="card-foot"><button class="mini" data-edit="' + i + '">✎ 改這則</button><button class="mini" data-copy="' + i + '">複製 Markdown</button></div></article>';
+      }).join('') + '</div>';
+      if (!entries.length) html += '<div class="empty">這個月還沒有日記。按「今天寫一筆」。</div>';
+      body.innerHTML = html;
+      $('j-new').onclick = function () { openEditor('journal'); };
+      body.querySelectorAll('[data-filter]').forEach(function (b) { b.onclick = function () { location.hash = '#/' + page.path + (b.dataset.filter ? '?tag=' + encodeURIComponent(b.dataset.filter) : ''); }; });
+      body.querySelectorAll('.tagpill').forEach(function (t) { t.onclick = function () { location.hash = '#/' + page.path + '?tag=' + encodeURIComponent(t.dataset.tag); }; });
+      body.querySelectorAll('[data-edit]').forEach(function (b) { b.onclick = function () { openEditor('full', null, shown[+b.dataset.edit].title); }; });
+      body.querySelectorAll('[data-copy]').forEach(function (b) { b.onclick = function () { var e = shown[+b.dataset.copy]; navigator.clipboard.writeText('## ' + e.title + '\n\n' + (e.mood ? '心情：' + e.mood + '\n\n' : '') + e.body).then(function () { toast('已複製'); }); }; });
+      bindImages(body);
+      if (params && params.c) {
+        var target = Array.from(body.querySelectorAll('.card')).filter(function (el) { return el.dataset.title === params.c; })[0];
+        if (target) setTimeout(function () { target.scrollIntoView({ block: 'start' }); target.classList.add('flash'); }, 60);
+      }
+    }
+    // 圖片：載入失敗就改抓 GitHub 原始檔（剛上傳、Pages 還沒更新時），點圖放大
+    function bindImages(root) {
+      root.querySelectorAll('img').forEach(function (img) {
+        var src = img.getAttribute('src') || '';
+        if (!/^https?:/.test(src)) img.onerror = function () { img.onerror = null; img.src = rawUrl(safeDecode(src)); };
+        img.onclick = function () { $('lb-img').src = img.src; $('lightbox').classList.add('open'); };
       });
     }
 
@@ -866,6 +999,7 @@
       return Promise.all(pages.map(function (p) {
         return loadFile(p.file).then(function (t) {
           var c = splitCards(t || '');
+          if (modeOf(p.path) === 'doc') return [{ page: p, title: p.title, body: (t || '').replace(/[*_`#>|]/g, '') }];
           return c.cards.map(function (card) { return { page: p, title: card.title, body: card.body.replace(/[*_`#>|]/g, '') }; });
         });
       })).then(function (lists) { searchIndex = lists.reduce(function (a, b) { return a.concat(b); }, []); return searchIndex; });
@@ -893,8 +1027,18 @@
       wrong: '## 【科目】115-Q07 一句話標題\n\n**題目**：\n\n**選項**：(A)  (B)  (C)  (D) \n\n**答案**：\n\n**我選**：\n\n**為什麼錯**：\n\n**觀念一句話**：\n\n**易混淆**：\n',
       concept: '## 名詞（英文）\n\n**一句話**：\n\n**比喻**：\n\n**怎麼考**：\n\n**跟它很像的**：\n',
       essay: '## DATE 題目：\n\n**大綱**\n1. \n2. \n3. \n\n**正文**\n\n\n**AI 批改（25 分制）**\n- 分數：\n- 缺的關鍵字：\n- 架構建議：\n',
-      free: '## DATE \n\n'
+      free: '## DATE \n\n',
+      article: '## 這是什麼\n\n\n## 重點\n\n- \n- \n\n## 我的理解／比喻\n\n\n## 來源\n\n- \n'
     };
+    var edJournalTarget = null; // 今天寫一筆要存去哪個檔
+    function journalFile() { return JOURNAL_DIR + '/' + today().slice(0, 7) + '.md'; }
+    function editorModes() {
+      // 依目前所在位置決定編輯器有哪幾種模式
+      var m = current.kind === 'page' ? modeOf(current.path) : current.kind === 'section' ? (SECTION_MODE[current.path] || 'doc') : '';
+      if (current.kind === 'page') return m === 'cards' ? ['card', 'full', 'page'] : m === 'journal' ? ['journal', 'full', 'page'] : ['full', 'page'];
+      if (current.kind === 'section') return m === 'journal' ? ['journal', 'page'] : ['page'];
+      return ['page', 'journal'];
+    }
     function tpl(name) { return TEMPLATES[name].replace('DATE', today()); }
     function currentFile() { return current.kind === 'page' ? current.path + '.md' : ''; }
     function sectionDirs() {
@@ -907,16 +1051,24 @@
     function updateFileLabel() {
       var file;
       if (edMode === 'page') { var name = $('ed-name').value.trim().replace(/[\/\\#?]/g, ''); file = $('ed-section').value + '/' + (name || '（頁面名稱）') + '.md'; }
+      else if (edMode === 'journal') file = journalFile();
       else file = currentFile();
       $('ed-file').textContent = file; return file;
     }
     function setMode(mode) {
-      if (mode !== 'page' && !currentFile()) mode = 'page';
+      var avail = editorModes();
+      if (avail.indexOf(mode) < 0) mode = avail[0];
       edMode = mode;
-      $('ed-mode').querySelectorAll('button').forEach(function (b) { b.classList.toggle('on', b.dataset.mode === mode); b.disabled = (b.dataset.mode !== 'page' && !currentFile()); });
+      $('ed-mode').querySelectorAll('button').forEach(function (b) { b.classList.toggle('on', b.dataset.mode === mode); b.style.display = avail.indexOf(b.dataset.mode) >= 0 ? '' : 'none'; });
       $('ed-target-row').style.display = mode === 'page' ? 'flex' : 'none';
+      $('ed-mood-row').style.display = mode === 'journal' ? 'flex' : 'none';
+      var isDoc = current.kind === 'page' && modeOf(current.path) === 'doc';
+      $('ed-templates').querySelectorAll('[data-tpl]').forEach(function (b) {
+        var t = b.dataset.tpl, show = mode === 'journal' ? false : isDoc ? (t === 'article' || t === 'free') : mode === 'page' ? true : (t !== 'article');
+        b.style.display = show ? '' : 'none';
+      });
       var pageTitle = (findPage(current.path) || {}).title || current.path.split('/').pop();
-      $('ed-title').textContent = mode === 'card' ? '加一張卡到「' + pageTitle + '」' : mode === 'page' ? '新頁面' : '編輯整頁「' + pageTitle + '」';
+      $('ed-title').textContent = mode === 'card' ? '加一張卡到「' + pageTitle + '」' : mode === 'page' ? '新頁面' : mode === 'journal' ? '今天寫一筆 · ' + today() : '編輯整頁「' + pageTitle + '」';
       showMsg('Ctrl + S 也可以存');
       $('ed-preview').classList.remove('show'); $('ed-text').style.display = ''; $('ed-preview-toggle').textContent = '預覽';
       var ta = $('ed-text');
@@ -932,11 +1084,74 @@
         var guess = edSectionHint || (current.kind === 'page' ? current.path.split('/').slice(0, -1).join('/') : current.kind === 'section' ? current.path : '');
         if (guess) { var opt = Array.from(sel.options).filter(function (o) { return o.value === guess; })[0]; if (opt) sel.value = guess; }
         $('ed-name').value = ''; ta.value = ''; updateFileLabel();
+      } else if (mode === 'journal') {
+        var jf = journalFile(); updateFileLabel();
+        ta.value = '## ' + today() + '\n\n心情：\n\n'; ta.disabled = true;
+        $('ed-tags').innerHTML = '';
+        ghGet(jf).then(function (f) {
+          edJournalTarget = f;
+          if (f) {
+            var c = splitCards(f.content);
+            var hasToday = c.cards.some(function (k) { return parseEntry(k).date === today(); });
+            if (hasToday) { var d = new Date(); ta.value = '## ' + today() + ' ' + String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0') + '\n\n心情：\n\n'; }
+            var tc = {}; c.cards.forEach(function (k) { parseEntry(k).tags.forEach(function (t) { tc[t] = (tc[t] || 0) + 1; }); });
+            var tags = Object.keys(tc).sort(function (a, b) { return tc[b] - tc[a]; }).slice(0, 12);
+            $('ed-tags').innerHTML = tags.map(function (t) { return '<button class="chip" data-tag="' + esc(t) + '">#' + esc(t) + '</button>'; }).join('');
+            $('ed-tags').querySelectorAll('[data-tag]').forEach(function (b) { b.onclick = function () { insertAtCursor(' #' + b.dataset.tag + ' '); }; });
+          }
+        }).catch(function () {}).then(function () { ta.disabled = false; ta.focus(); ta.setSelectionRange(ta.value.length, ta.value.length); });
       } else {
         var f = currentFile();
-        var g = f.indexOf('隨寫/') === 0 ? 'free' : f.indexOf('作文') >= 0 ? 'essay' : f.indexOf('概念') >= 0 ? 'concept' : f.indexOf('學習/') === 0 ? 'concept' : 'wrong';
+        var g = f.indexOf('作文') >= 0 ? 'essay' : f.indexOf('概念') >= 0 ? 'concept' : 'wrong';
         ta.value = tpl(g); updateFileLabel();
       }
+    }
+    function insertAtCursor(text) {
+      var ta = $('ed-text'), s = ta.selectionStart, e = ta.selectionEnd;
+      ta.value = ta.value.slice(0, s) + text + ta.value.slice(e);
+      ta.selectionStart = ta.selectionEnd = s + text.length; ta.focus();
+    }
+    function setMood(m) {
+      var ta = $('ed-text');
+      if (/^心情[：:].*$/m.test(ta.value)) ta.value = ta.value.replace(/^心情[：:].*$/m, '心情：' + m);
+      else ta.value = ta.value.replace(/^(## .+\n)/, '$1\n心情：' + m + '\n');
+      $('ed-mood-row').querySelectorAll('[data-mood]').forEach(function (b) { b.classList.toggle('on', b.dataset.mood === m); });
+      ta.focus();
+    }
+    // ---------- 圖片：貼上／拖放／選檔 → 壓縮 → 上傳到 assets/ ----------
+    function compressImage(file) {
+      return new Promise(function (resolve, reject) {
+        var keepPng = file.type === 'image/png' && file.size < 400 * 1024;
+        var img = new Image(), url = URL.createObjectURL(file);
+        img.onload = function () {
+          var w = img.naturalWidth, h = img.naturalHeight, scale = Math.min(1, IMG_MAX / Math.max(w, h));
+          if (keepPng && scale === 1) { var r = new FileReader(); r.onload = function () { resolve({ base64: r.result.split(',')[1], ext: 'png' }); }; r.readAsDataURL(file); return; }
+          var cv = document.createElement('canvas'); cv.width = Math.round(w * scale); cv.height = Math.round(h * scale);
+          var ctx = cv.getContext('2d'); ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, cv.width, cv.height); ctx.drawImage(img, 0, 0, cv.width, cv.height);
+          var data = cv.toDataURL('image/jpeg', IMG_QUALITY);
+          URL.revokeObjectURL(url);
+          resolve({ base64: data.split(',')[1], ext: 'jpg' });
+        };
+        img.onerror = function () { reject(new Error('讀不到這張圖')); };
+        img.src = url;
+      });
+    }
+    var imgSeq = 0;
+    function uploadImages(files) {
+      if (!getToken()) { toast('要先貼鑰匙才能上傳圖片'); return; }
+      Array.from(files).forEach(function (file) {
+        if (!/^image\//.test(file.type)) return;
+        var tag = '![上傳中…' + (++imgSeq) + ']()';
+        insertAtCursor('\n' + tag + '\n');
+        compressImage(file).then(function (r) {
+          var d = new Date(), path = ASSET_DIR + '/' + d.getFullYear() + '/' + String(d.getMonth() + 1).padStart(2, '0') + '/' + Date.now() + '-' + Math.random().toString(36).slice(2, 6) + '.' + r.ext;
+          return ghPutRaw(path, r.base64, '圖片 ' + today()).then(function () { return path; });
+        }).then(function (path) {
+          var ta = $('ed-text'); ta.value = ta.value.replace(tag, '![](' + path + ')'); toast('圖片上傳好了 ✓');
+        }).catch(function (e) {
+          var ta = $('ed-text'); ta.value = ta.value.replace(tag, ''); showMsg('圖片上傳失敗：' + e.message, 'err');
+        });
+      });
     }
     function openEditor(mode, sectionHint, focusCard) {
       if (!getToken()) { openSettings('先貼一次鑰匙，之後就能在這裡直接寫。'); return; }
@@ -944,7 +1159,7 @@
       $('editor').classList.add('open'); setMode(mode);
       setTimeout(function () { (edMode === 'page' ? $('ed-name') : $('ed-text')).focus(); }, 50);
     }
-    function closeAll() { ['editor', 'settings', 'search'].forEach(function (id) { $(id).classList.remove('open'); }); }
+    function closeAll() { ['editor', 'settings', 'search', 'lightbox'].forEach(function (id) { $(id).classList.remove('open'); }); }
     function addToToc(file, title) {
       return ghGet(TOC_FILE).then(function (f) {
         var text = f ? f.content : '', lines = text.split('\n');
@@ -974,6 +1189,23 @@
         });
       } else if (edMode === 'full') {
         p = ghPut(file, text, '編輯 ' + file.replace(/\.md$/, ''), edFileSha).then(function () { return text; });
+      } else if (edMode === 'journal') {
+        var month = today().slice(0, 7);
+        var entry = text.trim().replace(/^心情[：:]\s*$/m, '').replace(/\n{3,}/g, '\n\n').trim();
+        if (!/^## /.test(entry)) entry = '## ' + today() + '\n\n' + entry;
+        if (!entry.replace(/^## .+$/m, '').trim()) { showMsg('還沒寫東西', 'err'); $('ed-save').disabled = false; return; }
+        p = ghGet(file).then(function (f) {
+          var out;
+          if (!f) out = '# ' + month + '\n\n' + entry + '\n';
+          else {
+            var lines = f.content.split('\n'), idx = -1;
+            for (var i = 0; i < lines.length; i++) if (/^## /.test(lines[i])) { idx = i; break; }
+            if (idx < 0) out = f.content.replace(/\s+$/, '') + '\n\n' + entry + '\n';
+            else out = lines.slice(0, idx).join('\n').replace(/\s+$/, '') + '\n\n' + entry + '\n\n' + lines.slice(idx).join('\n');
+          }
+          var m = entry.match(/^## (.+)$/m);
+          return ghPut(file, out, '日記：' + (m ? m[1].trim() : month), f ? f.sha : null).then(function () { return f ? out : addToToc(file, month).then(function () { return out; }); });
+        });
       } else {
         var name = $('ed-name').value.trim();
         if (!name) { showMsg('要給頁面一個名稱', 'err'); $('ed-save').disabled = false; return; }
@@ -1026,7 +1258,16 @@
     // ===================== 綁事件 =====================
     document.addEventListener('DOMContentLoaded', function () {
       paintConn();
-      $('fab-new').onclick = function () { openEditor(current.kind === 'page' ? 'card' : 'page', current.kind === 'section' ? current.path : null); };
+      $('fab-new').onclick = function () { var m = editorModes()[0]; openEditor(m, current.kind === 'section' ? current.path : null); };
+      $('ed-mood-row').querySelectorAll('[data-mood]').forEach(function (b) { b.onclick = function () { setMood(b.dataset.mood); }; });
+      $('ed-img').onclick = function () { $('ed-file-input').click(); };
+      $('ed-file-input').onchange = function () { uploadImages(this.files); this.value = ''; };
+      $('ed-text').addEventListener('paste', function (e) {
+        var items = e.clipboardData && e.clipboardData.files; if (items && items.length) { e.preventDefault(); uploadImages(items); }
+      });
+      $('ed-text').addEventListener('dragover', function (e) { e.preventDefault(); });
+      $('ed-text').addEventListener('drop', function (e) { if (e.dataTransfer && e.dataTransfer.files.length) { e.preventDefault(); uploadImages(e.dataTransfer.files); } });
+      $('lightbox').onclick = function () { this.classList.remove('open'); };
       $('fab-edit').onclick = function () { openEditor('full'); };
       $('btn-settings').onclick = function () { openSettings(); };
       $('btn-search').onclick = function () { $('search').classList.add('open'); $('sq').value = ''; doSearch(''); setTimeout(function () { $('sq').focus(); }, 30); };
