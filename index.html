@@ -3,8 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <title>Daybook</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#f6efe3">
+  <link rel="manifest" href="manifest.json">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Daybook">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/icon-192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Huninn&family=Zen+Maru+Gothic:wght@400;500;700&display=swap">
   <style>
@@ -303,7 +310,9 @@
       .top-in { gap: 0.5rem; padding: 0.6rem 0.9rem; }
       .icon-btn .label { display: none; }
       .brand span.txt { display: none; }
-      main { padding: 1.1rem 0.9rem 7rem; }
+      main { padding: 1.1rem 0.9rem calc(7rem + env(safe-area-inset-bottom)); }
+      .fabs { bottom: calc(1rem + env(safe-area-inset-bottom)); }
+      .toast { bottom: calc(5.4rem + env(safe-area-inset-bottom)); }
       h1.page-title { font-size: 1.55rem; }
       .card { padding: 0.9rem 1rem 1rem; }
       .sheet textarea, .preview { min-height: 40vh; }
@@ -674,7 +683,8 @@
     function weekday(d) { var w = ['日', '一', '二', '三', '四', '五', '六']; var t = new Date(d + 'T00:00:00'); return isNaN(t) ? '' : '週' + w[t.getDay()]; }
     function tagPills(html) { return html.replace(/(^|[\s（(>])#([^\s#，。,.!?）)<]+)/g, function (_, pre, t) { return pre + '<span class="tagpill" data-tag="' + esc(t) + '">#' + esc(t) + '</span>'; }); }
     function cardKey(file, title) { return file.replace(/\.md$/, '') + '#' + title.trim().replace(/\s+/g, ' '); }
-    function inReviewSection(file) { return REVIEW_SECTIONS.some(function (s) { return file.indexOf(s) === 0; }); }
+    function isIndexPage(file) { return /\/考點\.md$/.test(file); } // 考點頁是索引，不進複習、不被隨機抽
+    function inReviewSection(file) { return !isIndexPage(file) && REVIEW_SECTIONS.some(function (s) { return file.indexOf(s) === 0; }); }
 
     // ===================== 複習紀錄 =====================
     var reviews = readJSON(K.reviews, {}), reviewsSha = null, reviewsLoaded = false;
@@ -773,6 +783,7 @@
         if (mode === 'doc') return { page: page, mode: mode, total: 0, seen: 0, due: 0, never: 0, dueList: [], cards: [], intro: c.intro, exists: text !== null, tasks: 0, tasksDone: 0, words: (text || '').replace(/\s+/g, '').length };
         if (mode === 'journal') { var ents = sortEntries(c.cards); return { page: page, mode: mode, total: c.cards.length, seen: 0, due: 0, never: 0, dueList: [], cards: [], entries: ents, latest: ents[0] || null, intro: c.intro, exists: text !== null, tasks: 0, tasksDone: 0 }; }
         if (t.total) { return { page: page, mode: 'cards', total: 0, seen: 0, due: 0, never: 0, dueList: [], cards: [], intro: c.intro, exists: true, tasks: t.total, tasksDone: t.done }; }
+        if (isIndexPage(page.file)) return { page: page, mode: 'cards', index: true, total: 0, seen: 0, due: 0, never: 0, dueList: [], cards: [], intro: c.intro, exists: text !== null, tasks: 0, tasksDone: 0, concepts: c.cards.length };
         return { page: page, mode: 'cards', total: c.cards.length, seen: seen, due: due, never: never, dueList: dueList, cards: c.cards, intro: c.intro, exists: text !== null, tasks: 0, tasksDone: 0 };
       });
     }
@@ -879,6 +890,7 @@
       var p = s.page;
       var meta = '';
       if (!s.exists) meta = '<span class="pill">空白頁</span>';
+      else if (s.index) meta = '<span class="pill">' + s.concepts + ' 個考點</span>';
       else if (s.mode === 'doc') meta = '<span class="pill">約 ' + (s.words || 0) + ' 字</span>';
       else if (s.mode === 'journal') meta = '<span class="pill">' + s.total + ' 則</span>' + (s.latest ? '<span class="pill">最近 ' + esc(s.latest.date) + (s.latest.mood ? ' ' + esc(s.latest.mood) : '') + '</span>' : '');
       else if (s.tasks) meta = '<span class="pill">' + s.tasksDone + ' / ' + s.tasks + ' 讀完</span>' + (s.due ? '<span class="pill due">' + s.due + ' 章該再看</span>' : '');

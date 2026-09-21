@@ -1,0 +1,16 @@
+{
+  "name": "Daybook",
+  "short_name": "Daybook",
+  "description": "白天的筆記本：學科、學習、隨寫、考場",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f6efe3",
+  "theme_color": "#f6efe3",
+  "lang": "zh-Hant",
+  "icons": [
+    { "src": "assets/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "assets/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
