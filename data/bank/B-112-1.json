@@ -1,0 +1,545 @@
+{
+ "exam": "B",
+ "year": 112,
+ "session": 1,
+ "parts": [
+  {
+   "kind": "essay",
+   "subject": "國文",
+   "title": "作文",
+   "minutes": 60,
+   "prompt": "國營事業員工如何面對 AI 浪潮之我見",
+   "detail": "自 2022 年 ChatGPT 問世以來，人工智慧（以下簡稱 AI）例如：機器人、聊天軟體、無人機等等，快速發展，不論任何領域均可看到 AI 被加速引進或全力研發。AI 的運用與發展，改變了企業原有的運作方式，員工也將面對一個嶄新的工作環境；因此分析 AI 對工作帶來什麼影響？進而思考應以什麼樣的態度、行為、或能力強化來因應，進而運用 AI 提升自己在企業裡的競爭力尤為重要。請以「國營事業員工如何面對 AI 浪潮之我見」撰寫論文ㄧ篇。"
+  },
+  {
+   "kind": "mc",
+   "subject": "英文",
+   "title": "英文",
+   "per": 2.5,
+   "minutes": 60,
+   "questions": [
+    {
+     "n": 1,
+     "answer": "A",
+     "group": "字彙",
+     "passage": "",
+     "stem": "The famous scientist lost all ______ once his fabricated data came to light.",
+     "options": {
+      "A": "credibility",
+      "B": "credence",
+      "C": "credulity",
+      "D": "credo"
+     }
+    },
+    {
+     "n": 2,
+     "answer": "B",
+     "group": "字彙",
+     "passage": "",
+     "stem": "Nicole’s ______ that she had stolen the money had shocked everyone.",
+     "options": {
+      "A": "adjustment",
+      "B": "admission",
+      "C": "admittance",
+      "D": "adoption"
+     }
+    },
+    {
+     "n": 3,
+     "answer": "D",
+     "group": "字彙",
+     "passage": "",
+     "stem": "Public ______ to the problem of litter has left the city’s park in a total mess.",
+     "options": {
+      "A": "disbelief",
+      "B": "dispute",
+      "C": "fastidiousness",
+      "D": "indifference"
+     }
+    },
+    {
+     "n": 4,
+     "answer": "C",
+     "group": "字彙",
+     "passage": "",
+     "stem": "The cars are ______ in price, but far apart in terms of performance.",
+     "options": {
+      "A": "communicative",
+      "B": "compact",
+      "C": "comparable",
+      "D": "compassionate"
+     }
+    },
+    {
+     "n": 5,
+     "answer": "B",
+     "group": "字彙",
+     "passage": "",
+     "stem": "No new business can succeed without hard-working and ______ employees.",
+     "options": {
+      "A": "compatible",
+      "B": "competent",
+      "C": "complacent",
+      "D": "complimentary"
+     }
+    },
+    {
+     "n": 6,
+     "answer": "C",
+     "group": "字彙",
+     "passage": "",
+     "stem": "In a laboratory, it is important to be ______ when measuring substances.",
+     "options": {
+      "A": "potential",
+      "B": "peculiar",
+      "C": "precise",
+      "D": "primary"
+     }
+    },
+    {
+     "n": 7,
+     "answer": "A",
+     "group": "字彙",
+     "passage": "",
+     "stem": "The ______ for setting the drinking age at 18 is that self-control and good judgement are still being developed before that age.",
+     "options": {
+      "A": "rationale",
+      "B": "recession",
+      "C": "retort",
+      "D": "revulsion"
+     }
+    },
+    {
+     "n": 8,
+     "answer": "D",
+     "group": "字彙",
+     "passage": "",
+     "stem": "A microscope can ______ a cell and make it large for our eyes to see.",
+     "options": {
+      "A": "modify",
+      "B": "maintain",
+      "C": "mislead",
+      "D": "magnify"
+     }
+    },
+    {
+     "n": 9,
+     "answer": "D",
+     "group": "字彙",
+     "passage": "",
+     "stem": "The ______ child was found safe after a week-long search, but the criminal demanded $1 million in exchange for the child.",
+     "options": {
+      "A": "invested",
+      "B": "defeated",
+      "C": "performed",
+      "D": "kidnapped"
+     }
+    },
+    {
+     "n": 10,
+     "answer": "C",
+     "group": "字彙",
+     "passage": "",
+     "stem": "This country’s military ______ near the border have raised concerns about a possible invasion, despite the claim to test their readiness of the armed forces.",
+     "options": {
+      "A": "outskirts",
+      "B": "wardrobes",
+      "C": "maneuvers",
+      "D": "parameters"
+     }
+    },
+    {
+     "n": 11,
+     "answer": "A",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "The doctor ______ the patient’s cancer for several months now, and the patient is responding well to the treatment.",
+     "options": {
+      "A": "has been treating",
+      "B": "has been treated",
+      "C": "is treating",
+      "D": "treats"
+     }
+    },
+    {
+     "n": 12,
+     "answer": "C",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "This year, only two applicants joined the job interview, but ______ of the candidates was qualified for the job.",
+     "options": {
+      "A": "both",
+      "B": "either",
+      "C": "neither",
+      "D": "all"
+     }
+    },
+    {
+     "n": 13,
+     "answer": "D",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "There are lots of cover-ups in the business world, ______ involve fraud and corruption.",
+     "options": {
+      "A": "one of them",
+      "B": "some of them",
+      "C": "one of which",
+      "D": "some of which"
+     }
+    },
+    {
+     "n": 14,
+     "answer": "D",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "Dell was struggling ______ the demands of his boss.",
+     "options": {
+      "A": "to keep up",
+      "B": "to keep down",
+      "C": "to keep in",
+      "D": "to keep up with"
+     }
+    },
+    {
+     "n": 15,
+     "answer": "B",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "The keys to happier marriage include not ______ change from your spouse.",
+     "options": {
+      "A": "demand",
+      "B": "demanding",
+      "C": "to demand",
+      "D": "by demanding"
+     }
+    },
+    {
+     "n": 16,
+     "answer": "C",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "It is intriguing to travel in foreign lands ______ cultures are different from our own.",
+     "options": {
+      "A": "with",
+      "B": "which",
+      "C": "whose",
+      "D": "what"
+     }
+    },
+    {
+     "n": 17,
+     "answer": "A",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "______ you have any questions, please do not hesitate to contact us.",
+     "options": {
+      "A": "Should",
+      "B": "Would",
+      "C": "Could",
+      "D": "Will"
+     }
+    },
+    {
+     "n": 18,
+     "answer": "B",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "Zoey moved to New York on her own when she was 17, ______ her family in Louisiana.",
+     "options": {
+      "A": "left aside",
+      "B": "leaving behind",
+      "C": "leaving aside",
+      "D": "to leave behind"
+     }
+    },
+    {
+     "n": 19,
+     "answer": "D",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "If you have something to say about his notorious behavior, ______. It is no use to complain to me.",
+     "options": {
+      "A": "say nothing of it",
+      "B": "enjoy yourself",
+      "C": "like it or not",
+      "D": "say it to his face"
+     }
+    },
+    {
+     "n": 20,
+     "answer": "A",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "______ entering the concert hall, I noticed that refreshments were being served.",
+     "options": {
+      "A": "On",
+      "B": "About",
+      "C": "To",
+      "D": "Of"
+     }
+    },
+    {
+     "n": 21,
+     "answer": "D",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "Only if the arrogant man sees the world through the eyes of a child ______ truly appreciate natural beauty.",
+     "options": {
+      "A": "he",
+      "B": "that he",
+      "C": "he does",
+      "D": "does he"
+     }
+    },
+    {
+     "n": 22,
+     "answer": "B",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "Though Abby may seem like a simple person when you first meet her, there’s more to her ______.",
+     "options": {
+      "A": "than meet the eyes",
+      "B": "than meets the eye",
+      "C": "then meets the eye",
+      "D": "yet meets the eye"
+     }
+    },
+    {
+     "n": 23,
+     "answer": "A",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "That restaurant managed to survive the pandemic ______.",
+     "options": {
+      "A": "one way or another",
+      "B": "by no means",
+      "C": "in no way",
+      "D": "at all"
+     }
+    },
+    {
+     "n": 24,
+     "answer": "C",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "“My son doesn’t mind fruit, but vegetables are a whole different story.” That means ______",
+     "options": {
+      "A": "My son doesn’t like fruit, but he likes vegetables.",
+      "B": "My son doesn’t like either fruit or vegetables.",
+      "C": "My son eats fruit but not vegetables.",
+      "D": "My son doesn’t eat fruit, but he eats vegetables."
+     }
+    },
+    {
+     "n": 25,
+     "answer": "B",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "“Tyler is no less intelligent than his brother” means the same as “Tyler is ______ his brother.”",
+     "options": {
+      "A": "more stupid than",
+      "B": "as smart as",
+      "C": "sharper than",
+      "D": "as stupid as"
+     }
+    },
+    {
+     "n": 26,
+     "answer": "A",
+     "group": "克漏字",
+     "passage": "Jane and Philip are in general a happily married couple; however, they do struggle over one point of __ (26)__ . They disagree as to how their family should follow the traditions of seasonal holidays. In her opinions, the emphasis __(27)__ presents has made the season lucrative for all those mercenary retailers who overcharge at holiday time. In addition, people should be watching their expenses and avoid unnecessary __(28)__ in their budgets. Therefore, she aspires to keep her home free of all such customs and wants her children to __(29)__ from traditions such as gift-giving and dyeing Easter eggs. Although Philip understands her concerns, he prefers the conventional way of celebrating holidays. He believes that children enjoy the customary __(30)__ that are connected with the holidays.",
+     "stem": "",
+     "options": {
+      "A": "dissent",
+      "B": "relief",
+      "C": "deficit",
+      "D": "harmony"
+     }
+    },
+    {
+     "n": 27,
+     "answer": "B",
+     "group": "克漏字",
+     "passage": "Jane and Philip are in general a happily married couple; however, they do struggle over one point of __ (26)__ . They disagree as to how their family should follow the traditions of seasonal holidays. In her opinions, the emphasis __(27)__ presents has made the season lucrative for all those mercenary retailers who overcharge at holiday time. In addition, people should be watching their expenses and avoid unnecessary __(28)__ in their budgets. Therefore, she aspires to keep her home free of all such customs and wants her children to __(29)__ from traditions such as gift-giving and dyeing Easter eggs. Although Philip understands her concerns, he prefers the conventional way of celebrating holidays. He believes that children enjoy the customary __(30)__ that are connected with the holidays.",
+     "stem": "",
+     "options": {
+      "A": "at",
+      "B": "on",
+      "C": "by",
+      "D": "of"
+     }
+    },
+    {
+     "n": 28,
+     "answer": "C",
+     "group": "克漏字",
+     "passage": "Jane and Philip are in general a happily married couple; however, they do struggle over one point of __ (26)__ . They disagree as to how their family should follow the traditions of seasonal holidays. In her opinions, the emphasis __(27)__ presents has made the season lucrative for all those mercenary retailers who overcharge at holiday time. In addition, people should be watching their expenses and avoid unnecessary __(28)__ in their budgets. Therefore, she aspires to keep her home free of all such customs and wants her children to __(29)__ from traditions such as gift-giving and dyeing Easter eggs. Although Philip understands her concerns, he prefers the conventional way of celebrating holidays. He believes that children enjoy the customary __(30)__ that are connected with the holidays.",
+     "stem": "",
+     "options": {
+      "A": "wealth",
+      "B": "surplus",
+      "C": "shortfall",
+      "D": "adequacy"
+     }
+    },
+    {
+     "n": 29,
+     "answer": "D",
+     "group": "克漏字",
+     "passage": "Jane and Philip are in general a happily married couple; however, they do struggle over one point of __ (26)__ . They disagree as to how their family should follow the traditions of seasonal holidays. In her opinions, the emphasis __(27)__ presents has made the season lucrative for all those mercenary retailers who overcharge at holiday time. In addition, people should be watching their expenses and avoid unnecessary __(28)__ in their budgets. Therefore, she aspires to keep her home free of all such customs and wants her children to __(29)__ from traditions such as gift-giving and dyeing Easter eggs. Although Philip understands her concerns, he prefers the conventional way of celebrating holidays. He believes that children enjoy the customary __(30)__ that are connected with the holidays.",
+     "stem": "",
+     "options": {
+      "A": "desire",
+      "B": "affiliate",
+      "C": "prompt",
+      "D": "abstain"
+     }
+    },
+    {
+     "n": 30,
+     "answer": "D",
+     "group": "克漏字",
+     "passage": "Jane and Philip are in general a happily married couple; however, they do struggle over one point of __ (26)__ . They disagree as to how their family should follow the traditions of seasonal holidays. In her opinions, the emphasis __(27)__ presents has made the season lucrative for all those mercenary retailers who overcharge at holiday time. In addition, people should be watching their expenses and avoid unnecessary __(28)__ in their budgets. Therefore, she aspires to keep her home free of all such customs and wants her children to __(29)__ from traditions such as gift-giving and dyeing Easter eggs. Although Philip understands her concerns, he prefers the conventional way of celebrating holidays. He believes that children enjoy the customary __(30)__ that are connected with the holidays.",
+     "stem": "",
+     "options": {
+      "A": "burdens",
+      "B": "sections",
+      "C": "downers",
+      "D": "activities"
+     }
+    },
+    {
+     "n": 31,
+     "answer": "C",
+     "group": "克漏字",
+     "passage": "Memorizing information is something we all need to do. There are __(31)__ ways to improve our memory, one of which is known as mind-mapping. A mind map is like a __(32)__ of thoughts, starting from a single idea, and spreading __(33)__ to new ideas, showing the connections between them. The theory behind it is that by drawing the map on paper, we are made to __(34)__ the information clearly. Later as we look at the mind map again and again, we __(35)__ our knowledge of the information and then memorize it.",
+     "stem": "",
+     "options": {
+      "A": "vulnerable",
+      "B": "inevitable",
+      "C": "various",
+      "D": "identical"
+     }
+    },
+    {
+     "n": 32,
+     "answer": "B",
+     "group": "克漏字",
+     "passage": "Memorizing information is something we all need to do. There are __(31)__ ways to improve our memory, one of which is known as mind-mapping. A mind map is like a __(32)__ of thoughts, starting from a single idea, and spreading __(33)__ to new ideas, showing the connections between them. The theory behind it is that by drawing the map on paper, we are made to __(34)__ the information clearly. Later as we look at the mind map again and again, we __(35)__ our knowledge of the information and then memorize it.",
+     "stem": "",
+     "options": {
+      "A": "drill",
+      "B": "diagram",
+      "C": "frontier",
+      "D": "machine"
+     }
+    },
+    {
+     "n": 33,
+     "answer": "C",
+     "group": "克漏字",
+     "passage": "Memorizing information is something we all need to do. There are __(31)__ ways to improve our memory, one of which is known as mind-mapping. A mind map is like a __(32)__ of thoughts, starting from a single idea, and spreading __(33)__ to new ideas, showing the connections between them. The theory behind it is that by drawing the map on paper, we are made to __(34)__ the information clearly. Later as we look at the mind map again and again, we __(35)__ our knowledge of the information and then memorize it.",
+     "stem": "",
+     "options": {
+      "A": "inside",
+      "B": "over",
+      "C": "outward",
+      "D": "downward"
+     }
+    },
+    {
+     "n": 34,
+     "answer": "D",
+     "group": "克漏字",
+     "passage": "Memorizing information is something we all need to do. There are __(31)__ ways to improve our memory, one of which is known as mind-mapping. A mind map is like a __(32)__ of thoughts, starting from a single idea, and spreading __(33)__ to new ideas, showing the connections between them. The theory behind it is that by drawing the map on paper, we are made to __(34)__ the information clearly. Later as we look at the mind map again and again, we __(35)__ our knowledge of the information and then memorize it.",
+     "stem": "",
+     "options": {
+      "A": "minimize",
+      "B": "isolate",
+      "C": "schedule",
+      "D": "visualize"
+     }
+    },
+    {
+     "n": 35,
+     "answer": "A",
+     "group": "克漏字",
+     "passage": "Memorizing information is something we all need to do. There are __(31)__ ways to improve our memory, one of which is known as mind-mapping. A mind map is like a __(32)__ of thoughts, starting from a single idea, and spreading __(33)__ to new ideas, showing the connections between them. The theory behind it is that by drawing the map on paper, we are made to __(34)__ the information clearly. Later as we look at the mind map again and again, we __(35)__ our knowledge of the information and then memorize it.",
+     "stem": "",
+     "options": {
+      "A": "reinforce",
+      "B": "reverse",
+      "C": "reward",
+      "D": "terminate"
+     }
+    },
+    {
+     "n": 36,
+     "answer": "B",
+     "group": "閱讀測驗",
+     "passage": "Ocean waves represent our planet’s last untapped large-scale renewable energy resource. Over 70 % of the earth’s surface is covered with water. The energy contained within waves has the potential to produce up to 80,000 TWh (1012 watt-hours) of electricity per year—sufficient to meet our global energy demand five times over. No wonder the idea of extracting energy from ocean waves and turning it into electricity is an alluring one. The first serious attempt to do so dates back to 1974, when Stephen Salter of Edinburgh University came up with the idea of “ducks”: house-sized buoys tethered to the sea floor that would convert the swell into rotational motion to drive generators. It failed, as have many subsequent efforts to perform the trick. But the idea of wave power will not go away, and the latest attempt—the brainchild of researchers at Oscilla Power, a firm based in Seattle—is trying to address head-on the reason why previous efforts have foundered. This reason, according to Rahul Shendure, the firm’s boss, is that those efforts took technologies developed for landlubbers (often as components of wind turbines) and tried to modify them for marine use. The consequence was kit too complicated and sensitive for the rough-and-tumble of life on the ocean waves, and also too vulnerable to corrosion. Better, he reckons, to start from scratch. Instead of generators with lots of moving parts, Oscilla is developing ones that barely move at all. These employ a little-explored phenomenon called magnetostriction, in which ferromagnetic materials (things like iron, which can be magnetized strongly) change their shape slightly in the presence of a magnetic field. Like many physical processes, this also works in reverse. Apply stresses or strains to such a material and its magnetic characteristics alter. Do this in the presence of permanent magnets and a coil of wire, such as are found in conventional generators, and it will generate electricity.",
+     "stem": "What are NOT true about ocean waves?",
+     "options": {
+      "A": "They can be turned into electricity.",
+      "B": "Stephen Salter successfully used “ducks” to convert them into electricity.",
+      "C": "There have been attempts to convert them into electricity.",
+      "D": "Oscilla Power is one of the firms to convert them into electricity."
+     }
+    },
+    {
+     "n": 37,
+     "answer": "A",
+     "group": "閱讀測驗",
+     "passage": "Ocean waves represent our planet’s last untapped large-scale renewable energy resource. Over 70 % of the earth’s surface is covered with water. The energy contained within waves has the potential to produce up to 80,000 TWh (1012 watt-hours) of electricity per year—sufficient to meet our global energy demand five times over. No wonder the idea of extracting energy from ocean waves and turning it into electricity is an alluring one. The first serious attempt to do so dates back to 1974, when Stephen Salter of Edinburgh University came up with the idea of “ducks”: house-sized buoys tethered to the sea floor that would convert the swell into rotational motion to drive generators. It failed, as have many subsequent efforts to perform the trick. But the idea of wave power will not go away, and the latest attempt—the brainchild of researchers at Oscilla Power, a firm based in Seattle—is trying to address head-on the reason why previous efforts have foundered. This reason, according to Rahul Shendure, the firm’s boss, is that those efforts took technologies developed for landlubbers (often as components of wind turbines) and tried to modify them for marine use. The consequence was kit too complicated and sensitive for the rough-and-tumble of life on the ocean waves, and also too vulnerable to corrosion. Better, he reckons, to start from scratch. Instead of generators with lots of moving parts, Oscilla is developing ones that barely move at all. These employ a little-explored phenomenon called magnetostriction, in which ferromagnetic materials (things like iron, which can be magnetized strongly) change their shape slightly in the presence of a magnetic field. Like many physical processes, this also works in reverse. Apply stresses or strains to such a material and its magnetic characteristics alter. Do this in the presence of permanent magnets and a coil of wire, such as are found in conventional generators, and it will generate electricity.",
+     "stem": "What is true about Oscilla Power?",
+     "options": {
+      "A": "It is based in Seattle.",
+      "B": "Its boss is Stephen Salter.",
+      "C": "It adopts a similar approach to other previous efforts.",
+      "D": "It copies some of the previous designs."
+     }
+    },
+    {
+     "n": 38,
+     "answer": "D",
+     "group": "閱讀測驗",
+     "passage": "Ocean waves represent our planet’s last untapped large-scale renewable energy resource. Over 70 % of the earth’s surface is covered with water. The energy contained within waves has the potential to produce up to 80,000 TWh (1012 watt-hours) of electricity per year—sufficient to meet our global energy demand five times over. No wonder the idea of extracting energy from ocean waves and turning it into electricity is an alluring one. The first serious attempt to do so dates back to 1974, when Stephen Salter of Edinburgh University came up with the idea of “ducks”: house-sized buoys tethered to the sea floor that would convert the swell into rotational motion to drive generators. It failed, as have many subsequent efforts to perform the trick. But the idea of wave power will not go away, and the latest attempt—the brainchild of researchers at Oscilla Power, a firm based in Seattle—is trying to address head-on the reason why previous efforts have foundered. This reason, according to Rahul Shendure, the firm’s boss, is that those efforts took technologies developed for landlubbers (often as components of wind turbines) and tried to modify them for marine use. The consequence was kit too complicated and sensitive for the rough-and-tumble of life on the ocean waves, and also too vulnerable to corrosion. Better, he reckons, to start from scratch. Instead of generators with lots of moving parts, Oscilla is developing ones that barely move at all. These employ a little-explored phenomenon called magnetostriction, in which ferromagnetic materials (things like iron, which can be magnetized strongly) change their shape slightly in the presence of a magnetic field. Like many physical processes, this also works in reverse. Apply stresses or strains to such a material and its magnetic characteristics alter. Do this in the presence of permanent magnets and a coil of wire, such as are found in conventional generators, and it will generate electricity.",
+     "stem": "What are true about Oscilla’s generators?",
+     "options": {
+      "A": "They have many moving parts.",
+      "B": "They move along with the waves.",
+      "C": "They do not have coils of wire.",
+      "D": "The phenomenon magnetostriction is employed."
+     }
+    },
+    {
+     "n": 39,
+     "answer": "C",
+     "group": "閱讀測驗",
+     "passage": "Ocean waves represent our planet’s last untapped large-scale renewable energy resource. Over 70 % of the earth’s surface is covered with water. The energy contained within waves has the potential to produce up to 80,000 TWh (1012 watt-hours) of electricity per year—sufficient to meet our global energy demand five times over. No wonder the idea of extracting energy from ocean waves and turning it into electricity is an alluring one. The first serious attempt to do so dates back to 1974, when Stephen Salter of Edinburgh University came up with the idea of “ducks”: house-sized buoys tethered to the sea floor that would convert the swell into rotational motion to drive generators. It failed, as have many subsequent efforts to perform the trick. But the idea of wave power will not go away, and the latest attempt—the brainchild of researchers at Oscilla Power, a firm based in Seattle—is trying to address head-on the reason why previous efforts have foundered. This reason, according to Rahul Shendure, the firm’s boss, is that those efforts took technologies developed for landlubbers (often as components of wind turbines) and tried to modify them for marine use. The consequence was kit too complicated and sensitive for the rough-and-tumble of life on the ocean waves, and also too vulnerable to corrosion. Better, he reckons, to start from scratch. Instead of generators with lots of moving parts, Oscilla is developing ones that barely move at all. These employ a little-explored phenomenon called magnetostriction, in which ferromagnetic materials (things like iron, which can be magnetized strongly) change their shape slightly in the presence of a magnetic field. Like many physical processes, this also works in reverse. Apply stresses or strains to such a material and its magnetic characteristics alter. Do this in the presence of permanent magnets and a coil of wire, such as are found in conventional generators, and it will generate electricity.",
+     "stem": "What are the advantages of ocean wave energy?",
+     "options": {
+      "A": "It’s easily available.",
+      "B": "It’s easily tapped.",
+      "C": "It’s renewable.",
+      "D": "It can be recycled."
+     }
+    },
+    {
+     "n": 40,
+     "answer": "B",
+     "group": "閱讀測驗",
+     "passage": "Ocean waves represent our planet’s last untapped large-scale renewable energy resource. Over 70 % of the earth’s surface is covered with water. The energy contained within waves has the potential to produce up to 80,000 TWh (1012 watt-hours) of electricity per year—sufficient to meet our global energy demand five times over. No wonder the idea of extracting energy from ocean waves and turning it into electricity is an alluring one. The first serious attempt to do so dates back to 1974, when Stephen Salter of Edinburgh University came up with the idea of “ducks”: house-sized buoys tethered to the sea floor that would convert the swell into rotational motion to drive generators. It failed, as have many subsequent efforts to perform the trick. But the idea of wave power will not go away, and the latest attempt—the brainchild of researchers at Oscilla Power, a firm based in Seattle—is trying to address head-on the reason why previous efforts have foundered. This reason, according to Rahul Shendure, the firm’s boss, is that those efforts took technologies developed for landlubbers (often as components of wind turbines) and tried to modify them for marine use. The consequence was kit too complicated and sensitive for the rough-and-tumble of life on the ocean waves, and also too vulnerable to corrosion. Better, he reckons, to start from scratch. Instead of generators with lots of moving parts, Oscilla is developing ones that barely move at all. These employ a little-explored phenomenon called magnetostriction, in which ferromagnetic materials (things like iron, which can be magnetized strongly) change their shape slightly in the presence of a magnetic field. Like many physical processes, this also works in reverse. Apply stresses or strains to such a material and its magnetic characteristics alter. Do this in the presence of permanent magnets and a coil of wire, such as are found in conventional generators, and it will generate electricity.",
+     "stem": "Why had the previous ocean wave energy conversion efforts failed?",
+     "options": {
+      "A": "Because they all relied on buoys.",
+      "B": "Because they were vulnerable to corrosion.",
+      "C": "Because they were not modified for marine use.",
+      "D": "Because they were not tethered to the sea floor."
+     }
+    }
+   ]
+  }
+ ],
+ "id": "B-112-1"
+}

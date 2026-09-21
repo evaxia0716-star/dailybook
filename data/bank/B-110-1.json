@@ -1,0 +1,545 @@
+{
+ "exam": "B",
+ "year": 110,
+ "session": 1,
+ "parts": [
+  {
+   "kind": "essay",
+   "subject": "國文",
+   "title": "作文",
+   "minutes": 60,
+   "prompt": "國營事業在 ESG 發展趨勢下的機會與挑戰",
+   "detail": "新型冠狀病毒肺炎疫情促使 ESG(Environment, Social, Governance，即環境、社會、治理)成為全球企業經營管理的關鍵課題，進而帶動企業經營目的，由「股東資本主義」(shareholder capitalism)轉型為「利害關係人資本主義」(stakeholder capitalism)。國營事業肩負政策任務，亦與同類民營事業具有同等之權利與義務，爰如何順應國際 ESG 潮流，將成為未來經營重點。請以「國營事業在 ESG 發展趨勢下的機會與挑戰」為題，寫作論文一篇，並加以闡述。"
+  },
+  {
+   "kind": "mc",
+   "subject": "英文",
+   "title": "英文",
+   "per": 2.5,
+   "minutes": 60,
+   "questions": [
+    {
+     "n": 1,
+     "answer": "B",
+     "group": "字彙",
+     "passage": "",
+     "stem": "In the literary history of the world, two of the greatest love stories have always been very popular and ______ - Shakespeare’s Romeo and Juliet and the Chinese folk tale: The Cowherd and the Weaver Girl.",
+     "options": {
+      "A": "intertwining",
+      "B": "influential",
+      "C": "arguable",
+      "D": "sensible"
+     }
+    },
+    {
+     "n": 2,
+     "answer": "C",
+     "group": "字彙",
+     "passage": "",
+     "stem": "Some critics argue that if people rely on alternative medicine too much, they could delay getting treatment for potentially serious problems or possibly ______ illness.",
+     "options": {
+      "A": "well-known",
+      "B": "eye-catching",
+      "C": "life-threatening",
+      "D": "long-lasting"
+     }
+    },
+    {
+     "n": 3,
+     "answer": "D",
+     "group": "字彙",
+     "passage": "",
+     "stem": "Sarah ______ Marian’s help. She is thankful for her assistance.",
+     "options": {
+      "A": "obtains",
+      "B": "endures",
+      "C": "motivates",
+      "D": "appreciates"
+     }
+    },
+    {
+     "n": 4,
+     "answer": "B",
+     "group": "字彙",
+     "passage": "",
+     "stem": "Police are still ______ how the accident happened. They try to find more clues.",
+     "options": {
+      "A": "puzzling",
+      "B": "investigating",
+      "C": "stalking",
+      "D": "reinforcing"
+     }
+    },
+    {
+     "n": 5,
+     "answer": "D",
+     "group": "字彙",
+     "passage": "",
+     "stem": "______ food does not contain any meat or fish.",
+     "options": {
+      "A": "Country",
+      "B": "Processed",
+      "C": "Greasy",
+      "D": "Vegetarian"
+     }
+    },
+    {
+     "n": 6,
+     "answer": "B",
+     "group": "字彙",
+     "passage": "",
+     "stem": "Simon is ______. He is aggressive and prone to cause an argument.",
+     "options": {
+      "A": "manipulative",
+      "B": "confrontational",
+      "C": "unanimous",
+      "D": "dubious"
+     }
+    },
+    {
+     "n": 7,
+     "answer": "A",
+     "group": "字彙",
+     "passage": "",
+     "stem": "The United Nations Educational, Scientific and Cultural Organization is usually _____ to UNESCO.",
+     "options": {
+      "A": "abbreviated",
+      "B": "associated",
+      "C": "abstracted",
+      "D": "affiliated"
+     }
+    },
+    {
+     "n": 8,
+     "answer": "D",
+     "group": "字彙",
+     "passage": "",
+     "stem": "The extinction of bees would have ______ effects for all other living things on earth.",
+     "options": {
+      "A": "hypocritical",
+      "B": "extroverted",
+      "C": "vulnerable",
+      "D": "catastrophic"
+     }
+    },
+    {
+     "n": 9,
+     "answer": "A",
+     "group": "字彙",
+     "passage": "",
+     "stem": "The delivery person was instructed to handle the ______ package with the utmost care.",
+     "options": {
+      "A": "fragile",
+      "B": "fertile",
+      "C": "famished",
+      "D": "fatigue"
+     }
+    },
+    {
+     "n": 10,
+     "answer": "D",
+     "group": "字彙",
+     "passage": "",
+     "stem": "Everyone has been talking about the hyper-violent thriller that has become a massive ______ ever since it launched on Netflix two weeks ago.",
+     "options": {
+      "A": "cast",
+      "B": "fling",
+      "C": "medium",
+      "D": "hit"
+     }
+    },
+    {
+     "n": 11,
+     "answer": "C",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "The couples make vows and promises to ______ each other in sickness and in health, through good and bad times.",
+     "options": {
+      "A": "embark on",
+      "B": "result in",
+      "C": "care for",
+      "D": "come up with"
+     }
+    },
+    {
+     "n": 12,
+     "answer": "A",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "Medicines should be ______ the reach of children.",
+     "options": {
+      "A": "kept out of",
+      "B": "kept in with",
+      "C": "cut off",
+      "D": "caught out"
+     }
+    },
+    {
+     "n": 13,
+     "answer": "B",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "Nowadays there are plenty of different methods teaching us how to live longer, from impossible diet plans to rigorous yoga routines, ______ suggest that you sleep before 10:00 p.m. and wake up at 4:00 a.m. to practice yoga daily.",
+     "options": {
+      "A": "that",
+      "B": "which",
+      "C": "what",
+      "D": "whom"
+     }
+    },
+    {
+     "n": 14,
+     "answer": "C",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "You don’t have to pay for your first drink; it’s ______.",
+     "options": {
+      "A": "on sale",
+      "B": "in season",
+      "C": "on the house",
+      "D": "on the go"
+     }
+    },
+    {
+     "n": 15,
+     "answer": "B",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "Stress relief is one of the most important factors for a longer life, and ______ suitable methods for releasing stress is important.",
+     "options": {
+      "A": "have",
+      "B": "having",
+      "C": "being having",
+      "D": "has"
+     }
+    },
+    {
+     "n": 16,
+     "answer": "D",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "Simon is working on three jobs while attending school. I hope he does not ______.",
+     "options": {
+      "A": "bring the community to his knees",
+      "B": "go to the end of the earth",
+      "C": "make mountains out of molehills",
+      "D": "bite off more than he can chew"
+     }
+    },
+    {
+     "n": 17,
+     "answer": "C",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "With her loud voice and colorful outfit, Martha always ______. She gets all the attention.",
+     "options": {
+      "A": "cuts it out",
+      "B": "takes a hike",
+      "C": "takes center stage",
+      "D": "stays put"
+     }
+    },
+    {
+     "n": 18,
+     "answer": "A",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "The current white rhino population ______ at only 17,000 to 18,000.",
+     "options": {
+      "A": "is estimated",
+      "B": "estimated",
+      "C": "is estimating",
+      "D": "estimates"
+     }
+    },
+    {
+     "n": 19,
+     "answer": "D",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "I would have bought a house last year if I ______ money then.",
+     "options": {
+      "A": "have",
+      "B": "had",
+      "C": "would have",
+      "D": "had had"
+     }
+    },
+    {
+     "n": 20,
+     "answer": "A",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "Sally likes vegetable in general, and broccoli ______.",
+     "options": {
+      "A": "in particular",
+      "B": "on the other hand",
+      "C": "in truth",
+      "D": "for example"
+     }
+    },
+    {
+     "n": 21,
+     "answer": "D",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "______ no denying that the quality of service is the main standard hotels are judged on.",
+     "options": {
+      "A": "It is",
+      "B": "They are",
+      "C": "There has",
+      "D": "There is"
+     }
+    },
+    {
+     "n": 22,
+     "answer": "A",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "The billionaire is happy to donate one million to the charity because it’s just ______ for him.",
+     "options": {
+      "A": "a drop in the bucket",
+      "B": "a pipe dream",
+      "C": "the lion’s share",
+      "D": "a long shot"
+     }
+    },
+    {
+     "n": 23,
+     "answer": "B",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "If we ______ our trip in advance, we would have booked the seats.",
+     "options": {
+      "A": "should have planned",
+      "B": "had planned",
+      "C": "plan",
+      "D": "planned"
+     }
+    },
+    {
+     "n": 24,
+     "answer": "C",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "It is essential ______ these instructions carefully to ensure his computer system has the technical capabilities he needs to fulfil the task.",
+     "options": {
+      "A": "that he reads",
+      "B": "he reads",
+      "C": "that he read",
+      "D": "he must read"
+     }
+    },
+    {
+     "n": 25,
+     "answer": "A",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "Please note that all applications must be received ______ Friday, December 10. Any late submission will not be accepted.",
+     "options": {
+      "A": "no later than",
+      "B": "no less than",
+      "C": "no more than",
+      "D": "no sooner than"
+     }
+    },
+    {
+     "n": 26,
+     "answer": "C",
+     "group": "克漏字",
+     "passage": "Numerous opportunities exist for people who want to travel abroad to experience a foreign culture. Homestays, study abroad programs, student exchanges, and international competitions all offer rich opportunities for cross-cultural (26) . There are also government-run programs, such as the Peace Corps. . (27) US president John F. Kennedy in 1961, the organization has sent volunteers all over the globe to take part in community enriching programs. Since its inception four decades ago, the Peace Corps has sent 200,000 Americans abroad. They’ve traveled to 139 countries, with the majority serving in Africa and Latin America. Volunteers (28) 27 months of service, which includes pre-service training and time spent overseas. Their assignments may be in one of many fields, such as education, agriculture, health, business, and youth development. Since many of these fields require (29) knowledge, 89% of volunteers hold university (30) .",
+     "stem": "",
+     "options": {
+      "A": "competition",
+      "B": "interview",
+      "C": "interaction",
+      "D": "business"
+     }
+    },
+    {
+     "n": 27,
+     "answer": "A",
+     "group": "克漏字",
+     "passage": "Numerous opportunities exist for people who want to travel abroad to experience a foreign culture. Homestays, study abroad programs, student exchanges, and international competitions all offer rich opportunities for cross-cultural (26) . There are also government-run programs, such as the Peace Corps. . (27) US president John F. Kennedy in 1961, the organization has sent volunteers all over the globe to take part in community enriching programs. Since its inception four decades ago, the Peace Corps has sent 200,000 Americans abroad. They’ve traveled to 139 countries, with the majority serving in Africa and Latin America. Volunteers (28) 27 months of service, which includes pre-service training and time spent overseas. Their assignments may be in one of many fields, such as education, agriculture, health, business, and youth development. Since many of these fields require (29) knowledge, 89% of volunteers hold university (30) .",
+     "stem": "",
+     "options": {
+      "A": "Established by",
+      "B": "Declared by",
+      "C": "Establishing",
+      "D": "Announced"
+     }
+    },
+    {
+     "n": 28,
+     "answer": "B",
+     "group": "克漏字",
+     "passage": "Numerous opportunities exist for people who want to travel abroad to experience a foreign culture. Homestays, study abroad programs, student exchanges, and international competitions all offer rich opportunities for cross-cultural (26) . There are also government-run programs, such as the Peace Corps. . (27) US president John F. Kennedy in 1961, the organization has sent volunteers all over the globe to take part in community enriching programs. Since its inception four decades ago, the Peace Corps has sent 200,000 Americans abroad. They’ve traveled to 139 countries, with the majority serving in Africa and Latin America. Volunteers (28) 27 months of service, which includes pre-service training and time spent overseas. Their assignments may be in one of many fields, such as education, agriculture, health, business, and youth development. Since many of these fields require (29) knowledge, 89% of volunteers hold university (30) .",
+     "stem": "",
+     "options": {
+      "A": "make up",
+      "B": "commit to",
+      "C": "consist of",
+      "D": "depend on"
+     }
+    },
+    {
+     "n": 29,
+     "answer": "D",
+     "group": "克漏字",
+     "passage": "Numerous opportunities exist for people who want to travel abroad to experience a foreign culture. Homestays, study abroad programs, student exchanges, and international competitions all offer rich opportunities for cross-cultural (26) . There are also government-run programs, such as the Peace Corps. . (27) US president John F. Kennedy in 1961, the organization has sent volunteers all over the globe to take part in community enriching programs. Since its inception four decades ago, the Peace Corps has sent 200,000 Americans abroad. They’ve traveled to 139 countries, with the majority serving in Africa and Latin America. Volunteers (28) 27 months of service, which includes pre-service training and time spent overseas. Their assignments may be in one of many fields, such as education, agriculture, health, business, and youth development. Since many of these fields require (29) knowledge, 89% of volunteers hold university (30) .",
+     "stem": "",
+     "options": {
+      "A": "general",
+      "B": "personal",
+      "C": "political",
+      "D": "specialized"
+     }
+    },
+    {
+     "n": 30,
+     "answer": "B",
+     "group": "克漏字",
+     "passage": "Numerous opportunities exist for people who want to travel abroad to experience a foreign culture. Homestays, study abroad programs, student exchanges, and international competitions all offer rich opportunities for cross-cultural (26) . There are also government-run programs, such as the Peace Corps. . (27) US president John F. Kennedy in 1961, the organization has sent volunteers all over the globe to take part in community enriching programs. Since its inception four decades ago, the Peace Corps has sent 200,000 Americans abroad. They’ve traveled to 139 countries, with the majority serving in Africa and Latin America. Volunteers (28) 27 months of service, which includes pre-service training and time spent overseas. Their assignments may be in one of many fields, such as education, agriculture, health, business, and youth development. Since many of these fields require (29) knowledge, 89% of volunteers hold university (30) .",
+     "stem": "",
+     "options": {
+      "A": "documents",
+      "B": "degrees",
+      "C": "papers",
+      "D": "proofs"
+     }
+    },
+    {
+     "n": 31,
+     "answer": "C",
+     "group": "克漏字",
+     "passage": "The Stanford Marshmallow experiment is a psychological experiment to (31) children’s ability to control their impulses. The idea was to see (32) the difference was between children who managed to control their impulses and those who could not. The results showed that those who succeeded in (33) . the immediate temptation to eat the marshmallow were able to perform better at exams and (34) in other aspects of their lives than those who had grabbed the marshmallow directly. The researchers were also able to show that the impulsive group also seemed to suffer more (35) stress and problems in relationship in later life.",
+     "stem": "",
+     "options": {
+      "A": "look away",
+      "B": "look after",
+      "C": "look into",
+      "D": "look for"
+     }
+    },
+    {
+     "n": 32,
+     "answer": "A",
+     "group": "克漏字",
+     "passage": "The Stanford Marshmallow experiment is a psychological experiment to (31) children’s ability to control their impulses. The idea was to see (32) the difference was between children who managed to control their impulses and those who could not. The results showed that those who succeeded in (33) . the immediate temptation to eat the marshmallow were able to perform better at exams and (34) in other aspects of their lives than those who had grabbed the marshmallow directly. The researchers were also able to show that the impulsive group also seemed to suffer more (35) stress and problems in relationship in later life.",
+     "stem": "",
+     "options": {
+      "A": "what",
+      "B": "how",
+      "C": "where",
+      "D": "in which"
+     }
+    },
+    {
+     "n": 33,
+     "answer": "A",
+     "group": "克漏字",
+     "passage": "The Stanford Marshmallow experiment is a psychological experiment to (31) children’s ability to control their impulses. The idea was to see (32) the difference was between children who managed to control their impulses and those who could not. The results showed that those who succeeded in (33) . the immediate temptation to eat the marshmallow were able to perform better at exams and (34) in other aspects of their lives than those who had grabbed the marshmallow directly. The researchers were also able to show that the impulsive group also seemed to suffer more (35) stress and problems in relationship in later life.",
+     "stem": "",
+     "options": {
+      "A": "resisting",
+      "B": "accepting",
+      "C": "identifying",
+      "D": "insisting"
+     }
+    },
+    {
+     "n": 34,
+     "answer": "B",
+     "group": "克漏字",
+     "passage": "The Stanford Marshmallow experiment is a psychological experiment to (31) children’s ability to control their impulses. The idea was to see (32) the difference was between children who managed to control their impulses and those who could not. The results showed that those who succeeded in (33) . the immediate temptation to eat the marshmallow were able to perform better at exams and (34) in other aspects of their lives than those who had grabbed the marshmallow directly. The researchers were also able to show that the impulsive group also seemed to suffer more (35) stress and problems in relationship in later life.",
+     "stem": "",
+     "options": {
+      "A": "being more stable",
+      "B": "be more stable",
+      "C": "was more stable",
+      "D": "were more stable"
+     }
+    },
+    {
+     "n": 35,
+     "answer": "C",
+     "group": "克漏字",
+     "passage": "The Stanford Marshmallow experiment is a psychological experiment to (31) children’s ability to control their impulses. The idea was to see (32) the difference was between children who managed to control their impulses and those who could not. The results showed that those who succeeded in (33) . the immediate temptation to eat the marshmallow were able to perform better at exams and (34) in other aspects of their lives than those who had grabbed the marshmallow directly. The researchers were also able to show that the impulsive group also seemed to suffer more (35) stress and problems in relationship in later life.",
+     "stem": "",
+     "options": {
+      "A": "of",
+      "B": "with",
+      "C": "from",
+      "D": "in"
+     }
+    },
+    {
+     "n": 36,
+     "answer": "C",
+     "group": "閱讀測驗",
+     "passage": "Recent biological research indicates that there is a biochemical basis to love, which explains why people in love feel as if they were in a more beautiful world. Psychologists such as Dr. Elaine Hatfield, Robert Sternberg and Zick Rubin posit that love consists of three or more stages. The three main stages are lust, attraction, and attachment, while some of the other stages are intimacy, trust, and jealousy. Each stage is ruled or initiated by specific hormonal controllers. In their studies, every love passes through some of these stages and occurs due to the mediation of certain molecules in these specific chemical controllers. Biological research has shown that the hormones dominant in the different phases include testosterone and estrogen (the sexual hormones); dopamine, norepinephrine and serotonin (these are the “pleasure chemicals” - the hormones invoking feelings of pleasure and excitement); and oxytocin (the “cuddle chemical” - the hormone producing feelings of attachment to another person). For example, in the second phase of attraction, when people have the feeling of being in love, the little molecule phenylethylamine (known as PEA), controlling the love chemicals dopamine and noreinephrine, can cause feelings of elation, exhilaration and euphoria. People feel excited and fulfilled. Additionally, biological anthropologist Helen Fisher, an expert on romantic love, discusses what happens in the brain when people are in love and proposes that there is a dramatic increase in the amount of dopamine and norepinephrine present in the brain when one first becomes infatuated with another person.",
+     "stem": "What is the passage mainly about?",
+     "options": {
+      "A": "Variations of love",
+      "B": "Love in different cultures",
+      "C": "Chemistry of love",
+      "D": "Psychological effects of love"
+     }
+    },
+    {
+     "n": 37,
+     "answer": "D",
+     "group": "閱讀測驗",
+     "passage": "Recent biological research indicates that there is a biochemical basis to love, which explains why people in love feel as if they were in a more beautiful world. Psychologists such as Dr. Elaine Hatfield, Robert Sternberg and Zick Rubin posit that love consists of three or more stages. The three main stages are lust, attraction, and attachment, while some of the other stages are intimacy, trust, and jealousy. Each stage is ruled or initiated by specific hormonal controllers. In their studies, every love passes through some of these stages and occurs due to the mediation of certain molecules in these specific chemical controllers. Biological research has shown that the hormones dominant in the different phases include testosterone and estrogen (the sexual hormones); dopamine, norepinephrine and serotonin (these are the “pleasure chemicals” - the hormones invoking feelings of pleasure and excitement); and oxytocin (the “cuddle chemical” - the hormone producing feelings of attachment to another person). For example, in the second phase of attraction, when people have the feeling of being in love, the little molecule phenylethylamine (known as PEA), controlling the love chemicals dopamine and noreinephrine, can cause feelings of elation, exhilaration and euphoria. People feel excited and fulfilled. Additionally, biological anthropologist Helen Fisher, an expert on romantic love, discusses what happens in the brain when people are in love and proposes that there is a dramatic increase in the amount of dopamine and norepinephrine present in the brain when one first becomes infatuated with another person.",
+     "stem": "According to the researchers, which of the following chemicals is most closely related to the feeling of being in love?",
+     "options": {
+      "A": "testosterone",
+      "B": "oxytocin",
+      "C": "estrogen",
+      "D": "dopamine"
+     }
+    },
+    {
+     "n": 38,
+     "answer": "C",
+     "group": "閱讀測驗",
+     "passage": "Recent biological research indicates that there is a biochemical basis to love, which explains why people in love feel as if they were in a more beautiful world. Psychologists such as Dr. Elaine Hatfield, Robert Sternberg and Zick Rubin posit that love consists of three or more stages. The three main stages are lust, attraction, and attachment, while some of the other stages are intimacy, trust, and jealousy. Each stage is ruled or initiated by specific hormonal controllers. In their studies, every love passes through some of these stages and occurs due to the mediation of certain molecules in these specific chemical controllers. Biological research has shown that the hormones dominant in the different phases include testosterone and estrogen (the sexual hormones); dopamine, norepinephrine and serotonin (these are the “pleasure chemicals” - the hormones invoking feelings of pleasure and excitement); and oxytocin (the “cuddle chemical” - the hormone producing feelings of attachment to another person). For example, in the second phase of attraction, when people have the feeling of being in love, the little molecule phenylethylamine (known as PEA), controlling the love chemicals dopamine and noreinephrine, can cause feelings of elation, exhilaration and euphoria. People feel excited and fulfilled. Additionally, biological anthropologist Helen Fisher, an expert on romantic love, discusses what happens in the brain when people are in love and proposes that there is a dramatic increase in the amount of dopamine and norepinephrine present in the brain when one first becomes infatuated with another person.",
+     "stem": "Which of the following is closest in meaning to the word “attachment”?",
+     "options": {
+      "A": "assistance",
+      "B": "concentration",
+      "C": "connection",
+      "D": "enclosure"
+     }
+    },
+    {
+     "n": 39,
+     "answer": "B",
+     "group": "閱讀測驗",
+     "passage": "Recent biological research indicates that there is a biochemical basis to love, which explains why people in love feel as if they were in a more beautiful world. Psychologists such as Dr. Elaine Hatfield, Robert Sternberg and Zick Rubin posit that love consists of three or more stages. The three main stages are lust, attraction, and attachment, while some of the other stages are intimacy, trust, and jealousy. Each stage is ruled or initiated by specific hormonal controllers. In their studies, every love passes through some of these stages and occurs due to the mediation of certain molecules in these specific chemical controllers. Biological research has shown that the hormones dominant in the different phases include testosterone and estrogen (the sexual hormones); dopamine, norepinephrine and serotonin (these are the “pleasure chemicals” - the hormones invoking feelings of pleasure and excitement); and oxytocin (the “cuddle chemical” - the hormone producing feelings of attachment to another person). For example, in the second phase of attraction, when people have the feeling of being in love, the little molecule phenylethylamine (known as PEA), controlling the love chemicals dopamine and noreinephrine, can cause feelings of elation, exhilaration and euphoria. People feel excited and fulfilled. Additionally, biological anthropologist Helen Fisher, an expert on romantic love, discusses what happens in the brain when people are in love and proposes that there is a dramatic increase in the amount of dopamine and norepinephrine present in the brain when one first becomes infatuated with another person.",
+     "stem": "According to the scientists, which of the following about how love occurs is NOT true?",
+     "options": {
+      "A": "Every love passes through three or more stages - lust, attraction, attachment, etc.",
+      "B": "PEA is a hormone our bodies produce that promotes mutual feelings of connection and bonding.",
+      "C": "There is an increase in the amount of dopamine present in the brain when people are in love.",
+      "D": "People’s brains are influenced by hormones and chemicals that cause them to feel the way they feel."
+     }
+    },
+    {
+     "n": 40,
+     "answer": "B",
+     "group": "閱讀測驗",
+     "passage": "Recent biological research indicates that there is a biochemical basis to love, which explains why people in love feel as if they were in a more beautiful world. Psychologists such as Dr. Elaine Hatfield, Robert Sternberg and Zick Rubin posit that love consists of three or more stages. The three main stages are lust, attraction, and attachment, while some of the other stages are intimacy, trust, and jealousy. Each stage is ruled or initiated by specific hormonal controllers. In their studies, every love passes through some of these stages and occurs due to the mediation of certain molecules in these specific chemical controllers. Biological research has shown that the hormones dominant in the different phases include testosterone and estrogen (the sexual hormones); dopamine, norepinephrine and serotonin (these are the “pleasure chemicals” - the hormones invoking feelings of pleasure and excitement); and oxytocin (the “cuddle chemical” - the hormone producing feelings of attachment to another person). For example, in the second phase of attraction, when people have the feeling of being in love, the little molecule phenylethylamine (known as PEA), controlling the love chemicals dopamine and noreinephrine, can cause feelings of elation, exhilaration and euphoria. People feel excited and fulfilled. Additionally, biological anthropologist Helen Fisher, an expert on romantic love, discusses what happens in the brain when people are in love and proposes that there is a dramatic increase in the amount of dopamine and norepinephrine present in the brain when one first becomes infatuated with another person.",
+     "stem": "What does the passage imply about love?",
+     "options": {
+      "A": "Most people are not controlled by love.",
+      "B": "Science may help explain how love takes place.",
+      "C": "Love can be expressed precisely by words or actions.",
+      "D": "People can easily find the right person everywhere."
+     }
+    }
+   ]
+  }
+ ],
+ "id": "B-110-1"
+}

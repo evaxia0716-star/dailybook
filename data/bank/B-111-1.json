@@ -1,0 +1,545 @@
+{
+ "exam": "B",
+ "year": 111,
+ "session": 1,
+ "parts": [
+  {
+   "kind": "essay",
+   "subject": "國文",
+   "title": "作文",
+   "minutes": 60,
+   "prompt": "如何建立國營事業企業韌性之我見",
+   "detail": "近年來對於建立企業韌性(resilience)日益受到重視，所謂「企業韌性」，簡言之，就是企業透過風險管控，強化其作業流程、內控機制及對外在環境的感知與想像，當面對衝擊時，能夠保有彈性和調適的能力，不僅可避免(或減少)損失，度過危機，更進而化危機為轉機，並從中獲得利益，使企業得以持續成長。請以「如何建立國營事業企業韌性之我見」為題，寫作論文一篇，並加以闡述。"
+  },
+  {
+   "kind": "mc",
+   "subject": "英文",
+   "title": "英文",
+   "per": 2.5,
+   "minutes": 60,
+   "questions": [
+    {
+     "n": 1,
+     "answer": "C",
+     "group": "字彙",
+     "passage": "",
+     "stem": "Different scientists, analyzing the same data, may arrive at wholly different and sometimes ______ interpretations.",
+     "options": {
+      "A": "unsuitable",
+      "B": "unintelligible",
+      "C": "conflicting",
+      "D": "invalid"
+     }
+    },
+    {
+     "n": 2,
+     "answer": "A",
+     "group": "字彙",
+     "passage": "",
+     "stem": "In some developing countries, the sales of imported brands are severely affected by the widespread availability of cheaper ______ goods that look almost exactly the same.",
+     "options": {
+      "A": "counterfeit",
+      "B": "smuggled",
+      "C": "circulated",
+      "D": "predominated"
+     }
+    },
+    {
+     "n": 3,
+     "answer": "D",
+     "group": "字彙",
+     "passage": "",
+     "stem": "The French philosopher Jean-Paul Sartre’s ______ writing theme was that man is alone in the world and has to shape his own life.",
+     "options": {
+      "A": "phenomenal",
+      "B": "observant",
+      "C": "superficial",
+      "D": "dominant"
+     }
+    },
+    {
+     "n": 4,
+     "answer": "D",
+     "group": "字彙",
+     "passage": "",
+     "stem": "Some safe ______ methods are recommended by doctors to get fertility control.",
+     "options": {
+      "A": "counteractive",
+      "B": "contradictory",
+      "C": "contrastive",
+      "D": "contraceptive"
+     }
+    },
+    {
+     "n": 5,
+     "answer": "A",
+     "group": "字彙",
+     "passage": "",
+     "stem": "The prices of goods are soaring, and the government is trying very hard to fight the ______.",
+     "options": {
+      "A": "inflation",
+      "B": "deflation",
+      "C": "reflation",
+      "D": "conflation"
+     }
+    },
+    {
+     "n": 6,
+     "answer": "C",
+     "group": "字彙",
+     "passage": "",
+     "stem": "His interpersonal relationship does not take place in physical reality. Most of his friends are ______.",
+     "options": {
+      "A": "fantastic",
+      "B": "realistic",
+      "C": "imaginary",
+      "D": "imaginative"
+     }
+    },
+    {
+     "n": 7,
+     "answer": "B",
+     "group": "字彙",
+     "passage": "",
+     "stem": "John lost his life in a ______ effort to save the child from drowning.",
+     "options": {
+      "A": "consequential",
+      "B": "conscientious",
+      "C": "contemporary",
+      "D": "contemptuous"
+     }
+    },
+    {
+     "n": 8,
+     "answer": "C",
+     "group": "字彙",
+     "passage": "",
+     "stem": "How did a man of so little personal ______ get to be prime minister?",
+     "options": {
+      "A": "aversion",
+      "B": "affection",
+      "C": "charisma",
+      "D": "affliction"
+     }
+    },
+    {
+     "n": 9,
+     "answer": "A",
+     "group": "字彙",
+     "passage": "",
+     "stem": "She's been in the ______ recently, following her heated debate on some political issues.",
+     "options": {
+      "A": "limelight",
+      "B": "daylight",
+      "C": "fanlight",
+      "D": "apple light"
+     }
+    },
+    {
+     "n": 10,
+     "answer": "A",
+     "group": "字彙",
+     "passage": "",
+     "stem": "I didn't ______ my high school classmate until she introduced herself to me at the conference.",
+     "options": {
+      "A": "recognize",
+      "B": "forget",
+      "C": "overlook",
+      "D": "neglect"
+     }
+    },
+    {
+     "n": 11,
+     "answer": "D",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "The suspect denies ______ into the house, but there is quite enough convincing evidence ______ him guilty.",
+     "options": {
+      "A": "to break, proving",
+      "B": "break, proven",
+      "C": "broken, having proven",
+      "D": "breaking, to prove"
+     }
+    },
+    {
+     "n": 12,
+     "answer": "C",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "Each of them ______ to bring ______ own book to the next class.",
+     "options": {
+      "A": "are, his",
+      "B": "is, their",
+      "C": "is, his",
+      "D": "are, them"
+     }
+    },
+    {
+     "n": 13,
+     "answer": "A",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "I’m not surprised that they are good students. They do nothing but ______.",
+     "options": {
+      "A": "study",
+      "B": "studied",
+      "C": "studying",
+      "D": "to study"
+     }
+    },
+    {
+     "n": 14,
+     "answer": "D",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "______, inform their parents.",
+     "options": {
+      "A": "The children misbehave",
+      "B": "Would the children misbehave",
+      "C": "Were the children to misbehave",
+      "D": "Should the children misbehave"
+     }
+    },
+    {
+     "n": 15,
+     "answer": "B",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "Supposing no one ______, what would you do with all the food you have prepared?",
+     "options": {
+      "A": "comes",
+      "B": "came",
+      "C": "had come",
+      "D": "would come"
+     }
+    },
+    {
+     "n": 16,
+     "answer": "D",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "Adam has a lot of experience ______ teaching young children; moreover, he has considerable patience ______ them.",
+     "options": {
+      "A": "at, from",
+      "B": "for, for",
+      "C": "with, towards",
+      "D": "in, with"
+     }
+    },
+    {
+     "n": 17,
+     "answer": "C",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "If Kim thinks that I’m going to let her copy my math homework, she’s ______.",
+     "options": {
+      "A": "beating around the bush",
+      "B": "getting stuck between a rock and a hard place",
+      "C": "barking up at the wrong tree",
+      "D": "standing up for herself"
+     }
+    },
+    {
+     "n": 18,
+     "answer": "C",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "I cannot ______ my new boss. He is too demanding.",
+     "options": {
+      "A": "get up",
+      "B": "get over",
+      "C": "get on with",
+      "D": "get out"
+     }
+    },
+    {
+     "n": 19,
+     "answer": "D",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "As a customer service representative, he has to deal with complaints from clients, ______ are hard to please.",
+     "options": {
+      "A": "many of who",
+      "B": "many of which",
+      "C": "many of them",
+      "D": "of whom many"
+     }
+    },
+    {
+     "n": 20,
+     "answer": "D",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "We feel very sorry to cancel the appointment ______, and we will do everything within our power to make up for it.",
+     "options": {
+      "A": "at your earliest convenience",
+      "B": "at your own risk",
+      "C": "for your own trouble",
+      "D": "on such short notice"
+     }
+    },
+    {
+     "n": 21,
+     "answer": "A",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "The monthly rent is the same ______ how many occupants there are.",
+     "options": {
+      "A": "irrespective of",
+      "B": "despite of",
+      "C": "according to",
+      "D": "in proportion as"
+     }
+    },
+    {
+     "n": 22,
+     "answer": "D",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "Animal rights groups are opposed ______ health and beauty products on animals.",
+     "options": {
+      "A": "to test",
+      "B": "testing",
+      "C": "tests of",
+      "D": "to testing"
+     }
+    },
+    {
+     "n": 23,
+     "answer": "C",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "A number of automobile ______ agencies are located on the lower level of the airport.",
+     "options": {
+      "A": "renting",
+      "B": "rents",
+      "C": "rental",
+      "D": "rented"
+     }
+    },
+    {
+     "n": 24,
+     "answer": "B",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "Some construction firms look for ways to ______ in order to earn a greater profit.",
+     "options": {
+      "A": "cut short",
+      "B": "cut corners",
+      "C": "cut off",
+      "D": "cut down"
+     }
+    },
+    {
+     "n": 25,
+     "answer": "B",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "You should have avoided ______ her divorce.",
+     "options": {
+      "A": "to talk about",
+      "B": "mentioning",
+      "C": "to mention",
+      "D": "being mentioned"
+     }
+    },
+    {
+     "n": 26,
+     "answer": "B",
+     "group": "克漏字",
+     "passage": "The antismoking lobby succeeded __(26)__ people knew without being told that cigarettes were killing their friends and families. They demanded hard data about the risks of breathing in secondhand smoke. They disbelieved glib assurances that cigarettes were __(27)__ and that the right to smoke __(28)__ the right to breathe clean air. More important, antismoking activists changed our idea of what smoking is all about. They uncooled the cigarette companies and their brands, forever __(29)__ smoking and death in all of our minds. It was, perhaps, the first victory in the fight for our mental environment—an ecology as rife with __(30)__ as any befouled river or cloud of smog. We long ago learned to watch what we dump into nature or absorb into our bodies; now we need to be equally careful about what we take into our minds.",
+     "stem": "",
+     "options": {
+      "A": "that",
+      "B": "because",
+      "C": "although",
+      "D": "if"
+     }
+    },
+    {
+     "n": 27,
+     "answer": "A",
+     "group": "克漏字",
+     "passage": "The antismoking lobby succeeded __(26)__ people knew without being told that cigarettes were killing their friends and families. They demanded hard data about the risks of breathing in secondhand smoke. They disbelieved glib assurances that cigarettes were __(27)__ and that the right to smoke __(28)__ the right to breathe clean air. More important, antismoking activists changed our idea of what smoking is all about. They uncooled the cigarette companies and their brands, forever __(29)__ smoking and death in all of our minds. It was, perhaps, the first victory in the fight for our mental environment—an ecology as rife with __(30)__ as any befouled river or cloud of smog. We long ago learned to watch what we dump into nature or absorb into our bodies; now we need to be equally careful about what we take into our minds.",
+     "stem": "",
+     "options": {
+      "A": "safe",
+      "B": "dangerous",
+      "C": "difficult",
+      "D": "commercial"
+     }
+    },
+    {
+     "n": 28,
+     "answer": "A",
+     "group": "克漏字",
+     "passage": "The antismoking lobby succeeded __(26)__ people knew without being told that cigarettes were killing their friends and families. They demanded hard data about the risks of breathing in secondhand smoke. They disbelieved glib assurances that cigarettes were __(27)__ and that the right to smoke __(28)__ the right to breathe clean air. More important, antismoking activists changed our idea of what smoking is all about. They uncooled the cigarette companies and their brands, forever __(29)__ smoking and death in all of our minds. It was, perhaps, the first victory in the fight for our mental environment—an ecology as rife with __(30)__ as any befouled river or cloud of smog. We long ago learned to watch what we dump into nature or absorb into our bodies; now we need to be equally careful about what we take into our minds.",
+     "stem": "",
+     "options": {
+      "A": "superseded",
+      "B": "superimposed",
+      "C": "substituted",
+      "D": "outnumbered"
+     }
+    },
+    {
+     "n": 29,
+     "answer": "C",
+     "group": "克漏字",
+     "passage": "The antismoking lobby succeeded __(26)__ people knew without being told that cigarettes were killing their friends and families. They demanded hard data about the risks of breathing in secondhand smoke. They disbelieved glib assurances that cigarettes were __(27)__ and that the right to smoke __(28)__ the right to breathe clean air. More important, antismoking activists changed our idea of what smoking is all about. They uncooled the cigarette companies and their brands, forever __(29)__ smoking and death in all of our minds. It was, perhaps, the first victory in the fight for our mental environment—an ecology as rife with __(30)__ as any befouled river or cloud of smog. We long ago learned to watch what we dump into nature or absorb into our bodies; now we need to be equally careful about what we take into our minds.",
+     "stem": "",
+     "options": {
+      "A": "connect",
+      "B": "connected",
+      "C": "connecting",
+      "D": "connective"
+     }
+    },
+    {
+     "n": 30,
+     "answer": "D",
+     "group": "克漏字",
+     "passage": "The antismoking lobby succeeded __(26)__ people knew without being told that cigarettes were killing their friends and families. They demanded hard data about the risks of breathing in secondhand smoke. They disbelieved glib assurances that cigarettes were __(27)__ and that the right to smoke __(28)__ the right to breathe clean air. More important, antismoking activists changed our idea of what smoking is all about. They uncooled the cigarette companies and their brands, forever __(29)__ smoking and death in all of our minds. It was, perhaps, the first victory in the fight for our mental environment—an ecology as rife with __(30)__ as any befouled river or cloud of smog. We long ago learned to watch what we dump into nature or absorb into our bodies; now we need to be equally careful about what we take into our minds.",
+     "stem": "",
+     "options": {
+      "A": "creatures",
+      "B": "illnesses",
+      "C": "myths",
+      "D": "pollutants"
+     }
+    },
+    {
+     "n": 31,
+     "answer": "C",
+     "group": "克漏字",
+     "passage": "Insomnia, also known as sleeplessness, is a __(31)__ disorder in which people have trouble sleeping. They may have difficulty falling asleep, or staying asleep __(32)__ desired. Insomnia is typically followed by daytime sleepiness, low energy, __(33)__, and a depressed mood. It may result in an increased risk of motor vehicle collisions, as well as problems __(34)__. Insomnia can be short term, lasting for days or weeks, or long term, lasting more than a month. The concept of the word insomnia has two possibilities: insomnia disorder and insomnia symptoms, and many __(35)__ of randomized controlled trials and systematic reviews often underreport on which of these two possibilities the word insomnia refers to.",
+     "stem": "",
+     "options": {
+      "A": "sleeping",
+      "B": "sleepy",
+      "C": "sleep",
+      "D": "asleep"
+     }
+    },
+    {
+     "n": 32,
+     "answer": "A",
+     "group": "克漏字",
+     "passage": "Insomnia, also known as sleeplessness, is a __(31)__ disorder in which people have trouble sleeping. They may have difficulty falling asleep, or staying asleep __(32)__ desired. Insomnia is typically followed by daytime sleepiness, low energy, __(33)__, and a depressed mood. It may result in an increased risk of motor vehicle collisions, as well as problems __(34)__. Insomnia can be short term, lasting for days or weeks, or long term, lasting more than a month. The concept of the word insomnia has two possibilities: insomnia disorder and insomnia symptoms, and many __(35)__ of randomized controlled trials and systematic reviews often underreport on which of these two possibilities the word insomnia refers to.",
+     "stem": "",
+     "options": {
+      "A": "as long as",
+      "B": "as soon as",
+      "C": "as more as",
+      "D": "no sooner than"
+     }
+    },
+    {
+     "n": 33,
+     "answer": "C",
+     "group": "克漏字",
+     "passage": "Insomnia, also known as sleeplessness, is a __(31)__ disorder in which people have trouble sleeping. They may have difficulty falling asleep, or staying asleep __(32)__ desired. Insomnia is typically followed by daytime sleepiness, low energy, __(33)__, and a depressed mood. It may result in an increased risk of motor vehicle collisions, as well as problems __(34)__. Insomnia can be short term, lasting for days or weeks, or long term, lasting more than a month. The concept of the word insomnia has two possibilities: insomnia disorder and insomnia symptoms, and many __(35)__ of randomized controlled trials and systematic reviews often underreport on which of these two possibilities the word insomnia refers to.",
+     "stem": "",
+     "options": {
+      "A": "irritating",
+      "B": "irritable",
+      "C": "irritability",
+      "D": "irritative"
+     }
+    },
+    {
+     "n": 34,
+     "answer": "C",
+     "group": "克漏字",
+     "passage": "Insomnia, also known as sleeplessness, is a __(31)__ disorder in which people have trouble sleeping. They may have difficulty falling asleep, or staying asleep __(32)__ desired. Insomnia is typically followed by daytime sleepiness, low energy, __(33)__, and a depressed mood. It may result in an increased risk of motor vehicle collisions, as well as problems __(34)__. Insomnia can be short term, lasting for days or weeks, or long term, lasting more than a month. The concept of the word insomnia has two possibilities: insomnia disorder and insomnia symptoms, and many __(35)__ of randomized controlled trials and systematic reviews often underreport on which of these two possibilities the word insomnia refers to.",
+     "stem": "",
+     "options": {
+      "A": "study and to work",
+      "B": "studying for work",
+      "C": "focusing and learning",
+      "D": "focus and learn"
+     }
+    },
+    {
+     "n": 35,
+     "answer": "A",
+     "group": "克漏字",
+     "passage": "Insomnia, also known as sleeplessness, is a __(31)__ disorder in which people have trouble sleeping. They may have difficulty falling asleep, or staying asleep __(32)__ desired. Insomnia is typically followed by daytime sleepiness, low energy, __(33)__, and a depressed mood. It may result in an increased risk of motor vehicle collisions, as well as problems __(34)__. Insomnia can be short term, lasting for days or weeks, or long term, lasting more than a month. The concept of the word insomnia has two possibilities: insomnia disorder and insomnia symptoms, and many __(35)__ of randomized controlled trials and systematic reviews often underreport on which of these two possibilities the word insomnia refers to.",
+     "stem": "",
+     "options": {
+      "A": "abstracts",
+      "B": "subtracts",
+      "C": "distracts",
+      "D": "attracts"
+     }
+    },
+    {
+     "n": 36,
+     "answer": "B",
+     "group": "閱讀測驗",
+     "passage": "For a long time, many psychologists embraced a victim narrative about trauma, believing that severe stress causes long-lasting and perhaps irreparable damage to one's psyche and health. In 1980, post-traumatic stress disorder (PTSD) was added to the list of mental disorders and has since received a lot of attention in the media and among ordinary individuals trying to understand what happens to people in the wake of tragic life events. Yet psychologists now know that only a small percentage of people develop the full-blown disorder while, on average, anywhere from one half to two-thirds of trauma survivors exhibit what's known as post-traumatic growth. After a crisis, most people acquire a newfound sense of purpose, develop deeper relationships, have a greater appreciation of life, and report other benefits. In American culture, when people are feeling depressed or anxious, they are often advised to do what makes them happy; they are encouraged to distract themselves from bad news and difficult feelings, to limit their time on social media and to exercise. However, the happy feelings one gets by doing pleasant things fade fast, and soon the sad mood takes over, plunging one into a deeper abyss of melancholy. A better strategy to cope with trauma has to do with meaning-seeking. When people search for meaning, they often do not feel happy, because the things that make our lives meaningful, like volunteering or working, are stressful and require effort. But months later, the meaning seekers not only reported fewer negative moods but also felt more enriched, inspired and part of something greater than themselves. Therefore, although none of us can avoid suffering, we can still learn to suffer well.",
+     "stem": "What is this passage mainly about?",
+     "options": {
+      "A": "PTSD as a widespread mental disorder.",
+      "B": "A good way to deal with trauma.",
+      "C": "How to find happiness in life.",
+      "D": "Suffering as a meaning of life."
+     }
+    },
+    {
+     "n": 37,
+     "answer": "C",
+     "group": "閱讀測驗",
+     "passage": "For a long time, many psychologists embraced a victim narrative about trauma, believing that severe stress causes long-lasting and perhaps irreparable damage to one's psyche and health. In 1980, post-traumatic stress disorder (PTSD) was added to the list of mental disorders and has since received a lot of attention in the media and among ordinary individuals trying to understand what happens to people in the wake of tragic life events. Yet psychologists now know that only a small percentage of people develop the full-blown disorder while, on average, anywhere from one half to two-thirds of trauma survivors exhibit what's known as post-traumatic growth. After a crisis, most people acquire a newfound sense of purpose, develop deeper relationships, have a greater appreciation of life, and report other benefits. In American culture, when people are feeling depressed or anxious, they are often advised to do what makes them happy; they are encouraged to distract themselves from bad news and difficult feelings, to limit their time on social media and to exercise. However, the happy feelings one gets by doing pleasant things fade fast, and soon the sad mood takes over, plunging one into a deeper abyss of melancholy. A better strategy to cope with trauma has to do with meaning-seeking. When people search for meaning, they often do not feel happy, because the things that make our lives meaningful, like volunteering or working, are stressful and require effort. But months later, the meaning seekers not only reported fewer negative moods but also felt more enriched, inspired and part of something greater than themselves. Therefore, although none of us can avoid suffering, we can still learn to suffer well.",
+     "stem": "Which of the following statements is true about the first paragraph?",
+     "options": {
+      "A": "Stress inevitably causes permanent damage to one's mind and body.",
+      "B": "PTSD should have been listed earlier as one of the mental disorders.",
+      "C": "Most people are able to survive and grow from a traumatic experience.",
+      "D": "The more serious one's crisis is, the more growth one can exhibit."
+     }
+    },
+    {
+     "n": 38,
+     "answer": "B",
+     "group": "閱讀測驗",
+     "passage": "For a long time, many psychologists embraced a victim narrative about trauma, believing that severe stress causes long-lasting and perhaps irreparable damage to one's psyche and health. In 1980, post-traumatic stress disorder (PTSD) was added to the list of mental disorders and has since received a lot of attention in the media and among ordinary individuals trying to understand what happens to people in the wake of tragic life events. Yet psychologists now know that only a small percentage of people develop the full-blown disorder while, on average, anywhere from one half to two-thirds of trauma survivors exhibit what's known as post-traumatic growth. After a crisis, most people acquire a newfound sense of purpose, develop deeper relationships, have a greater appreciation of life, and report other benefits. In American culture, when people are feeling depressed or anxious, they are often advised to do what makes them happy; they are encouraged to distract themselves from bad news and difficult feelings, to limit their time on social media and to exercise. However, the happy feelings one gets by doing pleasant things fade fast, and soon the sad mood takes over, plunging one into a deeper abyss of melancholy. A better strategy to cope with trauma has to do with meaning-seeking. When people search for meaning, they often do not feel happy, because the things that make our lives meaningful, like volunteering or working, are stressful and require effort. But months later, the meaning seekers not only reported fewer negative moods but also felt more enriched, inspired and part of something greater than themselves. Therefore, although none of us can avoid suffering, we can still learn to suffer well.",
+     "stem": "According to the second paragraph, which of the following options can best help one to recover from a traumatic experience?",
+     "options": {
+      "A": "To do something cheerful as distraction.",
+      "B": "To find meaning in the unhappy experience.",
+      "C": "To seek help from a professional psychologist.",
+      "D": "To eat well, exercise well, and sleep well."
+     }
+    },
+    {
+     "n": 39,
+     "answer": "B",
+     "group": "閱讀測驗",
+     "passage": "For a long time, many psychologists embraced a victim narrative about trauma, believing that severe stress causes long-lasting and perhaps irreparable damage to one's psyche and health. In 1980, post-traumatic stress disorder (PTSD) was added to the list of mental disorders and has since received a lot of attention in the media and among ordinary individuals trying to understand what happens to people in the wake of tragic life events. Yet psychologists now know that only a small percentage of people develop the full-blown disorder while, on average, anywhere from one half to two-thirds of trauma survivors exhibit what's known as post-traumatic growth. After a crisis, most people acquire a newfound sense of purpose, develop deeper relationships, have a greater appreciation of life, and report other benefits. In American culture, when people are feeling depressed or anxious, they are often advised to do what makes them happy; they are encouraged to distract themselves from bad news and difficult feelings, to limit their time on social media and to exercise. However, the happy feelings one gets by doing pleasant things fade fast, and soon the sad mood takes over, plunging one into a deeper abyss of melancholy. A better strategy to cope with trauma has to do with meaning-seeking. When people search for meaning, they often do not feel happy, because the things that make our lives meaningful, like volunteering or working, are stressful and require effort. But months later, the meaning seekers not only reported fewer negative moods but also felt more enriched, inspired and part of something greater than themselves. Therefore, although none of us can avoid suffering, we can still learn to suffer well.",
+     "stem": "Which of the following is closest in meaning to the phrase in the wake of in the first paragraph?",
+     "options": {
+      "A": "before",
+      "B": "after",
+      "C": "conscious of",
+      "D": "suffering from"
+     }
+    },
+    {
+     "n": 40,
+     "answer": "A",
+     "group": "閱讀測驗",
+     "passage": "For a long time, many psychologists embraced a victim narrative about trauma, believing that severe stress causes long-lasting and perhaps irreparable damage to one's psyche and health. In 1980, post-traumatic stress disorder (PTSD) was added to the list of mental disorders and has since received a lot of attention in the media and among ordinary individuals trying to understand what happens to people in the wake of tragic life events. Yet psychologists now know that only a small percentage of people develop the full-blown disorder while, on average, anywhere from one half to two-thirds of trauma survivors exhibit what's known as post-traumatic growth. After a crisis, most people acquire a newfound sense of purpose, develop deeper relationships, have a greater appreciation of life, and report other benefits. In American culture, when people are feeling depressed or anxious, they are often advised to do what makes them happy; they are encouraged to distract themselves from bad news and difficult feelings, to limit their time on social media and to exercise. However, the happy feelings one gets by doing pleasant things fade fast, and soon the sad mood takes over, plunging one into a deeper abyss of melancholy. A better strategy to cope with trauma has to do with meaning-seeking. When people search for meaning, they often do not feel happy, because the things that make our lives meaningful, like volunteering or working, are stressful and require effort. But months later, the meaning seekers not only reported fewer negative moods but also felt more enriched, inspired and part of something greater than themselves. Therefore, although none of us can avoid suffering, we can still learn to suffer well.",
+     "stem": "Which of the following has the least to do with post-traumatic growth?",
+     "options": {
+      "A": "To awaken to the futility of all struggles.",
+      "B": "To discover new sense of purpose in life.",
+      "C": "To appreciate the meaning of life better.",
+      "D": "To develop a closer bond with loved ones."
+     }
+    }
+   ]
+  }
+ ],
+ "id": "B-111-1"
+}

@@ -1,0 +1,749 @@
+{
+ "exam": "A",
+ "year": 112,
+ "session": 1,
+ "parts": [
+  {
+   "kind": "essay",
+   "subject": "國文",
+   "title": "作文",
+   "minutes": 40,
+   "prompt": "我最想做的一件事",
+   "detail": "文言白話不拘，但段落要分明。"
+  },
+  {
+   "kind": "mc",
+   "subject": "國文",
+   "title": "國文選擇",
+   "per": 2,
+   "minutes": 12,
+   "questions": [
+    {
+     "n": 1,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "下列成語用字，何者有誤？",
+     "options": {
+      "A": "相去咫尺",
+      "B": "千鈞一髮",
+      "C": "罪無可患",
+      "D": "煮豆燃萁"
+     }
+    },
+    {
+     "n": 2,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "「齧雪吞氈」一詞係指漢朝何人被匈奴單于囚禁於大窖中，不供應飲食，乃嚼雪混同氈毛而吞食？",
+     "options": {
+      "A": "李廣",
+      "B": "張騫",
+      "C": "韓信",
+      "D": "蘇武"
+     }
+    },
+    {
+     "n": 3,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "陶淵明〈桃花源記〉：「晉太元中，武陵人，捕魚為業，『』溪行，忘路之遠近」，其中『』之字，下列何者正確？",
+     "options": {
+      "A": "緣",
+      "B": "沿",
+      "C": "循",
+      "D": "順"
+     }
+    },
+    {
+     "n": 4,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "左丘明〈燭之武退秦師〉一文，燭之武說服秦君退師的說詞中，最有影響力的選項是？",
+     "options": {
+      "A": "若亡鄭而有益於君，敢以煩執事",
+      "B": "焉用亡鄭以陪鄰？鄰之厚，君之薄也",
+      "C": "舍鄭以為東道主，行李之往來，共其乏困，君亦無所害",
+      "D": "微夫人之力不及此"
+     }
+    },
+    {
+     "n": 5,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "荀子〈勸學〉：「吾嘗終日而思矣，不如須臾之所學也」說明什麼道理？",
+     "options": {
+      "A": "多思少學",
+      "B": "學思並重",
+      "C": "思重於學",
+      "D": "學重於思"
+     }
+    },
+    {
+     "n": 6,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "諸葛亮〈出師表〉原文中，下列字詞何者有誤？",
+     "options": {
+      "A": "中道崩殂",
+      "B": "陟罰臧否",
+      "C": "咨取善道",
+      "D": "裨補闕漏"
+     }
+    },
+    {
+     "n": 7,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "中國四大名著係指四部古典章回小說，下列何者有誤？",
+     "options": {
+      "A": "〈儒林外史〉",
+      "B": "〈西遊記〉",
+      "C": "〈水滸傳〉",
+      "D": "〈三國演義〉"
+     }
+    },
+    {
+     "n": 8,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "下列作品、作者對應，何者有誤？",
+     "options": {
+      "A": "〈鶯鶯傳〉／杜光庭",
+      "B": "〈三國演義〉／羅貫中",
+      "C": "〈聊齋誌異〉／蒲松齡",
+      "D": "〈世說新語〉／劉義慶"
+     }
+    },
+    {
+     "n": 9,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "蘇軾〈念奴嬌〉：「亂石崩雲，驚濤裂岸，卷起千堆雪。」文中「雪」指什麼？",
+     "options": {
+      "A": "亂石",
+      "B": "浪花",
+      "C": "雪花",
+      "D": "浮雲"
+     }
+    },
+    {
+     "n": 10,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "〈岳陽樓記〉一文中說道：「而或長煙一空，皓月千里，浮光躍金，靜影沉璧。」是在描寫洞庭湖何時的景色？",
+     "options": {
+      "A": "晴朗的白天",
+      "B": "晴朗的夜晚",
+      "C": "陰雨的白天",
+      "D": "陰雨的夜晚"
+     }
+    },
+    {
+     "n": 11,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "方孝孺〈指喻〉一文的主旨：「天下之事，常發於至微，而終為大患；始以為不足治，而終至於不可為。」作者在說明什麼道理？",
+     "options": {
+      "A": "水到渠成",
+      "B": "每下愈況",
+      "C": "防微杜漸",
+      "D": "指日可待"
+     }
+    },
+    {
+     "n": 12,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "有關曹雪芹和〈紅樓夢〉敘述，下列何者有誤？",
+     "options": {
+      "A": "曹雪芹祖先曾任江寧織造，家世顯赫",
+      "B": "曹雪芹祖父曹寅為著名的藏書家，並主持〈四庫全書〉的刻印",
+      "C": "〈紅樓夢〉初名〈石頭記〉，又名〈風月寶鑑〉、〈金陵十二釵〉等",
+      "D": "〈紅樓夢〉以富貴公子賈寶玉為視角，描繪了人生百態，展現人性美和悲劇美"
+     }
+    },
+    {
+     "n": 13,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "有關作家黃春明的敘述，下列何者有誤？",
+     "options": {
+      "A": "一生漢詩創作不輟，有「臺灣新文學之父」之譽",
+      "B": "出生宜蘭，作品擅長描寫宜蘭平原農村小人物",
+      "C": "語言質樸親切，臺灣當代重要的鄉土文學",
+      "D": "小說作品有〈鑼〉、〈兒子的大玩偶〉等"
+     }
+    },
+    {
+     "n": 14,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "〈桃花源記〉：「遂與外人間隔。問今是何世？乃不知有漢，無論魏、晉！」此句意與下列何者相同？",
+     "options": {
+      "A": "浮雲遊子意，落日故人情",
+      "B": "天生我材必有用，千金散盡還復來",
+      "C": "樹欲靜而風不止，子欲養而親不待",
+      "D": "山中無甲子，寒盡不知年"
+     }
+    },
+    {
+     "n": 15,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "顧炎武〈與友人書〉：「人之為學，不日進則日退。」可作為下列何種學習情況的註腳？",
+     "options": {
+      "A": "君子慎其所立",
+      "B": "君子過目不忘",
+      "C": "君子曰：「學不可以已。」",
+      "D": "君子學而不思則罔"
+     }
+    }
+   ]
+  },
+  {
+   "kind": "mc",
+   "subject": "英文",
+   "title": "英文",
+   "per": 2.5,
+   "minutes": 40,
+   "questions": [
+    {
+     "n": 16,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "It’s not a surprising fact that education levels are _____ related to income.",
+     "options": {
+      "A": "deeply",
+      "B": "heavily",
+      "C": "largely",
+      "D": "strongly"
+     }
+    },
+    {
+     "n": 17,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "The deadline was announced. The manager made us _____ our project proposal by next Monday.",
+     "options": {
+      "A": "submit",
+      "B": "to submit",
+      "C": "submitting",
+      "D": "to be submitted"
+     }
+    },
+    {
+     "n": 18,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "Today’s news included the results of a study by Veterans General Hospital on the rise in alcoholism _____ the country.",
+     "options": {
+      "A": "over",
+      "B": "cover",
+      "C": "across",
+      "D": "cross"
+     }
+    },
+    {
+     "n": 19,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "Many smartphone manufacturers are developing user-friendly mobile devices with many features for a different _____ of the local market.",
+     "options": {
+      "A": "sector",
+      "B": "section",
+      "C": "segment",
+      "D": "intersection"
+     }
+    },
+    {
+     "n": 20,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "As the meeting is going to end in 15 minutes, the chairperson suggests we _____ the details and get to the last item on the agenda.",
+     "options": {
+      "A": "go over",
+      "B": "skip over",
+      "C": "hop over",
+      "D": "move over"
+     }
+    },
+    {
+     "n": 21,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "The HR manager _____ back from his business trip when we have our meeting next Monday.",
+     "options": {
+      "A": "is coming",
+      "B": "is going to come",
+      "C": "will have come",
+      "D": "has come"
+     }
+    },
+    {
+     "n": 22,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "You should _____ me to change lanes so that I could turn left at the intersection.",
+     "options": {
+      "A": "allow",
+      "B": "let",
+      "C": "have allowed",
+      "D": "have let"
+     }
+    },
+    {
+     "n": 23,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "The representatives of two labor unions haven’t reached a consensus and _____ a solution after months of negotiation.",
+     "options": {
+      "A": "come by",
+      "B": "come up with",
+      "C": "come forth",
+      "D": "come down with"
+     }
+    },
+    {
+     "n": 24,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "_____ other forms of energy, the cost of producing solar energy is relatively economical.",
+     "options": {
+      "A": "Unlike",
+      "B": "Dislike",
+      "C": "Alike",
+      "D": "Not like"
+     }
+    },
+    {
+     "n": 25,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "“What do you do for a living?” Choose the best response.",
+     "options": {
+      "A": "I live just a few blocks from here.",
+      "B": "I enjoy living here.",
+      "C": "I used to work for an international trading company.",
+      "D": "I’m a computer programmer in an IT company."
+     }
+    },
+    {
+     "n": 26,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "Some people think that using English is a way of _____ communication, so that people don’t have to negotiate which language they are going to use.",
+     "options": {
+      "A": "changing",
+      "B": "discussing",
+      "C": "neutralizing",
+      "D": "understanding"
+     }
+    },
+    {
+     "n": 27,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "A lot of research shows that health problems _____ poor diet and a relative lack of exercise.",
+     "options": {
+      "A": "are linked to",
+      "B": "link with",
+      "C": "are linked with",
+      "D": "link to"
+     }
+    },
+    {
+     "n": 28,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "Too much sun damages the skin, _____ many people still do not use sunscreen.",
+     "options": {
+      "A": "since",
+      "B": "and",
+      "C": "or",
+      "D": "yet"
+     }
+    },
+    {
+     "n": 29,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "All new employees enroll in an intensive English program designed to _____ the amount of time they are exposed to spoken English.",
+     "options": {
+      "A": "change",
+      "B": "broaden",
+      "C": "maximize",
+      "D": "reduce"
+     }
+    },
+    {
+     "n": 30,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "The team _____ all the best players you can find in this country.",
+     "options": {
+      "A": "is made of",
+      "B": "is composed of",
+      "C": "is consisted of",
+      "D": "composes of"
+     }
+    },
+    {
+     "n": 31,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "Dian is so pleased to be informed of an opening in Taipei’s branch since she has been thinking of _____ 或 for a while. [D]",
+     "options": {
+      "A": "to transfer",
+      "B": "to be transferred",
+      "C": "transferring",
+      "D": "being transferred"
+     }
+    },
+    {
+     "n": 32,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "“Susan is all dressed up. I’d say she’s fishing for compliments.” What does the speaker think about Susan?",
+     "options": {
+      "A": "Fishing is her favorite activity.",
+      "B": "She looks pretty.",
+      "C": "She deserves compliments.",
+      "D": "She wants to be praised."
+     }
+    },
+    {
+     "n": 33,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "“Everyone, we’re just pulling in to our stop at Austin. We’ll be here for ten minutes to take on some more passengers.” Where is the speaker?",
+     "options": {
+      "A": "At a store.",
+      "B": "On a bus.",
+      "C": "On a boat.",
+      "D": "On a plane."
+     }
+    },
+    {
+     "n": 34,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "Since the files are regarded as strictly _____, you should save them with a password.",
+     "options": {
+      "A": "confide",
+      "B": "confident",
+      "C": "confidential",
+      "D": "confidence"
+     }
+    },
+    {
+     "n": 35,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "Interestingly, the painting on the wall is _____ upside down in that restaurant.",
+     "options": {
+      "A": "hung",
+      "B": "hanged",
+      "C": "hang",
+      "D": "to hang"
+     }
+    },
+    {
+     "n": 36,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "Any attempt to influence the referees during the game will be regarded as a(n) _____ of the rules.",
+     "options": {
+      "A": "fraction",
+      "B": "infraction",
+      "C": "intrusion",
+      "D": "malfunction"
+     }
+    },
+    {
+     "n": 37,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "The newly-appointed CEO is known not only for her integrity _____ for her decisiveness.",
+     "options": {
+      "A": "or",
+      "B": "but also",
+      "C": "nor",
+      "D": "and"
+     }
+    },
+    {
+     "n": 38,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "Don’t be troubled by Kate’s frequent angry remarks. It’s just _____ of her illness.",
+     "options": {
+      "A": "a clarification",
+      "B": "a consistency",
+      "C": "an enforcement",
+      "D": "a manifestation"
+     }
+    },
+    {
+     "n": 39,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "Everyone can be creative. Creativity is a tool we can all equip ourselves with and _____.",
+     "options": {
+      "A": "futile",
+      "B": "utilize",
+      "C": "possession",
+      "D": "take advantage"
+     }
+    },
+    {
+     "n": 40,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "“Believe it or not, Fred’s new novel has been selling like hot cakes.” Choose the best explanation for the sentence.",
+     "options": {
+      "A": "Fred likes to bake cakes.",
+      "B": "Fred’s novel is about baking cakes.",
+      "C": "Fred has been selling cakes.",
+      "D": "Fred’s new novel sells well."
+     }
+    },
+    {
+     "n": 41,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "Marc Chagall’s masterpieces are currently _____ at the national museum.",
+     "options": {
+      "A": "on screen",
+      "B": "in display",
+      "C": "on exhibit",
+      "D": "in exhibition"
+     }
+    },
+    {
+     "n": 42,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "The best way to protect the skin _____ is to avoid the sun when it is at its hottest or wear sunscreen.",
+     "options": {
+      "A": "to injure",
+      "B": "to be injured",
+      "C": "from injuring",
+      "D": "from being injured"
+     }
+    },
+    {
+     "n": 43,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "Being a good listener involves more than just the ability to speak. Your body language also _____.",
+     "options": {
+      "A": "counts",
+      "B": "accounts",
+      "C": "calculates",
+      "D": "depends"
+     }
+    },
+    {
+     "n": 44,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "General Motors announced yesterday that sales of its vehicles have increased _____ five percent over the last two years.",
+     "options": {
+      "A": "for",
+      "B": "to",
+      "C": "with",
+      "D": "by"
+     }
+    },
+    {
+     "n": 45,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "The success of our ad campaign for the new products _____ our expectation.",
+     "options": {
+      "A": "accumulated",
+      "B": "exceeded",
+      "C": "overwhelmed",
+      "D": "procured"
+     }
+    },
+    {
+     "n": 46,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "According to a recent survey, the amount of time _____ to leisure is dropping.",
+     "options": {
+      "A": "devoted",
+      "B": "sacrificed",
+      "C": "taken",
+      "D": "spent"
+     }
+    },
+    {
+     "n": 47,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "Audrey Hepburn will always be the favorite film actress of all time and a(n) _____ to style, elegance, and humanitarianism.",
+     "options": {
+      "A": "idol",
+      "B": "icon",
+      "C": "figure",
+      "D": "signal"
+     }
+    },
+    {
+     "n": 48,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "Pop art, _____ developed in the late 1950’s, is the 20th century art movement.",
+     "options": {
+      "A": "it",
+      "B": "that",
+      "C": "X",
+      "D": "which"
+     }
+    },
+    {
+     "n": 49,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "Only after I had arrived at the office _____ that I had forgotten to take the office keys with me.",
+     "options": {
+      "A": "did I realize",
+      "B": "I realized",
+      "C": "have I realized",
+      "D": "I had realized"
+     }
+    },
+    {
+     "n": 50,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "_____, I think the conference has been a great success.",
+     "options": {
+      "A": "One for all",
+      "B": "One in all",
+      "C": "All for all",
+      "D": "All in all"
+     }
+    },
+    {
+     "n": 51,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "Long exposure to second-hand smoke can be _____ to anyone, particularly those who have never smoked before.",
+     "options": {
+      "A": "detrimental",
+      "B": "meticulous",
+      "C": "incremental",
+      "D": "sentimental"
+     }
+    },
+    {
+     "n": 52,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "The company has _____ telemarketing as an effective means of seeking potential customers for years.",
+     "options": {
+      "A": "found",
+      "B": "adopted",
+      "C": "hired",
+      "D": "understood"
+     }
+    },
+    {
+     "n": 53,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "The government has decided to _____ the ban on the import of US beef until the end of next year.",
+     "options": {
+      "A": "extend",
+      "B": "expand",
+      "C": "launch",
+      "D": "release"
+     }
+    },
+    {
+     "n": 54,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "All staff are required to _____ these new safety regulations.",
+     "options": {
+      "A": "comply with",
+      "B": "abide with",
+      "C": "conform with",
+      "D": "obey with"
+     }
+    },
+    {
+     "n": 55,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "“Who’s going to fill the position of Mike Andrews?” Choose the best response.",
+     "options": {
+      "A": "He should fill out the form first.",
+      "B": "He wants a higher position.",
+      "C": "They’re considering an intern from the Marketing Department.",
+      "D": "He went to the Accounting Department."
+     }
+    }
+   ]
+  }
+ ],
+ "id": "A-112-1"
+}

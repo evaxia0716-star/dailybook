@@ -1,0 +1,545 @@
+{
+ "exam": "A",
+ "year": 115,
+ "session": 1,
+ "parts": [
+  {
+   "kind": "essay",
+   "subject": "國文",
+   "title": "作文",
+   "minutes": 40,
+   "prompt": "理想與現實",
+   "detail": "文言白話不拘，但段落要分明。"
+  },
+  {
+   "kind": "mc",
+   "subject": "英文",
+   "title": "英文",
+   "per": 2.5,
+   "minutes": 40,
+   "questions": [
+    {
+     "n": 1,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "Despite their strong performance throughout the season, the school baseball team lost the final game ________ poor leadership by the captain.",
+     "options": {
+      "A": "because of",
+      "B": "as a result",
+      "C": "in spite of",
+      "D": "regardless of"
+     }
+    },
+    {
+     "n": 2,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "Please refer to the ________ list to ensure you have purchased all the required textbooks for the training.",
+     "options": {
+      "A": "below",
+      "B": "as below",
+      "C": "following",
+      "D": "as follows"
+     }
+    },
+    {
+     "n": 3,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "As soon as I finish the financial statement, I will submit it to the committee ________ approval.",
+     "options": {
+      "A": "by",
+      "B": "for",
+      "C": "to",
+      "D": "with"
+     }
+    },
+    {
+     "n": 4,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "Whenever the team faces a difficult situation, Evan can always be relied on to ________ new ideas.",
+     "options": {
+      "A": "put up with",
+      "B": "turn up with",
+      "C": "come up with",
+      "D": "draw up with"
+     }
+    },
+    {
+     "n": 5,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "The committee offered a few ________ on the report.",
+     "options": {
+      "A": "comments",
+      "B": "sides",
+      "C": "judges",
+      "D": "themes"
+     }
+    },
+    {
+     "n": 6,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "The new procurement system is more ________ and easier to use than the old one.",
+     "options": {
+      "A": "active",
+      "B": "plain",
+      "C": "convenient",
+      "D": "lost"
+     }
+    },
+    {
+     "n": 7,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "What do you think they are ________ for their next move?",
+     "options": {
+      "A": "plan to",
+      "B": "plans",
+      "C": "planning",
+      "D": "planned"
+     }
+    },
+    {
+     "n": 8,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "My brother doesn’t care ________ life in the big city. He prefers the countryside.",
+     "options": {
+      "A": "for",
+      "B": "into",
+      "C": "towards",
+      "D": "with"
+     }
+    },
+    {
+     "n": 9,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "All passengers are expected to ________ the instructions given by airport security personnel.",
+     "options": {
+      "A": "comply at",
+      "B": "comply in",
+      "C": "comply to",
+      "D": "comply with"
+     }
+    },
+    {
+     "n": 10,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "Chris ________ professionally for a number of years before he finally won his first chess championship last year.",
+     "options": {
+      "A": "competes",
+      "B": "competed",
+      "C": "has competed",
+      "D": "had competed"
+     }
+    },
+    {
+     "n": 11,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "My friend just sent me an interesting book, the title of ________ is “Mind Reader”.",
+     "options": {
+      "A": "what",
+      "B": "which",
+      "C": "that",
+      "D": "whose"
+     }
+    },
+    {
+     "n": 12,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "The hotel staff is extremely helpful. Nothing is too ________ trouble for them.",
+     "options": {
+      "A": "little",
+      "B": "many",
+      "C": "more",
+      "D": "much"
+     }
+    },
+    {
+     "n": 13,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "________ the many difficulties I faced with my family, I’m glad that I took risks and chose to be different.",
+     "options": {
+      "A": "Although",
+      "B": "Because of",
+      "C": "Despite",
+      "D": "Due to"
+     }
+    },
+    {
+     "n": 14,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "We want to buy a new car next year, so we’ve decided to ________ on our spending to save more money.",
+     "options": {
+      "A": "close down",
+      "B": "cut down",
+      "C": "break down",
+      "D": "shut down"
+     }
+    },
+    {
+     "n": 15,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "I would say that, ________, I spend at least five hours a day in front of a computer screen.",
+     "options": {
+      "A": "on average",
+      "B": "in average",
+      "C": "above average",
+      "D": "to average"
+     }
+    },
+    {
+     "n": 16,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "Albert Einstein is widely ________ as one of the greatest scientists in history for his contributions to physics.",
+     "options": {
+      "A": "deemed",
+      "B": "regarded",
+      "C": "thought",
+      "D": "understood"
+     }
+    },
+    {
+     "n": 17,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "Emma’s mother didn’t approve of ________ to Japan alone for her graduation trip.",
+     "options": {
+      "A": "her going",
+      "B": "she goes",
+      "C": "she would go",
+      "D": "that she goes"
+     }
+    },
+    {
+     "n": 18,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "Peter Jackson’s epic movie trilogy “The Lord of the Rings” has ________ widespread critical acclaim and numerous awards.",
+     "options": {
+      "A": "accepted",
+      "B": "blessed",
+      "C": "offered",
+      "D": "received"
+     }
+    },
+    {
+     "n": 19,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "Most of us are flattered when we receive a sincere ________.",
+     "options": {
+      "A": "appraisal",
+      "B": "compliment",
+      "C": "supplement",
+      "D": "reprimand"
+     }
+    },
+    {
+     "n": 20,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "In a fast-changing world, why trouble yourself with problems that are ________ your control rather than focusing on what you can change?",
+     "options": {
+      "A": "out",
+      "B": "without",
+      "C": "past",
+      "D": "beyond"
+     }
+    },
+    {
+     "n": 21,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "Please buy some lunch boxes ________.",
+     "options": {
+      "A": "from the cafeteria",
+      "B": "to the top of the hill",
+      "C": "in this forest",
+      "D": "down the path by the river"
+     }
+    },
+    {
+     "n": 22,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "The decommissioning project will ________ small teams working on a variety of tasks.",
+     "options": {
+      "A": "involve",
+      "B": "to involve",
+      "C": "involving",
+      "D": "involved"
+     }
+    },
+    {
+     "n": 23,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "The project timeline is so long that it is difficult to ________ what the final cost will be.",
+     "options": {
+      "A": "betray",
+      "B": "comprise",
+      "C": "estimate",
+      "D": "flatter"
+     }
+    },
+    {
+     "n": 24,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "It’s important to follow the safety procedures to avoid exposure to ________ materials.",
+     "options": {
+      "A": "harmful",
+      "B": "playful",
+      "C": "affordable",
+      "D": "ragged"
+     }
+    },
+    {
+     "n": 25,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "The team made huge ________ to the new data management system.",
+     "options": {
+      "A": "contribute",
+      "B": "contributions",
+      "C": "contributing",
+      "D": "contributed"
+     }
+    },
+    {
+     "n": 26,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "The instruments are responsible for constantly ________ the current wind speeds.",
+     "options": {
+      "A": "to measure",
+      "B": "measures",
+      "C": "measuring",
+      "D": "measured"
+     }
+    },
+    {
+     "n": 27,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "Attending the course will ________ Vivian’s abilities and prepare her for the job.",
+     "options": {
+      "A": "strength",
+      "B": "strengthen",
+      "C": "stronger",
+      "D": "strengthening"
+     }
+    },
+    {
+     "n": 28,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "Many insulators are made from ________ materials.",
+     "options": {
+      "A": "artificial",
+      "B": "endless",
+      "C": "deliberate",
+      "D": "beloved"
+     }
+    },
+    {
+     "n": 29,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "The team made deliberate efforts to give the stakeholders ________.",
+     "options": {
+      "A": "a struggle to find affordable childcare",
+      "B": "a look at the famous landmarks in the city",
+      "C": "a chance to participate in the discussion",
+      "D": "a taste of the cute café they found while traveling"
+     }
+    },
+    {
+     "n": 30,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "Each of us was given a(n) ________ and asked to complete a written story.",
+     "options": {
+      "A": "fraction",
+      "B": "incentive",
+      "C": "contribution",
+      "D": "prompt"
+     }
+    },
+    {
+     "n": 31,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "If we fail to ________ our claims, the supplier will not be aware of the problem.",
+     "options": {
+      "A": "assert",
+      "B": "assertion",
+      "C": "asserting",
+      "D": "asserted"
+     }
+    },
+    {
+     "n": 32,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "After hours of discussion, Huang’s plan remained the ________ view among the committee members.",
+     "options": {
+      "A": "prevail",
+      "B": "prevalent",
+      "C": "prevalence",
+      "D": "prevailed"
+     }
+    },
+    {
+     "n": 33,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "Some people like to joke that there is a convenience store on every street corner in Taipei City. ________ this is an exaggeration, it is true that you can shop for many things twenty-four hours a day.",
+     "options": {
+      "A": "Because",
+      "B": "If",
+      "C": "When",
+      "D": "While"
+     }
+    },
+    {
+     "n": 34,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "His use of ________ helped to solve the problem quickly and efficiently.",
+     "options": {
+      "A": "motive",
+      "B": "logic",
+      "C": "recreation",
+      "D": "spectrum"
+     }
+    },
+    {
+     "n": 35,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "The Wulai hydropower plant is famous for its ________ popsicles.",
+     "options": {
+      "A": "adoption",
+      "B": "deliberate",
+      "C": "incentive",
+      "D": "signature"
+     }
+    },
+    {
+     "n": 36,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "We made ________ to the practices of other companies when developing our procedures.",
+     "options": {
+      "A": "refer",
+      "B": "referral",
+      "C": "referring",
+      "D": "reference"
+     }
+    },
+    {
+     "n": 37,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "The judges will choose ________.",
+     "options": {
+      "A": "the land for his supporters",
+      "B": "the other people that will meet them",
+      "C": "the winner of the skills competition",
+      "D": "the spreading of religious beliefs"
+     }
+    },
+    {
+     "n": 38,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "The courageous young linemen saved ________ at the jobsite last week.",
+     "options": {
+      "A": "the thief from stealing the paintings",
+      "B": "Blake from the neutral debate",
+      "C": "Vivian from her legitimate concerns",
+      "D": "their coworker from the damaged excavator"
+     }
+    },
+    {
+     "n": 39,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "We need ________ the weather accurately to maintain grid stability.",
+     "options": {
+      "A": "tracks",
+      "B": "to track",
+      "C": "tracking",
+      "D": "tracked"
+     }
+    },
+    {
+     "n": 40,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "Chiang gained ________ in her specialization through years of training and experience.",
+     "options": {
+      "A": "consumer",
+      "B": "rhythm",
+      "C": "expertise",
+      "D": "scheme"
+     }
+    }
+   ]
+  }
+ ],
+ "id": "A-115-1"
+}

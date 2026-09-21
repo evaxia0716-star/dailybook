@@ -1,0 +1,545 @@
+{
+ "exam": "B",
+ "year": 114,
+ "session": 1,
+ "parts": [
+  {
+   "kind": "essay",
+   "subject": "國文",
+   "title": "作文",
+   "minutes": 60,
+   "prompt": "因應人口變遷國營事業之創新作為及社會責任",
+   "detail": "依據國發會人口推估，我國自 114 年起進入超高齡社會(65 歲人口比重達 20 %以上)，此外，因少子化之故，我國勞動力短缺日益嚴重。面對此一人口結構變遷趨勢，從企業角度而言，必須思考在產品及服務提供、聘僱員工(如中高齡及婦女)、育才留才、職場環境、工作設計以及科技運用等，均需有所因應，並配合政府政策。請以「因應人口變遷國營事業之創新作為及社會責任」為題，寫作論文一篇並加以闡述。"
+  },
+  {
+   "kind": "mc",
+   "subject": "英文",
+   "title": "英文",
+   "per": 2.5,
+   "minutes": 60,
+   "questions": [
+    {
+     "n": 1,
+     "answer": "D",
+     "group": "字彙",
+     "passage": "",
+     "stem": "The disaster relief fund will go ______ a new community center. However, many people disagree with the plan.",
+     "options": {
+      "A": "inward",
+      "B": "backwards",
+      "C": "forward",
+      "D": "towards"
+     }
+    },
+    {
+     "n": 2,
+     "answer": "C",
+     "group": "字彙",
+     "passage": "",
+     "stem": "The CEO refused to ______ whom he had made secret deals with to acquire the illegal products found in the facility he oversaw.",
+     "options": {
+      "A": "suppose",
+      "B": "enclose",
+      "C": "disclose",
+      "D": "compose"
+     }
+    },
+    {
+     "n": 3,
+     "answer": "D",
+     "group": "字彙",
+     "passage": "",
+     "stem": "The catalog features a ______ range of home, yard, leisure, automobile, and clothing products, all of which are available for next day delivery.",
+     "options": {
+      "A": "bleak",
+      "B": "rigid",
+      "C": "brisk",
+      "D": "vast"
+     }
+    },
+    {
+     "n": 4,
+     "answer": "B",
+     "group": "字彙",
+     "passage": "",
+     "stem": "In most countries, it is ______ to wear a seatbelt when you are driving.",
+     "options": {
+      "A": "guilty",
+      "B": "compulsory",
+      "C": "responsibility",
+      "D": "duty"
+     }
+    },
+    {
+     "n": 5,
+     "answer": "D",
+     "group": "字彙",
+     "passage": "",
+     "stem": "The Trump administration issued an order to ______ illegal immigrants.",
+     "options": {
+      "A": "confirm",
+      "B": "explore",
+      "C": "manifest",
+      "D": "deport"
+     }
+    },
+    {
+     "n": 6,
+     "answer": "D",
+     "group": "字彙",
+     "passage": "",
+     "stem": "The ______ of AI technology into teaching is a promising development.",
+     "options": {
+      "A": "cooperation",
+      "B": "manipulation",
+      "C": "confrontation",
+      "D": "incorporation"
+     }
+    },
+    {
+     "n": 7,
+     "answer": "A",
+     "group": "字彙",
+     "passage": "",
+     "stem": "Teenagers' ______ with social media can cause body image anxiety.",
+     "options": {
+      "A": "infatuation",
+      "B": "negotiation",
+      "C": "toleration",
+      "D": "configuration"
+     }
+    },
+    {
+     "n": 8,
+     "answer": "C",
+     "group": "字彙",
+     "passage": "",
+     "stem": "Many people follow the daily lives of ______ on social media.",
+     "options": {
+      "A": "seclusion",
+      "B": "entitlements",
+      "C": "celebrities",
+      "D": "archives"
+     }
+    },
+    {
+     "n": 9,
+     "answer": "C",
+     "group": "字彙",
+     "passage": "",
+     "stem": "When receiving the invitation to join the project, Rachel felt she was ______.",
+     "options": {
+      "A": "soothed",
+      "B": "aggravated",
+      "C": "flattered",
+      "D": "reminded"
+     }
+    },
+    {
+     "n": 10,
+     "answer": "A",
+     "group": "字彙",
+     "passage": "",
+     "stem": "You need to be aware that large events often create challenging ______ for the safe handling of many details, such as food, transportation, registration, and facilities.",
+     "options": {
+      "A": "logistics",
+      "B": "affairs",
+      "C": "assessments",
+      "D": "enactments"
+     }
+    },
+    {
+     "n": 11,
+     "answer": "A",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "______ arthritis, Julian does not want to visit London because the flight is more than 10 hours long.",
+     "options": {
+      "A": "Suffering from",
+      "B": "Pleased with",
+      "C": "Used to",
+      "D": "Consistent with"
+     }
+    },
+    {
+     "n": 12,
+     "answer": "B",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "He is not only an accomplished artist ______ a brilliant mathematician.",
+     "options": {
+      "A": "but as well",
+      "B": "but also",
+      "C": "as well as",
+      "D": "or else"
+     }
+    },
+    {
+     "n": 13,
+     "answer": "D",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "The report is ______ finished; I just need to double check some of the figures.",
+     "options": {
+      "A": "no more than",
+      "B": "more and more",
+      "C": "anymore",
+      "D": "more or less"
+     }
+    },
+    {
+     "n": 14,
+     "answer": "B",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "This new Sony model is more ______, costing twenty-nine dollars less than the last one.",
+     "options": {
+      "A": "economize",
+      "B": "economical",
+      "C": "economy",
+      "D": "economic"
+     }
+    },
+    {
+     "n": 15,
+     "answer": "C",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "The CEO recommended that the board ______ immediately to discuss the merger proposal.",
+     "options": {
+      "A": "meets",
+      "B": "has met",
+      "C": "meet",
+      "D": "meeting"
+     }
+    },
+    {
+     "n": 16,
+     "answer": "D",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "I took a big risk when I decided to leave my job but ______, I am now working for a better company and earning more money.",
+     "options": {
+      "A": "because",
+      "B": "result in",
+      "C": "result",
+      "D": "as a result"
+     }
+    },
+    {
+     "n": 17,
+     "answer": "C",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "Facing a financial crisis, that company is struggling to ______ more funds to overcome the difficult situations.",
+     "options": {
+      "A": "live up to",
+      "B": "hand in",
+      "C": "come up with",
+      "D": "look up to"
+     }
+    },
+    {
+     "n": 18,
+     "answer": "A",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "Peter is more easy-going than ______ in his office. Therefore, he is popular with his colleagues.",
+     "options": {
+      "A": "any other man",
+      "B": "any others",
+      "C": "any other men",
+      "D": "other men"
+     }
+    },
+    {
+     "n": 19,
+     "answer": "A",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "When the doctor said my stress was caused by a lack of work-life balance, she really ______.",
+     "options": {
+      "A": "hit the nail on the head",
+      "B": "bit the bullet",
+      "C": "broke the ice",
+      "D": "cut corners"
+     }
+    },
+    {
+     "n": 20,
+     "answer": "C",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "______ her current job, she started looking for new opportunities.",
+     "options": {
+      "A": "Satisfying",
+      "B": "To satisfy with",
+      "C": "Unsatisfied with",
+      "D": "Unsatisfying to"
+     }
+    },
+    {
+     "n": 21,
+     "answer": "D",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "Routine exercise may help ______ stress levels.",
+     "options": {
+      "A": "to lowering",
+      "B": "lowered",
+      "C": "having lowered",
+      "D": "lower"
+     }
+    },
+    {
+     "n": 22,
+     "answer": "A",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "After COVID-19, most teachers in Taiwan are ______ offering courses combining both face-to-face and online formats.",
+     "options": {
+      "A": "capable of",
+      "B": "reliable for",
+      "C": "composed of",
+      "D": "adherent to"
+     }
+    },
+    {
+     "n": 23,
+     "answer": "C",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "To save money, they avoids ______ unnecessary items.",
+     "options": {
+      "A": "to spend on",
+      "B": "spending with",
+      "C": "spending on",
+      "D": "to spend with"
+     }
+    },
+    {
+     "n": 24,
+     "answer": "A",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "The decision to expand the factory into the wetlands was highly controversial, ______ many environmental concerns.",
+     "options": {
+      "A": "raising",
+      "B": "to raise",
+      "C": "that raised",
+      "D": "for raising"
+     }
+    },
+    {
+     "n": 25,
+     "answer": "B",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "High levels of stress can ______ the development of heart disease.",
+     "options": {
+      "A": "result from",
+      "B": "contribute to",
+      "C": "follow from",
+      "D": "appeal to"
+     }
+    },
+    {
+     "n": 26,
+     "answer": "A",
+     "group": "克漏字",
+     "passage": "The traditional 9-to-5 workday has become an (26) concept for many in the modern economy. Driven by technological advancements, especially in communication and cloud computing, the workplace is undergoing a radical transformation. More companies are embracing flexible work arrangements, such as remote work and compressed workweeks. This shift is largely a (27) to the growing demand for work-life balance and the need to reduce overhead costs associated with large office spaces. While flexible work offers numerous benefits, (28) for employees, it also presents challenges. Managers must find new ways to maintain team cohesion and prevent a sense of isolation among remote workers. Clear communication policies and the (29) of the right digital tools are (30) to making these new work models successful and productive for everyone involved.",
+     "stem": "",
+     "options": {
+      "A": "outdated",
+      "B": "temporary",
+      "C": "reasonable",
+      "D": "typical"
+     }
+    },
+    {
+     "n": 27,
+     "answer": "A",
+     "group": "克漏字",
+     "passage": "The traditional 9-to-5 workday has become an (26) concept for many in the modern economy. Driven by technological advancements, especially in communication and cloud computing, the workplace is undergoing a radical transformation. More companies are embracing flexible work arrangements, such as remote work and compressed workweeks. This shift is largely a (27) to the growing demand for work-life balance and the need to reduce overhead costs associated with large office spaces. While flexible work offers numerous benefits, (28) for employees, it also presents challenges. Managers must find new ways to maintain team cohesion and prevent a sense of isolation among remote workers. Clear communication policies and the (29) of the right digital tools are (30) to making these new work models successful and productive for everyone involved.",
+     "stem": "",
+     "options": {
+      "A": "consequence",
+      "B": "coincidence",
+      "C": "counterpart",
+      "D": "consensus"
+     }
+    },
+    {
+     "n": 28,
+     "answer": "B",
+     "group": "克漏字",
+     "passage": "The traditional 9-to-5 workday has become an (26) concept for many in the modern economy. Driven by technological advancements, especially in communication and cloud computing, the workplace is undergoing a radical transformation. More companies are embracing flexible work arrangements, such as remote work and compressed workweeks. This shift is largely a (27) to the growing demand for work-life balance and the need to reduce overhead costs associated with large office spaces. While flexible work offers numerous benefits, (28) for employees, it also presents challenges. Managers must find new ways to maintain team cohesion and prevent a sense of isolation among remote workers. Clear communication policies and the (29) of the right digital tools are (30) to making these new work models successful and productive for everyone involved.",
+     "stem": "",
+     "options": {
+      "A": "however",
+      "B": "in particular",
+      "C": "moreover",
+      "D": "generally"
+     }
+    },
+    {
+     "n": 29,
+     "answer": "B",
+     "group": "克漏字",
+     "passage": "The traditional 9-to-5 workday has become an (26) concept for many in the modern economy. Driven by technological advancements, especially in communication and cloud computing, the workplace is undergoing a radical transformation. More companies are embracing flexible work arrangements, such as remote work and compressed workweeks. This shift is largely a (27) to the growing demand for work-life balance and the need to reduce overhead costs associated with large office spaces. While flexible work offers numerous benefits, (28) for employees, it also presents challenges. Managers must find new ways to maintain team cohesion and prevent a sense of isolation among remote workers. Clear communication policies and the (29) of the right digital tools are (30) to making these new work models successful and productive for everyone involved.",
+     "stem": "",
+     "options": {
+      "A": "education",
+      "B": "deployment",
+      "C": "involvement",
+      "D": "instruction"
+     }
+    },
+    {
+     "n": 30,
+     "answer": "A",
+     "group": "克漏字",
+     "passage": "The traditional 9-to-5 workday has become an (26) concept for many in the modern economy. Driven by technological advancements, especially in communication and cloud computing, the workplace is undergoing a radical transformation. More companies are embracing flexible work arrangements, such as remote work and compressed workweeks. This shift is largely a (27) to the growing demand for work-life balance and the need to reduce overhead costs associated with large office spaces. While flexible work offers numerous benefits, (28) for employees, it also presents challenges. Managers must find new ways to maintain team cohesion and prevent a sense of isolation among remote workers. Clear communication policies and the (29) of the right digital tools are (30) to making these new work models successful and productive for everyone involved.",
+     "stem": "",
+     "options": {
+      "A": "integral",
+      "B": "optional",
+      "C": "mandatory",
+      "D": "difficult"
+     }
+    },
+    {
+     "n": 31,
+     "answer": "D",
+     "group": "克漏字",
+     "passage": "Recent college graduates are having a particularly hard time (31) their first full-time jobs (32) a weakening job market. This struggle is reflected in national economic data, which experts use (33) the economy’s health. For many young Americans, it’s changing what they expected this stage of life to be like. (34) federal data, the unemployment rate for \"new entrants\"—which includes recent grads—has reached its highest point in nine years. Their share of the total unemployed is now the highest (35) in decades.",
+     "stem": "",
+     "options": {
+      "A": "to search",
+      "B": "losing",
+      "C": "to employ",
+      "D": "finding"
+     }
+    },
+    {
+     "n": 32,
+     "answer": "C",
+     "group": "克漏字",
+     "passage": "Recent college graduates are having a particularly hard time (31) their first full-time jobs (32) a weakening job market. This struggle is reflected in national economic data, which experts use (33) the economy’s health. For many young Americans, it’s changing what they expected this stage of life to be like. (34) federal data, the unemployment rate for \"new entrants\"—which includes recent grads—has reached its highest point in nine years. Their share of the total unemployed is now the highest (35) in decades.",
+     "stem": "",
+     "options": {
+      "A": "resulting in",
+      "B": "leading to",
+      "C": "due to",
+      "D": "causing"
+     }
+    },
+    {
+     "n": 33,
+     "answer": "C",
+     "group": "克漏字",
+     "passage": "Recent college graduates are having a particularly hard time (31) their first full-time jobs (32) a weakening job market. This struggle is reflected in national economic data, which experts use (33) the economy’s health. For many young Americans, it’s changing what they expected this stage of life to be like. (34) federal data, the unemployment rate for \"new entrants\"—which includes recent grads—has reached its highest point in nine years. Their share of the total unemployed is now the highest (35) in decades.",
+     "stem": "",
+     "options": {
+      "A": "to undermine",
+      "B": "destabilizing",
+      "C": "to estimate",
+      "D": "converting"
+     }
+    },
+    {
+     "n": 34,
+     "answer": "B",
+     "group": "克漏字",
+     "passage": "Recent college graduates are having a particularly hard time (31) their first full-time jobs (32) a weakening job market. This struggle is reflected in national economic data, which experts use (33) the economy’s health. For many young Americans, it’s changing what they expected this stage of life to be like. (34) federal data, the unemployment rate for \"new entrants\"—which includes recent grads—has reached its highest point in nine years. Their share of the total unemployed is now the highest (35) in decades.",
+     "stem": "",
+     "options": {
+      "A": "Proposing",
+      "B": "According to",
+      "C": "Supposing",
+      "D": "In the event of"
+     }
+    },
+    {
+     "n": 35,
+     "answer": "D",
+     "group": "克漏字",
+     "passage": "Recent college graduates are having a particularly hard time (31) their first full-time jobs (32) a weakening job market. This struggle is reflected in national economic data, which experts use (33) the economy’s health. For many young Americans, it’s changing what they expected this stage of life to be like. (34) federal data, the unemployment rate for \"new entrants\"—which includes recent grads—has reached its highest point in nine years. Their share of the total unemployed is now the highest (35) in decades.",
+     "stem": "",
+     "options": {
+      "A": "it is",
+      "B": "it could have been",
+      "C": "it was",
+      "D": "it has been"
+     }
+    },
+    {
+     "n": 36,
+     "answer": "C",
+     "group": "閱讀測驗",
+     "passage": "AI has the potential to significantly reduce teacher workloads and enhance student learning; however, schools require more explicit guidance on its safe and ethical implementation. An education inspection report on artificial intelligence indicates that even though teachers are using it to plan lessons and draft letters to parents, they have also expressed concerns that AI could negatively impact students' skills, with some worried about plagiarism and the inappropriate use of the technology. The local government, besides, maintains that it is important to balance the effective use of AI with the safety and wellbeing of students and staff. Overall, the report has found that most schools observed are in the initial phases of investigating AI’s benefits, with limited trials being carried out by digitally skilled and motivated staff members. In most cases, the implementation of AI lacks consistency, with notable differences in usage across individuals, educational levels, and departments. It states that while many staff members are enthusiastic about AI's potential, they are also cautious about its use, often voicing concerns about possible problems like inaccuracy, bias, and risks related to data protection. The report also notes that the use of AI for drafting letters and project materials has significantly alleviated administrative burdens in some schools; moreover, teachers admitted that AI could be effective for tailoring resources to individual students, particularly those with additional needs. It concludes that the implementation of a coherent national strategy is imperative to ensure data security, optimize the use of artificial intelligence in supporting teaching, and mitigate the associated risks and challenges.",
+     "stem": "What has this education inspection report found about how AI is being adopted in schools?",
+     "options": {
+      "A": "All schools had strict AI policies in place.",
+      "B": "AI use was fully standardized across all departments.",
+      "C": "Most schools were still in the early stages, with varied and informal use.",
+      "D": "Most teachers refused to try AI."
+     }
+    },
+    {
+     "n": 37,
+     "answer": "B",
+     "group": "閱讀測驗",
+     "passage": "AI has the potential to significantly reduce teacher workloads and enhance student learning; however, schools require more explicit guidance on its safe and ethical implementation. An education inspection report on artificial intelligence indicates that even though teachers are using it to plan lessons and draft letters to parents, they have also expressed concerns that AI could negatively impact students' skills, with some worried about plagiarism and the inappropriate use of the technology. The local government, besides, maintains that it is important to balance the effective use of AI with the safety and wellbeing of students and staff. Overall, the report has found that most schools observed are in the initial phases of investigating AI’s benefits, with limited trials being carried out by digitally skilled and motivated staff members. In most cases, the implementation of AI lacks consistency, with notable differences in usage across individuals, educational levels, and departments. It states that while many staff members are enthusiastic about AI's potential, they are also cautious about its use, often voicing concerns about possible problems like inaccuracy, bias, and risks related to data protection. The report also notes that the use of AI for drafting letters and project materials has significantly alleviated administrative burdens in some schools; moreover, teachers admitted that AI could be effective for tailoring resources to individual students, particularly those with additional needs. It concludes that the implementation of a coherent national strategy is imperative to ensure data security, optimize the use of artificial intelligence in supporting teaching, and mitigate the associated risks and challenges.",
+     "stem": "Which concern is not explicitly mentioned as raised by teachers?",
+     "options": {
+      "A": "AI may negatively impact students’ skill development.",
+      "B": "AI may lead to unemployment among teaching staff.",
+      "C": "There are risks related to plagiarism when using AI.",
+      "D": "Students might misuse AI tools inappropriately."
+     }
+    },
+    {
+     "n": 38,
+     "answer": "B",
+     "group": "閱讀測驗",
+     "passage": "AI has the potential to significantly reduce teacher workloads and enhance student learning; however, schools require more explicit guidance on its safe and ethical implementation. An education inspection report on artificial intelligence indicates that even though teachers are using it to plan lessons and draft letters to parents, they have also expressed concerns that AI could negatively impact students' skills, with some worried about plagiarism and the inappropriate use of the technology. The local government, besides, maintains that it is important to balance the effective use of AI with the safety and wellbeing of students and staff. Overall, the report has found that most schools observed are in the initial phases of investigating AI’s benefits, with limited trials being carried out by digitally skilled and motivated staff members. In most cases, the implementation of AI lacks consistency, with notable differences in usage across individuals, educational levels, and departments. It states that while many staff members are enthusiastic about AI's potential, they are also cautious about its use, often voicing concerns about possible problems like inaccuracy, bias, and risks related to data protection. The report also notes that the use of AI for drafting letters and project materials has significantly alleviated administrative burdens in some schools; moreover, teachers admitted that AI could be effective for tailoring resources to individual students, particularly those with additional needs. It concludes that the implementation of a coherent national strategy is imperative to ensure data security, optimize the use of artificial intelligence in supporting teaching, and mitigate the associated risks and challenges.",
+     "stem": "What can be inferred about students with additional needs?",
+     "options": {
+      "A": "They gain no advantage from using AI in the classroom.",
+      "B": "They may benefit more from personalized learning tools.",
+      "C": "Teachers do not know how to support them.",
+      "D": "AI is less useful for them than for other students."
+     }
+    },
+    {
+     "n": 39,
+     "answer": "D",
+     "group": "閱讀測驗",
+     "passage": "AI has the potential to significantly reduce teacher workloads and enhance student learning; however, schools require more explicit guidance on its safe and ethical implementation. An education inspection report on artificial intelligence indicates that even though teachers are using it to plan lessons and draft letters to parents, they have also expressed concerns that AI could negatively impact students' skills, with some worried about plagiarism and the inappropriate use of the technology. The local government, besides, maintains that it is important to balance the effective use of AI with the safety and wellbeing of students and staff. Overall, the report has found that most schools observed are in the initial phases of investigating AI’s benefits, with limited trials being carried out by digitally skilled and motivated staff members. In most cases, the implementation of AI lacks consistency, with notable differences in usage across individuals, educational levels, and departments. It states that while many staff members are enthusiastic about AI's potential, they are also cautious about its use, often voicing concerns about possible problems like inaccuracy, bias, and risks related to data protection. The report also notes that the use of AI for drafting letters and project materials has significantly alleviated administrative burdens in some schools; moreover, teachers admitted that AI could be effective for tailoring resources to individual students, particularly those with additional needs. It concludes that the implementation of a coherent national strategy is imperative to ensure data security, optimize the use of artificial intelligence in supporting teaching, and mitigate the associated risks and challenges.",
+     "stem": "Which of the following best summarizes the overall tone of the report regarding AI in schools?",
+     "options": {
+      "A": "Neutral, with no clear stance on AI use.",
+      "B": "Overwhelmingly optimistic about AI's future in education.",
+      "C": "Strongly opposed to any use of AI.",
+      "D": "Cautiously supportive, recognizing both opportunities and risks."
+     }
+    },
+    {
+     "n": 40,
+     "answer": "B",
+     "group": "閱讀測驗",
+     "passage": "AI has the potential to significantly reduce teacher workloads and enhance student learning; however, schools require more explicit guidance on its safe and ethical implementation. An education inspection report on artificial intelligence indicates that even though teachers are using it to plan lessons and draft letters to parents, they have also expressed concerns that AI could negatively impact students' skills, with some worried about plagiarism and the inappropriate use of the technology. The local government, besides, maintains that it is important to balance the effective use of AI with the safety and wellbeing of students and staff. Overall, the report has found that most schools observed are in the initial phases of investigating AI’s benefits, with limited trials being carried out by digitally skilled and motivated staff members. In most cases, the implementation of AI lacks consistency, with notable differences in usage across individuals, educational levels, and departments. It states that while many staff members are enthusiastic about AI's potential, they are also cautious about its use, often voicing concerns about possible problems like inaccuracy, bias, and risks related to data protection. The report also notes that the use of AI for drafting letters and project materials has significantly alleviated administrative burdens in some schools; moreover, teachers admitted that AI could be effective for tailoring resources to individual students, particularly those with additional needs. It concludes that the implementation of a coherent national strategy is imperative to ensure data security, optimize the use of artificial intelligence in supporting teaching, and mitigate the associated risks and challenges.",
+     "stem": "Which of the following most accurately captures the main challenge schools encounter in adopting AI?",
+     "options": {
+      "A": "Lack of interest and motivation among teachers and staff.",
+      "B": "Unclear guidance on safe and ethical use of AI.",
+      "C": "Technical difficulties with AI software.",
+      "D": "High costs of implementing AI tools."
+     }
+    }
+   ]
+  }
+ ],
+ "id": "B-114-1"
+}

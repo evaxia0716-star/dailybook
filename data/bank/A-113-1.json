@@ -1,0 +1,749 @@
+{
+ "exam": "A",
+ "year": 113,
+ "session": 1,
+ "parts": [
+  {
+   "kind": "essay",
+   "subject": "國文",
+   "title": "作文",
+   "minutes": 40,
+   "prompt": "我的朋友",
+   "detail": "文言白話不拘，但段落要分明。"
+  },
+  {
+   "kind": "mc",
+   "subject": "國文",
+   "title": "國文選擇",
+   "per": 2,
+   "minutes": 12,
+   "questions": [
+    {
+     "n": 1,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "下列「」用字，何者有誤？",
+     "options": {
+      "A": "耳「儒」目染",
+      "B": "「孺」子可教",
+      "C": "個性「懦」弱",
+      "D": "囁「嚅」難言"
+     }
+    },
+    {
+     "n": 2,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "下列「」內的字，何者讀音前後不同？",
+     "options": {
+      "A": "「惘」然所失／置若「罔」聞",
+      "B": "青青子「衿」／「矜」持拘謹",
+      "C": "桑「榆」晚景／「逾」期未歸",
+      "D": "白髮「皤」皤／「藩」鎮割據"
+     }
+    },
+    {
+     "n": 3,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "下列「」內的字，何者讀音有誤？",
+     "options": {
+      "A": "罪「愆」：ㄧㄢˇ",
+      "B": "「畛」域：ㄓㄣˇ",
+      "C": "挑「釁」：ㄒㄧㄣˋ",
+      "D": "自「戕」：ㄑㄧㄤˊ"
+     }
+    },
+    {
+     "n": 4,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "下列成語用字，何者有誤？",
+     "options": {
+      "A": "南轅北轍",
+      "B": "相形見詘",
+      "C": "瞠乎其後",
+      "D": "匠心獨運"
+     }
+    },
+    {
+     "n": 5,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "諸葛亮《出師表》：「陛下亦宜自課，以諮諏善道。」此段文句是作者期盼後主治理國政時，應秉持下列何種態度？",
+     "options": {
+      "A": "克制物質與權力的欲望",
+      "B": "自我反省，並向賢臣請益",
+      "C": "努力不懈，充實新知",
+      "D": "勤讀兵書，強身健體"
+     }
+    },
+    {
+     "n": 6,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "屈原《漁父》中漁父曰：「聖人不凝滯於物，而能與世推移。世人皆濁，何不淈其泥而揚其波？」，漁父對屈原之建議，下列何者正確？",
+     "options": {
+      "A": "在現實世界中隨俗進退",
+      "B": "堅持崇高理想，不隨波逐流",
+      "C": "鍥而不捨，不改其志",
+      "D": "勿使高尚品格，蒙受世俗塵埃"
+     }
+    },
+    {
+     "n": 7,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "有關《前赤壁賦》之敘述，下列何者有誤？",
+     "options": {
+      "A": "係北宋文學家蘇軾所作",
+      "B": "作者共寫下兩篇赤壁賦",
+      "C": "為作者遭貶至黃州之作品",
+      "D": "描述作者與友人把酒言歡之心情"
+     }
+    },
+    {
+     "n": 8,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "《莊子．秋水》：「夏蟲不可以語於冰者，篤於時也。」的意思，下列何者正確？",
+     "options": {
+      "A": "比喻樂善好施的人",
+      "B": "比喻歷練豐富的人",
+      "C": "比喻隨機應變的人",
+      "D": "比喻見識短淺的人"
+     }
+    },
+    {
+     "n": 9,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "韓翃《寒食》：「春城無處不飛花，寒食東風御柳斜。」一詩所描述的是下列哪個節日？",
+     "options": {
+      "A": "元宵節",
+      "B": "清明節",
+      "C": "端午節",
+      "D": "中秋節"
+     }
+    },
+    {
+     "n": 10,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "王昌齡《閨怨》：「閨中少婦不知愁，春日凝妝上翠樓。忽見陌頭楊柳色，悔教夫婿覓封侯。」其中「凝妝」一詞的意思，下列何者正確？",
+     "options": {
+      "A": "妝髮凌亂",
+      "B": "不施脂粉",
+      "C": "盛妝打扮",
+      "D": "臉色凝重"
+     }
+    },
+    {
+     "n": 11,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "王維《九月九日憶山東兄弟》：「獨在異鄉為異客，每逢佳節倍思親。遙知兄弟登高處，遍插茱萸少一人。」，其中「少一人」指的是誰？",
+     "options": {
+      "A": "作者父母",
+      "B": "作者本人",
+      "C": "作者親戚",
+      "D": "作者兄弟"
+     }
+    },
+    {
+     "n": 12,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "《禮記．大同與小康》：「昔者，仲尼與於蜡賓，事畢，出遊於觀之上，喟然而歎。」，其中「蜡」的意義，下列何者正確？",
+     "options": {
+      "A": "樂器",
+      "B": "昆蟲",
+      "C": "祭禮",
+      "D": "地名"
+     }
+    },
+    {
+     "n": 13,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "「處大國不攻小國，處大家不篡小家，強者不劫弱，貴者不傲賤，多詐者不欺愚。」係下列先秦諸家中，何者的思想？",
+     "options": {
+      "A": "墨家",
+      "B": "儒家",
+      "C": "法家",
+      "D": "道家"
+     }
+    },
+    {
+     "n": 14,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "有關《台灣通史》之描述，下列何者有誤？",
+     "options": {
+      "A": "作者為連橫",
+      "B": "清末開始撰寫，民國初年成書",
+      "C": "內容起自明代，終於割讓給日本",
+      "D": "屬紀傳體之史書"
+     }
+    },
+    {
+     "n": 15,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "歸有光《項脊軒志》：「余扃牖而居，久之，能以足音辨人。」，其中「牖」的意義，下列何者正確？",
+     "options": {
+      "A": "竹床",
+      "B": "草房",
+      "C": "籬笆",
+      "D": "窗戶"
+     }
+    }
+   ]
+  },
+  {
+   "kind": "mc",
+   "subject": "英文",
+   "title": "英文",
+   "per": 2.5,
+   "minutes": 40,
+   "questions": [
+    {
+     "n": 16,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "After heavy rains, there is always a high _______ mudslides in this area.",
+     "options": {
+      "A": "possibility with",
+      "B": "risk of",
+      "C": "danger for",
+      "D": "chance from"
+     }
+    },
+    {
+     "n": 17,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "The landlord told us that the rent had to be paid at the _______ of each month.",
+     "options": {
+      "A": "final",
+      "B": "middle",
+      "C": "tenth",
+      "D": "beginning"
+     }
+    },
+    {
+     "n": 18,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "This model of car _______ three different colors: silver, red, and dark blue.",
+     "options": {
+      "A": "comes with",
+      "B": "comes in",
+      "C": "goes with",
+      "D": "goes in"
+     }
+    },
+    {
+     "n": 19,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "The crew must take a rest because they _______ from a long trip.",
+     "options": {
+      "A": "have just been returning",
+      "B": "have just been returned",
+      "C": "just return",
+      "D": "have just returned"
+     }
+    },
+    {
+     "n": 20,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "Ellie has a wide _______ of hobbies, including painting, hiking, and surfing.",
+     "options": {
+      "A": "range",
+      "B": "rank",
+      "C": "scope",
+      "D": "extension"
+     }
+    },
+    {
+     "n": 21,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "Would you rather _______ a promotion or a new job?",
+     "options": {
+      "A": "get",
+      "B": "to get",
+      "C": "getting",
+      "D": "be gotten"
+     }
+    },
+    {
+     "n": 22,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "Jake was told not to _______ the boat until the negotiations were finished.",
+     "options": {
+      "A": "rattle",
+      "B": "shake",
+      "C": "disturb",
+      "D": "rock"
+     }
+    },
+    {
+     "n": 23,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "Physical therapists use their professional knowledge to assist you _______ supportive devices like a crutch or cane.",
+     "options": {
+      "A": "and use",
+      "B": "to use",
+      "C": "use",
+      "D": "in using"
+     }
+    },
+    {
+     "n": 24,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "It’s better to get a rental car for the trip because the two cities are more than 20 km _______.",
+     "options": {
+      "A": "apart",
+      "B": "afar",
+      "C": "apart from",
+      "D": "afar from"
+     }
+    },
+    {
+     "n": 25,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "Figures _______ last year show that the number of online retailers has increased by 15.4% during the post-pandemic period.",
+     "options": {
+      "A": "were published",
+      "B": "that published",
+      "C": "published",
+      "D": "publishing"
+     }
+    },
+    {
+     "n": 26,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "If you would like to get a refund for a _______ product, you have to bring in the product and its receipt.",
+     "options": {
+      "A": "affected",
+      "B": "fault",
+      "C": "defected",
+      "D": "flawed"
+     }
+    },
+    {
+     "n": 27,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "The conclusion she made was _______ relevant to the discussion.",
+     "options": {
+      "A": "highly",
+      "B": "closely",
+      "C": "deeply",
+      "D": "largely"
+     }
+    },
+    {
+     "n": 28,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "Bonus payments based on productivity act as a(n) _______ for employees to work harder.",
+     "options": {
+      "A": "stimulus",
+      "B": "incentive",
+      "C": "perk",
+      "D": "commitment"
+     }
+    },
+    {
+     "n": 29,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "If you _______ on fat and sugar in your diet, you’ll feel a lot healthier.",
+     "options": {
+      "A": "cut back",
+      "B": "cut off",
+      "C": "cut out",
+      "D": "cut short"
+     }
+    },
+    {
+     "n": 30,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "I can’t remember her name, but it’ll _______ me in a minute.",
+     "options": {
+      "A": "come in",
+      "B": "come to",
+      "C": "come upon",
+      "D": "come after"
+     }
+    },
+    {
+     "n": 31,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "I haven’t the slightest idea _______ the moment I arrived this afternoon.",
+     "options": {
+      "A": "what have they discussed",
+      "B": "what were they discussing",
+      "C": "what they have discussed",
+      "D": "what they were discussing"
+     }
+    },
+    {
+     "n": 32,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "Heavy fines have recently been _______ minor driving offences.",
+     "options": {
+      "A": "exposed to",
+      "B": "deposed from",
+      "C": "imposed on",
+      "D": "composed for"
+     }
+    },
+    {
+     "n": 33,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "_______ increasing education about skin cancer, suntanned skin is no longer a desirable look in Western cultures.",
+     "options": {
+      "A": "Despite",
+      "B": "Except for",
+      "C": "In that",
+      "D": "Due to"
+     }
+    },
+    {
+     "n": 34,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "Own-label products now ______ more than 20% of sales in some European supermarkets.",
+     "options": {
+      "A": "account for",
+      "B": "account as",
+      "C": "count in",
+      "D": "count for"
+     }
+    },
+    {
+     "n": 35,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "“Have you ever been to the Grand Canyon?” Choose the best response.",
+     "options": {
+      "A": "I have. Never I had seen such a wonder.",
+      "B": "I have. Never had I seen such a wonder.",
+      "C": "I have. I haven’t ever seen such a wonder.",
+      "D": "I have. Ever have I seen such a wonder."
+     }
+    },
+    {
+     "n": 36,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "The babies of lions and bears are called cubs, but a person or a monkey _______ has just been born is called a baby.",
+     "options": {
+      "A": "that",
+      "B": "who",
+      "C": "which",
+      "D": "either"
+     }
+    },
+    {
+     "n": 37,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "The proposal for lifting the trade restrictions set off a(n) _______ over the issue. Until now, no conclusion has been reached.",
+     "options": {
+      "A": "debate",
+      "B": "alarm",
+      "C": "riot",
+      "D": "panic"
+     }
+    },
+    {
+     "n": 38,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "I’ve been feeling a little _______ this week. I’m afraid I must go to see a doctor.",
+     "options": {
+      "A": "out of my element",
+      "B": "at a loss",
+      "C": "under the weather",
+      "D": "behind the times"
+     }
+    },
+    {
+     "n": 39,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "You should get to the sales early to avoid missing out _______ all the best bargains.",
+     "options": {
+      "A": "in",
+      "B": "from",
+      "C": "for",
+      "D": "on"
+     }
+    },
+    {
+     "n": 40,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "A series of experiments to test the new drug _______ carried out, but so far it still can’t prove to be an effective drug.",
+     "options": {
+      "A": "was",
+      "B": "were",
+      "C": "has been",
+      "D": "have been"
+     }
+    },
+    {
+     "n": 41,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "The candidate insisted on finishing his speech even though there was hardly _______ left in the room.",
+     "options": {
+      "A": "one",
+      "B": "no one",
+      "C": "anyone",
+      "D": "someone"
+     }
+    },
+    {
+     "n": 42,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "A competitive market helps to _______ efficiency.",
+     "options": {
+      "A": "adopt",
+      "B": "develop",
+      "C": "generate",
+      "D": "promote"
+     }
+    },
+    {
+     "n": 43,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "My office is only a five-minute walk from the MRT station, so it’s _______ taking a taxi.",
+     "options": {
+      "A": "not worth",
+      "B": "no sense in",
+      "C": "no point in",
+      "D": "no reason to"
+     }
+    },
+    {
+     "n": 44,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "The car industry’s annual production _______ between 5.2 million and 8.5 million vehicles.",
+     "options": {
+      "A": "adjusts",
+      "B": "fluctuates",
+      "C": "expends",
+      "D": "influences"
+     }
+    },
+    {
+     "n": 45,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "A lot of manufacturing companies are trying to _______ by cutting the budget for equipment renewals.",
+     "options": {
+      "A": "balance",
+      "B": "economize",
+      "C": "limit",
+      "D": "reduce"
+     }
+    },
+    {
+     "n": 46,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "Because there wasn’t sufficient time, data precision and accuracy were barely _______ and reported in carbon monitoring.",
+     "options": {
+      "A": "acquired",
+      "B": "accessed",
+      "C": "assessed",
+      "D": "assumed"
+     }
+    },
+    {
+     "n": 47,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "Chiufen is an old gold-mining town that _______ economically when the gold ran out in the middle of the last century.",
+     "options": {
+      "A": "dropped",
+      "B": "declined",
+      "C": "fell",
+      "D": "disappeared"
+     }
+    },
+    {
+     "n": 48,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "An example of a generation gap is when the old have a value judgement that _______ that of the young.",
+     "options": {
+      "A": "compares to",
+      "B": "changes to",
+      "C": "differs from",
+      "D": "reverses into"
+     }
+    },
+    {
+     "n": 49,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "When you have trouble sleeping, a cup of warm milk can do the _______.",
+     "options": {
+      "A": "tip",
+      "B": "trick",
+      "C": "effect",
+      "D": "act"
+     }
+    },
+    {
+     "n": 50,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "The new lecture hall has a seating _______ of over 200.",
+     "options": {
+      "A": "amount",
+      "B": "capability",
+      "C": "capacity",
+      "D": "number"
+     }
+    },
+    {
+     "n": 51,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "“Susan hasn’t told you about her resignation, has she?” Choose the best response.",
+     "options": {
+      "A": "Yes, she did.",
+      "B": "Yes, she hasn’t.",
+      "C": "No, she has.",
+      "D": "No, she hasn’t."
+     }
+    },
+    {
+     "n": 52,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "“Mr. Smith has worked here for a long time, hasn’t he?” Choose the best response.",
+     "options": {
+      "A": "Yes, at five o’clock.",
+      "B": "No, he’s working overtime.",
+      "C": "Yes, more than thirty years.",
+      "D": "No. I don’t have a watch."
+     }
+    },
+    {
+     "n": 53,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "It rained heavily this morning, but they finally _______ to the airport.",
+     "options": {
+      "A": "left it",
+      "B": "made it",
+      "C": "got it",
+      "D": "reached it"
+     }
+    },
+    {
+     "n": 54,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "It was when they started working together that they found they just weren’t _______.",
+     "options": {
+      "A": "compatible",
+      "B": "doable",
+      "C": "possible",
+      "D": "workable"
+     }
+    },
+    {
+     "n": 55,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "The departure dates listed in this brochure for the summer tours _______ change.",
+     "options": {
+      "A": "look up to",
+      "B": "look forward to",
+      "C": "are subject to",
+      "D": "are based on"
+     }
+    }
+   ]
+  }
+ ],
+ "id": "A-113-1"
+}

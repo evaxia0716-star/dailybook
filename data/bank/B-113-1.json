@@ -1,0 +1,545 @@
+{
+ "exam": "B",
+ "year": 113,
+ "session": 1,
+ "parts": [
+  {
+   "kind": "essay",
+   "subject": "國文",
+   "title": "作文",
+   "minutes": 60,
+   "prompt": "國營事業如何因應淨零排放之我見",
+   "detail": "面對氣候變遷之挑戰，全球已有超過 150 個國家宣布淨零碳排目標，我國除公布 2050 年淨零排放路徑圖，總統府更成立國家氣候變遷對策委員會。此外，許多國內外企業也宣布淨零及綠電使用的目標。身為國營事業員工，如何從能源、營運、科技、運輸、建築、生活等各個面向，推動減碳工作，甚至創造綠色商機，十分重要。請以「國營事業如何因應淨零排放之我見」為題，寫作論文一篇，並進行闡述。"
+  },
+  {
+   "kind": "mc",
+   "subject": "英文",
+   "title": "英文",
+   "per": 2.5,
+   "minutes": 60,
+   "questions": [
+    {
+     "n": 1,
+     "answer": "B",
+     "group": "字彙",
+     "passage": "",
+     "stem": "That wide-eyed ______ look and those full lips reminded him of a fairytale princess.",
+     "options": {
+      "A": "temporary",
+      "B": "innocent",
+      "C": "gradual",
+      "D": "previous"
+     }
+    },
+    {
+     "n": 2,
+     "answer": "C",
+     "group": "字彙",
+     "passage": "",
+     "stem": "Health experts are now ______ that even a little exercise is far better than none at all.",
+     "options": {
+      "A": "inheriting",
+      "B": "surging",
+      "C": "preaching",
+      "D": "disposing"
+     }
+    },
+    {
+     "n": 3,
+     "answer": "A",
+     "group": "字彙",
+     "passage": "",
+     "stem": "The compensation bill offers the miners or their ______ as much as $100,000 apiece.",
+     "options": {
+      "A": "survivors",
+      "B": "knights",
+      "C": "creators",
+      "D": "outlines"
+     }
+    },
+    {
+     "n": 4,
+     "answer": "D",
+     "group": "字彙",
+     "passage": "",
+     "stem": "In African languages, there is a close ______ between sounds and letters.",
+     "options": {
+      "A": "poultry",
+      "B": "interpretation",
+      "C": "reminder",
+      "D": "correspondence"
+     }
+    },
+    {
+     "n": 5,
+     "answer": "A",
+     "group": "字彙",
+     "passage": "",
+     "stem": "In her difficulty, she turned down her eyelids again and ______ over face and neck.",
+     "options": {
+      "A": "blushed",
+      "B": "emerged",
+      "C": "intended",
+      "D": "consulted"
+     }
+    },
+    {
+     "n": 6,
+     "answer": "D",
+     "group": "字彙",
+     "passage": "",
+     "stem": "Scientists could not ______ the strange lights in the sky since there was no scientific proof.",
+     "options": {
+      "A": "travel",
+      "B": "prefer",
+      "C": "cancel",
+      "D": "explain"
+     }
+    },
+    {
+     "n": 7,
+     "answer": "B",
+     "group": "字彙",
+     "passage": "",
+     "stem": "Tom seemed polite enough, but his manner was distinctly ______.",
+     "options": {
+      "A": "florid",
+      "B": "frigid",
+      "C": "fluid",
+      "D": "fetid"
+     }
+    },
+    {
+     "n": 8,
+     "answer": "B",
+     "group": "字彙",
+     "passage": "",
+     "stem": "A _____ under international humanitarian law is a person who is not a member of his or her country’s armed forces.",
+     "options": {
+      "A": "charity",
+      "B": "civilian",
+      "C": "colleague",
+      "D": "council"
+     }
+    },
+    {
+     "n": 9,
+     "answer": "C",
+     "group": "字彙",
+     "passage": "",
+     "stem": "The vessel showcases the impeccable British craftsmanship for which Princess is ______, with a vast teak deck and gleaming stainless-steel rails.",
+     "options": {
+      "A": "edible",
+      "B": "captive",
+      "C": "renowned",
+      "D": "mournful"
+     }
+    },
+    {
+     "n": 10,
+     "answer": "D",
+     "group": "字彙",
+     "passage": "",
+     "stem": "While walking along a side street, John was _____ by three youths.",
+     "options": {
+      "A": "boycotted",
+      "B": "conveyed",
+      "C": "looped",
+      "D": "mugged"
+     }
+    },
+    {
+     "n": 11,
+     "answer": "C",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "In most cases, rabbits can keep themselves ______ with the help of their owners.",
+     "options": {
+      "A": "cleanly",
+      "B": "cleanliness",
+      "C": "clean",
+      "D": "to clean"
+     }
+    },
+    {
+     "n": 12,
+     "answer": "A",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "Read the instructions carefully before starting to ______ the form.",
+     "options": {
+      "A": "fill out",
+      "B": "find out",
+      "C": "fit in",
+      "D": "feel like"
+     }
+    },
+    {
+     "n": 13,
+     "answer": "D",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "I have been in only three cities since I came to Taiwan. One is Taipei, and _____ are Taichung and Tainan.",
+     "options": {
+      "A": "others",
+      "B": "the other",
+      "C": "other",
+      "D": "the others"
+     }
+    },
+    {
+     "n": 14,
+     "answer": "B",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "Kevin said that you can get into the club for free if you wear red, but I'm taking it ______.",
+     "options": {
+      "A": "with one stone",
+      "B": "with a grain of salt",
+      "C": "with flying colors",
+      "D": "with a full deck"
+     }
+    },
+    {
+     "n": 15,
+     "answer": "C",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "By the end of this month, the new employees _____ a range of tasks and challenges that may turn out to be more difficult than they anticipated.",
+     "options": {
+      "A": "will expose to",
+      "B": "will have exposed to",
+      "C": "will have been exposed to",
+      "D": "will have been exposing to"
+     }
+    },
+    {
+     "n": 16,
+     "answer": "A",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "The farmhouse we stayed in was completely _____.",
+     "options": {
+      "A": "off the beaten track",
+      "B": "on the beaten track",
+      "C": "off the well-worn track",
+      "D": "on the well-worn track"
+     }
+    },
+    {
+     "n": 17,
+     "answer": "D",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "It is necessary ______ steps to amend our laws in order to free up these funds.",
+     "options": {
+      "A": "take us",
+      "B": "to take us",
+      "C": "to us take",
+      "D": "for us to take"
+     }
+    },
+    {
+     "n": 18,
+     "answer": "A",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "The report ______ that more resources ______ devoted to teaching four-year-olds.",
+     "options": {
+      "A": "recommends; be",
+      "B": "thinks; is",
+      "C": "suggests; are",
+      "D": "indicates; have"
+     }
+    },
+    {
+     "n": 19,
+     "answer": "B",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "He followed her to the family room and made sure she was safely ______ down before he left.",
+     "options": {
+      "A": "laying",
+      "B": "lying",
+      "C": "lie",
+      "D": "to lay"
+     }
+    },
+    {
+     "n": 20,
+     "answer": "A",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "Antonin Dvorak ______as a major composer before he celebrated his fiftieth birthday in 1893.",
+     "options": {
+      "A": "had emerged",
+      "B": "has emerged",
+      "C": "had been emerged",
+      "D": "has been emerged"
+     }
+    },
+    {
+     "n": 21,
+     "answer": "C",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "Violence as a way of achieving racial justice is impractical because it is a descending ______ ending in destruction for all.",
+     "options": {
+      "A": "force",
+      "B": "legacy",
+      "C": "spiral",
+      "D": "boat"
+     }
+    },
+    {
+     "n": 22,
+     "answer": "D",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "However logical their explanation might be, the decision is simply not going to ______ with customers.",
+     "options": {
+      "A": "flux",
+      "B": "fling",
+      "C": "flax",
+      "D": "fly"
+     }
+    },
+    {
+     "n": 23,
+     "answer": "A",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "If Kathy _____ to resign, who would help us with managing the project?",
+     "options": {
+      "A": "were",
+      "B": "is",
+      "C": "be",
+      "D": "was"
+     }
+    },
+    {
+     "n": 24,
+     "answer": "B",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "This hotel has been standing for over 50 years, and you can really see the _____ on the furniture in the room.",
+     "options": {
+      "A": "up and down",
+      "B": "wear and tear",
+      "C": "here and there",
+      "D": "ins and outs"
+     }
+    },
+    {
+     "n": 25,
+     "answer": "C",
+     "group": "文法及慣用語",
+     "passage": "",
+     "stem": "My father loves reading and also enjoys creating stories and _____ ideas for books and movies.",
+     "options": {
+      "A": "calling at",
+      "B": "colliding in",
+      "C": "conjuring up",
+      "D": "coming up"
+     }
+    },
+    {
+     "n": 26,
+     "answer": "D",
+     "group": "克漏字",
+     "passage": "In recent years, the concept of sustainability (26) significant momentum. In 2015, the United Nations adopted the 2030 Agenda for Sustainable Development, establishing the Sustainable Development Goals (SDGs) as a framework for fostering global (27) . Among the 17 SDGs, Goal 10, which aims to reduce inequality both within and between countries, is particularly relevant to the indigenous communities’ (28) justice and equality. For these communities, addressing inequalities involves securing land rights, ensuring (29) culturally respectful education, achieving fair representation in governance, and equitably sharing the benefits of resources found on and beneath their lands. It goes without saying that achieving genuine sustainable development necessitates the inclusion and active participation of all societal groups, (30) indigenous peoples.",
+     "stem": "",
+     "options": {
+      "A": "is gained",
+      "B": "was gained",
+      "C": "had gained",
+      "D": "has gained"
+     }
+    },
+    {
+     "n": 27,
+     "answer": "B",
+     "group": "克漏字",
+     "passage": "In recent years, the concept of sustainability (26) significant momentum. In 2015, the United Nations adopted the 2030 Agenda for Sustainable Development, establishing the Sustainable Development Goals (SDGs) as a framework for fostering global (27) . Among the 17 SDGs, Goal 10, which aims to reduce inequality both within and between countries, is particularly relevant to the indigenous communities’ (28) justice and equality. For these communities, addressing inequalities involves securing land rights, ensuring (29) culturally respectful education, achieving fair representation in governance, and equitably sharing the benefits of resources found on and beneath their lands. It goes without saying that achieving genuine sustainable development necessitates the inclusion and active participation of all societal groups, (30) indigenous peoples.",
+     "stem": "",
+     "options": {
+      "A": "pros and cons",
+      "B": "peace and prosperity",
+      "C": "cause and effect",
+      "D": "trial and error"
+     }
+    },
+    {
+     "n": 28,
+     "answer": "A",
+     "group": "克漏字",
+     "passage": "In recent years, the concept of sustainability (26) significant momentum. In 2015, the United Nations adopted the 2030 Agenda for Sustainable Development, establishing the Sustainable Development Goals (SDGs) as a framework for fostering global (27) . Among the 17 SDGs, Goal 10, which aims to reduce inequality both within and between countries, is particularly relevant to the indigenous communities’ (28) justice and equality. For these communities, addressing inequalities involves securing land rights, ensuring (29) culturally respectful education, achieving fair representation in governance, and equitably sharing the benefits of resources found on and beneath their lands. It goes without saying that achieving genuine sustainable development necessitates the inclusion and active participation of all societal groups, (30) indigenous peoples.",
+     "stem": "",
+     "options": {
+      "A": "quest for",
+      "B": "questing for",
+      "C": "demand to",
+      "D": "demanding for"
+     }
+    },
+    {
+     "n": 29,
+     "answer": "C",
+     "group": "克漏字",
+     "passage": "In recent years, the concept of sustainability (26) significant momentum. In 2015, the United Nations adopted the 2030 Agenda for Sustainable Development, establishing the Sustainable Development Goals (SDGs) as a framework for fostering global (27) . Among the 17 SDGs, Goal 10, which aims to reduce inequality both within and between countries, is particularly relevant to the indigenous communities’ (28) justice and equality. For these communities, addressing inequalities involves securing land rights, ensuring (29) culturally respectful education, achieving fair representation in governance, and equitably sharing the benefits of resources found on and beneath their lands. It goes without saying that achieving genuine sustainable development necessitates the inclusion and active participation of all societal groups, (30) indigenous peoples.",
+     "stem": "",
+     "options": {
+      "A": "subject to",
+      "B": "opposed to",
+      "C": "access to",
+      "D": "reaction to"
+     }
+    },
+    {
+     "n": 30,
+     "answer": "B",
+     "group": "克漏字",
+     "passage": "In recent years, the concept of sustainability (26) significant momentum. In 2015, the United Nations adopted the 2030 Agenda for Sustainable Development, establishing the Sustainable Development Goals (SDGs) as a framework for fostering global (27) . Among the 17 SDGs, Goal 10, which aims to reduce inequality both within and between countries, is particularly relevant to the indigenous communities’ (28) justice and equality. For these communities, addressing inequalities involves securing land rights, ensuring (29) culturally respectful education, achieving fair representation in governance, and equitably sharing the benefits of resources found on and beneath their lands. It goes without saying that achieving genuine sustainable development necessitates the inclusion and active participation of all societal groups, (30) indigenous peoples.",
+     "stem": "",
+     "options": {
+      "A": "include",
+      "B": "including",
+      "C": "included",
+      "D": "to include"
+     }
+    },
+    {
+     "n": 31,
+     "answer": "C",
+     "group": "克漏字",
+     "passage": "Fake news by amplification occurs when small-scale events become amplified through the (31)__ actions of everyday users, mass media gatekeepers, and social media (32) . Events that are amplified risk becoming (33) as they circulate, with users (34) their own context and interpretations. The resulting fake news is difficult to (35) because it goes beyond questions of fact and enters the realm of interpretation, enabled by widespread networked belief.",
+     "stem": "",
+     "options": {
+      "A": "divergent",
+      "B": "emergent",
+      "C": "convergent",
+      "D": "exurgent"
+     }
+    },
+    {
+     "n": 32,
+     "answer": "D",
+     "group": "克漏字",
+     "passage": "Fake news by amplification occurs when small-scale events become amplified through the (31)__ actions of everyday users, mass media gatekeepers, and social media (32) . Events that are amplified risk becoming (33) as they circulate, with users (34) their own context and interpretations. The resulting fake news is difficult to (35) because it goes beyond questions of fact and enters the realm of interpretation, enabled by widespread networked belief.",
+     "stem": "",
+     "options": {
+      "A": "algebras",
+      "B": "logarithms",
+      "C": "theorems",
+      "D": "algorithms"
+     }
+    },
+    {
+     "n": 33,
+     "answer": "C",
+     "group": "克漏字",
+     "passage": "Fake news by amplification occurs when small-scale events become amplified through the (31)__ actions of everyday users, mass media gatekeepers, and social media (32) . Events that are amplified risk becoming (33) as they circulate, with users (34) their own context and interpretations. The resulting fake news is difficult to (35) because it goes beyond questions of fact and enters the realm of interpretation, enabled by widespread networked belief.",
+     "stem": "",
+     "options": {
+      "A": "extorted",
+      "B": "retorted",
+      "C": "distorted",
+      "D": "bistorted"
+     }
+    },
+    {
+     "n": 34,
+     "answer": "A",
+     "group": "克漏字",
+     "passage": "Fake news by amplification occurs when small-scale events become amplified through the (31)__ actions of everyday users, mass media gatekeepers, and social media (32) . Events that are amplified risk becoming (33) as they circulate, with users (34) their own context and interpretations. The resulting fake news is difficult to (35) because it goes beyond questions of fact and enters the realm of interpretation, enabled by widespread networked belief.",
+     "stem": "",
+     "options": {
+      "A": "supplying",
+      "B": "applying",
+      "C": "complying",
+      "D": "multiplying"
+     }
+    },
+    {
+     "n": 35,
+     "answer": "B",
+     "group": "克漏字",
+     "passage": "Fake news by amplification occurs when small-scale events become amplified through the (31)__ actions of everyday users, mass media gatekeepers, and social media (32) . Events that are amplified risk becoming (33) as they circulate, with users (34) their own context and interpretations. The resulting fake news is difficult to (35) because it goes beyond questions of fact and enters the realm of interpretation, enabled by widespread networked belief.",
+     "stem": "",
+     "options": {
+      "A": "encounter",
+      "B": "counter",
+      "C": "recounter",
+      "D": "discounter"
+     }
+    },
+    {
+     "n": 36,
+     "answer": "C",
+     "group": "閱讀測驗",
+     "passage": "The Great Migration is the largest herd movement of animals on the planet. The numbers are astonishing: over 1.5 million wildebeests, zebras, and antelopes move in a constant cycle through the Serengeti-Mara ecosystem in search of nutritious grass and water. Guided by survival instinct, each wildebeest will cover 800 to 1,000 km on its individual journey along age-old migration routes. Hungry predators, including lions, leopards, cheetahs, hyenas, wild dogs, and crocodiles, ensure the strongest survive in this natural spectacle. This is also known as ‘the greatest show on Earth.’ The animals travel from the Ngorongoro Conservation Area in southern Serengeti, Tanzania, through the Serengeti, into the Masai Mara in Kenya, and then back again. The journey is beset with danger: young calves are snatched by predators, the slow ones are brought down by prides of lion, brave beasts break legs on steep river slopes, crocodiles take their share of the stragglers, and the weak and exhausted drown. As for the three major animals of the migrant grazers, they have different grass-eating habits: as one group eats the top of the tallest grass, the next group will eat away some of the medium-height grass until finally it is almost completely eaten, and the herds move on. This means each group sticks to its kind with only a tiny overlap in their distributions. The grasses of the plains have the highest protein content throughout the Serengeti and are also high in calcium. It is unclear how the wildebeests know which way to go. However, it is generally believed that their journey is dictated primarily by their response to the weather. They probably follow the rains and new grass growth. Some experts believe the animals react to lightning and thunderstorms in the distance. It has even been suggested that wildebeest can locate rain more than 50 km away.",
+     "stem": "What is the main purpose of this article?",
+     "options": {
+      "A": "It mainly introduces African wildlife that can move freely on the vast rolling plains of the Serengeti.",
+      "B": "It mainly indicates the solutions to the problem of some roads crossing the path of the Great Migration.",
+      "C": "It mainly describes the ever-moving circular migration of over a million animals across the Serengeti-Mara ecosystem.",
+      "D": "It mainly shows that the Great Migration is slowly collapsing due to widespread habitat loss."
+     }
+    },
+    {
+     "n": 37,
+     "answer": "D",
+     "group": "閱讀測驗",
+     "passage": "The Great Migration is the largest herd movement of animals on the planet. The numbers are astonishing: over 1.5 million wildebeests, zebras, and antelopes move in a constant cycle through the Serengeti-Mara ecosystem in search of nutritious grass and water. Guided by survival instinct, each wildebeest will cover 800 to 1,000 km on its individual journey along age-old migration routes. Hungry predators, including lions, leopards, cheetahs, hyenas, wild dogs, and crocodiles, ensure the strongest survive in this natural spectacle. This is also known as ‘the greatest show on Earth.’ The animals travel from the Ngorongoro Conservation Area in southern Serengeti, Tanzania, through the Serengeti, into the Masai Mara in Kenya, and then back again. The journey is beset with danger: young calves are snatched by predators, the slow ones are brought down by prides of lion, brave beasts break legs on steep river slopes, crocodiles take their share of the stragglers, and the weak and exhausted drown. As for the three major animals of the migrant grazers, they have different grass-eating habits: as one group eats the top of the tallest grass, the next group will eat away some of the medium-height grass until finally it is almost completely eaten, and the herds move on. This means each group sticks to its kind with only a tiny overlap in their distributions. The grasses of the plains have the highest protein content throughout the Serengeti and are also high in calcium. It is unclear how the wildebeests know which way to go. However, it is generally believed that their journey is dictated primarily by their response to the weather. They probably follow the rains and new grass growth. Some experts believe the animals react to lightning and thunderstorms in the distance. It has even been suggested that wildebeest can locate rain more than 50 km away.",
+     "stem": "According to this article, why can the wildebeests know their routes in the Great Migration?",
+     "options": {
+      "A": "They tend to choose the routes away from hungry predators.",
+      "B": "They rely on their reaction to the earth’s magnetic fields.",
+      "C": "They can find cut shorts to return to Tanzania.",
+      "D": "They can detect rain more than 50 km away."
+     }
+    },
+    {
+     "n": 38,
+     "answer": "B",
+     "group": "閱讀測驗",
+     "passage": "The Great Migration is the largest herd movement of animals on the planet. The numbers are astonishing: over 1.5 million wildebeests, zebras, and antelopes move in a constant cycle through the Serengeti-Mara ecosystem in search of nutritious grass and water. Guided by survival instinct, each wildebeest will cover 800 to 1,000 km on its individual journey along age-old migration routes. Hungry predators, including lions, leopards, cheetahs, hyenas, wild dogs, and crocodiles, ensure the strongest survive in this natural spectacle. This is also known as ‘the greatest show on Earth.’ The animals travel from the Ngorongoro Conservation Area in southern Serengeti, Tanzania, through the Serengeti, into the Masai Mara in Kenya, and then back again. The journey is beset with danger: young calves are snatched by predators, the slow ones are brought down by prides of lion, brave beasts break legs on steep river slopes, crocodiles take their share of the stragglers, and the weak and exhausted drown. As for the three major animals of the migrant grazers, they have different grass-eating habits: as one group eats the top of the tallest grass, the next group will eat away some of the medium-height grass until finally it is almost completely eaten, and the herds move on. This means each group sticks to its kind with only a tiny overlap in their distributions. The grasses of the plains have the highest protein content throughout the Serengeti and are also high in calcium. It is unclear how the wildebeests know which way to go. However, it is generally believed that their journey is dictated primarily by their response to the weather. They probably follow the rains and new grass growth. Some experts believe the animals react to lightning and thunderstorms in the distance. It has even been suggested that wildebeest can locate rain more than 50 km away.",
+     "stem": "Which of the following is closest in meaning to the word “dictated” in Paragraph 4?",
+     "options": {
+      "A": "permitted",
+      "B": "directed",
+      "C": "teased",
+      "D": "fastened"
+     }
+    },
+    {
+     "n": 39,
+     "answer": "D",
+     "group": "閱讀測驗",
+     "passage": "The Great Migration is the largest herd movement of animals on the planet. The numbers are astonishing: over 1.5 million wildebeests, zebras, and antelopes move in a constant cycle through the Serengeti-Mara ecosystem in search of nutritious grass and water. Guided by survival instinct, each wildebeest will cover 800 to 1,000 km on its individual journey along age-old migration routes. Hungry predators, including lions, leopards, cheetahs, hyenas, wild dogs, and crocodiles, ensure the strongest survive in this natural spectacle. This is also known as ‘the greatest show on Earth.’ The animals travel from the Ngorongoro Conservation Area in southern Serengeti, Tanzania, through the Serengeti, into the Masai Mara in Kenya, and then back again. The journey is beset with danger: young calves are snatched by predators, the slow ones are brought down by prides of lion, brave beasts break legs on steep river slopes, crocodiles take their share of the stragglers, and the weak and exhausted drown. As for the three major animals of the migrant grazers, they have different grass-eating habits: as one group eats the top of the tallest grass, the next group will eat away some of the medium-height grass until finally it is almost completely eaten, and the herds move on. This means each group sticks to its kind with only a tiny overlap in their distributions. The grasses of the plains have the highest protein content throughout the Serengeti and are also high in calcium. It is unclear how the wildebeests know which way to go. However, it is generally believed that their journey is dictated primarily by their response to the weather. They probably follow the rains and new grass growth. Some experts believe the animals react to lightning and thunderstorms in the distance. It has even been suggested that wildebeest can locate rain more than 50 km away.",
+     "stem": "According to this article, which of the following statements is NOT true?",
+     "options": {
+      "A": "Cheetahs, hyenas, and lions belong to the predators in the Great Migration.",
+      "B": "The stragglers can be eaten by crocodiles.",
+      "C": "The Great Migration of the African animals takes place in Kenya and Tanzania.",
+      "D": "The major grazers compete with one another for grass eating."
+     }
+    },
+    {
+     "n": 40,
+     "answer": "A",
+     "group": "閱讀測驗",
+     "passage": "The Great Migration is the largest herd movement of animals on the planet. The numbers are astonishing: over 1.5 million wildebeests, zebras, and antelopes move in a constant cycle through the Serengeti-Mara ecosystem in search of nutritious grass and water. Guided by survival instinct, each wildebeest will cover 800 to 1,000 km on its individual journey along age-old migration routes. Hungry predators, including lions, leopards, cheetahs, hyenas, wild dogs, and crocodiles, ensure the strongest survive in this natural spectacle. This is also known as ‘the greatest show on Earth.’ The animals travel from the Ngorongoro Conservation Area in southern Serengeti, Tanzania, through the Serengeti, into the Masai Mara in Kenya, and then back again. The journey is beset with danger: young calves are snatched by predators, the slow ones are brought down by prides of lion, brave beasts break legs on steep river slopes, crocodiles take their share of the stragglers, and the weak and exhausted drown. As for the three major animals of the migrant grazers, they have different grass-eating habits: as one group eats the top of the tallest grass, the next group will eat away some of the medium-height grass until finally it is almost completely eaten, and the herds move on. This means each group sticks to its kind with only a tiny overlap in their distributions. The grasses of the plains have the highest protein content throughout the Serengeti and are also high in calcium. It is unclear how the wildebeests know which way to go. However, it is generally believed that their journey is dictated primarily by their response to the weather. They probably follow the rains and new grass growth. Some experts believe the animals react to lightning and thunderstorms in the distance. It has even been suggested that wildebeest can locate rain more than 50 km away.",
+     "stem": "According to this article, what nutrients can the grass-eating animals get from the grasses of the plains?",
+     "options": {
+      "A": "proteins",
+      "B": "water",
+      "C": "carbohydrates",
+      "D": "vitamins"
+     }
+    }
+   ]
+  }
+ ],
+ "id": "B-113-1"
+}

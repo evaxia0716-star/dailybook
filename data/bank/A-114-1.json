@@ -1,0 +1,749 @@
+{
+ "exam": "A",
+ "year": 114,
+ "session": 1,
+ "parts": [
+  {
+   "kind": "essay",
+   "subject": "國文",
+   "title": "作文",
+   "minutes": 40,
+   "prompt": "耕耘與收穫",
+   "detail": "文言白話不拘，但段落要分明。"
+  },
+  {
+   "kind": "mc",
+   "subject": "國文",
+   "title": "國文選擇",
+   "per": 2,
+   "minutes": 12,
+   "questions": [
+    {
+     "n": 1,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "下列各組「」內的文字，何者前後相同？",
+     "options": {
+      "A": "膏「ㄩˊ」之地／阿「ㄩˊ」諂媚",
+      "B": "「ㄧㄢˇ」旗息鼓／屋舍「ㄧㄢˇ」然",
+      "C": "「ㄐㄧㄠˇ」倖獲勝／「ㄐㄧㄠˇ」俗干名",
+      "D": "圖文並「ㄇㄠˋ」／「ㄇㄠˋ」林修竹"
+     }
+    },
+    {
+     "n": 2,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "下列成語用字，何者正確？",
+     "options": {
+      "A": "蓬壁生輝",
+      "B": "錐心泣血",
+      "C": "趨之若鶩",
+      "D": "莫衷一事"
+     }
+    },
+    {
+     "n": 3,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "下列文句「」中的成語，何者使用正確？",
+     "options": {
+      "A": "他對課業總是「牛角掛書」、敷衍了事，難怪成績差",
+      "B": "下課鐘聲一響，小朋友猶如「新鶯出谷」般衝出教室",
+      "C": "陳老闆經商失敗，以致失去鬥志，從此「一蹶不振」",
+      "D": "張教授做實驗總是「管窺蠡測」，謹慎細心絕不馬虎"
+     }
+    },
+    {
+     "n": 4,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "下列各組成語，何者意義最為相近？",
+     "options": {
+      "A": "螳臂當車／蚍蜉撼樹",
+      "B": "白雲蒼狗／白駒過隙",
+      "C": "斬草除根／竭澤而漁",
+      "D": "鳳毛麟角／九牛一毛"
+     }
+    },
+    {
+     "n": 5,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "下列詩詞所描繪的季節，何者有誤？",
+     "options": {
+      "A": "千里鶯啼綠映紅，水村山郭酒旗風—春天",
+      "B": "木槿花開畏日長，時搖輕扇倚繩床—夏天",
+      "C": "菡萏香銷翠葉殘，西風愁起綠波間—秋天",
+      "D": "梅英疏淡，冰澌溶泄，東風暗換年華—冬天"
+     }
+    },
+    {
+     "n": 6,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "下列有關方位語詞的解釋，何者有誤？",
+     "options": {
+      "A": "「馬耳東風」形容充耳不聞",
+      "B": "「剪燭西窗」形容喪妻之痛",
+      "C": "「北窗高臥」形容悠閒自適",
+      "D": "「虛左以待」形容禮賢下士"
+     }
+    },
+    {
+     "n": 7,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "陳義芝《草堂沉思》：「千年前為秋風所破的茅屋／剩日下的竹影搖曳／我小立在那座新築新修的草堂／遙想當年你如何扶杖嘆息，忍聽／兒童抱茅的嬉鬧」，詩中所述人物為下列何者？",
+     "options": {
+      "A": "蘇軾",
+      "B": "屈原",
+      "C": "王維",
+      "D": "杜甫"
+     }
+    },
+    {
+     "n": 8,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "王安石《登飛來峰》：「不畏浮雲遮望眼，自緣身在最高層。」其中的浮雲係比喻小人、佞臣，下列文句中的「浮雲」，何者具有相同意涵？",
+     "options": {
+      "A": "不義而富且貴，於我如浮雲",
+      "B": "浮雲遊子意，落日故人情",
+      "C": "總為浮雲能蔽日，長安不見使人愁",
+      "D": "浮雲一別後，流水十年間"
+     }
+    },
+    {
+     "n": 9,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "下列各組詞語所指涉的物品，何者相同？",
+     "options": {
+      "A": "玉盤／金烏",
+      "B": "魚雁／尺牘",
+      "C": "金甌／絲竹",
+      "D": "汗青／杜康"
+     }
+    },
+    {
+     "n": 10,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "辛棄疾《青玉案》：「東風夜放花千樹，更吹落，星如雨。寶馬雕車香滿路，鳳簫聲動，玉壺光轉，一夜魚龍舞。」係描述下列何種節令的場景？",
+     "options": {
+      "A": "元宵節",
+      "B": "清明節",
+      "C": "中秋節",
+      "D": "重陽節"
+     }
+    },
+    {
+     "n": 11,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "下列何者與夫妻相處之道無關？",
+     "options": {
+      "A": "相敬如賓",
+      "B": "倒屣相迎",
+      "C": "舉案齊眉",
+      "D": "鴻案相莊"
+     }
+    },
+    {
+     "n": 12,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "劉勰《文心雕龍．知音》：「凡操千曲而後曉聲，觀千劍而後識器。」此段文句之意旨，用於求學時應秉持之態度，與下列何者最為相近？",
+     "options": {
+      "A": "戒慎恐懼，表裡如一",
+      "B": "逆水行舟，不進則退",
+      "C": "讀萬卷書，行萬里路",
+      "D": "博覽群觀，多方學習"
+     }
+    },
+    {
+     "n": 13,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "有關辦理各類競賽所使用的題辭，下列何者有誤？",
+     "options": {
+      "A": "音樂：玉潤珠圓",
+      "B": "演講：餘音繞樑",
+      "C": "作文：洛陽紙貴",
+      "D": "書法：力透紙背"
+     }
+    },
+    {
+     "n": 14,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "李斯《諫逐客書》：「向使四君卻客而不內，疏士而不與，是使國無富利之實，而秦無彊大之名也。」此係李斯以4位君王之例說明國之強盛，主要是因君王採取下列何種作為？",
+     "options": {
+      "A": "廣納賢才，有容乃大",
+      "B": "開疆拓土，統一天下",
+      "C": "變法革新，自強不息",
+      "D": "虛心納諫，反求諸己"
+     }
+    },
+    {
+     "n": 15,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "下列對聯所適用的場合，何者配對有誤？",
+     "options": {
+      "A": "扁鵲重生稱妙手／華佗再世頌丹心—醫院",
+      "B": "相留燕趙齊梁客／借寓東西南北人—旅館",
+      "C": "劉伶問道誰家好／李白回言此處佳—茶館",
+      "D": "還我廬山真面目／愛他秋水舊風采—相館"
+     }
+    }
+   ]
+  },
+  {
+   "kind": "mc",
+   "subject": "英文",
+   "title": "英文",
+   "per": 2.5,
+   "minutes": 40,
+   "questions": [
+    {
+     "n": 16,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "We all agree that the manager’s idea, although promising, still needs ________ out before it can be fully implemented.",
+     "options": {
+      "A": "try",
+      "B": "to try",
+      "C": "being tried",
+      "D": "trying"
+     }
+    },
+    {
+     "n": 17,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "I didn’t use to like ice cream very much, but now I can’t ________ having it on hot summer days.",
+     "options": {
+      "A": "reduce",
+      "B": "refuse",
+      "C": "reject",
+      "D": "resist"
+     }
+    },
+    {
+     "n": 18,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "Which is a good response to “Ready to order”?",
+     "options": {
+      "A": "In a couple of minutes.",
+      "B": "No, thanks.",
+      "C": "Do I have to?",
+      "D": "I’m not hungry yet."
+     }
+    },
+    {
+     "n": 19,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "I had high hopes for the soup at that new restaurant, but I ended up disappointed — it tasted ________, which ruined the delicate balance I was expecting.",
+     "options": {
+      "A": "sweetly",
+      "B": "to be hot",
+      "C": "of garlic",
+      "D": "with fish"
+     }
+    },
+    {
+     "n": 20,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "We got stuck in traffic for such a long time ________ we missed our appointment with the clients.",
+     "options": {
+      "A": "that",
+      "B": "and",
+      "C": "because",
+      "D": "before"
+     }
+    },
+    {
+     "n": 21,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "Willy got a 3,000-dollar ________ for his full attendance last year.",
+     "options": {
+      "A": "bonus",
+      "B": "price",
+      "C": "fund",
+      "D": "merit"
+     }
+    },
+    {
+     "n": 22,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "Peter has such an extensive vocabulary that he is, ________, a walking dictionary.",
+     "options": {
+      "A": "to say so",
+      "B": "so to speak",
+      "C": "so to tell",
+      "D": "so to put"
+     }
+    },
+    {
+     "n": 23,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "There’s a police car parked outside our neighbor’s house, and it’s been there for a while. What do you suppose ________?",
+     "options": {
+      "A": "happened",
+      "B": "did happen",
+      "C": "has happened",
+      "D": "would happen"
+     }
+    },
+    {
+     "n": 24,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "You need to ________ a proposal to apply for approval for your project.",
+     "options": {
+      "A": "present",
+      "B": "issue",
+      "C": "describe",
+      "D": "offer"
+     }
+    },
+    {
+     "n": 25,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "“I was overwhelmed by the heavy workload, weren’t you?” Choose the best response.",
+     "options": {
+      "A": "Yes, it’s overstaffed.",
+      "B": "No, you should take a break.",
+      "C": "Yes, they need to hire more people.",
+      "D": "No, I don’t know where to download it."
+     }
+    },
+    {
+     "n": 26,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "Going to a gym to work out has become a ________ in Taiwan.",
+     "options": {
+      "A": "exercise",
+      "B": "trend",
+      "C": "style",
+      "D": "popular"
+     }
+    },
+    {
+     "n": 27,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "Tom turns 65 next year so he will ________.",
+     "options": {
+      "A": "resign",
+      "B": "be fired",
+      "C": "retire",
+      "D": "return home"
+     }
+    },
+    {
+     "n": 28,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "Anna and Cathy haven’t seen each other ________ high school graduation.",
+     "options": {
+      "A": "in",
+      "B": "since",
+      "C": "before",
+      "D": "at"
+     }
+    },
+    {
+     "n": 29,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "Many citizens looked upon the worsening economic situation ________, demanding urgent government intervention.",
+     "options": {
+      "A": "as critical",
+      "B": "to be critical",
+      "C": "being critical",
+      "D": "critical"
+     }
+    },
+    {
+     "n": 30,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "The sky is getting dark. I think it’s ________ rain.",
+     "options": {
+      "A": "about to",
+      "B": "will to",
+      "C": "like to",
+      "D": "meaning to"
+     }
+    },
+    {
+     "n": 31,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "Gardening is the biggest single hobby in America — the one ________ Americans spend the most time, energy, and money.",
+     "options": {
+      "A": "that",
+      "B": "which",
+      "C": "on that",
+      "D": "on which"
+     }
+    },
+    {
+     "n": 32,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "Evan has a bad temper and no one wants to be ________ him.",
+     "options": {
+      "A": "nearly",
+      "B": "away from",
+      "C": "about",
+      "D": "around"
+     }
+    },
+    {
+     "n": 33,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "You were opposed to ________ to join us for dinner last night, weren't you?",
+     "options": {
+      "A": "our inviting her",
+      "B": "us invite her",
+      "C": "that we invite her",
+      "D": "we inviting her"
+     }
+    },
+    {
+     "n": 34,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "The show must win the approval of the critics and audience in New York, ________ it is being performed at the Palace Theater.",
+     "options": {
+      "A": "that",
+      "B": "which",
+      "C": "when",
+      "D": "where"
+     }
+    },
+    {
+     "n": 35,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "TSMC pays well, but many people quit ________ the long work hours.",
+     "options": {
+      "A": "because",
+      "B": "avoid",
+      "C": "since",
+      "D": "because of"
+     }
+    },
+    {
+     "n": 36,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "You ________ right now. The train is leaving in an hour.",
+     "options": {
+      "A": "would rather go",
+      "B": "had better go",
+      "C": "had rather gone",
+      "D": "would better go"
+     }
+    },
+    {
+     "n": 37,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "UberEats is a food delivery ________ used by lots of people.",
+     "options": {
+      "A": "network",
+      "B": "platform",
+      "C": "website",
+      "D": "station"
+     }
+    },
+    {
+     "n": 38,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "Given the possibility of aftershocks, it’s clearly wiser to think ahead now than to later regret ________ any preparations.",
+     "options": {
+      "A": "making",
+      "B": "having made",
+      "C": "not having made",
+      "D": "have not made"
+     }
+    },
+    {
+     "n": 39,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "The HR manager from our Boston branch has just arrived though I didn’t know he ________ until yesterday.",
+     "options": {
+      "A": "comes",
+      "B": "will come",
+      "C": "was coming",
+      "D": "had been coming"
+     }
+    },
+    {
+     "n": 40,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "A positive company culture often rewards strong performance. For example, there is a(n) ________ scheme in place to recognize and motivate highly efficient employees.",
+     "options": {
+      "A": "encouragement",
+      "B": "incentive",
+      "C": "initiative",
+      "D": "compensation"
+     }
+    },
+    {
+     "n": 41,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "When science was still ________, the Greeks believed that the Earth was at the center of the universe.",
+     "options": {
+      "A": "in its beginning",
+      "B": "in its origin",
+      "C": "in its infancy",
+      "D": "in its phase"
+     }
+    },
+    {
+     "n": 42,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "I should have studied architecture. I ________ really good at it.",
+     "options": {
+      "A": "must have been",
+      "B": "should have been",
+      "C": "couldn’t have been",
+      "D": "would have been"
+     }
+    },
+    {
+     "n": 43,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "Don’t make reservations at the Spring Restaurant ________ you’re prepared to spend a lot of money.",
+     "options": {
+      "A": "until",
+      "B": "unless",
+      "C": "since",
+      "D": "although"
+     }
+    },
+    {
+     "n": 44,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "Every new employee ________ take special training courses.",
+     "options": {
+      "A": "is needed to",
+      "B": "must to",
+      "C": "is required to",
+      "D": "is order to"
+     }
+    },
+    {
+     "n": 45,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "________ the movie was so boring, I doubt I would have gone to see it.",
+     "options": {
+      "A": "I had known if",
+      "B": "If I knew",
+      "C": "If had I known",
+      "D": "Had I known"
+     }
+    },
+    {
+     "n": 46,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "To apply for a job, ________ the application form first.",
+     "options": {
+      "A": "read out",
+      "B": "write in",
+      "C": "print in",
+      "D": "fill out"
+     }
+    },
+    {
+     "n": 47,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "The new administration ________ the quality of preschool education nationwide.",
+     "options": {
+      "A": "is committed to improve",
+      "B": "is committed to improving",
+      "C": "has committed to improve",
+      "D": "has committed to be improved"
+     }
+    },
+    {
+     "n": 48,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "Debbie and I ________. We’ve been friends since high school and still see each other every few weeks even after all these years.",
+     "options": {
+      "A": "are back on our way",
+      "B": "know our way",
+      "C": "never lose our way",
+      "D": "go way back"
+     }
+    },
+    {
+     "n": 49,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "She quickly reached a level of musicianship that the rest of us can only ________.",
+     "options": {
+      "A": "aspire to",
+      "B": "admire to",
+      "C": "allude to",
+      "D": "attain to"
+     }
+    },
+    {
+     "n": 50,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "The high cost of living in big cities is steadily ________ people’s savings. As a result, many decide to relocate to suburban areas.",
+     "options": {
+      "A": "eating into",
+      "B": "cutting up",
+      "C": "draining away",
+      "D": "weighing on"
+     }
+    },
+    {
+     "n": 51,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "Despite coming from very different backgrounds, Sarah and Jack always seem to ________ on important issues.",
+     "options": {
+      "A": "catch their eyes",
+      "B": "keep an eye out",
+      "C": "see eye to eye",
+      "D": "feast their eyes"
+     }
+    },
+    {
+     "n": 52,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "I got my fridge ______ last week and now it’s running smoothly.",
+     "options": {
+      "A": "repair",
+      "B": "repaired",
+      "C": "fix up",
+      "D": "better"
+     }
+    },
+    {
+     "n": 53,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "We should be ________ and recycle.",
+     "options": {
+      "A": "environmental protection",
+      "B": "eco-friendly",
+      "C": "conscious",
+      "D": "love Earth"
+     }
+    },
+    {
+     "n": 54,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "I really put my ________ in it when I met our German business partner. Because I was so nervous, I accidentally said “Who are you?” instead of “How are you?”.",
+     "options": {
+      "A": "tongue",
+      "B": "finger",
+      "C": "hand",
+      "D": "foot"
+     }
+    },
+    {
+     "n": 55,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "The marketing team proposed a digital campaign to target younger consumers, ________ the sales department favored a more traditional approach using print media.",
+     "options": {
+      "A": "however",
+      "B": "despite",
+      "C": "whereas",
+      "D": "unless"
+     }
+    }
+   ]
+  }
+ ],
+ "id": "A-114-1"
+}

@@ -1,0 +1,653 @@
+[
+ {
+  "id": "A-110-1",
+  "exam": "A",
+  "year": 110,
+  "session": 1,
+  "parts": [
+   {
+    "kind": "essay",
+    "subject": "國文",
+    "title": "作文",
+    "count": 0,
+    "minutes": 40
+   },
+   {
+    "kind": "mc",
+    "subject": "國文",
+    "title": "國文選擇",
+    "count": 15,
+    "minutes": 12
+   },
+   {
+    "kind": "mc",
+    "subject": "英文",
+    "title": "英文",
+    "count": 40,
+    "minutes": 40
+   }
+  ]
+ },
+ {
+  "id": "A-110-2",
+  "exam": "A",
+  "year": 110,
+  "session": 2,
+  "parts": [
+   {
+    "kind": "mc",
+    "subject": "行政學",
+    "title": "行政學",
+    "count": 25,
+    "minutes": 30
+   },
+   {
+    "kind": "mc",
+    "subject": "法律常識",
+    "title": "法律常識",
+    "count": 25,
+    "minutes": 30
+   }
+  ]
+ },
+ {
+  "id": "A-111-1",
+  "exam": "A",
+  "year": 111,
+  "session": 1,
+  "parts": [
+   {
+    "kind": "essay",
+    "subject": "國文",
+    "title": "作文",
+    "count": 0,
+    "minutes": 40
+   },
+   {
+    "kind": "mc",
+    "subject": "國文",
+    "title": "國文選擇",
+    "count": 15,
+    "minutes": 12
+   },
+   {
+    "kind": "mc",
+    "subject": "英文",
+    "title": "英文",
+    "count": 40,
+    "minutes": 40
+   }
+  ]
+ },
+ {
+  "id": "A-111-2",
+  "exam": "A",
+  "year": 111,
+  "session": 2,
+  "parts": [
+   {
+    "kind": "mc",
+    "subject": "行政學",
+    "title": "行政學",
+    "count": 25,
+    "minutes": 30
+   },
+   {
+    "kind": "mc",
+    "subject": "法律常識",
+    "title": "法律常識",
+    "count": 25,
+    "minutes": 30
+   }
+  ]
+ },
+ {
+  "id": "A-112-1",
+  "exam": "A",
+  "year": 112,
+  "session": 1,
+  "parts": [
+   {
+    "kind": "essay",
+    "subject": "國文",
+    "title": "作文",
+    "count": 0,
+    "minutes": 40
+   },
+   {
+    "kind": "mc",
+    "subject": "國文",
+    "title": "國文選擇",
+    "count": 15,
+    "minutes": 12
+   },
+   {
+    "kind": "mc",
+    "subject": "英文",
+    "title": "英文",
+    "count": 40,
+    "minutes": 40
+   }
+  ]
+ },
+ {
+  "id": "A-112-2",
+  "exam": "A",
+  "year": 112,
+  "session": 2,
+  "parts": [
+   {
+    "kind": "mc",
+    "subject": "行政學",
+    "title": "行政學",
+    "count": 25,
+    "minutes": 30
+   },
+   {
+    "kind": "mc",
+    "subject": "法律常識",
+    "title": "法律常識",
+    "count": 25,
+    "minutes": 30
+   }
+  ]
+ },
+ {
+  "id": "A-113-1",
+  "exam": "A",
+  "year": 113,
+  "session": 1,
+  "parts": [
+   {
+    "kind": "essay",
+    "subject": "國文",
+    "title": "作文",
+    "count": 0,
+    "minutes": 40
+   },
+   {
+    "kind": "mc",
+    "subject": "國文",
+    "title": "國文選擇",
+    "count": 15,
+    "minutes": 12
+   },
+   {
+    "kind": "mc",
+    "subject": "英文",
+    "title": "英文",
+    "count": 40,
+    "minutes": 40
+   }
+  ]
+ },
+ {
+  "id": "A-113-2",
+  "exam": "A",
+  "year": 113,
+  "session": 2,
+  "parts": [
+   {
+    "kind": "mc",
+    "subject": "行政學",
+    "title": "行政學",
+    "count": 25,
+    "minutes": 30
+   },
+   {
+    "kind": "mc",
+    "subject": "法律常識",
+    "title": "法律常識",
+    "count": 25,
+    "minutes": 30
+   }
+  ]
+ },
+ {
+  "id": "A-114-1",
+  "exam": "A",
+  "year": 114,
+  "session": 1,
+  "parts": [
+   {
+    "kind": "essay",
+    "subject": "國文",
+    "title": "作文",
+    "count": 0,
+    "minutes": 40
+   },
+   {
+    "kind": "mc",
+    "subject": "國文",
+    "title": "國文選擇",
+    "count": 15,
+    "minutes": 12
+   },
+   {
+    "kind": "mc",
+    "subject": "英文",
+    "title": "英文",
+    "count": 40,
+    "minutes": 40
+   }
+  ]
+ },
+ {
+  "id": "A-114-2",
+  "exam": "A",
+  "year": 114,
+  "session": 2,
+  "parts": [
+   {
+    "kind": "mc",
+    "subject": "行政學",
+    "title": "行政學",
+    "count": 25,
+    "minutes": 30
+   },
+   {
+    "kind": "mc",
+    "subject": "法律常識",
+    "title": "法律常識",
+    "count": 25,
+    "minutes": 30
+   }
+  ]
+ },
+ {
+  "id": "A-115-1",
+  "exam": "A",
+  "year": 115,
+  "session": 1,
+  "parts": [
+   {
+    "kind": "essay",
+    "subject": "國文",
+    "title": "作文",
+    "count": 0,
+    "minutes": 40
+   },
+   {
+    "kind": "mc",
+    "subject": "英文",
+    "title": "英文",
+    "count": 40,
+    "minutes": 40
+   }
+  ]
+ },
+ {
+  "id": "A-115-2",
+  "exam": "A",
+  "year": 115,
+  "session": 2,
+  "parts": [
+   {
+    "kind": "mc",
+    "subject": "行政學",
+    "title": "行政學",
+    "count": 25,
+    "minutes": 30
+   },
+   {
+    "kind": "mc",
+    "subject": "法律常識",
+    "title": "法律常識",
+    "count": 25,
+    "minutes": 30
+   }
+  ]
+ },
+ {
+  "id": "A-115-3",
+  "exam": "A",
+  "year": 115,
+  "session": 3,
+  "parts": [
+   {
+    "kind": "fill",
+    "subject": "企業管理",
+    "title": "企管填充",
+    "count": 20,
+    "minutes": 25
+   },
+   {
+    "kind": "written",
+    "subject": "企業管理",
+    "title": "企管問答",
+    "count": 4,
+    "minutes": 35
+   }
+  ]
+ },
+ {
+  "id": "B-110-1",
+  "exam": "B",
+  "year": 110,
+  "session": 1,
+  "parts": [
+   {
+    "kind": "essay",
+    "subject": "國文",
+    "title": "作文",
+    "count": 0,
+    "minutes": 60
+   },
+   {
+    "kind": "mc",
+    "subject": "英文",
+    "title": "英文",
+    "count": 40,
+    "minutes": 60
+   }
+  ]
+ },
+ {
+  "id": "B-110-2",
+  "exam": "B",
+  "year": 110,
+  "session": 2,
+  "parts": [
+   {
+    "kind": "mc",
+    "subject": "企業概論",
+    "title": "企業概論",
+    "count": 25,
+    "minutes": 45
+   },
+   {
+    "kind": "mc",
+    "subject": "法學緒論",
+    "title": "法學緒論",
+    "count": 25,
+    "minutes": 45
+   }
+  ]
+ },
+ {
+  "id": "B-110-3",
+  "exam": "B",
+  "year": 110,
+  "session": 3,
+  "parts": [
+   {
+    "kind": "written",
+    "subject": "管理學",
+    "title": "管理學申論",
+    "count": 3,
+    "minutes": 60
+   },
+   {
+    "kind": "written",
+    "subject": "經濟學",
+    "title": "經濟學申論",
+    "count": 3,
+    "minutes": 60
+   }
+  ]
+ },
+ {
+  "id": "B-111-1",
+  "exam": "B",
+  "year": 111,
+  "session": 1,
+  "parts": [
+   {
+    "kind": "essay",
+    "subject": "國文",
+    "title": "作文",
+    "count": 0,
+    "minutes": 60
+   },
+   {
+    "kind": "mc",
+    "subject": "英文",
+    "title": "英文",
+    "count": 40,
+    "minutes": 60
+   }
+  ]
+ },
+ {
+  "id": "B-111-2",
+  "exam": "B",
+  "year": 111,
+  "session": 2,
+  "parts": [
+   {
+    "kind": "mc",
+    "subject": "企業概論",
+    "title": "企業概論",
+    "count": 25,
+    "minutes": 45
+   },
+   {
+    "kind": "mc",
+    "subject": "法學緒論",
+    "title": "法學緒論",
+    "count": 25,
+    "minutes": 45
+   }
+  ]
+ },
+ {
+  "id": "B-111-3",
+  "exam": "B",
+  "year": 111,
+  "session": 3,
+  "parts": [
+   {
+    "kind": "written",
+    "subject": "管理學",
+    "title": "管理學申論",
+    "count": 3,
+    "minutes": 60
+   },
+   {
+    "kind": "written",
+    "subject": "經濟學",
+    "title": "經濟學申論",
+    "count": 3,
+    "minutes": 60
+   }
+  ]
+ },
+ {
+  "id": "B-112-1",
+  "exam": "B",
+  "year": 112,
+  "session": 1,
+  "parts": [
+   {
+    "kind": "essay",
+    "subject": "國文",
+    "title": "作文",
+    "count": 0,
+    "minutes": 60
+   },
+   {
+    "kind": "mc",
+    "subject": "英文",
+    "title": "英文",
+    "count": 40,
+    "minutes": 60
+   }
+  ]
+ },
+ {
+  "id": "B-112-2",
+  "exam": "B",
+  "year": 112,
+  "session": 2,
+  "parts": [
+   {
+    "kind": "mc",
+    "subject": "企業概論",
+    "title": "企業概論",
+    "count": 25,
+    "minutes": 45
+   },
+   {
+    "kind": "mc",
+    "subject": "法學緒論",
+    "title": "法學緒論",
+    "count": 25,
+    "minutes": 45
+   }
+  ]
+ },
+ {
+  "id": "B-112-3",
+  "exam": "B",
+  "year": 112,
+  "session": 3,
+  "parts": [
+   {
+    "kind": "written",
+    "subject": "管理學",
+    "title": "管理學申論",
+    "count": 3,
+    "minutes": 60
+   },
+   {
+    "kind": "written",
+    "subject": "經濟學",
+    "title": "經濟學申論",
+    "count": 3,
+    "minutes": 60
+   }
+  ]
+ },
+ {
+  "id": "B-113-1",
+  "exam": "B",
+  "year": 113,
+  "session": 1,
+  "parts": [
+   {
+    "kind": "essay",
+    "subject": "國文",
+    "title": "作文",
+    "count": 0,
+    "minutes": 60
+   },
+   {
+    "kind": "mc",
+    "subject": "英文",
+    "title": "英文",
+    "count": 40,
+    "minutes": 60
+   }
+  ]
+ },
+ {
+  "id": "B-113-2",
+  "exam": "B",
+  "year": 113,
+  "session": 2,
+  "parts": [
+   {
+    "kind": "mc",
+    "subject": "企業概論",
+    "title": "企業概論",
+    "count": 25,
+    "minutes": 45
+   },
+   {
+    "kind": "mc",
+    "subject": "法學緒論",
+    "title": "法學緒論",
+    "count": 25,
+    "minutes": 45
+   }
+  ]
+ },
+ {
+  "id": "B-113-3",
+  "exam": "B",
+  "year": 113,
+  "session": 3,
+  "parts": [
+   {
+    "kind": "written",
+    "subject": "管理學",
+    "title": "管理學申論",
+    "count": 3,
+    "minutes": 60
+   },
+   {
+    "kind": "written",
+    "subject": "經濟學",
+    "title": "經濟學申論",
+    "count": 3,
+    "minutes": 60
+   }
+  ]
+ },
+ {
+  "id": "B-114-1",
+  "exam": "B",
+  "year": 114,
+  "session": 1,
+  "parts": [
+   {
+    "kind": "essay",
+    "subject": "國文",
+    "title": "作文",
+    "count": 0,
+    "minutes": 60
+   },
+   {
+    "kind": "mc",
+    "subject": "英文",
+    "title": "英文",
+    "count": 40,
+    "minutes": 60
+   }
+  ]
+ },
+ {
+  "id": "B-114-2",
+  "exam": "B",
+  "year": 114,
+  "session": 2,
+  "parts": [
+   {
+    "kind": "mc",
+    "subject": "企業概論",
+    "title": "企業概論",
+    "count": 25,
+    "minutes": 45
+   },
+   {
+    "kind": "mc",
+    "subject": "法學緒論",
+    "title": "法學緒論",
+    "count": 25,
+    "minutes": 45
+   }
+  ]
+ },
+ {
+  "id": "B-114-3",
+  "exam": "B",
+  "year": 114,
+  "session": 3,
+  "parts": [
+   {
+    "kind": "written",
+    "subject": "管理學",
+    "title": "管理學申論",
+    "count": 3,
+    "minutes": 60
+   },
+   {
+    "kind": "written",
+    "subject": "經濟學",
+    "title": "經濟學申論",
+    "count": 3,
+    "minutes": 60
+   }
+  ]
+ }
+]

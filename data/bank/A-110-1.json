@@ -1,0 +1,749 @@
+{
+ "exam": "A",
+ "year": 110,
+ "session": 1,
+ "parts": [
+  {
+   "kind": "essay",
+   "subject": "國文",
+   "title": "作文",
+   "minutes": 40,
+   "prompt": "如何做好時間管理",
+   "detail": "文言白話不拘，但段落要分明。"
+  },
+  {
+   "kind": "mc",
+   "subject": "國文",
+   "title": "國文選擇",
+   "per": 2,
+   "minutes": 12,
+   "questions": [
+    {
+     "n": 1,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "下列「」內的文字讀音何者正確？",
+     "options": {
+      "A": "跌「宕」不羈：ㄉㄤˋ",
+      "B": "「嚙」臂之交：ㄔˇ",
+      "C": "「褫」奪公權：ㄉ一ˋ",
+      "D": "諸父異「爨」：ㄔㄨㄢˋ"
+     }
+    },
+    {
+     "n": 2,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "下列「」內的文字，何者讀音前後相同？",
+     "options": {
+      "A": "「炯」炯有神／「迥」然不同",
+      "B": "「謳」歌／「傴」僂提攜",
+      "C": "「揭」其劍／深厲淺「揭」",
+      "D": "「鏢」魚船／「瞟」了一眼"
+     }
+    },
+    {
+     "n": 3,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "下列「」內的文字，何者讀音前後相同？",
+     "options": {
+      "A": "風行草「偃」／「揠」苗助長",
+      "B": "「矜」寡孤獨／青青子「衿」",
+      "C": "登「鸛」雀樓／醍醐「灌」頂",
+      "D": "「揣」摩上意／「惴」惴不安"
+     }
+    },
+    {
+     "n": 4,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "下列「」內的文字，何者讀音前後相同？",
+     "options": {
+      "A": "肆無忌「憚」／「殫」精竭慮",
+      "B": "名聞「遐」邇／好整以「暇」",
+      "C": "「怏」怏不樂／「泱」泱大國",
+      "D": "灰影「幢」幢／「憧」憬未來"
+     }
+    },
+    {
+     "n": 5,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "先秦諸子的思想與文章各有其特色，下列何者為主張「守柔」、「無為」思想的重要哲學家？",
+     "options": {
+      "A": "孟子",
+      "B": "韓非子",
+      "C": "老子",
+      "D": "墨子"
+     }
+    },
+    {
+     "n": 6,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "「唐宋八大家」是中國唐代與宋代八位大家的合稱，下列何者被讚稱為：「文起八代之衰，道濟天下之溺」？",
+     "options": {
+      "A": "蘇軾",
+      "B": "柳宗元",
+      "C": "韓愈",
+      "D": "王安石"
+     }
+    },
+    {
+     "n": 7,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "下列何者以「吾家藏書一萬卷，集錄三代以來金石遺文一千卷，有琴一張，有棋一局，常置酒一壺，以吾一老翁，老於此五物之間，是豈不為六一乎」之語，自稱「六一居士」？",
+     "options": {
+      "A": "范仲淹",
+      "B": "歐陽脩",
+      "C": "宋祁",
+      "D": "陸游"
+     }
+    },
+    {
+     "n": 8,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "下列何者為中國最早的白話章回小說？",
+     "options": {
+      "A": "杜光庭《虬髯客傳》",
+      "B": "施耐庵《水滸傳》",
+      "C": "吳承恩《西遊記》",
+      "D": "羅貫中《三國演義》"
+     }
+    },
+    {
+     "n": 9,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "《論語：先進》宗廟之事，如會同，端章甫，願為小相焉。其中「章甫」指的是下列何者？",
+     "options": {
+      "A": "古代禮帽",
+      "B": "代表國家政權的神器",
+      "C": "古代的酒器",
+      "D": "古代用來盛祭品的禮器"
+     }
+    },
+    {
+     "n": 10,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "他鼓動「如簧之舌」，終於說服客戶接受他的提案，其中「如簧之舌」之意為下列何者？",
+     "options": {
+      "A": "形容知識豐富，學問廣博",
+      "B": "形容人講話滔滔不絕",
+      "C": "形容人話語不多，沉默寡言",
+      "D": "形容人好逞口舌之快"
+     }
+    },
+    {
+     "n": 11,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "下列何者為描寫春夏的景致？",
+     "options": {
+      "A": "得斯泉於山谷之間",
+      "B": "仰而望山，俯而聽泉",
+      "C": "風霜冰雪，刻露清秀",
+      "D": "掇幽芳而蔭喬木"
+     }
+    },
+    {
+     "n": 12,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "蘇軾謫居黃州作《赤壁賦》「桂棹兮蘭槳，擊空明兮泝流光。渺渺兮予懷，望美人兮天一方」之文句，所要表達之意為下列何者？",
+     "options": {
+      "A": "泛舟赤壁的樂趣",
+      "B": "感嘆人生之短暫渺小",
+      "C": "內心釋懷之歡喜與曠達通脫之安適",
+      "D": "遠謫異鄉、遙念君國"
+     }
+    },
+    {
+     "n": 13,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "「劉姥姥進大觀園」已經成為一句成語，用來形容下列何者情境？",
+     "options": {
+      "A": "平凡的人貢獻平凡的事物",
+      "B": "眼界狹小無法接受新事物",
+      "C": "沒見過世面的人開了眼界",
+      "D": "滄海桑田世事多變難預料"
+     }
+    },
+    {
+     "n": 14,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "有關「新月詩派」的說明，下列何者有誤？",
+     "options": {
+      "A": "「新月」二字取自泰戈爾的詩集",
+      "B": "作品講究形式整齊和辭藻美麗",
+      "C": "徐志摩、卞之琳可說是新月代表詩人",
+      "D": "為擺脫舊詩的束縛，主張完全的自由，不受任何格律限制"
+     }
+    },
+    {
+     "n": 15,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "徐志摩《再別康橋》一詩中，「那波光裡的豔影，在我的心頭蕩漾」文句表達的意思為下列何者？",
+     "options": {
+      "A": "往日的青春美夢終難追憶",
+      "B": "柳樹倒映在康河裏的情景，勾起眷戀的感情",
+      "C": "對離別在即感到感傷",
+      "D": "象徵自己對未來生活的規劃與期望"
+     }
+    }
+   ]
+  },
+  {
+   "kind": "mc",
+   "subject": "英文",
+   "title": "英文",
+   "per": 2.5,
+   "minutes": 40,
+   "questions": [
+    {
+     "n": 16,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "What’s the best answer when someone says, “How are things?” to you?",
+     "options": {
+      "A": "What things?",
+      "B": "Same as usual.",
+      "C": "I don’t have a clue.",
+      "D": "I like them."
+     }
+    },
+    {
+     "n": 17,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "Earthquakes are not predictable, but new detectors ____ you to have 10 extra seconds to respond.",
+     "options": {
+      "A": "give",
+      "B": "allow",
+      "C": "let",
+      "D": "make"
+     }
+    },
+    {
+     "n": 18,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "Due to its success in fighting the COVID-19 pandemic, Taiwan is now a ____ for other countries.",
+     "options": {
+      "A": "learning subject",
+      "B": "object to copy",
+      "C": "standard nation",
+      "D": "role model"
+     }
+    },
+    {
+     "n": 19,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "The company was founded four decades ago; in other words, it has been in operation for ____.",
+     "options": {
+      "A": "40 years",
+      "B": "40 months",
+      "C": "80 years",
+      "D": "80 months"
+     }
+    },
+    {
+     "n": 20,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "Taiwan ____ approximately 400 kilometers from north to south.",
+     "options": {
+      "A": "measures",
+      "B": "longs",
+      "C": "has",
+      "D": "goes to"
+     }
+    },
+    {
+     "n": 21,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "Which is the most appropriate response to “Why aren’t you going to lunch with us?”?",
+     "options": {
+      "A": "I’m not friends.",
+      "B": "I had a late breakfast.",
+      "C": "Is it a question?",
+      "D": "It’s my problem."
+     }
+    },
+    {
+     "n": 22,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "Possessing a skill can be more ____ than having a pretty diploma sometimes.",
+     "options": {
+      "A": "better",
+      "B": "valuable",
+      "C": "impressed",
+      "D": "convenient"
+     }
+    },
+    {
+     "n": 23,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "Cathy is extremely ____ because she has exercised regularly for years.",
+     "options": {
+      "A": "fit",
+      "B": "satisfaction",
+      "C": "likable",
+      "D": "suitable"
+     }
+    },
+    {
+     "n": 24,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "Junk food is unhealthy, but it is usually quite ____ ; that’s why a lot of people like it.",
+     "options": {
+      "A": "good taste",
+      "B": "smells wonderful",
+      "C": "flavorful",
+      "D": "attractive"
+     }
+    },
+    {
+     "n": 25,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "Tom and Jerry are identical twins and it’s hard to ____ between them.",
+     "options": {
+      "A": "tell the difference",
+      "B": "separate",
+      "C": "know who",
+      "D": "confirm the identity"
+     }
+    },
+    {
+     "n": 26,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "It’s difficult to achieve the goal of same work same pay between men and women although ____ is a government policy.",
+     "options": {
+      "A": "salary fairness",
+      "B": "equal wages",
+      "C": "gender equality",
+      "D": "equality for all"
+     }
+    },
+    {
+     "n": 27,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "Talk to the ____ if you have any question about the amount of pay you received last week.",
+     "options": {
+      "A": "chairperson",
+      "B": "chief secretary",
+      "C": "accounting office",
+      "D": "personal office"
+     }
+    },
+    {
+     "n": 28,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "“Do you have minute? I need to ____ you.”",
+     "options": {
+      "A": "hear a story from",
+      "B": "tell a lie to",
+      "C": "have a chat with",
+      "D": "play some music with"
+     }
+    },
+    {
+     "n": 29,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "You have to ____ if you want to play the game.",
+     "options": {
+      "A": "enjoy the atmosphere",
+      "B": "follow the rules",
+      "C": "know the results",
+      "D": "take the money"
+     }
+    },
+    {
+     "n": 30,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "“There is no need to ____ ; the movie already started half hour ago.”",
+     "options": {
+      "A": "arrive",
+      "B": "rush",
+      "C": "race",
+      "D": "choose"
+     }
+    },
+    {
+     "n": 31,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "Jack admitted that he should have listened to you. It means",
+     "options": {
+      "A": "He didn’t hear you.",
+      "B": "You didn’t speak.",
+      "C": "He didn’t listen to you.",
+      "D": "You had told him."
+     }
+    },
+    {
+     "n": 32,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "“We’re celebrating Jimmy’s birthday this Friday. He’s ____ 26.”",
+     "options": {
+      "A": "turning",
+      "B": "been",
+      "C": "gone to",
+      "D": "arrived"
+     }
+    },
+    {
+     "n": 33,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "Mark is an interesting person and people like to be ____ him.",
+     "options": {
+      "A": "besides",
+      "B": "as",
+      "C": "around",
+      "D": "for"
+     }
+    },
+    {
+     "n": 34,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "Jay has trouble managing his money and he always ____ at the end of the month.",
+     "options": {
+      "A": "runs out of money",
+      "B": "uses cash",
+      "C": "in need of money",
+      "D": "has to lend money"
+     }
+    },
+    {
+     "n": 35,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "Matthew and Tony are buddies. They have known each other ____ childhood.",
+     "options": {
+      "A": "from",
+      "B": "since",
+      "C": "in",
+      "D": "during"
+     }
+    },
+    {
+     "n": 36,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "Taiwan Power Company is a ____ company under the Ministry of Economic Affairs.",
+     "options": {
+      "A": "private",
+      "B": "state-owned",
+      "C": "electric",
+      "D": "publicity"
+     }
+    },
+    {
+     "n": 37,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "Many sports events are held without ____ because of the pandemic.",
+     "options": {
+      "A": "guests",
+      "B": "tickets",
+      "C": "spectators",
+      "D": "people"
+     }
+    },
+    {
+     "n": 38,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "Gary spends three hours ____ between home and work each day, but he doesn’t mind.",
+     "options": {
+      "A": "riding",
+      "B": "coming",
+      "C": "commuting",
+      "D": "transporting"
+     }
+    },
+    {
+     "n": 39,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "Ken is really a good ____ although he doesn’t seem to have a lot of muscles.",
+     "options": {
+      "A": "athlete",
+      "B": "cook",
+      "C": "game player",
+      "D": "gulf player"
+     }
+    },
+    {
+     "n": 40,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "“You’d better hurry if you want to ____. It leaves in half hour.”",
+     "options": {
+      "A": "get the airplane",
+      "B": "meet the bus",
+      "C": "take the taxi",
+      "D": "catch the train"
+     }
+    },
+    {
+     "n": 41,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "The weather has been ____. Sometimes the temperature drops ten degrees in one day.",
+     "options": {
+      "A": "inconvenient",
+      "B": "unbalanced",
+      "C": "inconsistent",
+      "D": "unstable"
+     }
+    },
+    {
+     "n": 42,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "Some people are addicted to ____ and they upload several posts everyday.",
+     "options": {
+      "A": "internet",
+      "B": "social media",
+      "C": "intranet",
+      "D": "blogs"
+     }
+    },
+    {
+     "n": 43,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "It’s impossible to ____ fashion because new models come out so quickly.",
+     "options": {
+      "A": "keep up with",
+      "B": "pay attention to",
+      "C": "focus on",
+      "D": "hold on to"
+     }
+    },
+    {
+     "n": 44,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "Norma’s eyes are all red and swollen; she ____ all night because of not passing the test.",
+     "options": {
+      "A": "has cried",
+      "B": "must cry",
+      "C": "cries",
+      "D": "must have cried"
+     }
+    },
+    {
+     "n": 45,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "“Look at all the dark clouds coming in. It ____ rain.”",
+     "options": {
+      "A": "will seem to",
+      "B": "will like to",
+      "C": "must to",
+      "D": "is about to"
+     }
+    },
+    {
+     "n": 46,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "Taipei 101 ____ the tallest building in the world, but it is still an important landmark in the city.",
+     "options": {
+      "A": "has been",
+      "B": "used to be",
+      "C": "is",
+      "D": "is once"
+     }
+    },
+    {
+     "n": 47,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "”Jake didn’t ____, so the teacher thought he was not interested in the class.”",
+     "options": {
+      "A": "sign up",
+      "B": "write down",
+      "C": "turn in",
+      "D": "call out"
+     }
+    },
+    {
+     "n": 48,
+     "answer": "B",
+     "group": "",
+     "passage": "",
+     "stem": "No motor vehicles are allowed to enter the pedestrian zone. What is a pedestrian?",
+     "options": {
+      "A": "a person",
+      "B": "a walker",
+      "C": "a passerby",
+      "D": "a bicycle rider"
+     }
+    },
+    {
+     "n": 49,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "Children learn to speak by ____ their older family members.",
+     "options": {
+      "A": "learning",
+      "B": "studying",
+      "C": "imitating",
+      "D": "seeing"
+     }
+    },
+    {
+     "n": 50,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "Which one is the closest to “find out” in meaning?",
+     "options": {
+      "A": "learn about",
+      "B": "identify",
+      "C": "look for",
+      "D": "uncover"
+     }
+    },
+    {
+     "n": 51,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "My best friend’s father wanted to ____ me a job, but I said no to him.",
+     "options": {
+      "A": "provide",
+      "B": "supply",
+      "C": "suggest",
+      "D": "offer"
+     }
+    },
+    {
+     "n": 52,
+     "answer": "A",
+     "group": "",
+     "passage": "",
+     "stem": "The customer who made the complaint accepted my explanation without ____ questions.",
+     "options": {
+      "A": "further",
+      "B": "answering",
+      "C": "worst",
+      "D": "little"
+     }
+    },
+    {
+     "n": 53,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "By ____ garbage, we can reduce the amount of garbage put into our environment.",
+     "options": {
+      "A": "keeping",
+      "B": "giving away",
+      "C": "hiding",
+      "D": "sorting"
+     }
+    },
+    {
+     "n": 54,
+     "answer": "C",
+     "group": "",
+     "passage": "",
+     "stem": "The workers have been instructed to follow the SOP. “SOP” stands for",
+     "options": {
+      "A": "simple operation process",
+      "B": "single operational plan",
+      "C": "standard operating procedure",
+      "D": "singular operative progress"
+     }
+    },
+    {
+     "n": 55,
+     "answer": "D",
+     "group": "",
+     "passage": "",
+     "stem": "Heather is a ____ person. She doesn’t talk much.",
+     "options": {
+      "A": "talkative",
+      "B": "mute",
+      "C": "speechless",
+      "D": "quiet"
+     }
+    }
+   ]
+  }
+ ],
+ "id": "A-110-1"
+}
