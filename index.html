@@ -466,7 +466,8 @@
         <div class="row" id="ed-templates">
           <label>套範本</label>
           <button class="chip" data-tpl="wrong">錯題卡</button>
-          <button class="chip" data-tpl="concept">概念卡</button>
+          <button class="chip" data-tpl="concept">概念卡（只有標題，自由寫）</button>
+          <button class="chip" data-tpl="concept2">概念卡（有欄位）</button>
           <button class="chip" data-tpl="essay">作文練習</button>
           <button class="chip" data-tpl="article">文章骨架</button>
           <button class="chip" data-tpl="free">空白小節</button>
@@ -990,6 +991,7 @@
           var lbl = mode === 'journal' ? '✎ 今天寫一筆' : mode === 'doc' ? '✎ 開始寫' : '＋ 在這頁加第一張卡';
           body.innerHTML = '<div class="empty">這頁還沒有內容。可能是剛建好、GitHub Pages 還在更新（等 1 分鐘重新整理），或連結打錯了。<br><br><button class="btn primary" id="empty-add">' + lbl + '</button></div>';
           $('empty-add').onclick = function () { openEditor(mode === 'journal' ? 'journal' : mode === 'doc' ? 'full' : 'card'); };
+          if (params && params.new) { history.replaceState(null, '', '#/' + path); openEditor('card'); $('ed-text').value = '## ' + params.new + '\n\n'; }
           return;
         }
         var c = splitCards(text);
@@ -1048,6 +1050,24 @@
           b.onclick = function () { var card = c.cards[+b.dataset.copy]; navigator.clipboard.writeText('## ' + card.title + '\n\n' + card.body).then(function () { toast('已複製'); }); };
         });
         bindImages(body);
+        // 考點頁：查同一科的概念頁有沒有同名卡，有就連過去，沒有就給一顆「開這張概念卡」
+        if (isIndexPage(page.file)) {
+          var conceptPath = path.replace(/\/考點$/, '/概念');
+          loadFile(conceptPath + '.md').then(function (ct) {
+            var have = {}; if (ct) splitCards(ct).cards.forEach(function (k) { have[k.title.trim()] = 1; });
+            body.querySelectorAll('.card').forEach(function (el) {
+              var t = el.dataset.title.trim();
+              var slot = Array.from(el.querySelectorAll('.card-body > p')).filter(function (p) { var st = p.querySelector('strong'); return st && st.textContent.replace(/[：:]\s*$/, '').trim() === '概念卡'; })[0];
+              if (!slot) return;
+              slot.innerHTML = have[t] ? '<strong>概念卡</strong>：<a href="#/' + esc(conceptPath) + '?c=' + encodeURIComponent(t) + '">看我寫的 →</a>' : '<strong>概念卡</strong>：<a href="#/' + esc(conceptPath) + '?new=' + encodeURIComponent(t) + '" class="mini" style="text-decoration:none">＋ 開這張概念卡</a>';
+            });
+          });
+        }
+        // 從考點頁按「開這張概念卡」進來：開編輯器、標題先填好
+        if (params && params.new) {
+          history.replaceState(null, '', '#/' + path);
+          openEditor('card'); $('ed-text').value = '## ' + params.new + '\n\n'; $('ed-text').setSelectionRange($('ed-text').value.length, $('ed-text').value.length);
+        }
         // 從搜尋或「今天先看」跳進來：捲到那張卡並閃一下
         if (params && params.c) {
           var target = Array.from(body.querySelectorAll('.card')).filter(function (el) { return el.dataset.title === params.c; })[0];
@@ -1683,7 +1703,8 @@
     var edMode = 'card', edFileSha = null, edSectionHint = null, edFocusCard = null;
     var TEMPLATES = {
       wrong: '## 【科目】115-Q07 一句話標題\n\n**題目**：\n\n**選項**：(A)  (B)  (C)  (D) \n\n**答案**：\n\n**我選**：\n\n**為什麼錯**：\n\n**觀念一句話**：\n\n**易混淆**：\n',
-      concept: '## 名詞（英文）\n\n**一句話**：\n\n**比喻**：\n\n**怎麼考**：\n\n**跟它很像的**：\n',
+      concept: '## 【科】名稱\n\n',
+      concept2: '## 【科】名稱\n\n**一句話**：\n\n**比喻**：\n\n**起源與架構**：\n\n**考過怎麼考**\n- \n\n**跟它很像的**：\n\n**還沒懂**：\n',
       essay: '## DATE 題目：\n\n**大綱**\n1. \n2. \n3. \n\n**正文**\n\n\n**AI 批改（25 分制）**\n- 分數：\n- 缺的關鍵字：\n- 架構建議：\n',
       free: '## DATE \n\n',
       article: '## 這是什麼\n\n\n## 重點\n\n- \n- \n\n## 我的理解／比喻\n\n\n## 來源\n\n- \n'
