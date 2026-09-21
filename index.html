@@ -409,6 +409,18 @@
     .written-in.locked { background: var(--paper-3); }
     .written-list.handwrite .written-in { display: none; }
     .exam-strip .actions { margin-top: 0.7rem; }
+    /* 小筆記：像貼在卡片上的便利貼 */
+    .card-body .note, .card-body .note-cont { background: #fbf1c7; border-left: 4px solid #d9b640; padding: 0.45rem 0.8rem; margin: 0; }
+    .card-body .note { border-radius: 0 10px 0 0; margin-top: 0.8rem; padding-top: 0.55rem; }
+    .card-body .note-cont:last-child { border-radius: 0 0 10px 0; padding-bottom: 0.55rem; }
+    .card-body .note:last-child { border-radius: 0 10px 10px 0; padding-bottom: 0.55rem; }
+    .card-body ul.note-cont, .card-body ol.note-cont { padding-left: 2rem; }
+    .note-box { margin-top: 0.6rem; border: 1px dashed #d9b640; border-radius: 10px; padding: 0.6rem; background: #fdf8e6; }
+    .note-box textarea { width: 100%; min-height: 6rem; resize: vertical; font: inherit; font-size: 0.95rem; line-height: 1.7; border: 1px solid var(--line); border-radius: 8px; padding: 0.5rem 0.7rem; background: #fff; color: var(--ink); }
+    .note-actions { display: flex; gap: 0.4rem; align-items: center; margin-top: 0.4rem; }
+    .mini.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+    a.wiki { border-bottom: 1px dashed var(--accent); }
+    a.wiki::before { content: "⟶ "; font-size: 0.8em; opacity: 0.7; }
     @media (max-width: 860px) {
       .exam-layout { grid-template-columns: 1fr; }
       .exam-side { position: static; }
@@ -700,7 +712,7 @@
       if (reviewsLoaded && !force) return Promise.resolve(reviews);
       var p = getToken()
         ? ghGet(REVIEW_FILE).then(function (f) { if (f) { reviewsSha = f.sha; mergeReviews(JSON.parse(f.content || '{}')); } })
-        : fetchPages(REVIEW_FILE).then(function (t) { if (t) mergeReviews(JSON.parse(t)); });
+        : Promise.resolve(); // 沒鑰匙＝訪客，只用這台瀏覽器的紀錄，不去讀 GitHub 上的
       return p.catch(function () {}).then(function () { reviewsLoaded = true; return reviews; });
     }
     var reviewTimer = null;
@@ -742,7 +754,7 @@
       if (progressLoaded && !force) return Promise.resolve(progress);
       var p = getToken()
         ? ghGet(PROGRESS_FILE).then(function (f) { if (f) { progressSha = f.sha; Object.assign(progress, JSON.parse(f.content || '{}')); } })
-        : fetchPages(PROGRESS_FILE).then(function (t) { if (t) Object.assign(progress, JSON.parse(t)); });
+        : Promise.resolve();
       return p.catch(function () {}).then(function () { writeJSON(K.progress, progress); progressLoaded = true; return progress; });
     }
     var progressTimer = null;
@@ -884,7 +896,7 @@
       html += '<div class="week">' + days.map(function (d) { return '<div class="' + (counts[d] ? 'hit' : '') + (d === today() ? ' today' : '') + '" style="height:' + Math.max(8, Math.round(counts[d] / max * 42)) + 'px" title="' + d + '：' + counts[d] + ' 次"></div>'; }).join('') + '</div>';
       html += '<div class="week-labels">' + days.map(function (d) { return '<span>' + names[new Date(d + 'T00:00:00').getDay()] + '</span>'; }).join('') + '</div>';
       html += '<div class="stats"><div class="stat"><b>' + total + '</b><span>張卡</span></div><div class="stat"><b>' + seen + '</b><span>看過</span></div><div class="stat"><b style="color:' + (due ? 'var(--due)' : 'inherit') + '">' + due + '</b><span>該再看</span></div><div class="stat"><b>' + (tasks ? Math.round(tasksDone / tasks * 100) : 0) + '%</b><span>地圖讀完</span></div></div>';
-      html += '<p class="help" style="margin:0.7rem 0 0">' + (getToken() ? '紀錄同步到 GitHub，換裝置也在。' : '紀錄目前只存在這台瀏覽器；到右上角「設定」貼鑰匙就會同步。') + '</p>';
+      html += '<p class="help" style="margin:0.7rem 0 0">' + (getToken() ? '紀錄同步到 GitHub，換裝置也在。' : '訪客模式：紀錄只存在這台瀏覽器。到右上角「設定」貼鑰匙，才會讀取並同步 GitHub 上的紀錄。') + '</p>';
       $('stats').innerHTML = html;
     }
     function pageCardHtml(s) {
@@ -967,15 +979,47 @@
 
     // ---------- 筆記頁 ----------
     var ANSWER_LABELS = ['答案', '我選', '為什麼錯', '觀念一句話', '易混淆', '一句話', '比喻', '怎麼考', '跟它很像的', '答案架構', '申論寫法', '怎麼用'];
-    function markAnswers(container) {
-      container.querySelectorAll('.card-body > p, .card-body > table, .card-body > ul').forEach(function (el) {
-        var st = el.querySelector('strong');
-        var label = st ? st.textContent.replace(/[：:]\s*$/, '').trim() : '';
-        if (el.tagName !== 'P') { // 表格、清單：跟著前一個段落的標籤
-          var prev = el.previousElementSibling; if (prev && prev.classList.contains('ans')) el.classList.add('ans');
-          return;
+    // [[概念名]] → 連到同一科的概念頁那張卡；不在學科底下就連到搜尋
+    function wikiLinks(html, page) {
+      var sub = page && page.sub;
+      return html.replace(/\[\[([^\]\n]+?)\]\]/g, function (_, t) {
+        t = t.trim();
+        var href = sub ? '#/學科/' + sub + '/概念?c=' + encodeURIComponent(t) : 'javascript:void(0)';
+        return '<a class="wiki" href="' + esc(href) + '" data-wiki="' + esc(t) + '">' + esc(t) + '</a>';
+      });
+    }
+    // 在某張卡的最後面加一段「我的筆記」
+    function appendNoteToCard(file, title, text) {
+      return ghGet(file).then(function (f) {
+        if (!f) throw new Error('找不到這個檔案');
+        var lines = f.content.split('\n'), start = -1, end = lines.length;
+        for (var i = 0; i < lines.length; i++) {
+          if (!/^## /.test(lines[i])) continue;
+          if (start >= 0) { end = i; break; }
+          if (lines[i].replace(/^## /, '').trim() === title.trim()) start = i;
         }
-        if (ANSWER_LABELS.indexOf(label) >= 0) el.classList.add('ans');
+        if (start < 0) throw new Error('找不到這張卡，可能剛被改過名');
+        var body = text.trim().replace(/\n{3,}/g, '\n\n');
+        var block = '**我的筆記**（' + today() + '）：' + (body.indexOf('\n') >= 0 ? '\n\n' + body : body);
+        var before = lines.slice(0, end).join('\n').replace(/\s+$/, ''), after = lines.slice(end).join('\n');
+        var out = before + '\n\n' + block + '\n' + (after ? '\n' + after : '');
+        return ghPut(file, out, '筆記：' + title.slice(0, 30), f.sha).then(function () { setPending(file, out); fileCache[file] = out; searchIndex = null; return out; });
+      });
+    }
+    function markAnswers(container) {
+      container.querySelectorAll('.card-body').forEach(function (body) {
+        var inNote = false;
+        Array.from(body.children).forEach(function (el) {
+          var st = el.querySelector('strong');
+          var label = st ? st.textContent.replace(/[：:]\s*$/, '').trim() : '';
+          if (el.tagName === 'P' && label.indexOf('我的筆記') === 0) { inNote = true; el.classList.add('note'); return; }
+          if (inNote) { el.classList.add('note-cont'); return; } // 筆記之後的段落都算筆記
+          if (el.tagName !== 'P') { // 表格、清單：跟著前一個段落的標籤
+            var prev = el.previousElementSibling; if (prev && prev.classList.contains('ans')) el.classList.add('ans');
+            return;
+          }
+          if (ANSWER_LABELS.indexOf(label) >= 0) el.classList.add('ans');
+        });
       });
     }
     function renderPage(path, params) {
@@ -1013,7 +1057,7 @@
           var key = cardKey(page.file, card.title);
           var t = esc(card.title).replace(/^(【[^】]+】)/, '<span class="tag">$1</span>');
           var tk = countTasks(card.body, page.file);
-          return '<article class="card" id="card-' + i + '" data-title="' + esc(card.title) + '"><div class="card-head"><h2>' + t + '</h2>' + (tk.total ? '<span class="prog" data-prog="' + i + '">' + tk.done + ' / ' + tk.total + '</span>' : '') + (canReview ? reviewBtnHtml(key) : '') + '</div><div class="card-body">' + examTags(md(card.body)) + '</div><div class="card-foot"><button class="mini" data-edit="' + i + '">✎ 改這張</button><button class="mini" data-copy="' + i + '">複製 Markdown</button></div></article>';
+          return '<article class="card" id="card-' + i + '" data-title="' + esc(card.title) + '"><div class="card-head"><h2>' + t + '</h2>' + (tk.total ? '<span class="prog" data-prog="' + i + '">' + tk.done + ' / ' + tk.total + '</span>' : '') + (canReview ? reviewBtnHtml(key) : '') + '</div><div class="card-body">' + wikiLinks(examTags(md(card.body)), page) + '</div><div class="card-foot"><button class="mini" data-note="' + i + '">✎ 加筆記</button><button class="mini" data-edit="' + i + '">✎ 改整張</button><button class="mini" data-copy="' + i + '">複製 Markdown</button></div><div class="note-box" id="note-' + i + '" style="display:none"><textarea placeholder="查到的、想到的、要背的，直接寫。Markdown 可以用，[[概念名]] 會變連結。" spellcheck="false"></textarea><div class="note-actions"><span class="help" id="note-msg-' + i + '"></span><span style="flex:1"></span><button class="mini" data-note-cancel="' + i + '">取消</button><button class="mini primary" data-note-save="' + i + '">存到這張卡</button></div></div></article>';
         }).join('') + '</div>';
         if (!c.cards.length) html += '<div class="empty">還沒有卡。按右下角「＋ 新筆記」貼第一張。</div>';
         body.innerHTML = html;
@@ -1049,6 +1093,25 @@
         body.querySelectorAll('[data-copy]').forEach(function (b) {
           b.onclick = function () { var card = c.cards[+b.dataset.copy]; navigator.clipboard.writeText('## ' + card.title + '\n\n' + card.body).then(function () { toast('已複製'); }); };
         });
+        // 小筆記：卡片下面直接寫，存進這張卡的最後面
+        body.querySelectorAll('[data-note]').forEach(function (b) {
+          b.onclick = function () {
+            if (!getToken()) { openSettings('先貼一次鑰匙，筆記才能存進 GitHub。'); return; }
+            var box = $('note-' + b.dataset.note), open = box.style.display !== 'none';
+            box.style.display = open ? 'none' : ''; if (!open) box.querySelector('textarea').focus();
+          };
+        });
+        body.querySelectorAll('[data-note-cancel]').forEach(function (b) { b.onclick = function () { $('note-' + b.dataset.noteCancel).style.display = 'none'; }; });
+        body.querySelectorAll('[data-note-save]').forEach(function (b) {
+          b.onclick = function () {
+            var i = +b.dataset.noteSave, box = $('note-' + i), ta = box.querySelector('textarea'), msg = $('note-msg-' + i);
+            if (!ta.value.trim()) { msg.textContent = '還沒寫東西'; return; }
+            b.disabled = true; msg.textContent = '存檔中…';
+            appendNoteToCard(page.file, c.cards[i].title, ta.value).then(function () { toast('筆記存進這張卡了 ✓'); renderPage(path, { c: c.cards[i].title }); })
+              .catch(function (e) { msg.textContent = e.message; b.disabled = false; });
+          };
+        });
+        body.querySelectorAll('.note-box textarea').forEach(function (ta) { ta.addEventListener('keydown', function (e) { if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') { var i = ta.closest('.note-box').id.replace('note-', ''); body.querySelector('[data-note-save="' + i + '"]').click(); } }); });
         bindImages(body);
         // 考點頁：查同一科的概念頁有沒有同名卡，有就連過去，沒有就給一顆「開這張概念卡」
         if (isIndexPage(page.file)) {
@@ -1082,7 +1145,7 @@
       var heads = (content.match(/^## .+$/gm) || []).map(function (l) { return l.replace(/^## /, '').trim(); });
       var html = '';
       if (heads.length >= 3) html += '<div class="doc-toc">' + heads.map(function (h, i) { return '<a href="javascript:void(0)" data-h="' + i + '">' + esc(h) + '</a>'; }).join('') + '</div>';
-      html += '<article class="doc card-body">' + md(content) + '</article>';
+      html += '<article class="doc card-body">' + wikiLinks(md(content), page) + '</article>';
       html += '<div class="card-foot" style="margin-top:1rem"><button class="mini" id="doc-edit">✎ 編輯這頁</button><button class="mini" id="doc-copy">複製 Markdown</button><span class="hint" style="margin-left:auto;font-size:0.8rem;color:var(--ink-2)">約 ' + text.replace(/\s+/g, '').length + ' 字</span></div>';
       body.innerHTML = html;
       var h2s = body.querySelectorAll('.doc h2');
@@ -1196,7 +1259,7 @@
       if (examsLoaded && !force) return Promise.resolve(exams);
       var p = getToken()
         ? ghGet(EXAM_FILE).then(function (f) { if (f) { examsSha = f.sha; mergeExams(JSON.parse(f.content || '[]')); } })
-        : fetchPages(EXAM_FILE).then(function (t) { if (t) mergeExams(JSON.parse(t)); });
+        : Promise.resolve();
       return p.catch(function () {}).then(function () { examsLoaded = true; return exams; });
     }
     var examsTimer = null;
