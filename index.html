@@ -422,6 +422,10 @@
     .nt-entry .card-body p { margin: 0.2rem 0; font-size: 0.93rem; }
     .entry-link { font-size: 0.78rem; color: var(--exam); background: var(--exam-soft); border-radius: 6px; padding: 0 0.45rem; display: inline-block; margin-top: 0.15rem; }
     .entry-link:hover { text-decoration: none; filter: brightness(0.95); }
+    .nt-mini { position: fixed; left: 1rem; bottom: calc(1rem + env(safe-area-inset-bottom)); z-index: 45; display: flex; align-items: stretch; background: #fbf1c7; border: 1px solid #d9b640; border-radius: 12px; box-shadow: var(--shadow); max-width: min(360px, calc(100vw - 2rem)); }
+    .nt-mini-open { border: none; background: none; font: inherit; font-size: 0.88rem; color: var(--ink); padding: 0.55rem 0.9rem; cursor: pointer; text-align: left; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .nt-mini-x { border: none; border-left: 1px solid #d9b640; background: none; color: var(--ink-2); padding: 0 0.7rem; cursor: pointer; font-size: 0.9rem; }
+    .nt-mini-x:hover { color: var(--danger); }
     .icon-btn.on { background: var(--accent); color: #fff; border-color: var(--accent); }
     .icon-btn.break { background: var(--sage); color: #fff; border-color: var(--sage); }
     .pm-big { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 3.4rem; font-weight: 700; text-align: center; letter-spacing: 0.04em; margin: 0.4rem 0; }
@@ -526,7 +530,7 @@
   <!-- 筆記本抽屜 -->
   <div class="overlay drawer" id="notes">
     <div class="sheet side" role="dialog" aria-modal="true">
-      <header><h3>📝 筆記本</h3><span class="help">你自己的，跟隨寫分開</span><button class="btn ghost" id="nt-close">✕</button></header>
+      <header><h3>📝 筆記本</h3><span class="help">你自己的，跟隨寫分開</span><button class="btn ghost" id="nt-min" title="縮到下面，草稿留著">—</button><button class="btn ghost" id="nt-close">✕</button></header>
       <div class="body">
         <div class="row" id="nt-link"></div>
         <textarea id="nt-text" spellcheck="false" placeholder="查到的、想到的、要背的。Markdown 可以用，#標籤 之後可以篩，[[概念名]] 會變連結。Ctrl + Enter 存。"></textarea>
@@ -590,6 +594,7 @@
   </div>
 
   <div class="overlay lightbox" id="lightbox"><img id="lb-img" alt=""></div>
+  <div class="nt-mini" id="nt-mini" style="display:none"><button class="nt-mini-open" id="nt-mini-open">📝 <span id="nt-mini-text">草稿</span></button><button class="nt-mini-x" id="nt-mini-x" title="丟掉草稿">✕</button></div>
   <div class="toast" id="toast"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
@@ -1807,6 +1812,7 @@
     // 跟隨寫分開：隨寫是日記，筆記本是「看某張卡、某一頁時想到或查到的東西」。
     // 一個月一檔（筆記/2026-09.md），每則記得當時在看哪一頁、哪張卡（關聯：頁面 › 卡片）。
     var NOTE_DIR = '筆記';
+    K.noteDraft = 'daybook:note-draft';   // 沒存完的筆記留在這台瀏覽器，像 Gmail 的草稿
     var noteLink = null;      // 目前要掛的關聯 {path, title, card}
     var noteFilter = '';      // 抽屜裡的篩選字
     var noteIndex = null;     // 最近兩個月的筆記（給卡片顯示「筆記 N 則」）
@@ -1827,20 +1833,44 @@
         noteIndex = all; return all;
       });
     }
+    function noteDraft() { return readJSON(K.noteDraft, null); }
+    function saveNoteDraft() {
+      var text = $('nt-text').value;
+      if (!text.trim()) { localStorage.removeItem(K.noteDraft); paintNoteMini(); return; }
+      writeJSON(K.noteDraft, { text: text, link: noteLink, at: Date.now() }); paintNoteMini();
+    }
+    function paintNoteMini() {
+      var d = noteDraft(), el = $('nt-mini'); if (!el) return;
+      var show = d && d.text && d.text.trim() && !$('notes').classList.contains('open');
+      el.style.display = show ? '' : 'none';
+      if (show) $('nt-mini-text').textContent = '草稿：' + d.text.trim().split('\n')[0].slice(0, 22) + (d.link ? '（' + (d.link.card || d.link.title) + '）' : '');
+    }
+    function minimizeNotes() { $('notes').classList.remove('open'); saveNoteDraft(); }
     function openNotes(link, filter) {
-      noteLink = link || currentWhere(); noteFilter = filter || '';
-      $('notes').classList.add('open');
+      var d = noteDraft();
+      if (d && d.text && d.text.trim()) {
+        // 有草稿：文字帶回來；關聯以草稿的為主，除非草稿本來沒掛
+        $('nt-text').value = d.text;
+        noteLink = d.link || link || currentWhere();
+        if (link && d.link && (link.card || '') + link.path !== (d.link.card || '') + d.link.path) noteLinkPending = link; else noteLinkPending = null;
+      } else { noteLink = link || currentWhere(); noteLinkPending = null; }
+      noteFilter = filter || '';
+      $('notes').classList.add('open'); paintNoteMini();
       paintNoteLink();
       $('nt-filter').value = noteFilter;
       $('nt-list').innerHTML = '<div class="help">載入中…</div>';
       loadNoteIndex().then(paintNoteList);
       setTimeout(function () { $('nt-text').focus(); }, 50);
     }
+    var noteLinkPending = null; // 草稿掛在別處、但這次是從另一張卡打開的：問要不要換
     function paintNoteLink() {
       var el = $('nt-link');
-      if (!noteLink) { el.innerHTML = '<span class="help">沒有關聯。從某一頁或某張卡打開，就會自動記住。</span>'; return; }
-      el.innerHTML = '<span class="chip on" title="這則筆記會記得你在看這裡">📎 ' + esc(noteLink.title) + (noteLink.card ? ' › ' + esc(noteLink.card) : '') + '</span><button class="chip" id="nt-unlink">不要關聯</button>';
-      $('nt-unlink').onclick = function () { noteLink = null; paintNoteLink(); };
+      var html = !noteLink ? '<span class="help">沒有關聯。從某一頁或某張卡打開，就會自動記住。</span>'
+        : '<span class="chip on" title="這則筆記會記得你在看這裡">📎 ' + esc(noteLink.title) + (noteLink.card ? ' › ' + esc(noteLink.card) : '') + '</span><button class="chip" id="nt-unlink">不要關聯</button>';
+      if (noteLinkPending) html += '<button class="chip" id="nt-relink" title="草稿原本掛在別張卡">改掛到：' + esc(noteLinkPending.card || noteLinkPending.title) + '</button>';
+      el.innerHTML = html;
+      var u = $('nt-unlink'); if (u) u.onclick = function () { noteLink = null; noteLinkPending = null; paintNoteLink(); saveNoteDraft(); };
+      var r = $('nt-relink'); if (r) r.onclick = function () { noteLink = noteLinkPending; noteLinkPending = null; paintNoteLink(); saveNoteDraft(); };
     }
     function entryLinkHtml(e) {
       if (!e.link) return '';
@@ -1874,7 +1904,7 @@
         }
         return ghPut(file, out, '筆記：' + first, f ? f.sha : null).then(function () { setPending(file, out); fileCache[file] = out; searchIndex = null; return f ? null : addToToc(file, month); });
       }).then(function () {
-        $('nt-text').value = ''; $('nt-msg').textContent = '存好了 ✓'; toast('筆記存進 GitHub 了');
+        $('nt-text').value = ''; localStorage.removeItem(K.noteDraft); noteLinkPending = null; paintNoteMini(); $('nt-msg').textContent = '存好了 ✓'; toast('筆記存進 GitHub 了');
         return loadNoteIndex(true).then(function () { paintNoteList(); if (current.kind === 'page' && current.path.indexOf(NOTE_DIR + '/') === 0) go(); else if (current.kind === 'page') paintCardNoteCounts(); });
       }).catch(function (e) { $('nt-msg').textContent = '存檔失敗：' + e.message; }).then(function () { btn.disabled = false; });
     }
@@ -2171,7 +2201,7 @@
       $('editor').classList.add('open'); setMode(mode);
       setTimeout(function () { (edMode === 'page' ? $('ed-name') : $('ed-text')).focus(); }, 50);
     }
-    function closeAll() { ['editor', 'settings', 'search', 'lightbox', 'notes', 'pomo'].forEach(function (id) { $(id).classList.remove('open'); }); }
+    function closeAll() { if ($('notes').classList.contains('open')) minimizeNotes(); ['editor', 'settings', 'search', 'lightbox', 'notes', 'pomo'].forEach(function (id) { $(id).classList.remove('open'); }); }
     function addToToc(file, title) {
       return ghGet(TOC_FILE).then(function (f) {
         var text = f ? f.content : '', lines = text.split('\n');
@@ -2296,7 +2326,13 @@
       $('btn-settings').onclick = function () { openSettings(); };
       $('btn-notes').onclick = function () { openNotes(null); };
       document.addEventListener('click', function (e) { var a = e.target.closest && e.target.closest('a.wiki'); if (a && a.getAttribute('href') === 'javascript:void(0)') { e.preventDefault(); closeAll(); $('btn-search').click(); $('sq').value = a.dataset.wiki; doSearch(a.dataset.wiki); } });
-      $('nt-close').onclick = closeAll; $('nt-save').onclick = saveNote;
+      $('nt-close').onclick = function () { if ($('nt-text').value.trim() && !confirm('草稿要留著嗎？\n\n「確定」＝留著（縮到下面），「取消」＝丟掉')) { $('nt-text').value = ''; } minimizeNotes(); };
+      $('nt-min').onclick = minimizeNotes;
+      $('nt-text').addEventListener('input', function () { clearTimeout(window.__ntDraftT); window.__ntDraftT = setTimeout(saveNoteDraft, 300); });
+      $('nt-mini-open').onclick = function () { openNotes(null); };
+      $('nt-mini-x').onclick = function () { if (confirm('丟掉這則草稿？')) { localStorage.removeItem(K.noteDraft); $('nt-text').value = ''; paintNoteMini(); } };
+      paintNoteMini();
+      $('nt-save').onclick = saveNote;
       $('nt-filter').oninput = function () { noteFilter = this.value; paintNoteList(); };
       $('nt-all').onclick = closeAll;
       $('nt-text').addEventListener('keydown', function (e) { if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') saveNote(); });
