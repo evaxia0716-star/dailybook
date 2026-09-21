@@ -309,6 +309,8 @@
       .tab { padding: 0.3rem 0.7rem; font-size: 0.9rem; }
       .top-in { gap: 0.5rem; padding: 0.6rem 0.9rem; }
       .icon-btn .label { display: none; }
+      .icon-btn #pomo-label { display: inline; font-size: 0.8rem; }
+      #btn-pomo:not(.on):not(.break) #pomo-label { display: none; }
       .brand span.txt { display: none; }
       main { padding: 1.1rem 0.9rem calc(7rem + env(safe-area-inset-bottom)); }
       .fabs { bottom: calc(1rem + env(safe-area-inset-bottom)); }
@@ -409,6 +411,24 @@
     .written-in.locked { background: var(--paper-3); }
     .written-list.handwrite .written-in { display: none; }
     .exam-strip .actions { margin-top: 0.7rem; }
+    /* 筆記本抽屜 */
+    .overlay.drawer { justify-content: flex-end; align-items: stretch; }
+    .sheet.side { width: min(460px, 100%); max-height: 100vh; height: 100vh; border-radius: 0; margin: 0; display: flex; flex-direction: column; }
+    .sheet.side .body { flex: 1; overflow: auto; }
+    .sheet.side textarea { min-height: 7rem; }
+    .sheet.side input[type=search] { flex: 1; }
+    .nt-entry { border-top: 1px dashed var(--line); padding: 0.6rem 0; }
+    .nt-meta { font-size: 0.78rem; color: var(--ink-2); display: flex; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 0.2rem; }
+    .nt-entry .card-body p { margin: 0.2rem 0; font-size: 0.93rem; }
+    .entry-link { font-size: 0.78rem; color: var(--exam); background: var(--exam-soft); border-radius: 6px; padding: 0 0.45rem; display: inline-block; margin-top: 0.15rem; }
+    .entry-link:hover { text-decoration: none; filter: brightness(0.95); }
+    .icon-btn.on { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .icon-btn.break { background: var(--sage); color: #fff; border-color: var(--sage); }
+    .pm-big { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 3.4rem; font-weight: 700; text-align: center; letter-spacing: 0.04em; margin: 0.4rem 0; }
+    .pm-big.focus { color: var(--accent); } .pm-big.break { color: var(--sage); }
+    .sec-筆記 { --c: #b58a3c; }
+    #study-panel .week { margin-top: 0.4rem; }
+    #study-panel .actions { display: flex; gap: 0.5rem; align-items: center; margin-top: 0.8rem; flex-wrap: wrap; }
     /* 小筆記：像貼在卡片上的便利貼 */
     .card-body .note, .card-body .note-cont { background: #fbf1c7; border-left: 4px solid #d9b640; padding: 0.45rem 0.8rem; margin: 0; }
     .card-body .note { border-radius: 0 10px 0 0; margin-top: 0.8rem; padding-top: 0.55rem; }
@@ -437,6 +457,8 @@
       <a class="brand" href="#/"><span class="mark">D</span><span class="txt">Daybook</span></a>
       <nav class="tabs" id="tabs"></nav>
       <span class="sp"></span>
+      <button class="icon-btn" id="btn-pomo" title="番茄鐘">🍅 <span class="label" id="pomo-label">專注</span></button>
+      <button class="icon-btn" id="btn-notes" title="筆記本">📝 <span class="label">筆記</span></button>
       <button class="icon-btn" id="btn-search">🔍 <span class="label">搜尋</span> <kbd>/</kbd></button>
       <button class="icon-btn" id="btn-settings" title="設定"><span class="dot" id="conn-dot"></span><span class="label">設定</span></button>
     </div>
@@ -499,6 +521,29 @@
     </div>
   </div>
 
+  <!-- 筆記本抽屜 -->
+  <div class="overlay drawer" id="notes">
+    <div class="sheet side" role="dialog" aria-modal="true">
+      <header><h3>📝 筆記本</h3><span class="help">你自己的，跟隨寫分開</span><button class="btn ghost" id="nt-close">✕</button></header>
+      <div class="body">
+        <div class="row" id="nt-link"></div>
+        <textarea id="nt-text" spellcheck="false" placeholder="查到的、想到的、要背的。Markdown 可以用，#標籤 之後可以篩，[[概念名]] 會變連結。Ctrl + Enter 存。"></textarea>
+        <div class="row"><span class="msg help" id="nt-msg"></span><span style="flex:1"></span><a class="chip" href="#/筆記" id="nt-all">看全部</a><button class="btn primary" id="nt-save">存到筆記本</button></div>
+        <div class="row"><input type="search" id="nt-filter" placeholder="篩：關鍵字、#標籤、卡片名"></div>
+        <div id="nt-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 番茄鐘 -->
+  <div class="overlay" id="pomo">
+    <div class="sheet" role="dialog" aria-modal="true" style="width:min(460px,100%)">
+      <header><h3>🍅 番茄鐘</h3><button class="btn ghost" id="pm-close">✕</button></header>
+      <div class="body" id="pm-body"></div>
+      <footer><span class="msg">專注和休息的長度、每日目標，在「設定」改。</span></footer>
+    </div>
+  </div>
+
   <!-- 設定 -->
   <div class="overlay" id="settings">
     <div class="sheet" role="dialog" aria-modal="true" style="width:min(640px,100%)">
@@ -520,6 +565,8 @@
         </div>
         <div class="row"><label>Repo</label><code id="st-repo"></code><label>分支</label><code id="st-branch"></code></div>
         <div class="row"><label>幾天沒看算「該再看」</label><input type="text" id="st-days" style="flex:0;width:4rem" inputmode="numeric"></div>
+        <div class="row"><label>番茄鐘：專注</label><input type="text" id="st-focus" style="flex:0;width:4rem" inputmode="numeric"><label>分 · 休息</label><input type="text" id="st-break" style="flex:0;width:4rem" inputmode="numeric"><label>分 · 每天目標</label><input type="text" id="st-goal" style="flex:0;width:4rem" inputmode="numeric"><label>顆</label></div>
+        <div class="row"><label>字級</label><span class="segs" id="st-font"><button data-font="small">小</button><button data-font="normal">標準</button><button data-font="large">大</button></span></div>
       </div>
       <footer>
         <span class="msg" id="st-msg"></span>
@@ -553,7 +600,7 @@
     var REVIEW_FILE = 'data/reviews.json';
     var REVIEW_SECTIONS = ['學科/'];            // 這些區的卡有「已複習」
     // 三種紙：cards＝卡片（錯題、概念、地圖）、doc＝白紙（整頁自由寫）、journal＝日記（一鍵帶日期、心情、標籤）
-    var SECTION_MODE = { '學科': 'cards', '學習': 'doc', '隨寫': 'journal' }; // 沒列到的分區預設 doc
+    var SECTION_MODE = { '學科': 'cards', '學習': 'doc', '隨寫': 'journal', '筆記': 'journal' }; // 沒列到的分區預設 doc
     var JOURNAL_DIR = '隨寫';
     var ASSET_DIR = 'assets';                    // 貼上的圖片存這裡（assets/年/月/）
     var IMG_MAX = 1600, IMG_QUALITY = 0.85;      // 圖片最長邊、JPEG 品質
@@ -562,7 +609,8 @@
     var SECTION_INTRO = {
       '學科': '每科三頁：地圖是章節骨架（讀懂就打勾），錯題記怎麼錯，概念記是什麼。',
       '學習': '白紙。一個主題一頁，想怎麼寫就怎麼寫，圖片直接貼。',
-      '隨寫': '日記。一天一則，帶日期、心情、標籤；最新的在最上面。'
+      '隨寫': '日記。一天一則，帶日期、心情、標籤；最新的在最上面。',
+      '筆記': '你自己的筆記本。任何頁面按右上角「筆記」就能寫，會記得你當時在看哪一頁、哪張卡。'
     };
     var K = { token: 'daybook:token', reviews: 'daybook:reviews', progress: 'daybook:progress', pending: 'daybook:pending', days: 'daybook:days', selftest: 'daybook:selftest' };
     var PENDING_TTL = 15 * 60 * 1000;
@@ -687,8 +735,10 @@
       var body = card.body, mood = '';
       var mm = body.match(/^心情[：:]\s*(.*)$/m);
       if (mm) { mood = mm[1].trim(); body = body.replace(mm[0], '').trim(); }
+      var link = null, ml = body.match(/^關聯[：:]\s*(.+)$/m);
+      if (ml) { var parts = ml[1].split('›').map(function (x) { return x.trim(); }); var pg = findPage(parts[0]); link = { path: parts[0], title: pg ? pg.title : parts[0].split('/').pop(), card: parts[1] || '' }; body = body.replace(ml[0], '').trim(); }
       var tags = []; body.replace(/(^|[\s（(])#([^\s#，。,.!?）)]+)/g, function (_, __, t) { if (tags.indexOf(t) < 0) tags.push(t); return _; });
-      return { title: card.title, date: m ? m[1] : '', time: m ? (m[2] || '') : '', label: m ? m[3].trim() : card.title, mood: mood, tags: tags, body: body };
+      return { title: card.title, date: m ? m[1] : '', time: m ? (m[2] || '') : '', label: m ? m[3].trim() : card.title, mood: mood, tags: tags, body: body, link: link };
     }
     function sortEntries(cards) {
       return cards.map(parseEntry).sort(function (a, b) { var ka = a.date + ' ' + (a.time || '00:00'), kb = b.date + ' ' + (b.time || '00:00'); return ka < kb ? 1 : ka > kb ? -1 : 0; });
@@ -841,10 +891,11 @@
     // ---------- 首頁 ----------
     function renderHome() {
       $('fab-edit').style.display = 'none';
-      app.innerHTML = '<div class="hero"><div class="panel" id="today"><h3>今天先看這些</h3><div class="help">整理中…</div></div><div class="panel" id="stats"><h3>這週</h3></div></div><div id="exam-strip"></div><div id="sections"></div>';
-      renderExamStrip();
+      app.innerHTML = '<div class="hero"><div class="panel" id="today"><h3>今天先看這些</h3><div class="help">整理中…</div></div><div class="panel" id="stats"><h3>這週</h3></div></div><div class="panel" id="study-panel"><h3>今天讀了</h3></div><div id="exam-strip"></div><div id="sections"></div>';
+      renderStudyPanel(); renderExamStrip();
       var pages = allPages();
       Promise.all([loadReviews(), loadProgress()].concat(pages.map(pageStats))).then(function (res) {
+        if (!$('today')) return; // 載入途中已經離開首頁
         var stats = res.slice(2);
         renderToday(stats);
         renderWeek(stats);
@@ -951,12 +1002,13 @@
       });
     }
     function addCardHtml(secName) {
+      if (secName === NOTE_DIR) return '<div class="pcard add" data-section="' + esc(secName) + '" data-mode="notes">📝 寫一則筆記</div>';
       var j = (SECTION_MODE[secName] || 'doc') === 'journal';
       return '<div class="pcard add" data-section="' + esc(secName) + '" data-mode="' + (j ? 'journal' : 'page') + '">' + (j ? '✎ 今天寫一筆' : '＋ 新頁面') + '</div>';
     }
     function bindAddCards() {
       document.querySelectorAll('.pcard.add').forEach(function (el) {
-        el.onclick = function () { openEditor(el.dataset.mode || 'page', el.dataset.section); };
+        el.onclick = function () { if (el.dataset.mode === 'notes') { openNotes(null); return; } openEditor(el.dataset.mode || 'page', el.dataset.section); };
       });
     }
 
@@ -1057,7 +1109,7 @@
           var key = cardKey(page.file, card.title);
           var t = esc(card.title).replace(/^(【[^】]+】)/, '<span class="tag">$1</span>');
           var tk = countTasks(card.body, page.file);
-          return '<article class="card" id="card-' + i + '" data-title="' + esc(card.title) + '"><div class="card-head"><h2>' + t + '</h2>' + (tk.total ? '<span class="prog" data-prog="' + i + '">' + tk.done + ' / ' + tk.total + '</span>' : '') + (canReview ? reviewBtnHtml(key) : '') + '</div><div class="card-body">' + wikiLinks(examTags(md(card.body)), page) + '</div><div class="card-foot"><button class="mini" data-note="' + i + '">✎ 加筆記</button><button class="mini" data-edit="' + i + '">✎ 改整張</button><button class="mini" data-copy="' + i + '">複製 Markdown</button></div><div class="note-box" id="note-' + i + '" style="display:none"><textarea placeholder="查到的、想到的、要背的，直接寫。Markdown 可以用，[[概念名]] 會變連結。" spellcheck="false"></textarea><div class="note-actions"><span class="help" id="note-msg-' + i + '"></span><span style="flex:1"></span><button class="mini" data-note-cancel="' + i + '">取消</button><button class="mini primary" data-note-save="' + i + '">存到這張卡</button></div></div></article>';
+          return '<article class="card" id="card-' + i + '" data-title="' + esc(card.title) + '"><div class="card-head"><h2>' + t + '</h2>' + (tk.total ? '<span class="prog" data-prog="' + i + '">' + tk.done + ' / ' + tk.total + '</span>' : '') + (canReview ? reviewBtnHtml(key) : '') + '</div><div class="card-body">' + wikiLinks(examTags(md(card.body)), page) + '</div><div class="card-foot"><button class="mini" data-note="' + i + '">📝 寫筆記</button><button class="mini" data-edit="' + i + '">✎ 改這張</button><button class="mini" data-copy="' + i + '">複製 Markdown</button></div></article>';
         }).join('') + '</div>';
         if (!c.cards.length) html += '<div class="empty">還沒有卡。按右下角「＋ 新筆記」貼第一張。</div>';
         body.innerHTML = html;
@@ -1093,25 +1145,9 @@
         body.querySelectorAll('[data-copy]').forEach(function (b) {
           b.onclick = function () { var card = c.cards[+b.dataset.copy]; navigator.clipboard.writeText('## ' + card.title + '\n\n' + card.body).then(function () { toast('已複製'); }); };
         });
-        // 小筆記：卡片下面直接寫，存進這張卡的最後面
-        body.querySelectorAll('[data-note]').forEach(function (b) {
-          b.onclick = function () {
-            if (!getToken()) { openSettings('先貼一次鑰匙，筆記才能存進 GitHub。'); return; }
-            var box = $('note-' + b.dataset.note), open = box.style.display !== 'none';
-            box.style.display = open ? 'none' : ''; if (!open) box.querySelector('textarea').focus();
-          };
-        });
-        body.querySelectorAll('[data-note-cancel]').forEach(function (b) { b.onclick = function () { $('note-' + b.dataset.noteCancel).style.display = 'none'; }; });
-        body.querySelectorAll('[data-note-save]').forEach(function (b) {
-          b.onclick = function () {
-            var i = +b.dataset.noteSave, box = $('note-' + i), ta = box.querySelector('textarea'), msg = $('note-msg-' + i);
-            if (!ta.value.trim()) { msg.textContent = '還沒寫東西'; return; }
-            b.disabled = true; msg.textContent = '存檔中…';
-            appendNoteToCard(page.file, c.cards[i].title, ta.value).then(function () { toast('筆記存進這張卡了 ✓'); renderPage(path, { c: c.cards[i].title }); })
-              .catch(function (e) { msg.textContent = e.message; b.disabled = false; });
-          };
-        });
-        body.querySelectorAll('.note-box textarea').forEach(function (ta) { ta.addEventListener('keydown', function (e) { if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') { var i = ta.closest('.note-box').id.replace('note-', ''); body.querySelector('[data-note-save="' + i + '"]').click(); } }); });
+        // 寫筆記：開筆記本抽屜，關聯到這張卡
+        body.querySelectorAll('[data-note]').forEach(function (b) { b.onclick = function () { openNotes({ path: path, title: page.title, card: c.cards[+b.dataset.note].title }); }; });
+        paintCardNoteCounts();
         bindImages(body);
         // 考點頁：查同一科的概念頁有沒有同名卡，有就連過去，沒有就給一顆「開這張概念卡」
         if (isIndexPage(page.file)) {
@@ -1164,14 +1200,15 @@
       if (c.intro) html += '<div class="lead card-body">' + md(c.intro) + '</div>';
       html += '<div class="page-tools"><span class="hint">' + entries.length + ' 則</span>';
       if (tags.length) html += '<span class="filterbar">' + tags.map(function (t) { return '<button class="chip' + (filter === t ? ' on' : '') + '" data-filter="' + esc(t) + '">#' + esc(t) + ' <small>' + tagCount[t] + '</small></button>'; }).join('') + (filter ? '<button class="chip" data-filter="">全部</button>' : '') + '</span>';
-      html += '<span style="flex:1"></span><button class="btn primary" id="j-new">✎ 今天寫一筆</button></div>';
+      var isNotes = page.path.indexOf(NOTE_DIR + '/') === 0;
+      html += '<span style="flex:1"></span><button class="btn primary" id="j-new">' + (isNotes ? '📝 寫一則筆記' : '✎ 今天寫一筆') + '</button></div>';
       var shown = entries.filter(function (e) { return !filter || e.tags.indexOf(filter) >= 0; });
       html += '<div class="cards" id="cards">' + shown.map(function (e, i) {
-        return '<article class="card entry" data-title="' + esc(e.title) + '"><div class="entry-head">' + (e.mood ? '<span class="mood">' + esc(e.mood) + '</span>' : '') + '<div><div class="entry-date">' + esc(e.date || e.title) + (e.time ? ' <small>' + esc(e.time) + '</small>' : '') + (e.date ? ' <small>' + weekday(e.date) + '</small>' : '') + '</div>' + (e.label ? '<div class="entry-label">' + esc(e.label) + '</div>' : '') + '</div></div><div class="card-body">' + tagPills(md(e.body)) + '</div><div class="card-foot"><button class="mini" data-edit="' + i + '">✎ 改這則</button><button class="mini" data-copy="' + i + '">複製 Markdown</button></div></article>';
+        return '<article class="card entry" data-title="' + esc(e.title) + '"><div class="entry-head">' + (e.mood ? '<span class="mood">' + esc(e.mood) + '</span>' : '') + '<div><div class="entry-date">' + esc(e.date || e.title) + (e.time ? ' <small>' + esc(e.time) + '</small>' : '') + (e.date ? ' <small>' + weekday(e.date) + '</small>' : '') + '</div>' + (e.label ? '<div class="entry-label">' + esc(e.label) + '</div>' : '') + entryLinkHtml(e) + '</div></div><div class="card-body">' + wikiLinks(tagPills(md(e.body)), e.link ? { sub: e.link.path.split('/')[1] } : page) + '</div><div class="card-foot"><button class="mini" data-edit="' + i + '">✎ 改這則</button><button class="mini" data-copy="' + i + '">複製 Markdown</button></div></article>';
       }).join('') + '</div>';
-      if (!entries.length) html += '<div class="empty">這個月還沒有日記。按「今天寫一筆」。</div>';
+      if (!entries.length) html += '<div class="empty">' + (isNotes ? '這個月還沒有筆記。' : '這個月還沒有日記。按「今天寫一筆」。') + '</div>';
       body.innerHTML = html;
-      $('j-new').onclick = function () { openEditor('journal'); };
+      $('j-new').onclick = function () { if (isNotes) openNotes(null); else openEditor('journal'); };
       body.querySelectorAll('[data-filter]').forEach(function (b) { b.onclick = function () { location.hash = '#/' + page.path + (b.dataset.filter ? '?tag=' + encodeURIComponent(b.dataset.filter) : ''); }; });
       body.querySelectorAll('.tagpill').forEach(function (t) { t.onclick = function () { location.hash = '#/' + page.path + '?tag=' + encodeURIComponent(t.dataset.tag); }; });
       body.querySelectorAll('[data-edit]').forEach(function (b) { b.onclick = function () { openEditor('full', null, shown[+b.dataset.edit].title); }; });
@@ -1735,6 +1772,7 @@
         if (blank && !confirm('還有 ' + blank + ' 題空白。答錯不倒扣，空白一定要猜。\n\n按「取消」回去猜，按「確定」直接交卷。')) return;
       }
       run.seconds = elapsedSec(); run.submitted = true; stopRunTimer(); localStorage.removeItem(K.examDraft);
+      if (run.seconds >= 60) addStudy({ kind: 'exam', minutes: Math.round(run.seconds / 60), where: run.label });
       var t = $('ex-timer'); if (t) { t.textContent = fmtDur(run.seconds); t.classList.remove('low'); t.classList.add('stopped'); }
       if (run.kind === 'mc') {
         var res = gradeMc();
@@ -1751,6 +1789,7 @@
     function renderExamStrip() {
       var el = $('exam-strip'); if (!el) return;
       loadExams().then(function () {
+        if (!$('exam-strip')) return;
         var recent = exams.slice().sort(function (a, b) { return a.at < b.at ? 1 : -1; }).slice(0, 3);
         var draft = readJSON(K.examDraft, null);
         var html = '<div class="panel exam-strip"><h3>考場 <span class="help" style="font-weight:400">' + (exams.length ? '考過 ' + exams.length + ' 次' : '歷年考古題都在這裡') + '</span></h3>';
@@ -1761,6 +1800,211 @@
         el.innerHTML = html;
       });
     }
+
+    // ===================== 筆記本（你自己的） =====================
+    // 跟隨寫分開：隨寫是日記，筆記本是「看某張卡、某一頁時想到或查到的東西」。
+    // 一個月一檔（筆記/2026-09.md），每則記得當時在看哪一頁、哪張卡（關聯：頁面 › 卡片）。
+    var NOTE_DIR = '筆記';
+    var noteLink = null;      // 目前要掛的關聯 {path, title, card}
+    var noteFilter = '';      // 抽屜裡的篩選字
+    var noteIndex = null;     // 最近兩個月的筆記（給卡片顯示「筆記 N 則」）
+    function noteFile(ym) { return NOTE_DIR + '/' + (ym || today().slice(0, 7)) + '.md'; }
+    function prevMonth() { var d = new Date(); d.setDate(1); d.setMonth(d.getMonth() - 1); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0'); }
+    function currentWhere() {
+      if (current.kind === 'page') { var p = findPage(current.path); return { path: current.path, title: p ? p.title : current.path.split('/').pop() }; }
+      if (current.kind === 'exam' && run) return { path: '考場', title: run.label };
+      if (current.kind === 'section') return { path: current.path, title: current.path };
+      return null;
+    }
+    function loadNoteIndex(force) {
+      if (noteIndex && !force) return Promise.resolve(noteIndex);
+      return Promise.all([loadFile(noteFile(), force), loadFile(noteFile(prevMonth()), force)]).then(function (res) {
+        var all = [];
+        res.forEach(function (t, i) { if (!t) return; var ym = i === 0 ? today().slice(0, 7) : prevMonth(); splitCards(t).cards.forEach(function (c) { var e = parseEntry(c); e.file = noteFile(ym); all.push(e); }); });
+        all.sort(function (a, b) { var ka = a.date + ' ' + (a.time || '00:00'), kb = b.date + ' ' + (b.time || '00:00'); return ka < kb ? 1 : ka > kb ? -1 : 0; });
+        noteIndex = all; return all;
+      });
+    }
+    function openNotes(link, filter) {
+      noteLink = link || currentWhere(); noteFilter = filter || '';
+      $('notes').classList.add('open');
+      paintNoteLink();
+      $('nt-filter').value = noteFilter;
+      $('nt-list').innerHTML = '<div class="help">載入中…</div>';
+      loadNoteIndex().then(paintNoteList);
+      setTimeout(function () { $('nt-text').focus(); }, 50);
+    }
+    function paintNoteLink() {
+      var el = $('nt-link');
+      if (!noteLink) { el.innerHTML = '<span class="help">沒有關聯。從某一頁或某張卡打開，就會自動記住。</span>'; return; }
+      el.innerHTML = '<span class="chip on" title="這則筆記會記得你在看這裡">📎 ' + esc(noteLink.title) + (noteLink.card ? ' › ' + esc(noteLink.card) : '') + '</span><button class="chip" id="nt-unlink">不要關聯</button>';
+      $('nt-unlink').onclick = function () { noteLink = null; paintNoteLink(); };
+    }
+    function entryLinkHtml(e) {
+      if (!e.link) return '';
+      var href = e.link.path === '考場' ? '#/考場' : '#/' + e.link.path + (e.link.card ? '?c=' + encodeURIComponent(e.link.card) : '');
+      return '<a class="entry-link" href="' + esc(href) + '">📎 ' + esc(e.link.title || e.link.path) + (e.link.card ? ' › ' + esc(e.link.card) : '') + '</a>';
+    }
+    function paintNoteList() {
+      var q = noteFilter.trim().toLowerCase();
+      var list = (noteIndex || []).filter(function (e) { if (!q) return true; var hay = (e.body + ' ' + (e.link ? e.link.card + ' ' + e.link.title + ' ' + e.link.path : '')).toLowerCase(); return hay.indexOf(q) >= 0; });
+      var el = $('nt-list');
+      if (!list.length) { el.innerHTML = '<div class="help" style="padding:1rem 0">' + (q ? '沒有符合的筆記。' : '還沒有筆記。上面那格寫第一則。') + '</div>'; return; }
+      el.innerHTML = list.slice(0, 40).map(function (e) {
+        return '<div class="nt-entry"><div class="nt-meta">' + esc(e.date) + (e.time ? ' ' + esc(e.time) : '') + entryLinkHtml(e) + '</div><div class="card-body">' + wikiLinks(tagPills(md(e.body)), e.link ? { sub: e.link.path.split('/')[1] } : null) + '</div></div>';
+      }).join('') + (list.length > 40 ? '<p class="help">還有 ' + (list.length - 40) + ' 則，到「筆記」分區看全部。</p>' : '');
+    }
+    function saveNote() {
+      var text = $('nt-text').value.trim(); if (!text) { $('nt-msg').textContent = '還沒寫東西'; return; }
+      if (!getToken()) { openSettings('先貼一次鑰匙，筆記才能存進 GitHub。'); return; }
+      var btn = $('nt-save'); btn.disabled = true; $('nt-msg').textContent = '存檔中…';
+      var d = new Date(), hm = String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
+      var first = text.split('\n')[0].replace(/^#+\s*/, '').slice(0, 24);
+      var entry = '## ' + today() + ' ' + hm + ' ' + first + '\n\n' + (noteLink ? '關聯：' + noteLink.path + (noteLink.card ? ' › ' + noteLink.card : '') + '\n\n' : '') + text + '\n';
+      var file = noteFile(), month = today().slice(0, 7);
+      ghGet(file).then(function (f) {
+        var out;
+        if (!f) out = '# ' + month + '\n\n' + entry;
+        else {
+          var lines = f.content.split('\n'), idx = -1;
+          for (var i = 0; i < lines.length; i++) if (/^## /.test(lines[i])) { idx = i; break; }
+          out = idx < 0 ? f.content.replace(/\s+$/, '') + '\n\n' + entry : lines.slice(0, idx).join('\n').replace(/\s+$/, '') + '\n\n' + entry + '\n' + lines.slice(idx).join('\n');
+        }
+        return ghPut(file, out, '筆記：' + first, f ? f.sha : null).then(function () { setPending(file, out); fileCache[file] = out; searchIndex = null; return f ? null : addToToc(file, month); });
+      }).then(function () {
+        $('nt-text').value = ''; $('nt-msg').textContent = '存好了 ✓'; toast('筆記存進 GitHub 了');
+        return loadNoteIndex(true).then(function () { paintNoteList(); if (current.kind === 'page' && current.path.indexOf(NOTE_DIR + '/') === 0) go(); else if (current.kind === 'page') paintCardNoteCounts(); });
+      }).catch(function (e) { $('nt-msg').textContent = '存檔失敗：' + e.message; }).then(function () { btn.disabled = false; });
+    }
+    // 卡片頁：每張卡顯示「筆記 N 則」
+    function paintCardNoteCounts() {
+      if (current.kind !== 'page') return;
+      var path = current.path;
+      loadNoteIndex().then(function (list) {
+        var by = {}; list.forEach(function (e) { if (e.link && e.link.path === path && e.link.card) by[e.link.card] = (by[e.link.card] || 0) + 1; });
+        document.querySelectorAll('#cards .card').forEach(function (el) {
+          var t = el.dataset.title, n = by[t]; var old = el.querySelector('.note-count'); if (old) old.remove();
+          if (!n) return;
+          var b = document.createElement('button'); b.className = 'mini note-count'; b.textContent = '📝 筆記 ' + n + ' 則';
+          b.onclick = function () { openNotes({ path: path, title: (findPage(path) || {}).title || path, card: t }, t); };
+          var foot = el.querySelector('.card-foot'); if (foot) foot.insertBefore(b, foot.firstChild);
+        });
+      });
+    }
+
+    // ===================== 番茄鐘與學習紀錄 =====================
+    // 專注 25 分 → 休息 5 分。每完成一顆專注就記一筆到 data/study.json；考場交卷也記一筆。
+    var STUDY_FILE = 'data/study.json';
+    K.pomo = 'daybook:pomo'; K.pomoFocus = 'daybook:pomo-focus'; K.pomoBreak = 'daybook:pomo-break'; K.goal = 'daybook:goal'; K.font = 'daybook:font'; K.study = 'daybook:study';
+    function pomoFocusMin() { return parseInt(localStorage.getItem(K.pomoFocus) || '25', 10) || 25; }
+    function pomoBreakMin() { return parseInt(localStorage.getItem(K.pomoBreak) || '5', 10) || 5; }
+    function dailyGoal() { return parseInt(localStorage.getItem(K.goal) || '2', 10) || 2; }
+    var study = readJSON(K.study, []), studySha = null, studyLoaded = false;
+    function mergeStudy(remote) {
+      var by = {}; study.forEach(function (r) { by[r.id] = r; });
+      (remote || []).forEach(function (r) { if (r && r.id && !by[r.id]) by[r.id] = r; });
+      study = Object.keys(by).map(function (k) { return by[k]; }).sort(function (a, b) { return a.at < b.at ? -1 : 1; });
+      writeJSON(K.study, study);
+    }
+    function loadStudy(force) {
+      if (studyLoaded && !force) return Promise.resolve(study);
+      var p = getToken() ? ghGet(STUDY_FILE).then(function (f) { if (f) { studySha = f.sha; mergeStudy(JSON.parse(f.content || '[]')); } }) : Promise.resolve();
+      return p.catch(function () {}).then(function () { studyLoaded = true; return study; });
+    }
+    var studyTimer = null;
+    function pushStudy() {
+      if (!getToken()) return;
+      clearTimeout(studyTimer);
+      studyTimer = setTimeout(function () {
+        ghPut(STUDY_FILE, JSON.stringify(study, null, 1), '學習紀錄 ' + today(), studySha).then(function (j) { studySha = j.content.sha; })
+          .catch(function () {
+            return ghGet(STUDY_FILE).then(function (f) { if (f) { studySha = f.sha; mergeStudy(JSON.parse(f.content || '[]')); } return ghPut(STUDY_FILE, JSON.stringify(study, null, 1), '學習紀錄 ' + today(), studySha); })
+              .then(function (j) { studySha = j.content.sha; }).catch(function (e) { toast('學習紀錄沒同步到 GitHub：' + e.message); });
+          });
+      }, 800);
+    }
+    function addStudy(rec) { rec.id = Date.now() + '-' + Math.random().toString(36).slice(2, 6); rec.at = rec.at || new Date().toISOString(); rec.date = rec.at.slice(0, 10); study.push(rec); writeJSON(K.study, study); pushStudy(); return rec; }
+    function localDate(iso) { var d = new Date(iso); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+    function studyStats() {
+      var byDay = {}, tomatoes = {};
+      study.forEach(function (r) { var d = localDate(r.at); byDay[d] = (byDay[d] || 0) + (r.minutes || 0); if (r.kind === 'focus') tomatoes[d] = (tomatoes[d] || 0) + 1; });
+      var days = []; for (var i = 6; i >= 0; i--) { var d = new Date(); d.setDate(d.getDate() - i); days.push(d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0')); }
+      var streak = 0; for (var j = 0; j < 400; j++) { var dd = new Date(); dd.setDate(dd.getDate() - j); var k = dd.getFullYear() + '-' + String(dd.getMonth() + 1).padStart(2, '0') + '-' + String(dd.getDate()).padStart(2, '0'); if (byDay[k]) streak++; else if (j > 0) break; }
+      return { byDay: byDay, tomatoes: tomatoes, days: days, todayMin: byDay[today()] || 0, todayTomato: tomatoes[today()] || 0, streak: streak, weekMin: days.reduce(function (s, d) { return s + (byDay[d] || 0); }, 0) };
+    }
+    // ---- 計時器本體 ----
+    var pomo = readJSON(K.pomo, null); // {phase:'focus'|'break', minutes, startedAt, endAt, paused, remainMs, where}
+    function savePomo() { if (pomo) writeJSON(K.pomo, pomo); else localStorage.removeItem(K.pomo); }
+    function startPomo(phase) {
+      var min = phase === 'focus' ? pomoFocusMin() : pomoBreakMin();
+      var w = currentWhere();
+      pomo = { phase: phase, minutes: min, startedAt: Date.now(), endAt: Date.now() + min * 60000, paused: false, where: w ? w.title : '' };
+      savePomo(); tickPomo(); paintPomoSheet();
+      toast(phase === 'focus' ? '開始專注 ' + min + ' 分鐘 🍅' : '休息 ' + min + ' 分鐘');
+    }
+    function pausePomo() { if (!pomo || pomo.paused) return; pomo.paused = true; pomo.remainMs = Math.max(0, pomo.endAt - Date.now()); savePomo(); tickPomo(); paintPomoSheet(); }
+    function resumePomo() { if (!pomo || !pomo.paused) return; pomo.paused = false; pomo.endAt = Date.now() + pomo.remainMs; savePomo(); tickPomo(); paintPomoSheet(); }
+    function stopPomo(keep) {
+      if (!pomo) return;
+      if (keep && pomo.phase === 'focus') { var done = Math.round((pomo.minutes * 60000 - (pomo.paused ? pomo.remainMs : Math.max(0, pomo.endAt - Date.now()))) / 60000); if (done >= 5) addStudy({ kind: 'partial', minutes: done, where: pomo.where }); }
+      pomo = null; savePomo(); tickPomo(); paintPomoSheet();
+    }
+    function finishPomo() {
+      var was = pomo; pomo = null; savePomo();
+      if (was.phase === 'focus') { addStudy({ kind: 'focus', minutes: was.minutes, where: was.where }); beep(); toast('🍅 完成一顆！今天第 ' + studyStats().todayTomato + ' 顆'); document.title = '🍅 完成 · Daybook'; }
+      else { beep(); toast('休息結束，回來吧'); document.title = 'Daybook'; }
+      tickPomo(); $('pomo').classList.add('open'); paintPomoSheet();
+    }
+    function tickPomo() {
+      var lbl = $('pomo-label'), btn = $('btn-pomo'); if (!lbl) return;
+      if (!pomo) { lbl.textContent = '專注'; btn.classList.remove('on', 'break'); return; }
+      var remain = pomo.paused ? pomo.remainMs : pomo.endAt - Date.now();
+      if (remain <= 0 && !pomo.paused) { finishPomo(); return; }
+      lbl.textContent = fmtDur(remain / 1000) + (pomo.paused ? ' ⏸' : '');
+      btn.classList.toggle('on', pomo.phase === 'focus'); btn.classList.toggle('break', pomo.phase === 'break');
+      var big = $('pm-big'); if (big && $('pomo').classList.contains('open')) big.textContent = fmtDur(remain / 1000);
+    }
+    function beep() {
+      try {
+        var ac = new (window.AudioContext || window.webkitAudioContext)();
+        [0, 0.25, 0.5].forEach(function (t, i) { var o = ac.createOscillator(), g = ac.createGain(); o.frequency.value = [660, 880, 990][i]; o.connect(g); g.connect(ac.destination); g.gain.setValueAtTime(0.0001, ac.currentTime + t); g.gain.exponentialRampToValueAtTime(0.2, ac.currentTime + t + 0.02); g.gain.exponentialRampToValueAtTime(0.0001, ac.currentTime + t + 0.2); o.start(ac.currentTime + t); o.stop(ac.currentTime + t + 0.22); });
+      } catch (e) {}
+    }
+    function paintPomoSheet() {
+      var s = studyStats(), el = $('pm-body'); if (!el) return;
+      var html = '';
+      if (!pomo) {
+        html += '<div class="pm-big" id="pm-big">' + fmtDur(pomoFocusMin() * 60) + '</div><p class="help" style="text-align:center;margin:0 0 0.8rem">專注 ' + pomoFocusMin() + ' 分、休息 ' + pomoBreakMin() + ' 分。時間到會叫，專注完成會記一顆。</p>';
+        html += '<div class="actions" style="justify-content:center"><button class="btn primary" id="pm-start">🍅 開始專注</button><button class="btn" id="pm-break">☕ 先休息</button></div>';
+      } else {
+        html += '<div class="eyebrow" style="text-align:center">' + (pomo.phase === 'focus' ? '專注中' : '休息中') + (pomo.where ? ' · ' + esc(pomo.where) : '') + '</div><div class="pm-big ' + pomo.phase + '" id="pm-big">' + fmtDur((pomo.paused ? pomo.remainMs : pomo.endAt - Date.now()) / 1000) + '</div>';
+        html += '<div class="actions" style="justify-content:center">' + (pomo.paused ? '<button class="btn primary" id="pm-resume">▶ 繼續</button>' : '<button class="btn" id="pm-pause">⏸ 暫停</button>') + '<button class="btn" id="pm-stop">■ 結束' + (pomo.phase === 'focus' ? '（算已做的分鐘）' : '') + '</button></div>';
+      }
+      html += '<div class="stats" style="margin-top:1rem"><div class="stat"><b>' + '🍅'.repeat(Math.min(s.todayTomato, 8)) + (s.todayTomato ? '' : '—') + '</b><span>今天 ' + s.todayTomato + ' / ' + dailyGoal() + ' 顆</span></div><div class="stat"><b>' + s.todayMin + '</b><span>今天分鐘</span></div><div class="stat"><b>' + s.streak + '</b><span>連續天數</span></div></div>';
+      el.innerHTML = html;
+      if ($('pm-start')) $('pm-start').onclick = function () { startPomo('focus'); };
+      if ($('pm-break')) $('pm-break').onclick = function () { startPomo('break'); };
+      if ($('pm-pause')) $('pm-pause').onclick = pausePomo;
+      if ($('pm-resume')) $('pm-resume').onclick = resumePomo;
+      if ($('pm-stop')) $('pm-stop').onclick = function () { stopPomo(true); };
+    }
+    function openPomo() { $('pomo').classList.add('open'); loadStudy().then(paintPomoSheet); }
+    // ---- 首頁「今天」面板 ----
+    function renderStudyPanel() {
+      var el = $('study-panel'); if (!el) return;
+      loadStudy().then(function () {
+        if (!$('study-panel')) return;
+        var s = studyStats(), names = ['日', '一', '二', '三', '四', '五', '六'];
+        var max = Math.max.apply(null, s.days.map(function (d) { return s.byDay[d] || 0; }).concat([25]));
+        var html = '<h3>今天讀了 <span class="help" style="font-weight:400">' + s.todayMin + ' 分鐘 · 🍅 ' + s.todayTomato + ' / ' + dailyGoal() + (s.streak > 1 ? ' · 連續 ' + s.streak + ' 天' : '') + '</span></h3>';
+        html += '<div class="week">' + s.days.map(function (d) { var m = s.byDay[d] || 0; return '<div class="' + (m ? 'hit' : '') + (d === today() ? ' today' : '') + '" style="height:' + Math.max(8, Math.round(m / max * 42)) + 'px" title="' + d + '：' + m + ' 分鐘"></div>'; }).join('') + '</div>';
+        html += '<div class="week-labels">' + s.days.map(function (d) { return '<span>' + names[new Date(d + 'T00:00:00').getDay()] + '</span>'; }).join('') + '</div>';
+        html += '<div class="actions"><button class="btn primary" id="home-pomo">🍅 ' + (pomo ? '計時中' : '開始專注') + '</button><button class="btn" id="home-notes">📝 寫筆記</button><span class="help">本週 ' + s.weekMin + ' 分鐘</span></div>';
+        el.innerHTML = html;
+        $('home-pomo').onclick = openPomo; $('home-notes').onclick = function () { openNotes(null); };
+      });
+    }
+    function applyFont() { var f = localStorage.getItem(K.font) || 'normal'; document.documentElement.style.fontSize = f === 'small' ? '15px' : f === 'large' ? '18px' : ''; }
 
     // ===================== 編輯器 =====================
     var edMode = 'card', edFileSha = null, edSectionHint = null, edFocusCard = null;
@@ -1901,7 +2145,7 @@
       $('editor').classList.add('open'); setMode(mode);
       setTimeout(function () { (edMode === 'page' ? $('ed-name') : $('ed-text')).focus(); }, 50);
     }
-    function closeAll() { ['editor', 'settings', 'search', 'lightbox'].forEach(function (id) { $(id).classList.remove('open'); }); }
+    function closeAll() { ['editor', 'settings', 'search', 'lightbox', 'notes', 'pomo'].forEach(function (id) { $(id).classList.remove('open'); }); }
     function addToToc(file, title) {
       return ghGet(TOC_FILE).then(function (f) {
         var text = f ? f.content : '', lines = text.split('\n');
@@ -1973,13 +2217,16 @@
     function openSettings(hint) {
       $('st-repo').textContent = OWNER + '/' + REPO; $('st-repo-name').textContent = REPO; $('st-branch').textContent = BRANCH;
       $('st-token').value = getToken(); $('st-days').value = reviewDays();
+      $('st-focus').value = pomoFocusMin(); $('st-break').value = pomoBreakMin(); $('st-goal').value = dailyGoal();
+      var cf = localStorage.getItem(K.font) || 'normal'; $('st-font').querySelectorAll('button').forEach(function (b) { b.classList.toggle('on', b.dataset.font === cf); });
       $('st-msg').className = 'msg'; $('st-msg').textContent = hint || '';
       $('settings').classList.add('open');
     }
     function testAndSave() {
       var tk = $('st-token').value.trim(), m = $('st-msg');
       var days = parseInt($('st-days').value, 10); if (days > 0) localStorage.setItem(K.days, String(days));
-      if (!tk) { m.className = 'msg err'; m.textContent = '請先貼上鑰匙'; return; }
+      ['focus', 'break', 'goal'].forEach(function (k) { var v = parseInt($('st-' + k).value, 10); if (v > 0) localStorage.setItem(k === 'focus' ? K.pomoFocus : k === 'break' ? K.pomoBreak : K.goal, String(v)); });
+      if (!tk) { m.className = 'msg ok'; m.textContent = '設定存好了（沒有鑰匙，紀錄只留在這台）'; setTimeout(closeAll, 900); return; }
       m.className = 'msg'; m.textContent = '測試中…';
       fetch('https://api.github.com/repos/' + OWNER + '/' + REPO, { headers: { 'Authorization': 'Bearer ' + tk, 'Accept': 'application/vnd.github+json' } })
         .then(function (r) {
@@ -1992,7 +2239,7 @@
           localStorage.setItem(K.token, tk); BRANCH = j.default_branch || BRANCH; paintConn();
           m.className = 'msg ok'; m.textContent = '連上了 ✓ 可以開始寫';
           fileCache = {}; searchIndex = null;
-          loadReviews(true).then(function () { if (Object.keys(reviews).length) pushReviews(); return loadProgress(true); }).then(function () { if (Object.keys(progress).length) pushProgress(); return loadExams(true); }).then(function () { if (exams.length) pushExams(); go(); });
+          loadReviews(true).then(function () { if (Object.keys(reviews).length) pushReviews(); return loadProgress(true); }).then(function () { if (Object.keys(progress).length) pushProgress(); return loadExams(true); }).then(function () { if (exams.length) pushExams(); return loadStudy(true); }).then(function () { if (study.length) pushStudy(); go(); });
           setTimeout(closeAll, 900);
         }).catch(function (e) { m.className = 'msg err'; m.textContent = e.message; });
     }
@@ -2000,7 +2247,7 @@
     // ===================== 綁事件 =====================
     document.addEventListener('DOMContentLoaded', function () {
       paintConn();
-      $('fab-new').onclick = function () { var m = editorModes()[0]; openEditor(m, current.kind === 'section' ? current.path : null); };
+      $('fab-new').onclick = function () { if (sectionOf(current.path) === NOTE_DIR) { openNotes(null); return; } var m = editorModes()[0]; openEditor(m, current.kind === 'section' ? current.path : null); };
       $('ed-mood-row').querySelectorAll('[data-mood]').forEach(function (b) { b.onclick = function () { setMood(b.dataset.mood); }; });
       $('ed-img').onclick = function () { $('ed-file-input').click(); };
       $('ed-file-input').onchange = function () { uploadImages(this.files); this.value = ''; };
@@ -2012,6 +2259,15 @@
       $('lightbox').onclick = function () { this.classList.remove('open'); };
       $('fab-edit').onclick = function () { openEditor('full'); };
       $('btn-settings').onclick = function () { openSettings(); };
+      $('btn-notes').onclick = function () { openNotes(null); };
+      document.addEventListener('click', function (e) { var a = e.target.closest && e.target.closest('a.wiki'); if (a && a.getAttribute('href') === 'javascript:void(0)') { e.preventDefault(); closeAll(); $('btn-search').click(); $('sq').value = a.dataset.wiki; doSearch(a.dataset.wiki); } });
+      $('nt-close').onclick = closeAll; $('nt-save').onclick = saveNote;
+      $('nt-filter').oninput = function () { noteFilter = this.value; paintNoteList(); };
+      $('nt-all').onclick = closeAll;
+      $('nt-text').addEventListener('keydown', function (e) { if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') saveNote(); });
+      $('btn-pomo').onclick = openPomo; $('pm-close').onclick = closeAll;
+      $('st-font').querySelectorAll('button').forEach(function (b) { b.onclick = function () { localStorage.setItem(K.font, b.dataset.font); applyFont(); $('st-font').querySelectorAll('button').forEach(function (x) { x.classList.toggle('on', x === b); }); }; });
+      applyFont(); tickPomo(); setInterval(tickPomo, 1000);
       $('btn-search').onclick = function () { $('search').classList.add('open'); $('sq').value = ''; doSearch(''); setTimeout(function () { $('sq').focus(); }, 30); };
       $('sq').oninput = function () { doSearch(this.value); };
       $('sq-close').onclick = $('ed-close').onclick = $('ed-cancel').onclick = $('st-close').onclick = closeAll;
@@ -2036,7 +2292,7 @@
         else if (e.key === '/' && !typing) { e.preventDefault(); $('btn-search').click(); }
         else if (e.key === 'n' && !typing && !e.ctrlKey && !e.metaKey && current.kind !== 'exam') { $('fab-new').click(); }
       });
-      ['editor', 'settings', 'search'].forEach(function (id) { $(id).addEventListener('click', function (e) { if (e.target === this) closeAll(); }); });
+      ['editor', 'settings', 'search', 'notes', 'pomo'].forEach(function (id) { $(id).addEventListener('click', function (e) { if (e.target === this) closeAll(); }); });
       window.addEventListener('hashchange', go);
       go();
     });
