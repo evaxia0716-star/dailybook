@@ -174,9 +174,20 @@
     .card-head { display: flex; align-items: flex-start; gap: 0.8rem; margin-bottom: 0.4rem; }
     .card-head h2 { margin: 0; font-size: 1.12rem; line-height: 1.45; flex: 1; }
     .card-head h2 .tag { color: var(--accent); font-weight: 700; }
-    .card-body p { margin: 0.45rem 0; }
+    .card-body { line-height: 1.9; }
+    .card-body p { margin: 0.55rem 0; }
     .card-body strong { color: var(--accent); font-weight: 700; }
     .card-body ul, .card-body ol { padding-left: 1.4rem; margin: 0.4rem 0; }
+    /* 標籤段落：「**一句話**：……」→ 左邊小標籤、右邊內文 */
+    .card-body p.lbl { display: flex; gap: 0.6rem; align-items: flex-start; margin: 0.6rem 0; }
+    .card-body p.lbl .lb { flex: none; font-size: 0.76rem; font-weight: 700; letter-spacing: 0.04em; color: var(--accent); background: var(--accent-soft); border-radius: 6px; padding: 0 0.5rem; line-height: 1.7; margin-top: 0.35rem; }
+    .card-body p.lbl .lt { flex: 1; min-width: 0; }
+    /* 數字條列：圓圈號碼，每條一行 */
+    .card-body ol { list-style: none; padding-left: 0; counter-reset: n; }
+    .card-body ol > li { counter-increment: n; position: relative; padding-left: 2.1rem; margin: 0.45rem 0; }
+    .card-body ol > li::before { content: counter(n); position: absolute; left: 0; top: 0.3rem; width: 1.45rem; height: 1.45rem; border-radius: 50%; background: var(--accent-soft); color: var(--accent); font-weight: 700; font-size: 0.78rem; display: flex; align-items: center; justify-content: center; }
+    .card-body ol > li > strong:first-child, .card-body li > strong:first-child { color: var(--ink); }
+    .card-body ul > li { margin: 0.3rem 0; }
     .card-body table { border-collapse: collapse; width: 100%; margin: 0.6rem 0; font-size: 0.95rem; }
     .card-body th, .card-body td { border: 1px solid var(--line); padding: 0.4rem 0.6rem; text-align: left; }
     .card-body th { background: var(--paper-3); }
@@ -245,6 +256,42 @@
     .lightbox { cursor: zoom-out; background: rgba(34,28,24,0.85); }
     .lightbox img { max-width: 96vw; max-height: 94vh; border-radius: 8px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
     .empty { color: var(--ink-2); text-align: center; padding: 2rem 1rem; border: 1px dashed var(--line); border-radius: var(--radius); }
+
+    /* ===== 背誦模式 ===== */
+    .recite-sheet { background: var(--paper); border-radius: 18px; width: min(820px, 100%); height: min(92vh, 900px); display: flex; flex-direction: column; box-shadow: 0 20px 60px rgba(0,0,0,0.3); border: 1px solid var(--line); overflow: hidden; }
+    .recite-sheet header, .recite-sheet footer { display: flex; align-items: center; gap: 0.5rem; padding: 0.7rem 1rem; background: var(--paper-2); flex-wrap: wrap; }
+    .recite-sheet header { border-bottom: 1px solid var(--line); }
+    .recite-sheet footer { border-top: 1px solid var(--line); }
+    .rc-prog { font-size: 0.85rem; color: var(--ink-2); font-weight: 600; }
+    .rc-page { font-size: 0.85rem; color: var(--ink-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 40%; }
+    .rc-stage { flex: 1; overflow: auto; padding: 1.2rem 1rem 2rem; -webkit-overflow-scrolling: touch; }
+    .rc-card { max-width: 40em; margin: 0 auto; background: var(--paper-2); border: 1px solid var(--line); border-radius: 18px; box-shadow: var(--shadow); padding: 1.5rem 1.7rem 1.7rem; min-height: 40vh; cursor: pointer; }
+    .rc-card .rc-side { font-size: 0.75rem; letter-spacing: 0.1em; color: var(--ink-2); margin-bottom: 0.6rem; }
+    .rc-card h2 { margin: 0 0 0.9rem; font-size: 1.45rem; line-height: 1.5; }
+    .rc-card h2 .tag { color: var(--accent); }
+    .rc-card .card-body { font-size: 1.12rem; line-height: 2; cursor: auto; }
+    .rc-card .card-body p.lbl .lb { font-size: 0.82rem; margin-top: 0.45rem; }
+    .rc-card .card-body img { max-height: 45vh; width: auto; max-width: 100%; margin: 0.9rem auto; }
+    .rc-card .card-body table { font-size: 1rem; }
+    .rc-card.front .card-body .ans, .rc-card.front .card-body .note, .rc-card.front .card-body .note-cont, .rc-card.front.bare .card-body { display: none; }
+    .rc-card .rc-tap { margin-top: 1.4rem; text-align: center; color: var(--ink-2); font-size: 0.85rem; border: 1px dashed var(--line); border-radius: 999px; padding: 0.35rem 1rem; }
+    .rc-card:not(.front) .rc-tap { display: none; }
+    .rc-card.front.bare { display: flex; flex-direction: column; justify-content: center; }
+    .rc-card.front.bare h2 { font-size: 1.7rem; text-align: center; }
+    .recite.big .rc-card .card-body { font-size: 1.32rem; line-height: 2.05; }
+    .recite.big .rc-card h2 { font-size: 1.7rem; }
+    .rc-empty { text-align: center; color: var(--ink-2); padding: 3rem 1rem; }
+    @media (max-width: 720px) {
+      #recite.overlay { padding: 0; }
+      .recite-sheet { width: 100%; height: 100%; border-radius: 0; border: none; }
+      .rc-card { padding: 1.1rem 1.1rem 1.3rem; min-height: 50vh; }
+      .rc-card .card-body { font-size: 1.06rem; }
+      .recite-sheet footer { padding-bottom: calc(0.7rem + env(safe-area-inset-bottom)); }
+      .rc-page { display: none; }
+      .recite-sheet .w { display: none; }
+      .recite-sheet header, .recite-sheet footer { gap: 0.4rem; padding: 0.55rem 0.7rem; }
+      .recite-sheet .toggle { font-size: 0.82rem; }
+    }
 
     /* ===== 浮動按鈕 ===== */
     .fabs { position: fixed; right: 1.2rem; bottom: 1.2rem; z-index: 40; display: flex; flex-direction: column; gap: 0.5rem; align-items: flex-end; }
@@ -593,6 +640,28 @@
     </div>
   </div>
 
+  <div class="overlay recite" id="recite">
+    <div class="recite-sheet">
+      <header>
+        <span class="rc-prog" id="rc-prog"></span>
+        <span class="rc-page" id="rc-page"></span>
+        <span style="flex:1"></span>
+        <label class="toggle"><input type="checkbox" id="rc-due"><span>只背<span class="w">該</span>再看<span class="w">的</span></span></label>
+        <label class="toggle"><input type="checkbox" id="rc-big"> 大字</label>
+        <button class="chip" id="rc-shuffle">🔀 打亂</button>
+        <button class="chip" id="rc-close">✕</button>
+      </header>
+      <div class="rc-stage" id="rc-stage"><div class="rc-card front" id="rc-card"></div></div>
+      <footer>
+        <button class="chip" id="rc-prev">←<span class="w"> 上一張</span></button>
+        <span style="flex:1"></span>
+        <button class="chip" id="rc-again">🔁 再看一次</button>
+        <button class="btn primary" id="rc-ok">記住了 ✓</button>
+        <span style="flex:1"></span>
+        <button class="chip" id="rc-next"><span class="w">下一張 </span>→</button>
+      </footer>
+    </div>
+  </div>
   <div class="overlay lightbox" id="lightbox"><img id="lb-img" alt=""></div>
   <div class="nt-mini" id="nt-mini" style="display:none"><button class="nt-mini-open" id="nt-mini-open">📝 <span id="nt-mini-text">草稿</span></button><button class="nt-mini-x" id="nt-mini-x" title="丟掉草稿">✕</button></div>
   <div class="toast" id="toast"></div>
@@ -648,7 +717,29 @@
       if (Date.now() - e.t > PENDING_TTL) { delete p[file]; writeJSON(K.pending, p); return null; }
       return e.c;
     }
-    function md(s) { return marked.parse(s || '', { breaks: false, gfm: true }); }
+    function md(s) { return marked.parse(cnList(s || ''), { breaks: true, gfm: true }); }
+    // 中文式條列：「1、」「1．」「（一）」「一、」開頭的行，自動變成清單；短標題自動加粗
+    function cnList(s) {
+      var fence = false, inList = false, out = [];
+      function bold(t) { return (t.length <= 50 && !/[。；;：:]/.test(t) && t.indexOf('**') < 0) ? '**' + t + '**' : t; }
+      s.split('\n').forEach(function (l) {
+        if (/^```/.test(l)) { fence = !fence; out.push(l); inList = false; return; }
+        if (fence) { out.push(l); return; }
+        if (!l.trim()) { out.push(l); inList = false; return; }
+        var m = l.match(/^\s*(\d{1,2})[、．]\s*(.*)$/);
+        if (m) { // 1、2、3、→ 圓圈號碼清單
+          if (!inList && out.length && out[out.length - 1].trim()) out.push('');
+          out.push(m[1] + '. ' + bold(m[2].trim()));
+          inList = true; return;
+        }
+        var c = l.match(/^\s*([（(][一二三四五六七八九十]{1,2}[）)])\s*(.*)$/);
+        if (c) { out.push((inList ? '   ' : '') + c[1] + bold(c[2].trim())); return; } // （一）（二）→ 自己一行，短的加粗；在清單裡就縮排跟著上一條
+        var h = l.match(/^\s*([一二三四五六七八九十]{1,2})、\s*(.*)$/);
+        if (h) { if (out.length && out[out.length - 1].trim()) out.push(''); out.push('**' + h[1] + '、' + h[2].trim() + '**'); inList = false; return; } // 一、二、→ 小標題
+        out.push(l);
+      });
+      return out.join('\n');
+    }
 
     // ===================== GitHub API =====================
     function ghFetch(url, opts) {
@@ -1078,6 +1169,14 @@
             return;
           }
           if (ANSWER_LABELS.indexOf(label) >= 0) el.classList.add('ans');
+          // 「**標籤**：內文」→ 左邊小標籤、右邊內文（標籤 8 字以內才算）
+          if (st && st === el.firstElementChild && !st.previousSibling && label && label.length <= 8 && !st.querySelector('a') && st.nextSibling && st.nextSibling.nodeType === 3 && /^[：:]/.test(st.nextSibling.textContent)) {
+            st.nextSibling.textContent = st.nextSibling.textContent.replace(/^[：:]\s*/, '');
+            st.textContent = label; st.className = 'lb';
+            var lt = document.createElement('span'); lt.className = 'lt';
+            while (st.nextSibling) lt.appendChild(st.nextSibling);
+            el.appendChild(lt); el.classList.add('lbl');
+          }
         });
       });
     }
@@ -1110,13 +1209,13 @@
           html += '<div class="page-tools"><span class="hint">讀懂一項就打勾。<b id="map-total">' + tt.done + ' / ' + tt.total + '</b> 已讀完</span><span style="flex:1"></span><span class="hint"><span class="exam A">A</span><span class="exam B">B</span> 哪場考試會考，沒標的兩場都考</span></div>';
         }
         if (canReview && c.cards.length) {
-          html += '<div class="page-tools"><label class="toggle"><input type="checkbox" id="pg-selftest"' + (localStorage.getItem(K.selftest) === '1' ? ' checked' : '') + '> 自測：遮住答案</label><span class="hint">' + c.cards.length + ' 張卡</span><span style="flex:1"></span><button class="mini" id="mark-all">全部標記已複習</button></div>';
+          html += '<div class="page-tools"><label class="toggle"><input type="checkbox" id="pg-selftest"' + (localStorage.getItem(K.selftest) === '1' ? ' checked' : '') + '> 自測：遮住答案</label><button class="chip" id="recite-all" style="border-color:var(--accent);color:var(--accent)">🎴 背誦這頁</button><span class="hint">' + c.cards.length + ' 張卡</span><span style="flex:1"></span><button class="mini" id="mark-all">全部標記已複習</button></div>';
         }
         html += '<div class="cards" id="cards">' + c.cards.map(function (card, i) {
           var key = cardKey(page.file, card.title);
           var t = esc(card.title).replace(/^(【[^】]+】)/, '<span class="tag">$1</span>');
           var tk = countTasks(card.body, page.file);
-          return '<article class="card" id="card-' + i + '" data-title="' + esc(card.title) + '"><div class="card-head"><h2>' + t + '</h2>' + (tk.total ? '<span class="prog" data-prog="' + i + '">' + tk.done + ' / ' + tk.total + '</span>' : '') + (canReview ? reviewBtnHtml(key) : '') + '</div><div class="card-body">' + wikiLinks(examTags(md(card.body)), page) + '</div><div class="card-foot"><button class="mini" data-note="' + i + '">📝 寫筆記</button><button class="mini" data-edit="' + i + '">✎ 改這張</button><button class="mini" data-copy="' + i + '">複製 Markdown</button></div></article>';
+          return '<article class="card" id="card-' + i + '" data-title="' + esc(card.title) + '"><div class="card-head"><h2>' + t + '</h2>' + (tk.total ? '<span class="prog" data-prog="' + i + '">' + tk.done + ' / ' + tk.total + '</span>' : '') + (canReview ? reviewBtnHtml(key) : '') + '</div><div class="card-body">' + wikiLinks(examTags(md(card.body)), page) + '</div><div class="card-foot">' + (canReview ? '<button class="mini" data-recite="' + i + '">🎴 背這張</button>' : '') + '<button class="mini" data-note="' + i + '">📝 寫筆記</button><button class="mini" data-edit="' + i + '">✎ 改這張</button><button class="mini" data-copy="' + i + '">複製 Markdown</button></div></article>';
         }).join('') + '</div>';
         if (!c.cards.length) html += '<div class="empty">還沒有卡。按右下角「＋ 新筆記」貼第一張。</div>';
         body.innerHTML = html;
@@ -1147,6 +1246,15 @@
           btn.onclick = function () { markReviewed(btn.dataset.key); btn.outerHTML = reviewBtnHtml(btn.dataset.key); bindReview(); toast('記下了 ✓'); };
         });
         function bindReview() { body.querySelectorAll('.review-btn').forEach(function (b) { b.onclick = function () { markReviewed(b.dataset.key); b.outerHTML = reviewBtnHtml(b.dataset.key); bindReview(); toast('記下了 ✓'); }; }); }
+        // 背誦：整頁或從某一張開始；背完回來把「已複習」鈕更新
+        function startRecite(from) {
+          openRecite(c.cards, page, from, function (key) {
+            var b = body.querySelector('.review-btn[data-key="' + key.replace(/"/g, '\\"') + '"]');
+            if (b) { b.outerHTML = reviewBtnHtml(key); bindReview(); }
+          });
+        }
+        if ($('recite-all')) $('recite-all').onclick = function () { startRecite(0); };
+        body.querySelectorAll('[data-recite]').forEach(function (b) { b.onclick = function () { startRecite(+b.dataset.recite); }; });
         if ($('mark-all')) $('mark-all').onclick = function () { c.cards.forEach(function (card) { markReviewed(cardKey(page.file, card.title)); }); renderPage(path, {}); toast('這頁全部記下了 ✓'); };
         body.querySelectorAll('[data-edit]').forEach(function (b) { b.onclick = function () { openEditor('cardedit', null, c.cards[+b.dataset.edit].title); }; });
         body.querySelectorAll('[data-copy]').forEach(function (b) {
@@ -1227,6 +1335,72 @@
       }
     }
     // 圖片：載入失敗就改抓 GitHub 原始檔（剛上傳、Pages 還沒更新時），點圖放大
+    // ===================== 背誦模式 =====================
+    var RC = { list: [], i: 0, page: null, onMark: null, all: [] };
+    function openRecite(cards, page, from, onMark) {
+      RC.page = page; RC.onMark = onMark; RC.all = cards.slice();
+      $('rc-page').textContent = page.title;
+      $('rc-due').checked = false;
+      buildReciteList(from || 0);
+      $('recite').classList.add('open');
+      $('recite').classList.toggle('big', localStorage.getItem('daybook:rcbig') === '1');
+      $('rc-big').checked = localStorage.getItem('daybook:rcbig') === '1';
+    }
+    function buildReciteList(from) {
+      var list = RC.all.map(function (card, i) { return { card: card, idx: i, key: cardKey(RC.page.file, card.title) }; });
+      if ($('rc-due').checked) list = list.filter(function (x) { var s = reviewState(x.key); return s.never || s.due; });
+      if (from) list = list.slice(from).concat(list.slice(0, from));
+      RC.list = list; RC.i = 0; RC.done = 0;
+      paintRecite(true);
+    }
+    function paintRecite(front) {
+      var el = $('rc-card'), cur = RC.list[RC.i];
+      if (!cur) {
+        el.className = 'rc-card'; el.innerHTML = '<div class="rc-empty">' + (RC.all.length ? '這一輪背完了 🎉<br><small>關掉回到頁面，或按「打亂」再來一輪。</small>' : '這頁還沒有卡') + '</div>';
+        $('rc-prog').textContent = RC.list.length ? RC.list.length + ' / ' + RC.list.length : '0 張'; return;
+      }
+      var t = esc(cur.card.title).replace(/^(【[^】]+】)/, '<span class="tag">$1</span>');
+      var s = reviewState(cur.key);
+      el.innerHTML = '<div class="rc-side">' + (front ? '正面 · 想一想它是什麼' : '背面') + (s.never ? '' : ' · 看過 ' + s.n + ' 次') + '</div><h2>' + t + '</h2><div class="card-body">' + wikiLinks(examTags(md(cur.card.body)), RC.page) + '</div><div class="rc-tap">點一下翻面（空白鍵）</div>';
+      markAnswers(el);
+      var bare = !Array.from(el.querySelectorAll('.card-body > *')).some(function (x) { return !/(^| )(ans|note|note-cont)( |$)/.test(x.className); }); // 正面沒東西可看 → 只把標題放中間
+      el.className = 'rc-card' + (front ? ' front' : '') + (bare ? ' bare' : '');
+      bindImages(el);
+      $('rc-prog').textContent = (RC.i + 1) + ' / ' + RC.list.length;
+      $('rc-stage').scrollTop = 0;
+    }
+    function reciteFlip() { var el = $('rc-card'); if (!RC.list[RC.i]) return; if (el.classList.contains('front')) paintRecite(false); }
+    function reciteStep(d) { if (!RC.list.length) return; RC.i = Math.min(Math.max(RC.i + d, 0), RC.list.length); paintRecite(true); }
+    document.addEventListener('DOMContentLoaded', function () {
+      $('rc-card').addEventListener('click', function (e) { if (e.target.closest('a, img, input')) return; reciteFlip(); });
+      $('rc-close').onclick = function () { $('recite').classList.remove('open'); };
+      $('rc-prev').onclick = function () { reciteStep(-1); };
+      $('rc-next').onclick = function () { reciteStep(1); };
+      $('rc-ok').onclick = function () {
+        var cur = RC.list[RC.i]; if (!cur) return;
+        markReviewed(cur.key); if (RC.onMark) RC.onMark(cur.key);
+        RC.list.splice(RC.i, 1); paintRecite(true); toast('記下了 ✓');
+      };
+      $('rc-again').onclick = function () {
+        var cur = RC.list[RC.i]; if (!cur) return;
+        RC.list.splice(RC.i, 1); RC.list.push(cur); paintRecite(true); toast('放到最後，等一下再背');
+      };
+      $('rc-shuffle').onclick = function () {
+        for (var i = RC.list.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = RC.list[i]; RC.list[i] = RC.list[j]; RC.list[j] = t; }
+        if (!RC.list.length) buildReciteList(0); else { RC.i = 0; paintRecite(true); }
+      };
+      $('rc-due').onchange = function () { buildReciteList(0); };
+      $('rc-big').onchange = function () { localStorage.setItem('daybook:rcbig', this.checked ? '1' : '0'); $('recite').classList.toggle('big', this.checked); };
+      $('recite').addEventListener('click', function (e) { if (e.target === this) this.classList.remove('open'); });
+      document.addEventListener('keydown', function (e) {
+        if (!$('recite').classList.contains('open') || $('lightbox').classList.contains('open')) return;
+        if (/INPUT|TEXTAREA|SELECT/.test(e.target.tagName || '')) return;
+        if (e.key === ' ') { e.preventDefault(); reciteFlip(); }
+        else if (e.key === 'ArrowRight') reciteStep(1);
+        else if (e.key === 'ArrowLeft') reciteStep(-1);
+        else if (e.key === 'Enter') { if ($('rc-card').classList.contains('front')) reciteFlip(); else $('rc-ok').click(); }
+      }, true);
+    });
     function bindImages(root) {
       root.querySelectorAll('img').forEach(function (img) {
         var src = img.getAttribute('src') || '';
@@ -2201,7 +2375,7 @@
       $('editor').classList.add('open'); setMode(mode);
       setTimeout(function () { (edMode === 'page' ? $('ed-name') : $('ed-text')).focus(); }, 50);
     }
-    function closeAll() { if ($('notes').classList.contains('open')) minimizeNotes(); ['editor', 'settings', 'search', 'lightbox', 'notes', 'pomo'].forEach(function (id) { $(id).classList.remove('open'); }); }
+    function closeAll() { if ($('notes').classList.contains('open')) minimizeNotes(); ['editor', 'settings', 'search', 'lightbox', 'notes', 'pomo', 'recite'].forEach(function (id) { $(id).classList.remove('open'); }); }
     function addToToc(file, title) {
       return ghGet(TOC_FILE).then(function (f) {
         var text = f ? f.content : '', lines = text.split('\n');
@@ -2370,7 +2544,7 @@
         if ((e.ctrlKey || e.metaKey) && e.key === 's' && $('editor').classList.contains('open')) { e.preventDefault(); saveEditor(); }
         else if (e.key === 'Escape') closeAll();
         else if (e.key === '/' && !typing) { e.preventDefault(); $('btn-search').click(); }
-        else if (e.key === 'n' && !typing && !e.ctrlKey && !e.metaKey && current.kind !== 'exam') { $('fab-new').click(); }
+        else if (e.key === 'n' && !typing && !e.ctrlKey && !e.metaKey && current.kind !== 'exam' && !$('recite').classList.contains('open')) { $('fab-new').click(); }
       });
       ['editor', 'settings', 'search', 'notes', 'pomo'].forEach(function (id) { $(id).addEventListener('click', function (e) { if (e.target === this) closeAll(); }); });
       window.addEventListener('hashchange', go);
