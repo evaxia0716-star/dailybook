@@ -10,5 +10,9 @@
 - `筆記/`：你自己的筆記本，一個月一檔，右上角「筆記」抽屜寫進來；每則記得關聯的頁面和卡片
 - `assets/年/月/`：貼進編輯器的圖片，自動壓縮後存這裡；`assets/icons/` 與 `manifest.json` 是加到手機桌面用的圖示與設定
 - `data/bank/`：考古題題庫，一份考卷一個 JSON，`index.json` 是清單；網站的「考場」從這裡出題
+- `data/concepts.json`：每一題的考點標記（題目代號 → 考點名、出題角度、關鍵一句）
+- `data/map.json`：六科的章節骨架（章 → 考點名清單＋延伸項目）；地圖頁從這裡畫出來
+- `data/cards/`：待併入概念頁的卡片（`## 考點名` 一張）；`tools/build.py` 會把還沒有的卡加進 `學科/<科>/概念.md`
+- `tools/build.py`：更新知識庫——重算考點頁、重畫地圖頁、併入新卡；`--check` 只看報告。`tools/make_map.py` 是第一次產 `map.json` 的草稿，平常不用跑
 - `data/reviews.json`、`data/progress.json`、`data/exams.json`、`data/study.json`：複習、地圖進度、考試成績、番茄鐘學習時間，由網站自動寫入
 - 用法與格式見網站上的「使用說明」
