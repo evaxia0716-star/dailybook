@@ -500,6 +500,9 @@
     .hub-head small { font-weight: 400; color: var(--ink-2); margin-left: 0.3rem; }
     .hub-group .card { margin-bottom: 0.6rem; }
     .relink { margin-top: 0.6rem; border: 1px dashed var(--accent); border-radius: 10px; padding: 0.6rem; background: var(--paper); display: flex; flex-direction: column; gap: 0.45rem; }
+    .note-edit { width: 100%; min-height: 8rem; resize: vertical; font: inherit; font-size: 0.95rem; line-height: 1.7; border: 1px solid var(--line); border-radius: 8px; padding: 0.5rem 0.7rem; background: #fff; color: var(--ink); }
+    .mini.danger { color: var(--danger); }
+    .nt-meta { align-items: center; }
     .relink input[type=search] { font: inherit; font-size: 0.9rem; padding: 0.45rem 0.6rem; }
     .sheet.side input[type=search] { flex: 1; }
     .nt-entry { border-top: 1px dashed var(--line); padding: 0.6rem 0; }
@@ -1372,7 +1375,7 @@
       $('j-new').onclick = function () { if (isNotes) openNotes(null); else openEditor('journal'); };
       body.querySelectorAll('[data-filter]').forEach(function (b) { b.onclick = function () { location.hash = '#/' + page.path + (b.dataset.filter ? '?tag=' + encodeURIComponent(b.dataset.filter) : ''); }; });
       body.querySelectorAll('.tagpill').forEach(function (t) { t.onclick = function () { location.hash = '#/' + page.path + '?tag=' + encodeURIComponent(t.dataset.tag); }; });
-      body.querySelectorAll('[data-edit]').forEach(function (b) { b.onclick = function () { openEditor('cardedit', null, shown[+b.dataset.edit].title); }; });
+      body.querySelectorAll('[data-edit]').forEach(function (b) { b.onclick = function () { if (isNotes) openEditNote(b.closest('.card'), shown[+b.dataset.edit], go); else openEditor('cardedit', null, shown[+b.dataset.edit].title); }; });
       body.querySelectorAll('[data-relink]').forEach(function (b) { b.onclick = function () { openRelink(b.closest('.card'), shown[+b.dataset.relink], go); }; });
       body.querySelectorAll('[data-copy]').forEach(function (b) { b.onclick = function () { var e = shown[+b.dataset.copy]; navigator.clipboard.writeText('## ' + e.title + '\n\n' + (e.mood ? '心情：' + e.mood + '\n\n' : '') + e.body).then(function () { toast('已複製'); }); }; });
       bindImages(body);
@@ -2231,8 +2234,15 @@
       var el = $('nt-list');
       if (!list.length) { el.innerHTML = '<div class="help" style="padding:1rem 0">' + (q || noteSubj ? '沒有符合的筆記。' : '還沒有筆記。上面那格寫第一則。') + '</div>'; return; }
       el.innerHTML = list.slice(0, 40).map(function (e) {
-        return '<div class="nt-entry"><div class="nt-meta">' + esc(e.date) + (e.time ? ' ' + esc(e.time) : '') + entryLinkHtml(e, true) + '</div><div class="card-body">' + wikiLinks(tagPills(md(e.body)), e.link ? { sub: e.link.path.split('/')[1] } : null) + '</div></div>';
+        return '<div class="nt-entry" data-i="' + all.indexOf(e) + '"><div class="nt-meta">' + esc(e.date) + (e.time ? ' ' + esc(e.time) : '') + entryLinkHtml(e, true) + '<span style="flex:1"></span><button type="button" class="mini" data-ne="edit">✎ 改</button><button type="button" class="mini' + (e.link ? '' : ' primary') + '" data-ne="link">📂 ' + (e.link ? '改歸類' : '歸類') + '</button></div><div class="card-body">' + wikiLinks(tagPills(md(e.body)), e.link ? { sub: e.link.path.split('/')[1] } : null) + '</div></div>';
       }).join('') + (list.length > 40 ? '<p class="help">還有 ' + (list.length - 40) + ' 則，到「筆記」分區看全部。</p>' : '');
+      el.querySelectorAll('[data-ne]').forEach(function (b) {
+        b.onclick = function () {
+          var host = b.closest('.nt-entry'), e = all[+host.dataset.i];
+          var done = function () { paintNoteList(); if ((current.kind === 'section' && current.path === NOTE_DIR) || (current.kind === 'page' && current.path.indexOf(NOTE_DIR + '/') === 0)) go(); };
+          if (b.dataset.ne === 'edit') openEditNote(host, e, done); else openRelink(host, e, done);
+        };
+      });
     }
     function saveNote() {
       var text = $('nt-text').value.trim(); if (!text) { $('nt-msg').textContent = '還沒寫東西'; return; }
@@ -2278,6 +2288,37 @@
         return ghPut(e.file, out, '筆記歸類：' + (e.label || e.title).slice(0, 24), f.sha).then(function () { setPending(e.file, out); fileCache[e.file] = out; searchIndex = null; });
       }).then(function () { return loadNoteIndex(true); });
     }
+    // ---------- 存好的筆記改內容／刪掉：只動那一則 ----------
+    function rewriteNote(e, text) { // text 為 null ＝ 刪掉這則
+      if (!getToken()) { openSettings('先貼一次鑰匙，才能改筆記。'); return Promise.reject(new Error('沒有鑰匙')); }
+      return ghGet(e.file).then(function (f) {
+        if (!f) throw new Error('找不到檔案');
+        var lines = f.content.split('\n'), i = lines.indexOf('## ' + e.title);
+        if (i < 0) throw new Error('找不到這則筆記（可能剛被改過，重新整理再試）');
+        var j = i + 1; while (j < lines.length && !/^## /.test(lines[j])) j++;
+        var rel = null; for (var x = i + 1; x < j; x++) if (/^關聯[：:]/.test(lines[x])) { rel = lines[x]; break; }
+        if (text === null) lines.splice(i, j - i);
+        else { var body = [''].concat(rel ? [rel, ''] : [], text.replace(/\s+$/, '').split('\n'), ['']); Array.prototype.splice.apply(lines, [i + 1, j - i - 1].concat(body)); }
+        var out = lines.join('\n').replace(/\n{3,}/g, '\n\n');
+        return ghPut(e.file, out, (text === null ? '刪筆記：' : '改筆記：') + (e.label || e.title).slice(0, 24), f.sha).then(function () { setPending(e.file, out); fileCache[e.file] = out; searchIndex = null; });
+      }).then(function () { return loadNoteIndex(true); });
+    }
+    function openEditNote(host, e, after) {
+      var old = host.querySelector('.relink'); if (old) { old.remove(); return; }
+      var box = document.createElement('div'); box.className = 'relink';
+      box.innerHTML = '<textarea class="note-edit" spellcheck="false"></textarea><div class="note-actions"><button type="button" class="mini primary">存修改</button><button type="button" class="mini">取消</button><span style="flex:1"></span><button type="button" class="mini danger">刪掉這則</button></div><span class="help relink-msg"></span>';
+      host.appendChild(box);
+      var ta = box.querySelector('textarea'); ta.value = e.body; ta.style.height = Math.min(480, Math.max(140, ta.scrollHeight + 10)) + 'px'; ta.focus();
+      var bs = box.querySelectorAll('.note-actions button'), msg = box.querySelector('.relink-msg');
+      function run(text, okMsg) {
+        bs.forEach(function (b) { b.disabled = true; }); msg.textContent = '存檔中…';
+        rewriteNote(e, text).then(function () { toast(okMsg); after(); }).catch(function (err) { msg.textContent = '沒存成：' + err.message; bs.forEach(function (b) { b.disabled = false; }); });
+      }
+      ta.addEventListener('keydown', function (ev) { if ((ev.ctrlKey || ev.metaKey) && ev.key === 'Enter') bs[0].click(); });
+      bs[0].onclick = function () { if (!ta.value.trim()) { msg.textContent = '不能是空的；要刪掉請按「刪掉這則」'; return; } run(ta.value, '改好了 ✓'); };
+      bs[1].onclick = function () { box.remove(); };
+      bs[2].onclick = function () { if (confirm('刪掉這則筆記？刪了就沒有了。')) run(null, '刪掉了'); };
+    }
     // 在一則筆記底下展開「歸類」小面板
     function openRelink(host, e, after) {
       var old = host.querySelector('.relink'); if (old) { old.remove(); return; }
@@ -2318,10 +2359,11 @@
         $('hub-list').innerHTML = order.map(function (g) {
           return '<div class="hub-group"><div class="hub-head">' + esc(g) + ' <small>' + groups[g].length + ' 則</small></div>' + groups[g].map(function (e) {
             var i = flat.push(e) - 1;
-            return '<article class="card entry" data-i="' + i + '"><div class="nt-meta">' + esc(e.date) + (e.time ? ' ' + esc(e.time) : '') + entryLinkHtml(e, true) + '</div><div class="card-body">' + wikiLinks(tagPills(md(e.body)), e.link ? { sub: e.link.path.split('/')[1] } : null) + '</div><div class="card-foot"><button class="mini' + (e.link ? '' : ' primary') + '" data-relink="' + i + '">📂 ' + (e.link ? '改歸類' : '歸類') + '</button><a class="mini" href="#/' + esc(e.file.replace(/\.md$/, '')) + '?c=' + encodeURIComponent(e.title) + '">到那個月看</a></div></article>';
+            return '<article class="card entry" data-i="' + i + '"><div class="nt-meta">' + esc(e.date) + (e.time ? ' ' + esc(e.time) : '') + entryLinkHtml(e, true) + '</div><div class="card-body">' + wikiLinks(tagPills(md(e.body)), e.link ? { sub: e.link.path.split('/')[1] } : null) + '</div><div class="card-foot"><button class="mini' + (e.link ? '' : ' primary') + '" data-relink="' + i + '">📂 ' + (e.link ? '改歸類' : '歸類') + '</button><button class="mini" data-nedit="' + i + '">✎ 改內容</button><a class="mini" href="#/' + esc(e.file.replace(/\.md$/, '')) + '?c=' + encodeURIComponent(e.title) + '">到那個月看</a></div></article>';
           }).join('') + '</div>';
         }).join('');
         $('hub-list').querySelectorAll('[data-relink]').forEach(function (b) { b.onclick = function () { var el = b.closest('.card'); openRelink(el, flat[+b.dataset.relink], go); }; });
+        $('hub-list').querySelectorAll('[data-nedit]').forEach(function (b) { b.onclick = function () { openEditNote(b.closest('.card'), flat[+b.dataset.nedit], go); }; });
         bindImages($('hub-list'));
       });
     }
