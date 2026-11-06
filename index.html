@@ -459,10 +459,48 @@
     .written-list.handwrite .written-in { display: none; }
     .exam-strip .actions { margin-top: 0.7rem; }
     /* 筆記本抽屜 */
-    .overlay.drawer { justify-content: flex-end; align-items: stretch; }
-    .sheet.side { width: min(460px, 100%); max-height: 100vh; height: 100vh; border-radius: 0; margin: 0; display: flex; flex-direction: column; }
+    /* 不蓋灰幕、點旁邊不會關；寬螢幕時把頁面往左推，邊看邊寫 */
+    .overlay.drawer { justify-content: flex-end; align-items: stretch; background: transparent; pointer-events: none; padding: 0; z-index: 44; }
+    .overlay.drawer .sheet { pointer-events: auto; }
+    .sheet.side { width: min(440px, 100%); max-height: 100vh; height: 100vh; border-radius: 0; margin: 0; display: flex; flex-direction: column; border-width: 0 0 0 1px; box-shadow: -10px 0 30px rgba(58,49,41,0.12); }
+    @media (min-width: 1100px) {
+      body.nt-docked { padding-right: 440px; }
+      body.nt-docked .fabs { right: calc(440px + 1.2rem); }
+    }
     .sheet.side .body { flex: 1; overflow: auto; }
-    .sheet.side textarea { min-height: 7rem; }
+    .sheet.side textarea { min-height: 9rem; }
+    /* 按鈕的「選中」要一眼看得出來：實心底色＋✓ */
+    .chip.sel, .chip[aria-pressed=true] { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+    .chip.sel:hover { color: #fff; filter: brightness(1.05); }
+    .chip:active, .mini:active, .btn:active { transform: scale(0.96); }
+    .chip:focus-visible, .mini:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .nt-where-box { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 0.6rem 0.7rem; display: flex; flex-direction: column; gap: 0.45rem; }
+    .nt-where-label { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; color: var(--ink-2); }
+    .pk-subj { display: flex; gap: 0.35rem; flex-wrap: wrap; }
+    .pk-chip.none:not(.sel) { border-style: dashed; color: var(--ink-2); }
+    .pk-chip.none.sel { background: var(--ink-2); border-color: var(--ink-2); }
+    .pk-target { display: flex; gap: 0.4rem; align-items: center; flex-wrap: wrap; margin-top: 0.15rem; }
+    .pk-empty { font-size: 0.82rem; color: var(--ink-2); }
+    .pk-pill { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.85rem; background: var(--accent-soft); color: var(--accent); border-radius: 8px; padding: 0.15rem 0.3rem 0.15rem 0.55rem; font-weight: 600; max-width: 100%; }
+    .pk-pill.deep { background: var(--accent); color: #fff; }
+    .pk-x { border: none; background: rgba(255,255,255,0.35); color: inherit; border-radius: 6px; cursor: pointer; font-size: 0.75rem; padding: 0 0.35rem; line-height: 1.5; }
+    .pk-find { border: 1px solid var(--line); border-radius: 10px; background: #fff; overflow: hidden; }
+    .pk-find input[type=search] { width: 100%; border: none !important; border-bottom: 1px solid var(--line) !important; border-radius: 0 !important; min-width: 0; }
+    .pk-list { max-height: 15rem; overflow: auto; padding: 0.3rem; }
+    .pk-ch { font-size: 0.72rem; color: var(--ink-2); font-weight: 700; padding: 0.4rem 0.4rem 0.1rem; }
+    .pk-item { display: block; width: 100%; text-align: left; border: none; background: none; font: inherit; font-size: 0.88rem; padding: 0.25rem 0.5rem; border-radius: 7px; cursor: pointer; color: var(--ink); }
+    .pk-item:hover { background: var(--accent-soft); }
+    .pk-item.sel { background: var(--accent); color: #fff; font-weight: 600; }
+    .nt-pending { display: flex; gap: 0.4rem; align-items: center; flex-wrap: wrap; font-size: 0.82rem; background: #fbf1c7; border-radius: 8px; padding: 0.35rem 0.5rem; }
+    .nt-list-head { display: flex; align-items: center; justify-content: space-between; margin-top: 0.6rem; padding-top: 0.6rem; border-top: 1px solid var(--line); font-size: 0.92rem; }
+    .nt-subjbar { display: flex; gap: 0.3rem; flex-wrap: wrap; }
+    .entry-link.none { color: var(--ink-2); background: var(--paper-3); }
+    .hub-group { margin: 1.2rem 0; }
+    .hub-head { font-weight: 700; font-size: 1rem; margin: 0 0 0.5rem; padding-left: 0.6rem; border-left: 4px solid var(--c, var(--accent)); }
+    .hub-head small { font-weight: 400; color: var(--ink-2); margin-left: 0.3rem; }
+    .hub-group .card { margin-bottom: 0.6rem; }
+    .relink { margin-top: 0.6rem; border: 1px dashed var(--accent); border-radius: 10px; padding: 0.6rem; background: var(--paper); display: flex; flex-direction: column; gap: 0.45rem; }
+    .relink input[type=search] { font: inherit; font-size: 0.9rem; padding: 0.45rem 0.6rem; }
     .sheet.side input[type=search] { flex: 1; }
     .nt-entry { border-top: 1px dashed var(--line); padding: 0.6rem 0; }
     .nt-meta { font-size: 0.78rem; color: var(--ink-2); display: flex; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 0.2rem; }
@@ -574,15 +612,21 @@
     </div>
   </div>
 
-  <!-- 筆記本抽屜 -->
+  <!-- 筆記本抽屜：靠右的便條紙，不擋畫面 -->
   <div class="overlay drawer" id="notes">
-    <div class="sheet side" role="dialog" aria-modal="true">
-      <header><h3>📝 筆記本</h3><span class="help">你自己的，跟隨寫分開</span><button class="btn ghost" id="nt-min" title="縮到下面，草稿留著">—</button><button class="btn ghost" id="nt-close">✕</button></header>
+    <div class="sheet side" role="complementary" aria-label="筆記本">
+      <header><h3>📝 筆記本</h3><span class="help">邊看邊記，草稿自動留著</span><button class="btn ghost" id="nt-close" title="收到下面，草稿會留著">收起 ⇲</button></header>
       <div class="body">
-        <div class="row" id="nt-link"></div>
+        <div class="nt-where-box">
+          <div class="nt-where-label">這則放進哪裡</div>
+          <div id="nt-where"></div>
+          <div class="nt-pending" id="nt-pending" style="display:none"></div>
+        </div>
         <textarea id="nt-text" spellcheck="false" placeholder="查到的、想到的、要背的。Markdown 可以用，#標籤 之後可以篩，[[概念名]] 會變連結。Ctrl + Enter 存。"></textarea>
-        <div class="row"><span class="msg help" id="nt-msg"></span><span style="flex:1"></span><a class="chip" href="#/筆記" id="nt-all">看全部</a><button class="btn primary" id="nt-save">存到筆記本</button></div>
-        <div class="row"><input type="search" id="nt-filter" placeholder="篩：關鍵字、#標籤、卡片名"></div>
+        <div class="row"><span class="msg help" id="nt-msg"></span><span style="flex:1"></span><button class="mini" id="nt-discard" style="display:none">丟掉草稿</button><button class="btn primary" id="nt-save">存到筆記本</button></div>
+        <div class="nt-list-head"><b>之前記的</b><a class="mini" href="#/筆記" id="nt-all">照科目整理 →</a></div>
+        <div class="filterbar nt-subjbar" id="nt-subjbar"></div>
+        <div class="row"><input type="search" id="nt-filter" placeholder="篩：關鍵字、#標籤、概念名"></div>
         <div id="nt-list"></div>
       </div>
     </div>
@@ -834,7 +878,7 @@
       var mm = body.match(/^心情[：:]\s*(.*)$/m);
       if (mm) { mood = mm[1].trim(); body = body.replace(mm[0], '').trim(); }
       var link = null, ml = body.match(/^關聯[：:]\s*(.+)$/m);
-      if (ml) { var parts = ml[1].split('›').map(function (x) { return x.trim(); }); var pg = findPage(parts[0]); link = { path: parts[0], title: pg ? pg.title : parts[0].split('/').pop(), card: parts[1] || '' }; body = body.replace(ml[0], '').trim(); }
+      if (ml) { var parts = ml[1].split('›').map(function (x) { return x.trim(); }); var pg = findPage(parts[0]); if (parts[0].indexOf('/') > 0 || parts[0] === '考場') link = { path: parts[0], title: pg ? pg.title : parts[0].split('/').pop(), card: parts[1] || '' }; body = body.replace(ml[0], '').trim(); } // 只掛在分區（例如「學科」）不算有放進哪裡
       var tags = []; body.replace(/(^|[\s（(])#([^\s#，。,.!?）)]+)/g, function (_, __, t) { if (tags.indexOf(t) < 0) tags.push(t); return _; });
       return { title: card.title, date: m ? m[1] : '', time: m ? (m[2] || '') : '', label: m ? m[3].trim() : card.title, mood: mood, tags: tags, body: body, link: link };
     }
@@ -969,6 +1013,7 @@
         var isExam = r.path === '考場' || r.path.indexOf('考場/') === 0;
         current = !r.path ? { kind: 'home', path: '' } : isExam ? { kind: 'exam', path: r.path } : sec ? { kind: 'section', path: r.path } : { kind: 'page', path: r.path };
         renderTabs(r.path);
+        notesFollow();
         if (current.kind === 'exam') return renderExam(r);
         if (current.kind === 'home') return renderHome();
         if (current.kind === 'section') return renderSection(sec);
@@ -1112,6 +1157,7 @@
 
     // ---------- 分區頁 ----------
     function renderSection(sec) {
+      if (sec.name === NOTE_DIR) return renderNoteHub(sec);
       $('fab-edit').style.display = 'none';
       app.innerHTML = '<div class="crumbs"><a href="#/">首頁</a><span>›</span><span>' + esc(sec.name) + '</span></div><h1 class="page-title">' + esc(sec.name) + '</h1><p class="lead">' + esc(SECTION_INTRO[sec.name] || '') + '</p><div class="grid" id="sec-grid"></div>';
       Promise.all([loadReviews(), loadProgress()].concat(sec.pages.map(pageStats))).then(function (res) {
@@ -1307,7 +1353,7 @@
     }
     // ---------- 日記：一天一則，最新在上 ----------
     function renderJournal(body, page, c, params) {
-      var entries = sortEntries(c.cards);
+      var entries = sortEntries(c.cards); entries.forEach(function (e) { e.file = page.file; });
       var tagCount = {}; entries.forEach(function (e) { e.tags.forEach(function (t) { tagCount[t] = (tagCount[t] || 0) + 1; }); });
       var tags = Object.keys(tagCount).sort(function (a, b) { return tagCount[b] - tagCount[a]; });
       var filter = (params && params.tag) || '';
@@ -1319,7 +1365,7 @@
       html += '<span style="flex:1"></span><button class="btn primary" id="j-new">' + (isNotes ? '📝 寫一則筆記' : '✎ 今天寫一筆') + '</button></div>';
       var shown = entries.filter(function (e) { return !filter || e.tags.indexOf(filter) >= 0; });
       html += '<div class="cards" id="cards">' + shown.map(function (e, i) {
-        return '<article class="card entry" data-title="' + esc(e.title) + '"><div class="entry-head">' + (e.mood ? '<span class="mood">' + esc(e.mood) + '</span>' : '') + '<div><div class="entry-date">' + esc(e.date || e.title) + (e.time ? ' <small>' + esc(e.time) + '</small>' : '') + (e.date ? ' <small>' + weekday(e.date) + '</small>' : '') + '</div>' + (e.label ? '<div class="entry-label">' + esc(e.label) + '</div>' : '') + entryLinkHtml(e) + '</div></div><div class="card-body">' + wikiLinks(tagPills(md(e.body)), e.link ? { sub: e.link.path.split('/')[1] } : page) + '</div><div class="card-foot"><button class="mini" data-edit="' + i + '">✎ 改這則</button><button class="mini" data-copy="' + i + '">複製 Markdown</button></div></article>';
+        return '<article class="card entry" data-title="' + esc(e.title) + '"><div class="entry-head">' + (e.mood ? '<span class="mood">' + esc(e.mood) + '</span>' : '') + '<div><div class="entry-date">' + esc(e.date || e.title) + (e.time ? ' <small>' + esc(e.time) + '</small>' : '') + (e.date ? ' <small>' + weekday(e.date) + '</small>' : '') + '</div>' + (e.label ? '<div class="entry-label">' + esc(e.label) + '</div>' : '') + entryLinkHtml(e, isNotes) + '</div></div><div class="card-body">' + wikiLinks(tagPills(md(e.body)), e.link ? { sub: e.link.path.split('/')[1] } : page) + '</div><div class="card-foot">' + (isNotes ? '<button class="mini' + (e.link ? '' : ' primary') + '" data-relink="' + i + '">📂 ' + (e.link ? '改歸類' : '歸類') + '</button>' : '') + '<button class="mini" data-edit="' + i + '">✎ 改這則</button><button class="mini" data-copy="' + i + '">複製 Markdown</button></div></article>';
       }).join('') + '</div>';
       if (!entries.length) html += '<div class="empty">' + (isNotes ? '這個月還沒有筆記。' : '這個月還沒有日記。按「今天寫一筆」。') + '</div>';
       body.innerHTML = html;
@@ -1327,6 +1373,7 @@
       body.querySelectorAll('[data-filter]').forEach(function (b) { b.onclick = function () { location.hash = '#/' + page.path + (b.dataset.filter ? '?tag=' + encodeURIComponent(b.dataset.filter) : ''); }; });
       body.querySelectorAll('.tagpill').forEach(function (t) { t.onclick = function () { location.hash = '#/' + page.path + '?tag=' + encodeURIComponent(t.dataset.tag); }; });
       body.querySelectorAll('[data-edit]').forEach(function (b) { b.onclick = function () { openEditor('cardedit', null, shown[+b.dataset.edit].title); }; });
+      body.querySelectorAll('[data-relink]').forEach(function (b) { b.onclick = function () { openRelink(b.closest('.card'), shown[+b.dataset.relink], go); }; });
       body.querySelectorAll('[data-copy]').forEach(function (b) { b.onclick = function () { var e = shown[+b.dataset.copy]; navigator.clipboard.writeText('## ' + e.title + '\n\n' + (e.mood ? '心情：' + e.mood + '\n\n' : '') + e.body).then(function () { toast('已複製'); }); }; });
       bindImages(body);
       if (params && params.c) {
@@ -1984,85 +2031,213 @@
 
     // ===================== 筆記本（你自己的） =====================
     // 跟隨寫分開：隨寫是日記，筆記本是「看某張卡、某一頁時想到或查到的東西」。
-    // 一個月一檔（筆記/2026-09.md），每則記得當時在看哪一頁、哪張卡（關聯：頁面 › 卡片）。
+    // 一個月一檔（筆記/2026-11.md），照時間存；每則記得「放進哪一科、哪個概念」（關聯：頁面 › 卡片），照科目看。
+    // 抽屜是靠在右邊的便條紙：不擋畫面、點旁邊不會關、換頁也跟著，草稿每打一個字就存在這台瀏覽器。
     var NOTE_DIR = '筆記';
-    K.noteDraft = 'daybook:note-draft';   // 沒存完的筆記留在這台瀏覽器，像 Gmail 的草稿
-    var noteLink = null;      // 目前要掛的關聯 {path, title, card}
-    var noteFilter = '';      // 抽屜裡的篩選字
-    var noteIndex = null;     // 最近兩個月的筆記（給卡片顯示「筆記 N 則」）
+    var SUBJECTS = ['行政學', '法學', '管理學', '經濟學', '國文', '英文'];
+    K.noteDraft = 'daybook:note-draft';
+    var noteLink = null;          // 這則要放進哪裡 {path, title, card}
+    var noteLinkManual = false;   // 是不是自己選的（自己選的就不跟著換頁）
+    var noteLinkPending = null;   // 換到別頁時，問要不要改放到這頁
+    var noteFilter = '';          // 抽屜裡的篩選字
+    var noteSubj = '';            // 抽屜裡的科目篩選：'' 全部、'未分類'、或科目名
+    var noteIndex = null;         // 全部月份的筆記
     function noteFile(ym) { return NOTE_DIR + '/' + (ym || today().slice(0, 7)) + '.md'; }
-    function prevMonth() { var d = new Date(); d.setDate(1); d.setMonth(d.getMonth() - 1); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0'); }
+    function noteMonths() {
+      var sec = toc.sections.filter(function (s) { return s.name === NOTE_DIR; })[0];
+      var files = sec ? sec.pages.map(function (p) { return p.file; }) : [];
+      if (files.indexOf(noteFile()) < 0) files.push(noteFile());
+      return files;
+    }
+    function subjectOf(path) {
+      if (!path) return '';
+      var m = path.match(/^學科\/([^/]+)/); if (m) return m[1];
+      for (var i = 0; i < SUBJECTS.length; i++) if (path.indexOf('學習/' + SUBJECTS[i]) === 0) return SUBJECTS[i];
+      return '';
+    }
+    function subjLink(s, card) { return { path: '學科/' + s + '/概念', title: s + '概念', card: card || '' }; }
+    function sameLink(a, b) { return !!a && !!b && a.path === b.path && (a.card || '') === (b.card || ''); }
+    function linkText(l) { if (!l) return ''; var s = subjectOf(l.path); return (s && /\/概念$/.test(l.path) ? s : (l.title || l.path)) + (l.card ? ' › ' + shortConcept(l.card) : ''); }
     function currentWhere() {
-      if (current.kind === 'page') { var p = findPage(current.path); return { path: current.path, title: p ? p.title : current.path.split('/').pop() }; }
-      if (current.kind === 'exam' && run) return { path: '考場', title: run.label };
-      if (current.kind === 'section') return { path: current.path, title: current.path };
-      return null;
+      if (current.kind === 'page') { var p = findPage(current.path); return { path: current.path, title: p ? p.title : current.path.split('/').pop(), card: '' }; }
+      if (current.kind === 'exam' && run) return { path: '考場', title: run.label, card: '' };
+      return null; // 首頁、分區頁不算一個「地方」，不自動掛
     }
     function loadNoteIndex(force) {
       if (noteIndex && !force) return Promise.resolve(noteIndex);
-      return Promise.all([loadFile(noteFile(), force), loadFile(noteFile(prevMonth()), force)]).then(function (res) {
+      var files = noteMonths();
+      return Promise.all(files.map(function (f) { return loadFile(f, force); })).then(function (res) {
         var all = [];
-        res.forEach(function (t, i) { if (!t) return; var ym = i === 0 ? today().slice(0, 7) : prevMonth(); splitCards(t).cards.forEach(function (c) { var e = parseEntry(c); e.file = noteFile(ym); all.push(e); }); });
+        res.forEach(function (t, i) { if (!t) return; splitCards(t).cards.forEach(function (c) { var e = parseEntry(c); e.file = files[i]; all.push(e); }); });
         all.sort(function (a, b) { var ka = a.date + ' ' + (a.time || '00:00'), kb = b.date + ' ' + (b.time || '00:00'); return ka < kb ? 1 : ka > kb ? -1 : 0; });
         noteIndex = all; return all;
       });
     }
+
+    // ---------- 概念清單（從學科地圖來，選「放進哪個概念」用） ----------
+    var conceptCache = {};
+    function loadConcepts(subj) {
+      if (conceptCache[subj]) return Promise.resolve(conceptCache[subj]);
+      return Promise.all([loadFile('data/map.json'), loadFile('學科/' + subj + '/概念.md')]).then(function (res) {
+        var groups = [], seen = {};
+        try {
+          var m = JSON.parse(res[0] || '{}')[subj];
+          (m && m.chapters || []).forEach(function (ch) { var list = (ch.concepts || []).filter(function (c) { if (seen[c]) return false; seen[c] = 1; return true; }); if (list.length) groups.push({ title: ch.title, items: list }); });
+        } catch (e) {}
+        var extra = splitCards(res[1] || '').cards.map(function (c) { return c.title; }).filter(function (t) { if (seen[t]) return false; seen[t] = 1; return true; });
+        if (extra.length) groups.push({ title: '其他概念卡', items: extra });
+        conceptCache[subj] = groups; return groups;
+      });
+    }
+    function shortConcept(t) { return t.replace(/^【[^】]*】\s*/, ''); }
+
+    // ---------- 選「放進哪裡」的小元件：抽屜和「歸類」共用 ----------
+    // 第一排：科目鈕（選中＝實心橘底＋✓）；第二排：現在放在哪；「選概念」打開可搜尋的清單
+    function linkPicker(box, link, onPick) {
+      var st = { link: link || null, open: false, q: '' };
+      function subj() { return st.link ? subjectOf(st.link.path) : ''; }
+      function set(l) { st.link = l; st.open = false; st.q = ''; paint(); onPick(l); }
+      function paint() {
+        var s = subj();
+        var html = '<div class="pk-subj" role="group" aria-label="放進哪一科">' + SUBJECTS.map(function (x) {
+          var on = x === s;
+          return '<button type="button" class="chip pk-chip' + (on ? ' sel' : '') + '" aria-pressed="' + on + '" data-subj="' + esc(x) + '">' + (on ? '✓ ' : '') + esc(x) + '</button>';
+        }).join('') + '<button type="button" class="chip pk-chip none' + (!st.link ? ' sel' : '') + '" aria-pressed="' + !st.link + '" data-subj="">' + (!st.link ? '✓ ' : '') + '先不分</button></div>';
+        html += '<div class="pk-target">';
+        if (!st.link) html += '<span class="pk-empty">放在「未分類」。之後到「筆記」分區一鍵歸類就好。</span>';
+        else {
+          html += '<span class="pk-pill' + (st.link.card ? ' deep' : '') + '">📎 ' + esc(linkText(st.link)) + (st.link.card || !s ? '<button type="button" class="pk-x" data-act="up" title="' + (st.link.card ? '拿掉概念，只放在這一科' : '拿掉') + '">✕</button>' : '') + '</span>';
+          if (s) html += '<button type="button" class="chip pk-find-btn' + (st.open ? ' sel' : '') + '" aria-pressed="' + st.open + '" data-act="find">' + (st.link.card ? '換概念' : '選概念') + ' ' + (st.open ? '▴' : '▾') + '</button>';
+        }
+        html += '</div>';
+        if (st.open && s) html += '<div class="pk-find"><input type="search" class="pk-q" placeholder="找' + esc(s) + '的概念：打幾個字，例如 ' + (s === '英文' ? '動名詞' : s === '法學' ? '行政處分' : '定義') + '" value="' + esc(st.q) + '"><div class="pk-list"><div class="help">載入中…</div></div></div>';
+        box.innerHTML = html;
+        box.querySelectorAll('[data-subj]').forEach(function (b) {
+          b.onclick = function () {
+            var x = b.dataset.subj;
+            if (!x) return set(null);
+            if (x === s && !st.link.card && st.link.path === subjLink(x).path) { st.open = !st.open; return paint(); } // 再按一次同一科＝打開概念清單
+            set(subjLink(x)); st.open = true; paint();
+          };
+        });
+        var up = box.querySelector('[data-act=up]');
+        if (up) up.onclick = function () { set(st.link.card && s ? subjLink(s) : null); };
+        var fb = box.querySelector('[data-act=find]');
+        if (fb) fb.onclick = function () { st.open = !st.open; paint(); };
+        if (st.open && s) {
+          var q = box.querySelector('.pk-q');
+          q.oninput = function () { st.q = q.value; paintList(); };
+          q.onkeydown = function (e) { if (e.key === 'Enter') { e.preventDefault(); var first = box.querySelector('.pk-item'); if (first) first.click(); } else if (e.key === 'Escape') { e.stopPropagation(); st.open = false; paint(); } };
+          paintList();
+          setTimeout(function () { q.focus(); }, 30);
+        }
+      }
+      function paintList() {
+        var s = subj(), list = box.querySelector('.pk-list'); if (!list) return;
+        loadConcepts(s).then(function (groups) {
+          if (subj() !== s || !box.contains(list)) return;
+          var q = st.q.trim().toLowerCase(), n = 0;
+          var html = groups.map(function (g) {
+            var items = g.items.filter(function (t) { return !q || t.toLowerCase().indexOf(q) >= 0 || g.title.toLowerCase().indexOf(q) >= 0; });
+            n += items.length;
+            return items.length ? '<div class="pk-ch">' + esc(g.title) + '</div>' + items.map(function (t) {
+              var on = st.link && st.link.card === t;
+              return '<button type="button" class="pk-item' + (on ? ' sel' : '') + '" data-c="' + esc(t) + '">' + (on ? '✓ ' : '') + esc(shortConcept(t)) + '</button>';
+            }).join('') : '';
+          }).join('');
+          list.innerHTML = n ? html : '<div class="help">找不到「' + esc(st.q) + '」。換個字，或先只放在' + esc(s) + '就好。</div>';
+          list.querySelectorAll('.pk-item').forEach(function (b) { b.onclick = function () { set(subjLink(s, b.dataset.c)); }; });
+        });
+      }
+      paint();
+      return { set: function (l) { st.link = l; st.open = false; paint(); }, get: function () { return st.link; } };
+    }
+
+    // ---------- 抽屜 ----------
+    var notePicker = null;
     function noteDraft() { return readJSON(K.noteDraft, null); }
     function saveNoteDraft() {
       var text = $('nt-text').value;
-      if (!text.trim()) { localStorage.removeItem(K.noteDraft); paintNoteMini(); return; }
-      writeJSON(K.noteDraft, { text: text, link: noteLink, at: Date.now() }); paintNoteMini();
+      if (!text.trim() && !noteLinkManual) { localStorage.removeItem(K.noteDraft); paintNoteMini(); return; }
+      writeJSON(K.noteDraft, { text: text, link: noteLink, manual: noteLinkManual, at: Date.now() }); paintNoteMini();
     }
     function paintNoteMini() {
       var d = noteDraft(), el = $('nt-mini'); if (!el) return;
       var show = d && d.text && d.text.trim() && !$('notes').classList.contains('open');
       el.style.display = show ? '' : 'none';
-      if (show) $('nt-mini-text').textContent = '草稿：' + d.text.trim().split('\n')[0].slice(0, 22) + (d.link ? '（' + (d.link.card || d.link.title) + '）' : '');
+      if (show) $('nt-mini-text').textContent = '草稿：' + d.text.trim().split('\n')[0].slice(0, 22) + (d.link ? '（' + (d.link.card ? shortConcept(d.link.card) : d.link.title) + '）' : '');
+      $('btn-notes').classList.toggle('on', $('notes').classList.contains('open'));
+      var dz = $('nt-discard'); if (dz) dz.style.display = $('nt-text').value.trim() ? '' : 'none';
     }
-    function minimizeNotes() { $('notes').classList.remove('open'); saveNoteDraft(); }
+    function notesOpen() { return $('notes').classList.contains('open'); }
+    function minimizeNotes() { saveNoteDraft(); $('notes').classList.remove('open'); document.body.classList.remove('nt-docked'); paintNoteMini(); }
+    function setNoteLink(l, manual) { noteLink = l; noteLinkManual = !!manual; noteLinkPending = null; if (notePicker) notePicker.set(l); paintNotePending(); saveNoteDraft(); }
     function openNotes(link, filter) {
-      var d = noteDraft();
-      if (d && d.text && d.text.trim()) {
-        // 有草稿：文字帶回來；關聯以草稿的為主，除非草稿本來沒掛
+      var d = noteDraft(), here = currentWhere();
+      if (d && (d.text || '').trim()) {
+        // 有草稿：文字和原本放的地方都帶回來；這次從別張卡打開，就問要不要改放
         $('nt-text').value = d.text;
-        noteLink = d.link || link || currentWhere();
-        if (link && d.link && (link.card || '') + link.path !== (d.link.card || '') + d.link.path) noteLinkPending = link; else noteLinkPending = null;
-      } else { noteLink = link || currentWhere(); noteLinkPending = null; }
+        noteLink = d.link || null; noteLinkManual = !!d.manual || !!d.link;
+        noteLinkPending = link && !sameLink(link, d.link) ? link : null;
+      } else if (d && d.manual && !link) { $('nt-text').value = ''; noteLink = d.link || null; noteLinkManual = true; noteLinkPending = null; }
+      else { $('nt-text').value = ''; noteLink = link || here; noteLinkManual = !!link; noteLinkPending = null; }
       noteFilter = filter || '';
-      $('notes').classList.add('open'); paintNoteMini();
-      paintNoteLink();
-      $('nt-filter').value = noteFilter;
+      $('notes').classList.add('open'); document.body.classList.add('nt-docked');
+      notePicker = linkPicker($('nt-where'), noteLink, function (l) { noteLink = l; noteLinkManual = true; noteLinkPending = null; paintNotePending(); saveNoteDraft(); });
+      paintNotePending(); paintNoteMini();
+      $('nt-filter').value = noteFilter; $('nt-msg').textContent = '';
       $('nt-list').innerHTML = '<div class="help">載入中…</div>';
       loadNoteIndex().then(paintNoteList);
       setTimeout(function () { $('nt-text').focus(); }, 50);
     }
-    var noteLinkPending = null; // 草稿掛在別處、但這次是從另一張卡打開的：問要不要換
-    function paintNoteLink() {
-      var el = $('nt-link');
-      var html = !noteLink ? '<span class="help">沒有關聯。從某一頁或某張卡打開，就會自動記住。</span>'
-        : '<span class="chip on" title="這則筆記會記得你在看這裡">📎 ' + esc(noteLink.title) + (noteLink.card ? ' › ' + esc(noteLink.card) : '') + '</span><button class="chip" id="nt-unlink">不要關聯</button>';
-      if (noteLinkPending) html += '<button class="chip" id="nt-relink" title="草稿原本掛在別張卡">改掛到：' + esc(noteLinkPending.card || noteLinkPending.title) + '</button>';
-      el.innerHTML = html;
-      var u = $('nt-unlink'); if (u) u.onclick = function () { noteLink = null; noteLinkPending = null; paintNoteLink(); saveNoteDraft(); };
-      var r = $('nt-relink'); if (r) r.onclick = function () { noteLink = noteLinkPending; noteLinkPending = null; paintNoteLink(); saveNoteDraft(); };
+    function paintNotePending() {
+      var el = $('nt-pending'); if (!el) return;
+      if (!noteLinkPending) { el.innerHTML = ''; el.style.display = 'none'; return; }
+      el.style.display = '';
+      el.innerHTML = '<span>你換到了「' + esc(noteLinkPending.card ? shortConcept(noteLinkPending.card) : noteLinkPending.title) + '」</span><button type="button" class="chip" id="nt-relink">改放到這裡</button><button type="button" class="mini" id="nt-keep">不用</button>';
+      $('nt-relink').onclick = function () { setNoteLink(noteLinkPending, true); };
+      $('nt-keep').onclick = function () { noteLinkPending = null; paintNotePending(); };
     }
-    function entryLinkHtml(e) {
-      if (!e.link) return '';
+    // 換頁時：還沒寫字、也沒自己選過 → 跟著換；已經在寫 → 只問一句
+    function notesFollow() {
+      if (!notesOpen()) return;
+      var here = currentWhere();
+      if (!$('nt-text').value.trim() && !noteLinkManual) { noteLink = here; noteLinkPending = null; if (notePicker) notePicker.set(here); paintNotePending(); return; }
+      noteLinkPending = here && !sameLink(here, noteLink) ? here : null; paintNotePending();
+    }
+    function entryLinkHtml(e, showNone) {
+      if (!e.link) return showNone ? '<span class="entry-link none">未分類</span>' : '';
       var href = e.link.path === '考場' ? '#/考場' : '#/' + e.link.path + (e.link.card ? '?c=' + encodeURIComponent(e.link.card) : '');
-      return '<a class="entry-link" href="' + esc(href) + '">📎 ' + esc(e.link.title || e.link.path) + (e.link.card ? ' › ' + esc(e.link.card) : '') + '</a>';
+      return '<a class="entry-link" href="' + esc(href) + '">📎 ' + esc(linkText(e.link)) + '</a>';
+    }
+    function noteMatchesSubj(e, s) { if (!s) return true; var x = e.link ? subjectOf(e.link.path) : ''; return s === '未分類' ? !x : x === s; }
+    function subjCounts(list) {
+      var c = { '': list.length, '未分類': 0 }; SUBJECTS.forEach(function (s) { c[s] = 0; });
+      list.forEach(function (e) { var x = e.link ? subjectOf(e.link.path) : ''; if (x) c[x] = (c[x] || 0) + 1; else c['未分類']++; });
+      return c;
+    }
+    function subjBarHtml(counts, on) {
+      return ['', '未分類'].concat(SUBJECTS).filter(function (s) { return s === '' || counts[s]; }).map(function (s) {
+        var sel = s === on;
+        return '<button type="button" class="chip' + (sel ? ' sel' : '') + '" aria-pressed="' + sel + '" data-ns="' + esc(s) + '">' + (sel ? '✓ ' : '') + (s || '全部') + ' <small>' + counts[s] + '</small></button>';
+      }).join('');
     }
     function paintNoteList() {
+      var all = noteIndex || [];
+      $('nt-subjbar').innerHTML = all.length ? subjBarHtml(subjCounts(all), noteSubj) : '';
+      $('nt-subjbar').querySelectorAll('[data-ns]').forEach(function (b) { b.onclick = function () { noteSubj = b.dataset.ns; paintNoteList(); }; });
       var q = noteFilter.trim().toLowerCase();
-      var list = (noteIndex || []).filter(function (e) { if (!q) return true; var hay = (e.body + ' ' + (e.link ? e.link.card + ' ' + e.link.title + ' ' + e.link.path : '')).toLowerCase(); return hay.indexOf(q) >= 0; });
+      var list = all.filter(function (e) { if (!noteMatchesSubj(e, noteSubj)) return false; if (!q) return true; var hay = (e.body + ' ' + (e.link ? e.link.card + ' ' + e.link.title + ' ' + e.link.path : '')).toLowerCase(); return hay.indexOf(q) >= 0; });
       var el = $('nt-list');
-      if (!list.length) { el.innerHTML = '<div class="help" style="padding:1rem 0">' + (q ? '沒有符合的筆記。' : '還沒有筆記。上面那格寫第一則。') + '</div>'; return; }
+      if (!list.length) { el.innerHTML = '<div class="help" style="padding:1rem 0">' + (q || noteSubj ? '沒有符合的筆記。' : '還沒有筆記。上面那格寫第一則。') + '</div>'; return; }
       el.innerHTML = list.slice(0, 40).map(function (e) {
-        return '<div class="nt-entry"><div class="nt-meta">' + esc(e.date) + (e.time ? ' ' + esc(e.time) : '') + entryLinkHtml(e) + '</div><div class="card-body">' + wikiLinks(tagPills(md(e.body)), e.link ? { sub: e.link.path.split('/')[1] } : null) + '</div></div>';
+        return '<div class="nt-entry"><div class="nt-meta">' + esc(e.date) + (e.time ? ' ' + esc(e.time) : '') + entryLinkHtml(e, true) + '</div><div class="card-body">' + wikiLinks(tagPills(md(e.body)), e.link ? { sub: e.link.path.split('/')[1] } : null) + '</div></div>';
       }).join('') + (list.length > 40 ? '<p class="help">還有 ' + (list.length - 40) + ' 則，到「筆記」分區看全部。</p>' : '');
     }
     function saveNote() {
       var text = $('nt-text').value.trim(); if (!text) { $('nt-msg').textContent = '還沒寫東西'; return; }
       if (!getToken()) { openSettings('先貼一次鑰匙，筆記才能存進 GitHub。'); return; }
+      saveNoteDraft(); // 先把草稿存好，萬一網路斷了也不會不見
       var btn = $('nt-save'); btn.disabled = true; $('nt-msg').textContent = '存檔中…';
       var d = new Date(), hm = String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
       var first = text.split('\n')[0].replace(/^#+\s*/, '').slice(0, 24);
@@ -2076,13 +2251,82 @@
           for (var i = 0; i < lines.length; i++) if (/^## /.test(lines[i])) { idx = i; break; }
           out = idx < 0 ? f.content.replace(/\s+$/, '') + '\n\n' + entry : lines.slice(0, idx).join('\n').replace(/\s+$/, '') + '\n\n' + entry + '\n' + lines.slice(idx).join('\n');
         }
-        return ghPut(file, out, '筆記：' + first, f ? f.sha : null).then(function () { setPending(file, out); fileCache[file] = out; searchIndex = null; return f ? null : addToToc(file, month); });
+        return ghPut(file, out, '筆記：' + first, f ? f.sha : null).then(function () { setPending(file, out); fileCache[file] = out; searchIndex = null; return f ? null : addToToc(file, month).then(function () { return loadToc(); }); });
       }).then(function () {
-        $('nt-text').value = ''; localStorage.removeItem(K.noteDraft); noteLinkPending = null; paintNoteMini(); $('nt-msg').textContent = '存好了 ✓'; toast('筆記存進 GitHub 了');
-        return loadNoteIndex(true).then(function () { paintNoteList(); if (current.kind === 'page' && current.path.indexOf(NOTE_DIR + '/') === 0) go(); else if (current.kind === 'page') paintCardNoteCounts(); });
-      }).catch(function (e) { $('nt-msg').textContent = '存檔失敗：' + e.message; }).then(function () { btn.disabled = false; });
+        // 存好之後：清空，但「放進哪裡」留著——同一科常常一次記好幾則
+        $('nt-text').value = ''; noteLinkPending = null; noteLinkManual = !!noteLink; saveNoteDraft();
+        $('nt-msg').textContent = '存好了 ✓ 下一則一樣放在' + (noteLink ? '「' + (noteLink.card ? shortConcept(noteLink.card) : noteLink.title) + '」' : '「未分類」');
+        toast('筆記存進 GitHub 了');
+        return loadNoteIndex(true).then(function () { paintNoteList(); if (current.kind === 'page' && current.path.indexOf(NOTE_DIR + '/') === 0) go(); else if (current.kind === 'section' && current.path === NOTE_DIR) go(); else if (current.kind === 'page') paintCardNoteCounts(); });
+      }).catch(function (e) { $('nt-msg').textContent = '存檔失敗（草稿還在）：' + e.message; }).then(function () { btn.disabled = false; });
     }
-    // 卡片頁：每張卡顯示「筆記 N 則」
+
+    // ---------- 存好的筆記改歸類：只改那一則的「關聯：」那行 ----------
+    function relinkNote(e, link) {
+      if (!getToken()) { openSettings('先貼一次鑰匙，才能幫筆記歸類。'); return Promise.reject(new Error('沒有鑰匙')); }
+      return ghGet(e.file).then(function (f) {
+        if (!f) throw new Error('找不到檔案');
+        var lines = f.content.split('\n'), i = lines.indexOf('## ' + e.title);
+        if (i < 0) throw new Error('找不到這則筆記');
+        var j = i + 1; while (j < lines.length && !/^## /.test(lines[j])) j++;
+        var k = -1; for (var x = i + 1; x < j; x++) if (/^關聯[：:]/.test(lines[x])) { k = x; break; }
+        var line = link ? '關聯：' + link.path + (link.card ? ' › ' + link.card : '') : null;
+        if (k >= 0 && line) lines[k] = line;
+        else if (k >= 0) { lines.splice(k, (lines[k + 1] === '' ? 2 : 1)); }
+        else if (line) lines.splice(i + 1, 0, '', line);
+        var out = lines.join('\n');
+        return ghPut(e.file, out, '筆記歸類：' + (e.label || e.title).slice(0, 24), f.sha).then(function () { setPending(e.file, out); fileCache[e.file] = out; searchIndex = null; });
+      }).then(function () { return loadNoteIndex(true); });
+    }
+    // 在一則筆記底下展開「歸類」小面板
+    function openRelink(host, e, after) {
+      var old = host.querySelector('.relink'); if (old) { old.remove(); return; }
+      var box = document.createElement('div'); box.className = 'relink';
+      box.innerHTML = '<div class="relink-pk"></div><div class="note-actions"><button type="button" class="mini primary">存這個歸類</button><button type="button" class="mini">取消</button><span class="help relink-msg"></span></div>';
+      host.appendChild(box);
+      var chosen = e.link ? { path: e.link.path, title: e.link.title, card: e.link.card || '' } : null;
+      linkPicker(box.querySelector('.relink-pk'), chosen, function (l) { chosen = l; });
+      var bs = box.querySelectorAll('.note-actions button');
+      bs[1].onclick = function () { box.remove(); };
+      bs[0].onclick = function () {
+        bs[0].disabled = true; box.querySelector('.relink-msg').textContent = '存檔中…';
+        relinkNote(e, chosen).then(function () { toast('歸類好了 ✓'); after(); }).catch(function (err) { box.querySelector('.relink-msg').textContent = '沒存成：' + err.message; bs[0].disabled = false; });
+      };
+    }
+
+    // ---------- 「筆記」分區首頁：依科目整理 ----------
+    function renderNoteHub(sec) {
+      $('fab-edit').style.display = 'none';
+      var params = route().params || {}, on = params.s || '';
+      app.innerHTML = '<div class="crumbs"><a href="#/">首頁</a><span>›</span><span>' + esc(sec.name) + '</span></div><h1 class="page-title">' + esc(sec.name) + '</h1><p class="lead">寫的時候照時間存，看的時候照科目排。跳著讀、跳著記都沒關係，隨時回來這裡歸類。</p><div class="page-tools"><span class="filterbar" id="hub-bar"></span><span style="flex:1"></span><button class="btn primary" id="hub-new">📝 寫一則筆記</button></div><div id="hub-list"><div class="help">整理中…</div></div><div class="sec-head" style="margin-top:2rem"><h2>照月份</h2></div><div class="grid" id="sec-grid"></div>';
+      $('hub-new').onclick = function () { openNotes(null); };
+      $('sec-grid').innerHTML = sec.pages.slice().reverse().map(function (p) { return '<a class="pcard" href="#/' + esc(p.path) + '"><div class="sub">筆記</div><h3>' + esc(p.title) + '</h3></a>'; }).join('');
+      loadNoteIndex(true).then(function (all) {
+        if (!$('hub-list')) return;
+        $('hub-bar').innerHTML = subjBarHtml(subjCounts(all), on);
+        $('hub-bar').querySelectorAll('[data-ns]').forEach(function (b) { b.onclick = function () { location.hash = '#/' + NOTE_DIR + (b.dataset.ns ? '?s=' + encodeURIComponent(b.dataset.ns) : ''); }; });
+        var list = all.filter(function (e) { return noteMatchesSubj(e, on); });
+        if (!list.length) { $('hub-list').innerHTML = '<div class="empty">' + (all.length ? '這裡沒有筆記。' : '還沒有筆記。按右上角 📝 或卡片下的「寫筆記」開始。') + '</div>'; return; }
+        // 同一個概念的放一起；概念照最近寫的排前面；只放科目、沒指定概念的放最後
+        var groups = {}, order = [];
+        list.forEach(function (e) {
+          var g = !e.link ? '未分類' : e.link.card ? (subjectOf(e.link.path) ? subjectOf(e.link.path) + ' › ' : '') + shortConcept(e.link.card) : (subjectOf(e.link.path) ? subjectOf(e.link.path) + '（還沒指定概念）' : e.link.title);
+          if (!groups[g]) { groups[g] = []; order.push(g); } groups[g].push(e);
+        });
+        order.sort(function (a, b) { var wa = /還沒指定|^未分類$/.test(a) ? 1 : 0, wb = /還沒指定|^未分類$/.test(b) ? 1 : 0; return wa - wb; });
+        var flat = [];
+        $('hub-list').innerHTML = order.map(function (g) {
+          return '<div class="hub-group"><div class="hub-head">' + esc(g) + ' <small>' + groups[g].length + ' 則</small></div>' + groups[g].map(function (e) {
+            var i = flat.push(e) - 1;
+            return '<article class="card entry" data-i="' + i + '"><div class="nt-meta">' + esc(e.date) + (e.time ? ' ' + esc(e.time) : '') + entryLinkHtml(e, true) + '</div><div class="card-body">' + wikiLinks(tagPills(md(e.body)), e.link ? { sub: e.link.path.split('/')[1] } : null) + '</div><div class="card-foot"><button class="mini' + (e.link ? '' : ' primary') + '" data-relink="' + i + '">📂 ' + (e.link ? '改歸類' : '歸類') + '</button><a class="mini" href="#/' + esc(e.file.replace(/\.md$/, '')) + '?c=' + encodeURIComponent(e.title) + '">到那個月看</a></div></article>';
+          }).join('') + '</div>';
+        }).join('');
+        $('hub-list').querySelectorAll('[data-relink]').forEach(function (b) { b.onclick = function () { var el = b.closest('.card'); openRelink(el, flat[+b.dataset.relink], go); }; });
+        bindImages($('hub-list'));
+      });
+    }
+
+    // 卡片頁：每張卡顯示「筆記 N 則」（全部月份）
     function paintCardNoteCounts() {
       if (current.kind !== 'page') return;
       var path = current.path;
@@ -2092,7 +2336,7 @@
           var t = el.dataset.title, n = by[t]; var old = el.querySelector('.note-count'); if (old) old.remove();
           if (!n) return;
           var b = document.createElement('button'); b.className = 'mini note-count'; b.textContent = '📝 筆記 ' + n + ' 則';
-          b.onclick = function () { openNotes({ path: path, title: (findPage(path) || {}).title || path, card: t }, t); };
+          b.onclick = function () { openNotes({ path: path, title: (findPage(path) || {}).title || path, card: t }, shortConcept(t)); };
           var foot = el.querySelector('.card-foot'); if (foot) foot.insertBefore(b, foot.firstChild);
         });
       });
@@ -2375,7 +2619,7 @@
       $('editor').classList.add('open'); setMode(mode);
       setTimeout(function () { (edMode === 'page' ? $('ed-name') : $('ed-text')).focus(); }, 50);
     }
-    function closeAll() { if ($('notes').classList.contains('open')) minimizeNotes(); ['editor', 'settings', 'search', 'lightbox', 'notes', 'pomo', 'recite'].forEach(function (id) { $(id).classList.remove('open'); }); }
+    function closeAll() { ['editor', 'settings', 'search', 'lightbox', 'pomo', 'recite'].forEach(function (id) { $(id).classList.remove('open'); }); } // 筆記本不在這裡：只有它自己的「收起」會收
     function addToToc(file, title) {
       return ghGet(TOC_FILE).then(function (f) {
         var text = f ? f.content : '', lines = text.split('\n');
@@ -2498,17 +2742,18 @@
       $('lightbox').onclick = function () { this.classList.remove('open'); };
       $('fab-edit').onclick = function () { openEditor('full'); };
       $('btn-settings').onclick = function () { openSettings(); };
-      $('btn-notes').onclick = function () { openNotes(null); };
+      $('btn-notes').onclick = function () { if (notesOpen()) minimizeNotes(); else openNotes(null); };
       document.addEventListener('click', function (e) { var a = e.target.closest && e.target.closest('a.wiki'); if (a && a.getAttribute('href') === 'javascript:void(0)') { e.preventDefault(); closeAll(); $('btn-search').click(); $('sq').value = a.dataset.wiki; doSearch(a.dataset.wiki); } });
-      $('nt-close').onclick = function () { if ($('nt-text').value.trim() && !confirm('草稿要留著嗎？\n\n「確定」＝留著（縮到下面），「取消」＝丟掉')) { $('nt-text').value = ''; } minimizeNotes(); };
-      $('nt-min').onclick = minimizeNotes;
-      $('nt-text').addEventListener('input', function () { clearTimeout(window.__ntDraftT); window.__ntDraftT = setTimeout(saveNoteDraft, 300); });
+      $('nt-close').onclick = minimizeNotes;
+      $('nt-discard').onclick = function () { if (!confirm('丟掉這則草稿？（存好的筆記不會動）')) return; $('nt-text').value = ''; noteLinkManual = false; localStorage.removeItem(K.noteDraft); paintNoteMini(); $('nt-text').focus(); };
+      $('nt-text').addEventListener('input', function () { clearTimeout(window.__ntDraftT); window.__ntDraftT = setTimeout(saveNoteDraft, 300); var dz = $('nt-discard'); if (dz) dz.style.display = this.value.trim() ? '' : 'none'; });
+      window.addEventListener('pagehide', function () { if (notesOpen()) saveNoteDraft(); });
+      document.addEventListener('visibilitychange', function () { if (document.hidden && notesOpen()) saveNoteDraft(); });
       $('nt-mini-open').onclick = function () { openNotes(null); };
-      $('nt-mini-x').onclick = function () { if (confirm('丟掉這則草稿？')) { localStorage.removeItem(K.noteDraft); $('nt-text').value = ''; paintNoteMini(); } };
+      $('nt-mini-x').onclick = function () { if (confirm('丟掉這則草稿？')) { localStorage.removeItem(K.noteDraft); $('nt-text').value = ''; noteLinkManual = false; paintNoteMini(); } };
       paintNoteMini();
       $('nt-save').onclick = saveNote;
       $('nt-filter').oninput = function () { noteFilter = this.value; paintNoteList(); };
-      $('nt-all').onclick = closeAll;
       $('nt-text').addEventListener('keydown', function (e) { if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') saveNote(); });
       $('btn-pomo').onclick = openPomo; $('pm-close').onclick = closeAll;
       $('st-font').querySelectorAll('button').forEach(function (b) { b.onclick = function () { localStorage.setItem(K.font, b.dataset.font); applyFont(); $('st-font').querySelectorAll('button').forEach(function (x) { x.classList.toggle('on', x === b); }); }; });
@@ -2546,7 +2791,7 @@
         else if (e.key === '/' && !typing) { e.preventDefault(); $('btn-search').click(); }
         else if (e.key === 'n' && !typing && !e.ctrlKey && !e.metaKey && current.kind !== 'exam' && !$('recite').classList.contains('open')) { $('fab-new').click(); }
       });
-      ['editor', 'settings', 'search', 'notes', 'pomo'].forEach(function (id) { $(id).addEventListener('click', function (e) { if (e.target === this) closeAll(); }); });
+      ['editor', 'settings', 'search', 'pomo'].forEach(function (id) { $(id).addEventListener('click', function (e) { if (e.target === this) closeAll(); }); });
       window.addEventListener('hashchange', go);
       go();
     });
