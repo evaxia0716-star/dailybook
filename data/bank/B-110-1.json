@@ -46,7 +46,7 @@
     },
     {
      "n": 3,
-     "answer": "D",
+     "answer": "A/D",
      "group": "字彙",
      "passage": "",
      "stem": "Sarah ______ Marian’s help. She is thankful for her assistance.",
@@ -55,7 +55,8 @@
       "B": "endures",
       "C": "motivates",
       "D": "appreciates"
-     }
+     },
+     "note": "官方更正：A 或 D 都給分"
     },
     {
      "n": 4,
@@ -449,7 +450,7 @@
     },
     {
      "n": 34,
-     "answer": "B",
+     "answer": "B/D",
      "group": "克漏字",
      "passage": "The Stanford Marshmallow experiment is a psychological experiment to (31) children’s ability to control their impulses. The idea was to see (32) the difference was between children who managed to control their impulses and those who could not. The results showed that those who succeeded in (33) . the immediate temptation to eat the marshmallow were able to perform better at exams and (34) in other aspects of their lives than those who had grabbed the marshmallow directly. The researchers were also able to show that the impulsive group also seemed to suffer more (35) stress and problems in relationship in later life.",
      "stem": "",
@@ -458,7 +459,8 @@
       "B": "be more stable",
       "C": "was more stable",
       "D": "were more stable"
-     }
+     },
+     "note": "官方更正：B 或 D 都給分"
     },
     {
      "n": 35,
@@ -514,7 +516,7 @@
     },
     {
      "n": 39,
-     "answer": "B",
+     "answer": "A/B",
      "group": "閱讀測驗",
      "passage": "Recent biological research indicates that there is a biochemical basis to love, which explains why people in love feel as if they were in a more beautiful world. Psychologists such as Dr. Elaine Hatfield, Robert Sternberg and Zick Rubin posit that love consists of three or more stages. The three main stages are lust, attraction, and attachment, while some of the other stages are intimacy, trust, and jealousy. Each stage is ruled or initiated by specific hormonal controllers. In their studies, every love passes through some of these stages and occurs due to the mediation of certain molecules in these specific chemical controllers. Biological research has shown that the hormones dominant in the different phases include testosterone and estrogen (the sexual hormones); dopamine, norepinephrine and serotonin (these are the “pleasure chemicals” - the hormones invoking feelings of pleasure and excitement); and oxytocin (the “cuddle chemical” - the hormone producing feelings of attachment to another person). For example, in the second phase of attraction, when people have the feeling of being in love, the little molecule phenylethylamine (known as PEA), controlling the love chemicals dopamine and noreinephrine, can cause feelings of elation, exhilaration and euphoria. People feel excited and fulfilled. Additionally, biological anthropologist Helen Fisher, an expert on romantic love, discusses what happens in the brain when people are in love and proposes that there is a dramatic increase in the amount of dopamine and norepinephrine present in the brain when one first becomes infatuated with another person.",
      "stem": "According to the scientists, which of the following about how love occurs is NOT true?",
@@ -523,7 +525,8 @@
       "B": "PEA is a hormone our bodies produce that promotes mutual feelings of connection and bonding.",
       "C": "There is an increase in the amount of dopamine present in the brain when people are in love.",
       "D": "People’s brains are influenced by hormones and chemicals that cause them to feel the way they feel."
-     }
+     },
+     "note": "官方更正：A 或 B 都給分"
     },
     {
      "n": 40,

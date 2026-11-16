@@ -72,7 +72,7 @@
     },
     {
      "n": 5,
-     "answer": "C",
+     "answer": "",
      "group": "",
      "passage": "",
      "stem": "下列成語「」內的文字，何者正確？",
@@ -81,7 +81,8 @@
       "B": "中道崩「徂」",
       "C": "詩詠關「睢」",
       "D": "葦「軺」繫巢"
-     }
+     },
+     "note": "官方更正：無標準解（四個選項都有錯字）"
     },
     {
      "n": 6,
@@ -406,7 +407,7 @@
     },
     {
      "n": 30,
-     "answer": "D",
+     "answer": "",
      "group": "",
      "passage": "",
      "stem": "More and more countries have requested ____ and magazines to hire very thin models because of the bad influence on young girls.",
@@ -415,7 +416,8 @@
       "B": "artists",
       "C": "performers",
       "D": "designers"
-     }
+     },
+     "note": "官方更正：無標準解"
     },
     {
      "n": 31,

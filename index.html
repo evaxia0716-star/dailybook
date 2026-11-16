@@ -1805,7 +1805,7 @@
           b.classList.toggle('correct', !!isAns); b.classList.toggle('chosen-wrong', k === a && !isAns);
         });
         var s = app.querySelector('.answer-sheet a[data-n="' + q.n + '"]'); if (s) { s.classList.remove('done'); s.classList.add(q._ok ? 'ok' : 'ng'); }
-        $('exa-' + q.n).innerHTML = q._ok ? (a ? '' : '<span class="help">空白，官方送分題</span>') : '<span class="ng">答案 ' + esc(q.answer || '送分') + (a ? '，你選 ' + esc(a) : '，你沒作答') + '</span>' + (q.note ? ' <span class="help">' + esc(q.note) + '</span>' : '');
+        $('exa-' + q.n).innerHTML = q._ok ? ((a ? '' : '<span class="help">空白，官方送分題</span>') + (q.note ? ' <span class="help">' + esc(q.note) + '</span>' : '')) : '<span class="ng">答案 ' + esc(q.answer || '送分') + (a ? '，你選 ' + esc(a) : '，你沒作答') + '</span>' + (q.note ? ' <span class="help">' + esc(q.note) + '</span>' : '');
       });
       var wrongQs = qs.filter(function (q) { return !q._ok; });
       var top = document.createElement('div'); top.className = 'panel exam-result';
