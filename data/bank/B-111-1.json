@@ -163,7 +163,7 @@
     },
     {
      "n": 12,
-     "answer": "C",
+     "answer": "B/C",
      "group": "文法及慣用語",
      "passage": "",
      "stem": "Each of them ______ to bring ______ own book to the next class.",
@@ -172,7 +172,8 @@
       "B": "is, their",
       "C": "is, his",
       "D": "are, them"
-     }
+     },
+     "note": "官方更正：B 或 C 都給分"
     },
     {
      "n": 13,

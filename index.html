@@ -1591,7 +1591,7 @@
         // 組合卷：從索引挑出有選擇題的科目
         var subjects = []; idx.forEach(function (p) { p.parts.forEach(function (pt) { if (pt.kind === 'mc' && subjects.indexOf(pt.subject) < 0) subjects.push(pt.subject); }); });
         var ws = wrongSummary(), wsKeys = Object.keys(ws.by).sort(function (a, b) { return ws.by[b] - ws.by[a]; });
-        var html = '<div class="panel wb-entry"><h3>📕 錯題本 <span class="help" style="font-weight:400">考卷答錯的題自動收進來，連對 ' + GRAD + ' 次畢業</span></h3>'
+        var html = '<div class="panel wb-entry"><h3>📕 錯題本 <span class="help" style="font-weight:400">選擇題、填充題答錯的自動收進來，連對 ' + GRAD + ' 次畢業</span></h3>'
           + (ws.n || ws.grad ? '<div class="stats" style="grid-template-columns:repeat(2,1fr)"><div class="stat"><b style="color:' + (ws.n ? 'var(--due)' : 'var(--done)') + '">' + ws.n + '</b><span>待練' + (wsKeys.length ? '：' + wsKeys.map(function (s) { return esc(s) + ' ' + ws.by[s]; }).join('、') : '') + '</span></div><div class="stat"><b style="color:var(--done)">' + ws.grad + '</b><span>已畢業</span></div></div>' : '<p class="help" style="margin:0">還沒有錯題。考完一份卷，答錯的會自動收進來。</p>')
           + (ws.n || ws.grad ? '<div class="actions"><a class="btn" href="#/考場/錯題本">看錯題本</a>' + (ws.n ? '<a class="btn primary" href="#/考場/練錯題?n=10">開始練錯題（10 題）</a>' : '') + '</div>' : '') + '</div>';
         html += '<div class="panel exam-combo"><h3>🎲 組合卷 <span class="help" style="font-weight:400">從歷年選擇題隨機抽，練單科或只練錯過的</span></h3>';
@@ -1868,10 +1868,12 @@
     }
     function br(s) { return esc(s).replace(/\n/g, '<br>'); }
     function parseRef(ref) { var a = String(ref).split('/'); return { paper: a[0], part: parseInt(a[1], 10), n: parseInt(a[2], 10) }; }
-    function mcPartOf(ref) { // 用題庫索引確認這題是選擇題
+    function mcPartOf(ref) { // 用題庫索引確認這題是選擇題或填充題（問答、作文不進錯題本）
       var r = parseRef(ref), p = (bankIndex || []).filter(function (x) { return x.id === r.paper; })[0], pt = p && p.parts[r.part];
-      return pt && pt.kind === 'mc' ? { paper: p, part: pt } : null;
+      return pt && (pt.kind === 'mc' || pt.kind === 'fill') ? { paper: p, part: pt } : null;
     }
+    function fillOk(q, text) { var mine = normAns(text); return !!mine && (q.answers || []).some(function (a) { return normAns(a) === mine; }); }
+    function blankHtml(stem) { return esc(stem).replace(/_{3,}/g, '<span class="blank">＿＿＿</span>'); }
     function wrongStats() {
       // 每一題：答錯幾次、練過幾次、目前連對幾次、上次選了什麼
       var st = {};
@@ -1910,17 +1912,19 @@
           var r = parseRef(k), paper = by[r.paper], pt = paper && paper.parts[r.part];
           var q = pt && pt.questions.filter(function (x) { return String(x.n) === String(r.n); })[0];
           if (!q) return;
-          out.push({ ref: k, q: q, subject: q.subject || pt.subject, src: paperLabel(paper) + ' ' + pt.subject + ' 第 ' + r.n + ' 題', st: st[k] });
+          out.push({ ref: k, kind: pt.kind, q: q, subject: q.subject || pt.subject, src: paperLabel(paper) + ' ' + pt.subject + ' 第 ' + r.n + ' 題', st: st[k] });
         });
         return out;
       });
     }
     function qPlain(e) {
-      var q = e.q, opts = ['A', 'B', 'C', 'D'].filter(function (k) { return q.options[k] !== undefined; }).map(function (k) { return '(' + k + ') ' + q.options[k]; }).join(' ');
+      var q = e.q;
+      if (e.kind === 'fill') return '【' + e.src + '】\n填充題：' + q.stem + '\n官方答案：' + (q.answers || []).join('／') + '\n我填：' + (e.st.pick === undefined ? '（沒記錄）' : (e.st.pick || '（空白）')) + '\n';
+      var opts = ['A', 'B', 'C', 'D'].filter(function (k) { return q.options[k] !== undefined; }).map(function (k) { return '(' + k + ') ' + q.options[k]; }).join(' ');
       var pick = e.st.pick === undefined ? '（沒記錄）' : (e.st.pick || '（沒作答）');
       return '【' + e.src + '】\n題目：' + (q.passage ? '（文章）' + q.passage + '\n' : '') + q.stem + '\n選項：' + opts + '\n答案：' + (q.answer || '送分') + '\n我選：' + pick + '\n';
     }
-    var ASK_CLAUDE = '請幫我解析這些選擇題。一題一題：先公布答案，再用白話和比喻解釋，最後補一個容易混淆的觀念。\n\n';
+    var ASK_CLAUDE = '請幫我解析這些題目。一題一題：先公布答案，再用白話和比喻解釋，最後補一個容易混淆的觀念。\n\n';
     function explainHtml(ref) {
       var t = explainMap && explainMap[ref];
       return t ? '<div class="pr-explain">' + br(t) + '</div>' : '';
@@ -1930,7 +1934,7 @@
     var WB = { subj: '', status: 'todo', n: '10' };
     function renderWrongBook(params) {
       if (params.s) WB.subj = params.s;
-      app.innerHTML = '<div class="crumbs"><a href="#/">首頁</a><span>›</span><a href="#/考場">考場</a><span>›</span><span>錯題本</span></div><h1 class="page-title">📕 錯題本</h1><p class="lead">考卷裡答錯的選擇題都收在這裡。同一題連續答對 ' + GRAD + ' 次就畢業，中間答錯會回到待練。</p><div id="wb"><div class="help">載入中…</div></div>';
+      app.innerHTML = '<div class="crumbs"><a href="#/">首頁</a><span>›</span><a href="#/考場">考場</a><span>›</span><span>錯題本</span></div><h1 class="page-title">📕 錯題本</h1><p class="lead">考卷裡答錯的選擇題和填充題都收在這裡。同一題連續答對 ' + GRAD + ' 次就畢業，中間答錯會回到待練。</p><div id="wb"><div class="help">載入中…</div></div>';
       Promise.all([loadBankIndex(), loadExams(), loadExplain()]).then(collectWrong).then(function (list) {
         paintWrongBook(list);
       }).catch(function (e) { $('wb').innerHTML = '<div class="empty">載入失敗：' + esc(e.message) + '</div>'; });
@@ -1963,6 +1967,13 @@
     function wbItem(e) {
       var q = e.q, s = e.st, isGrad = s.streak >= GRAD;
       var pill = isGrad ? '<span class="pill new">已畢業</span>' : '<span class="pill due">連對 ' + s.streak + ' / ' + GRAD + '</span>';
+      if (e.kind === 'fill') {
+        return '<details class="wb-item"><summary><span class="wb-stem">' + esc(q.stem.replace(/\s+/g, ' ').slice(0, 46)) + (q.stem.length > 46 ? '…' : '') + '</span>' + pill + '<span class="pill">答錯 ' + s.wrong + ' 次</span><span class="wb-src">' + esc(e.src) + '</span></summary>'
+          + '<div class="wb-body"><div class="exq-stem">' + blankHtml(q.stem) + '</div>'
+          + (s.pick !== undefined ? '<div class="help">你上次填：' + (s.pick ? '<code>' + esc(s.pick) + '</code>' : '（空白）') + '</div>' : '')
+          + '<div class="exq-after"><b>官方答案</b> ' + ((q.answers || []).map(function (a) { return '<code>' + esc(a) + '</code>'; }).join(' ') || '（沒有官方答案）') + '</div>' + explainHtml(e.ref)
+          + '<div class="actions" style="margin-top:0.5rem"><button class="mini" data-copy="' + esc(e.ref) + '">複製給 Claude 解析</button></div></div></details>';
+      }
       var opts = ['A', 'B', 'C', 'D'].filter(function (k) { return q.options[k] !== undefined; }).map(function (k) {
         var isAns = q.answer && q.answer.split('/').indexOf(k) >= 0, mine = s.pick === k;
         return '<div class="wb-opt' + (isAns ? ' correct' : '') + (mine && !isAns ? ' chosen-wrong' : '') + '"><span class="l">' + k + '</span><span>' + esc(q.options[k]) + '</span>' + (mine ? '<span class="wb-me">你上次選</span>' : '') + '</div>';
@@ -1991,18 +2002,25 @@
       }).catch(function (e) { app.innerHTML = '<div class="empty">' + esc(e.message) + '<br><br><a class="btn" href="#/考場">回考場</a></div>'; });
     }
     function paintPractice() {
-      var p = practice, e = p.queue[p.i], q = e.q; p.answered = false;
+      var p = practice, e = p.queue[p.i], q = e.q, fill = e.kind === 'fill'; p.answered = false; p.cur = null;
       var html = '<div class="narrow practice"><div class="crumbs"><a href="#/">首頁</a><span>›</span><a href="#/考場">考場</a><span>›</span><a href="#/考場/錯題本">錯題本</a><span>›</span><span>練習</span></div>'
         + '<div class="pr-top"><b>第 ' + (p.i + 1) + ' / ' + p.queue.length + ' 題</b><span class="help">' + esc(e.src) + '　已錯 ' + e.st.wrong + ' 次　連對 ' + e.st.streak + ' / ' + GRAD + '</span></div>'
         + '<div class="pr-progress"><i style="width:' + Math.round(p.i / p.queue.length * 100) + '%"></i></div>'
         + (q.passage ? '<div class="exq-passage">' + br(q.passage) + '</div>' : '')
-        + '<div class="exq" id="pr-q"><div class="exq-stem">' + esc(q.stem) + '</div><div class="exq-opts">'
-        + ['A', 'B', 'C', 'D'].map(function (k) { return q.options[k] === undefined ? '' : '<button class="opt" data-k="' + k + '"><span class="l">' + k + '</span><span>' + esc(q.options[k]) + '</span></button>'; }).join('')
-        + '</div><div class="exq-after" id="pr-after"></div></div>'
-        + '<div class="actions" style="display:flex;gap:0.6rem;flex-wrap:wrap"><button class="btn" id="pr-skip">不知道，直接看答案</button><button class="btn primary" id="pr-next" style="display:none">' + (p.i + 1 < p.queue.length ? '下一題' : '看這輪結果') + '</button></div>'
-        + '<p class="help" style="margin-top:0.8rem">鍵盤：按 A–D（或 1–4）作答，Enter 下一題。</p></div>';
+        + '<div class="exq" id="pr-q">' + (fill
+          ? '<div class="exq-stem">' + blankHtml(q.stem) + '</div><div class="fill-in"><input type="text" id="pr-input" placeholder="答案" autocomplete="off"></div>'
+          : '<div class="exq-stem">' + esc(q.stem) + '</div><div class="exq-opts">' + ['A', 'B', 'C', 'D'].map(function (k) { return q.options[k] === undefined ? '' : '<button class="opt" data-k="' + k + '"><span class="l">' + k + '</span><span>' + esc(q.options[k]) + '</span></button>'; }).join('') + '</div>')
+        + '<div class="exq-after" id="pr-after"></div></div>'
+        + '<div class="actions" style="display:flex;gap:0.6rem;flex-wrap:wrap">' + (fill ? '<button class="btn primary" id="pr-check">對答案</button>' : '') + '<button class="btn" id="pr-skip">不知道，直接看答案</button><button class="btn primary" id="pr-next" style="display:none">' + (p.i + 1 < p.queue.length ? '下一題' : '看這輪結果') + '</button></div>'
+        + '<p class="help" style="margin-top:0.8rem">' + (fill ? '鍵盤：打完按 Enter 對答案，再按 Enter 下一題。' : '鍵盤：按 A–D（或 1–4）作答，Enter 下一題。') + '</p></div>';
       app.innerHTML = html; window.scrollTo(0, 0);
       app.querySelectorAll('#pr-q .opt').forEach(function (b) { b.onclick = function () { practiceAnswer(b.dataset.k); }; });
+      if (fill) {
+        var inp = $('pr-input');
+        $('pr-check').onclick = function () { practiceAnswer(inp.value.trim()); };
+        inp.addEventListener('keydown', function (ev) { if (ev.key === 'Enter' && !ev.isComposing && ev.keyCode !== 229) { ev.preventDefault(); ev.stopPropagation(); practiceAnswer(inp.value.trim()); } });
+        inp.focus({ preventScroll: true });
+      }
       $('pr-skip').onclick = function () { practiceAnswer(''); };
       $('pr-next').onclick = practiceNext;
     }
@@ -2017,24 +2035,48 @@
     function finishPracticeRecord() { var p = practice; if (!p || !p.rec) return; p.rec.seconds = Math.round((Date.now() - p.startedAt) / 1000); writeJSON(K.exams, exams); }
     function practiceAnswer(k) {
       var p = practice; if (!p || p.answered) return; p.answered = true;
-      var e = p.queue[p.i], q = e.q, ans = q.answer ? q.answer.split('/') : [];
-      var ok = !q.answer ? true : (!!k && ans.indexOf(k) >= 0);
-      var rec = practiceRecord(); rec.done.push(e.ref); if (!ok) rec.wrong.push(e.ref); rec.picks[e.ref] = k; rec.total++; if (ok) rec.correct++;
-      e.st.tries++; e.st.pick = k; if (ok) e.st.streak++; else { e.st.streak = 0; e.st.wrong++; }
-      p.results.push({ e: e, ok: ok, pick: k });
-      finishPracticeRecord();
+      var e = p.queue[p.i], q = e.q, fill = e.kind === 'fill';
+      var ok = fill ? fillOk(q, k) : (!q.answer ? true : (!!k && q.answer.split('/').indexOf(k) >= 0));
+      var rec = practiceRecord(); rec.done.push(e.ref); rec.picks[e.ref] = k; rec.total++;
+      p.cur = { e: e, ok: ok, pick: k, prev: { streak: e.st.streak, wrong: e.st.wrong } };
+      e.st.tries++; e.st.pick = k; p.results.push(p.cur);
+      practiceApply(ok);
       if (p.results.length % 5 === 0) pushExams();
+      var inp = $('pr-input'); if (inp) inp.disabled = true;
+      var pc = $('pr-check'); if (pc) pc.style.display = 'none';
+      $('pr-skip').style.display = 'none'; $('pr-next').style.display = '';
+      paintPracticeAfter();
+      $('pr-next').focus({ preventScroll: true });
+    }
+    function practiceApply(ok) { // 記下這題的對錯；填充題可以事後改判，所以每次都從作答前的狀態重算
+      var p = practice, c = p.cur, e = c.e, rec = p.rec;
+      c.ok = ok;
+      e.st.streak = ok ? c.prev.streak + 1 : 0; e.st.wrong = ok ? c.prev.wrong : c.prev.wrong + 1;
+      rec.wrong = rec.wrong.filter(function (x) { return x !== e.ref; }); if (!ok) rec.wrong.push(e.ref);
+      rec.correct = p.results.filter(function (r) { return r.ok; }).length;
+      finishPracticeRecord();
+    }
+    function paintPracticeAfter() {
+      var p = practice, c = p.cur, e = c.e, q = e.q, k = c.pick, ok = c.ok, fill = e.kind === 'fill';
+      var ans = !fill && q.answer ? q.answer.split('/') : [];
       app.querySelectorAll('#pr-q .opt').forEach(function (b) {
         b.disabled = true; var kk = b.dataset.k, isAns = ans.indexOf(kk) >= 0;
         b.classList.toggle('correct', isAns); b.classList.toggle('chosen-wrong', kk === k && !isAns);
       });
-      var msg = ok
-        ? '<span class="ok">' + (k ? '答對了' : '送分題') + '。連對 ' + e.st.streak + ' / ' + GRAD + (e.st.streak >= GRAD ? '，這題畢業了 🎓' : '，再對 ' + (GRAD - e.st.streak) + ' 次畢業') + '</span>'
-        : '<span class="ng">' + (k ? '答錯了' : '先看答案') + '。答案 ' + esc(q.answer) + (k ? '，你選 ' + esc(k) : '') + '。連對歸零，之後還會再出現</span>';
+      $('pr-q').classList.toggle('right', ok); $('pr-q').classList.toggle('wrong', !ok);
+      var tail = ok ? '連對 ' + e.st.streak + ' / ' + GRAD + (e.st.streak >= GRAD ? '，這題畢業了 🎓' : '，再對 ' + (GRAD - e.st.streak) + ' 次畢業') : '連對歸零，之後還會再出現';
+      var msg;
+      if (fill) {
+        msg = '<span class="' + (ok ? 'ok' : 'ng') + '">' + (ok ? '答對了。' : (k ? '跟官方答案對不上。' : '先看答案。')) + tail + '</span>'
+          + '<div class="fill-key" style="margin-top:0.4rem"><span class="help">官方答案：</span>' + ((q.answers || []).map(function (a) { return '<code>' + esc(a) + '</code>'; }).join(' ') || '<span class="help">（沒有官方答案，自己判）</span>') + '</div>'
+          + (k ? '<div class="actions" style="margin-top:0.4rem"><button class="mini" id="pr-flip">' + (ok ? '改判：其實我寫錯了' : '改判：意思一樣，算我對') + '</button></div>' : '');
+      } else {
+        msg = ok ? '<span class="ok">' + (k ? '答對了' : '送分題') + '。' + tail + '</span>'
+          : '<span class="ng">' + (k ? '答錯了' : '先看答案') + '。答案 ' + esc(q.answer) + (k ? '，你選 ' + esc(k) : '') + '。' + tail + '</span>';
+      }
       $('pr-after').innerHTML = msg + (q.note ? ' <span class="help">' + esc(q.note) + '</span>' : '') + (explainHtml(e.ref) || '<div class="help" style="margin-top:0.5rem">這題還沒有白話解析。</div>') + '<div class="actions" style="margin-top:0.5rem"><button class="mini" id="pr-copy">複製這題給 Claude 解析</button></div>';
       $('pr-copy').onclick = function () { navigator.clipboard.writeText(ASK_CLAUDE + qPlain(e)).then(function () { toast('已複製，貼到 Claude 專案'); }); };
-      $('pr-skip').style.display = 'none'; $('pr-next').style.display = '';
-      $('pr-next').focus({ preventScroll: true });
+      var fl = $('pr-flip'); if (fl) fl.onclick = function () { practiceApply(!c.ok); paintPracticeAfter(); };
     }
     function practiceNext() {
       var p = practice; if (!p || !p.answered) return;
@@ -2060,7 +2102,7 @@
       if (!practice || !practice.alive || !$('pr-q') || ev.ctrlKey || ev.metaKey || ev.altKey) return;
       var t = ev.target && ev.target.tagName; if (t === 'INPUT' || t === 'TEXTAREA' || t === 'SELECT') return;
       var k = ({ '1': 'A', '2': 'B', '3': 'C', '4': 'D' })[ev.key] || ev.key.toUpperCase();
-      if (k.length === 1 && 'ABCD'.indexOf(k) >= 0) { if (!practice.answered) { ev.preventDefault(); practiceAnswer(k); } }
+      if (k.length === 1 && 'ABCD'.indexOf(k) >= 0) { if (!practice.answered && !$('pr-input')) { ev.preventDefault(); practiceAnswer(k); } }
       else if (ev.key === 'Enter' || ev.key === 'ArrowRight') { if (practice.answered) { ev.preventDefault(); practiceNext(); } }
     });
 
@@ -2173,7 +2215,8 @@
         top.innerHTML = '<div class="stats"><div class="stat"><b>' + t.score + '</b><span>分</span></div><div class="stat"><b>' + t.correct + ' / ' + t.total + '</b><span>對</span></div><div class="stat"><b>' + t.pct + '%</b><span>答對率</span></div><div class="stat"><b>' + fmtDur(run.seconds) + '</b><span>用時</span></div></div><p class="help" style="margin:0.4rem 0 0.6rem">機器先比對過一次，寫法不同但意思對的，自己按 ✓ 改回來。</p><div class="actions"><button class="btn primary" id="fl-save">確認成績，存紀錄</button><button class="btn" id="fl-copy">複製給 Claude 解析</button><a class="btn" href="#/考場">回考場</a></div><p class="help" id="ex-msg" style="margin:0.6rem 0 0"></p>';
         $('fl-save').onclick = function () {
           var t2 = tally(); var wrong = qs.filter(function (q) { return !run.marks[q.n]; }).map(function (q) { return qRef(run.paper.id, run.partIdx, q.n); });
-          addExamRecord({ at: new Date().toISOString(), paper: run.paper.id, part: run.partIdx, subject: run.part.subject, label: run.label, kind: 'fill', score: t2.score, correct: t2.correct, total: t2.total, pct: t2.pct, seconds: Math.round(run.seconds), wrong: wrong, done: qs.map(function (q) { return qRef(run.paper.id, run.partIdx, q.n); }) });
+          var fpicks = {}; qs.forEach(function (q) { fpicks[qRef(run.paper.id, run.partIdx, q.n)] = (run.answers[q.n] || '').trim(); });
+          addExamRecord({ at: new Date().toISOString(), paper: run.paper.id, part: run.partIdx, subject: run.part.subject, label: run.label, kind: 'fill', score: t2.score, correct: t2.correct, total: t2.total, pct: t2.pct, seconds: Math.round(run.seconds), wrong: wrong, done: qs.map(function (q) { return qRef(run.paper.id, run.partIdx, q.n); }), picks: fpicks });
           this.disabled = true; this.textContent = '已存紀錄'; toast('成績記下了 ✓');
         };
         $('fl-copy').onclick = function () {
@@ -2251,7 +2294,7 @@
         var draft = readJSON(K.examDraft, null);
         var html = '<div class="panel exam-strip"><h3>考場 <span class="help" style="font-weight:400">' + (exams.length ? '考過 ' + exams.length + ' 次' : '歷年考古題都在這裡') + '</span></h3>';
         if (draft && draft.route) html += '<p class="help">有一份沒交的卷：<a href="' + esc(draft.route) + '">接著寫</a></p>';
-        if (recent.length) html += '<ul class="today-list">' + recent.map(function (r) { return '<li><span class="pg">' + esc(fmtDate(r.at)) + '</span><span style="flex:1">' + esc(r.label) + '</span><b>' + (r.pct != null ? r.pct + '%' : (r.kind === 'essay' ? r.chars + ' 字' : '—')) + '</b></li>'; }).join('') + '</ul>';
+        if (recent.length) html += '<ul class="today-list">' + recent.map(function (r) { return '<li><span class="pg">' + esc(fmtDate(r.at)) + '</span><span style="flex:1">' + esc(r.label) + '</span><b>' + (r.pct != null ? r.pct + '%' : (r.kind === 'essay' ? r.chars + ' 字' : (r.practice ? r.correct + '/' + r.total : '—'))) + '</b></li>'; }).join('') + '</ul>';
         else html += '<p class="help">還沒考過。先從 20 題的組合卷開始，看看自己在哪裡。</p>';
         html += '<div class="actions"><a class="btn primary" href="#/考場">進考場</a></div></div>';
         el.innerHTML = html;
